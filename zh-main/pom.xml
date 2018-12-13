@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!--指定父模块，需要注意的是，这里要指定父模块pom.xml的相对路径-->
+    <parent>
+        <groupId>net.zhenghao.zh</groupId>
+        <artifactId>zh-admin</artifactId>
+        <version>${zh-version}</version>
+    </parent>
+
+    <artifactId>zh-main</artifactId>
+    <packaging>jar</packaging>
+    <name>zh-main</name>
+    <description>main project for Spring Boot</description>
+
+    <properties>
+
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.zhenghao.zh</groupId>
+            <artifactId>zh-shiro</artifactId>
+            <version>${zh-version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--这里写上main方法所在类的路径-->
+                <configuration>
+                    <mainClass>net.zhenghao.zh.main.ZhAdminApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <finalName>zh-admin</finalName>
+    </build>
+
+
+</project>
