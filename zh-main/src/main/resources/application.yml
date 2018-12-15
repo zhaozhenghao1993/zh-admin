@@ -5,41 +5,36 @@ server:
     max-threads: 1000
     min-spare-threads: 30
 
+logging:
+  config: classpath:logback.xml
+
+
 spring:
-  datasource:
-    name: zh-admin
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      filters: stat #监控统计拦截的filters
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/test-security?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true #基本属性
-      username: root
-      password: root
-      initial-size: 1 #配置初始化大小/最小/最大
-      min-idle: 1
-      max-active: 20
-      max-wait: 60000 #获取连接等待超时时间
-      time-between-eviction-runs-millis: 60000 #间隔多久进行一次检测，检测需要关闭的空闲连接
-      min-evictable-idle-time-millis: 300000 #一个连接在池中最小生存的时间
-      validation-query: SELECT 'x'
-      test-while-idle: true
-      test-on-borrow: false
-      test-on-return: false
-      pool-prepared-statements: false #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
-      max-pool-prepared-statement-per-connection-size: 20
+  profiles:
+    active: dev
   redis:
     shiro:
-      host: 127.0.0.1
-      port: 6379
-      timeout: 300
-      password:
+      host: 127.0.0.1:6379
+      timeout: 30
+      password: foobared
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss #日期格式化
+    serialization:
+      indent_output: true #格式化输出
+      fail_on_empty_beans: false #忽略无法转换的对象
+    defaultPropertyInclusion: NON_EMPTY #设置空如何序列化
+    deserialization:
+      fail_on_unknown_properties: false #允许对象忽略json中不存在的属性
+    parser:
+      allow_unquoted_control_chars: true #允许出现特殊字符和转义符
+      allow_single_quotes: true #允许出现单引号
 
 ##################mybatis####################
 mybatis:
   configuration:
     mapUnderscoreToCamelCase: true
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: net.zhenghao.zh.**.entity
+  type-aliases-package: net.zhenghao.zh
 
 
 ##################pagehelper分页插件####################

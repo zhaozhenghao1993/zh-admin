@@ -9,7 +9,7 @@ import net.zhenghao.zh.shiro.dao.SysRoleMapper;
 import net.zhenghao.zh.shiro.dao.SysUserMapper;
 import net.zhenghao.zh.shiro.dao.SysUserRoleMapper;
 import net.zhenghao.zh.shiro.manager.SysUserManager;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

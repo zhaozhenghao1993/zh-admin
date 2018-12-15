@@ -54,7 +54,6 @@ public class UserRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		String username = (String) token.getPrincipal();//得到用户名
 		String password = new String((char[]) token.getCredentials());//得到密码
-		String code = ShiroUtils.getCode(SystemConstant.TWO_FACTOR_AUTHENTICATOR);//得到双因素身份验证码
 		
 		//查询用户信息
 		SysUserEntity user = sysUserManager.getByUserName(username);
