@@ -6,7 +6,7 @@ spring:
     druid:
       filters: stat #监控统计拦截的filters
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/test-security?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=GMT%2B8 #基本属性
+      url: jdbc:mysql://127.0.0.1:3306/test-admin?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=GMT%2B8 #基本属性
       username: root
       password: root
       initial-size: 1 #配置初始化大小/最小/最大

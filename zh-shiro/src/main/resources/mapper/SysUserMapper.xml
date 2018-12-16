@@ -34,9 +34,7 @@
 			password,
 			email,
 			mobile,
-			status,
-			is_authentication,
-			secret_key
+			status
 		FROM
 			sys_user
 		WHERE
@@ -61,8 +59,6 @@
 			email,
 			mobile,
 			status,
-			is_authentication,
-			secret_key,
 			user_id_create,
 			gmt_create
 		)
@@ -72,8 +68,6 @@
 			#{email},
 			#{mobile},
 			#{status},
-			#{isAuthentication},
-			#{secretKey},
 			#{userIdCreate},
 			NOW()
 		)
@@ -86,9 +80,7 @@
 			password,
 			email,
 			mobile,
-			status,
-			is_authentication,
-			secret_key
+			status
 		FROM 
 			sys_user
 		WHERE
@@ -102,8 +94,6 @@
 			<if test="email != null">email = #{email}, </if>
 			<if test="mobile != null">mobile = #{mobile}, </if>
 			<if test="status != null">status = #{status}, </if>
-			<if test="isAuthentication != null">is_authentication = #{isAuthentication}, </if>
-			<if test="secretKey != null">secret_key = #{secretKey}, </if>
 			gmt_modified = NOW()
 		</set>
 		where user_id = #{userId}

@@ -1,9 +1,13 @@
 package net.zhenghao.zh.shiro.config;
 
+import net.zhenghao.zh.common.entity.Query;
+import net.zhenghao.zh.shiro.entity.SysMenuEntity;
 import net.zhenghao.zh.shiro.filter.ShiroLoginFilter;
 import net.zhenghao.zh.shiro.filter.ShiroPermsFilter;
+import net.zhenghao.zh.shiro.manager.SysMenuManager;
 import net.zhenghao.zh.shiro.security.UserRealm;
 import net.zhenghao.zh.shiro.session.UserSessionManager;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.config.Ini;
 import org.apache.shiro.mgt.SecurityManager;
@@ -15,13 +19,17 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,12 +46,17 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
+    private static final Logger LOGGRT = LoggerFactory.getLogger(ShiroConfig.class);
+
     @Value("${spring.redis.shiro.host}")
     private String host;
     @Value("${spring.redis.shiro.timeout}")
     private int timeout;
     @Value("${spring.redis.shiro.password}")
     private String password;
+
+    @Autowired
+    private SysMenuManager sysMenuManager;
 
     @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
@@ -55,11 +68,18 @@ public class ShiroConfig {
 
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
+        List<SysMenuEntity> lists = sysMenuManager.listMenu(new Query());
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         filterChainDefinitionMap.put("/sys/login", "anon");
-        filterChainDefinitionMap.put("/sys/test", "perms[test]");
-        filterChainDefinitionMap.put("/sys/user/save", "perms[sys:user:save]");
-
+        for (SysMenuEntity menu : lists) {
+            String permKey = menu.getPerms();
+            String permUrl = menu.getUrl();
+            if (StringUtils.isNotBlank(permKey) && StringUtils.isNotBlank(permUrl)) {
+                String permission = "perms[" + permKey + "]";
+                filterChainDefinitionMap.put(permUrl, permission);
+                LOGGRT.info("初始化权限:{}={}", permUrl, permission);
+            }
+        }
         //所有资源的访问权限,必须放在最后
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
@@ -73,13 +93,13 @@ public class ShiroConfig {
     }
 
     @Bean
-    public SecurityManager securityManager(SessionManager sessionManager, RedisCacheManager cacheManager, UserRealm userRealm) {
+    public SecurityManager securityManager(SessionManager sessionManager, RedisCacheManager redisCacheManager, UserRealm userRealm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(userRealm);
         //自定义session管理 使用redis
         securityManager.setSessionManager(sessionManager);
         // 自定义缓存实现 使用redis
-        securityManager.setCacheManager(cacheManager);
+        securityManager.setCacheManager(redisCacheManager);
         return securityManager;
     }
 
@@ -107,7 +127,7 @@ public class ShiroConfig {
     }
 
     @Bean
-    public RedisCacheManager cacheManager(RedisManager redisManager) {
+    public RedisCacheManager redisCacheManager(RedisManager redisManager) {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
         redisCacheManager.setRedisManager(redisManager);
         //shiro-redis 需要一个id字段来标识Redis中的授权对象。因此，请确保您的主要类有一个字段，您可以获得此对象的唯一ID

@@ -85,21 +85,9 @@ public class SysLoginController {
 
 	@ResponseBody
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout() {
+	public R logout() {
 		ShiroUtils.logout();
-		return "logout";
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test() {
-		return "test";
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/user/save", method = RequestMethod.GET)
-	public String testSave() {
-		return "testSave";
+		return R.ok().put("msg", "logout successful");
 	}
 
 }

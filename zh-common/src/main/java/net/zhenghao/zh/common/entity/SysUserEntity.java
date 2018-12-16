@@ -50,16 +50,6 @@ public class SysUserEntity implements Serializable {
 	private Integer status;
 
 	/**
-	 * 是否开启双因素身份验(0:关闭   1:开启)
-	 */
-	private Integer isAuthentication;
-
-	/**
-	 * 双因素身份验密钥
-	 */
-	private String secretKey;
-
-	/**
 	 * 创建用户id
 	 */
 	private Long userIdCreate;
@@ -129,22 +119,6 @@ public class SysUserEntity implements Serializable {
 
 	public void setStatus(Integer status) {
 		this.status = status;
-	}
-
-	public Integer getIsAuthentication() {
-		return isAuthentication;
-	}
-
-	public void setIsAuthentication(Integer isAuthentication) {
-		this.isAuthentication = isAuthentication;
-	}
-
-	public String getSecretKey() {
-		return secretKey;
-	}
-
-	public void setSecretKey(String secretKey) {
-		this.secretKey = secretKey;
 	}
 
 	public Long getUserIdCreate() {
