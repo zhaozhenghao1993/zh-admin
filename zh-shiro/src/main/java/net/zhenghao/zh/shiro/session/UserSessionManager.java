@@ -22,7 +22,7 @@ import java.io.Serializable;
 
 public class UserSessionManager extends DefaultWebSessionManager {
 
-    private static final String TOKEN = "zh-token";
+    private static final String TOKEN = "ZH-TOKEN";
 
     private static final String REFERENCED_SESSION_ID_SOURCE = "Stateless request";
 
