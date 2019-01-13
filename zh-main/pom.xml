@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.zhenghao.zh</groupId>
         <artifactId>zh-admin</artifactId>
-        <version>${zh-version}</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>zh-main</artifactId>
@@ -21,7 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>net.zhenghao.zh</groupId>
-            <artifactId>zh-shiro</artifactId>
+            <artifactId>zh-auth</artifactId>
             <version>${zh-version}</version>
         </dependency>
     </dependencies>

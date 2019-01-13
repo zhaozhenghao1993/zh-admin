@@ -11,6 +11,7 @@
   <modules>
       <module>zh-shiro</module>
       <module>zh-common</module>
+      <module>zh-auth</module>
   </modules>
 
   <name>zh-admin</name>

@@ -17,12 +17,23 @@ public class SystemConstant {
 	/**
 	 * 数据标识
 	 */
-	public static final String DATA_ROWS = "rows";
+	public static final String DATA_ROWS = "data";
+
 
 	/**
-	 * Google Authenticator 双因素身份验证 标识
+	 * 当前用户ID key
 	 */
-	public static final String TWO_FACTOR_AUTHENTICATOR = "TWO_FACTOR_AUTHENTICATOR";
+	public static final String CONTEXT_KEY_USER_ID = "currentUserId";
+
+	/**
+	 * 当前用户username key
+	 */
+	public static final String CONTEXT_KEY_USERNAME = "currentUserName";
+
+	/**
+	 * 当前用户token key
+	 */
+	public static final String CONTEXT_KEY_USER_TOKEN = "currentUserToken";
 
 	/**
 	 * 日志类型

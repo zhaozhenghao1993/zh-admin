@@ -5,6 +5,10 @@ server:
     max-threads: 1000
     min-spare-threads: 30
 
+zh-admin:
+  auth:
+    routes: /api/v1
+
 logging:
   config: classpath:logback.xml
   level:
