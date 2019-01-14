@@ -36,6 +36,16 @@ public class SystemConstant {
 	public static final String CONTEXT_KEY_USER_TOKEN = "currentUserToken";
 
 	/**
+	 * JWT userId标识
+	 */
+	public static final String JWT_KEY_USER_ID = "userId";
+
+	/**
+	 * JWT username标识
+	 */
+	public static final String JWT_KEY_USERNAME = "username";
+
+	/**
 	 * 日志类型
 	 */
 	public enum LogType {
