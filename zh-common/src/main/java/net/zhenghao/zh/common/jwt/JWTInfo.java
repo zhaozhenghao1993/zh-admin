@@ -28,6 +28,11 @@ public class JWTInfo {
         this.username = username;
     }
 
+    public JWTInfo(String userId, String username) {
+        this.userId = Long.valueOf(userId);
+        this.username = username;
+    }
+
     public Long getUserId() {
         return userId;
     }

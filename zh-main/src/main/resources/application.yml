@@ -8,6 +8,10 @@ server:
 zh-admin:
   auth:
     routes: /api/v1
+  jwt:
+    token-header: ZH-TOKEN
+    expire: 14400
+    rsa-secret: pYC#0xjpsYC6OgY^9
 
 logging:
   config: classpath:logback.xml
