@@ -61,7 +61,7 @@
     <druid.version>1.1.9</druid.version>
     <pagehelper.version>1.2.5</pagehelper.version>
     <jwt.version>3.2.0</jwt.version>
-    <jjwt.version>0.10.5</jjwt.version>
+    <jjwt.version>0.9.1</jjwt.version>
     <joda.version>2.10.1</joda.version>
     <shiro.version>1.4.0</shiro.version>
     <shiro-redis.version>3.2.2</shiro-redis.version>
@@ -156,7 +156,7 @@
 
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt-api</artifactId>
+      <artifactId>jjwt</artifactId>
       <version>${jjwt.version}</version>
     </dependency>
 

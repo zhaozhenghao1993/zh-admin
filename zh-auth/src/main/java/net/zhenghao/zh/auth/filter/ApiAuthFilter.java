@@ -33,7 +33,7 @@ public class ApiAuthFilter implements Filter {
     private String routes;
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
     }
 

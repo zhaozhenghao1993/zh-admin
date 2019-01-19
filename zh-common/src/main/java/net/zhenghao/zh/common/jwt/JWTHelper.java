@@ -36,7 +36,7 @@ public class JWTHelper {
                 .setSubject(jwtInfo.getUsername())
                 .claim(SystemConstant.JWT_KEY_USER_ID, jwtInfo.getUserId())
                 .setExpiration(DateTime.now().plusSeconds(expire).toDate())
-                .signWith(RsaKeyHelper.getPrivateKey(priKey), SignatureAlgorithm.RS256)
+                .signWith(SignatureAlgorithm.RS256, RsaKeyHelper.getPrivateKey(priKey))
                 .compact();
         return compactJws;
     }
