@@ -25,6 +25,13 @@ public class RequestHandlerAdapter {
     @Autowired
     private FilterChainConfig filterChainConfig;
 
+    public boolean validateAnnoFilterChain(String uri, String method) {
+        if (filterChainConfig.getAnnoFilterChain().stream().filter(permission -> uri.equals(permission.getUri()) && method.equals(permission.getMethod())).findAny().isPresent()) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean dealRequestHandler(HttpServletRequest request, HttpServletResponse response) {
         String requestUri = request.getRequestURI(); //得到请求的资源
         String requestmethod = request.getMethod(); //得到请求URL地址时使用的方法

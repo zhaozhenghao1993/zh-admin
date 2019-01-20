@@ -1,9 +1,11 @@
 package net.zhenghao.zh.auth.filter;
 
 
+import net.zhenghao.zh.auth.core.RequestHandlerAdapter;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.utils.JSONUtils;
 import org.apache.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -32,6 +34,9 @@ public class ApiAuthFilter implements Filter {
     @Value("${zh-admin.auth.routes}")
     private String routes;
 
+    @Autowired
+    private RequestHandlerAdapter requestHandlerAdapter;
+
     @Override
     public void init(FilterConfig filterConfig) {
 
@@ -44,6 +49,7 @@ public class ApiAuthFilter implements Filter {
             String uri = httpServletRequest.getRequestURI();
             if (uri.startsWith(routes)) {
                 String newPath = uri.replace(routes, "");
+                // requestHandlerAdapter.dealRequestHandler();
                 RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher(newPath);
                 requestDispatcher.forward(request, response);
             } else {
