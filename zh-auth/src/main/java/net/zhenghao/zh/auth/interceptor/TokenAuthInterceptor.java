@@ -22,15 +22,11 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class TokenAuthInterceptor extends HandlerInterceptorAdapter {
 
-    @Autowired
-    private RequestHandlerAdapter requestHandlerAdapter;
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println(request.getRequestURL());
         System.out.println(request.getHeader("ZH-TOKEN"));
-        // return super.preHandle(request, response, handler);
-        return requestHandlerAdapter.dealRequestHandler(request, response);
+        return super.preHandle(request, response, handler);
     }
 
     @Override

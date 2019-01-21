@@ -25,7 +25,20 @@ public class RequestHandlerAdapter {
     @Autowired
     private FilterChainConfig filterChainConfig;
 
+    /**
+     * 验证当前uri是否为直接匿名访问uri
+     * @param uri
+     * @param method
+     * @return
+     */
     public boolean validateAnnoFilterChain(String uri, String method) {
+        if (filterChainConfig.getAnnoFilterChain().stream().filter(permission -> uri.equals(permission.getUri()) && method.equals(permission.getMethod())).findAny().isPresent()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean validatePermsFilterChain(String uri, String method, String token) {
         if (filterChainConfig.getAnnoFilterChain().stream().filter(permission -> uri.equals(permission.getUri()) && method.equals(permission.getMethod())).findAny().isPresent()) {
             return true;
         }

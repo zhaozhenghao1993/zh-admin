@@ -5,6 +5,8 @@ import net.zhenghao.zh.auth.core.RequestHandlerAdapter;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.utils.JSONUtils;
 import org.apache.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -31,6 +33,8 @@ import java.io.IOException;
 @Component
 public class ApiAuthFilter implements Filter {
 
+    private Logger LOGGER = LoggerFactory.getLogger(ApiAuthFilter.class);
+
     @Value("${zh-admin.auth.routes}")
     private String routes;
 
@@ -44,20 +48,23 @@ public class ApiAuthFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        LOGGER.info("check token and user permission....");
         if (request instanceof HttpServletRequest) {
             HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+            HttpServletResponse httpServletResponse = (HttpServletResponse) response;
             String uri = httpServletRequest.getRequestURI();
+            String method = httpServletRequest.getMethod();
             if (uri.startsWith(routes)) {
                 String newPath = uri.replace(routes, "");
-                // requestHandlerAdapter.dealRequestHandler();
-                RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher(newPath);
-                requestDispatcher.forward(request, response);
+                if (requestHandlerAdapter.validateAnnoFilterChain(newPath, method)) {
+                    RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher(newPath);
+                    requestDispatcher.forward(request, response);
+                }
+                requestHandlerAdapter.validateAnnoFilterChain(uri, method);
+
             } else {
-                HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-                httpServletResponse.setCharacterEncoding("UTF-8");
-                httpServletResponse.setContentType("application/json");
-                httpServletResponse.getWriter()
-                        .write(JSONUtils.objToString(R.error(HttpStatus.SC_NOT_FOUND, "This api is invalid!")));
+                LOGGER.error("This api is invalid!");
+                getErrorResponse(httpServletResponse, R.error(HttpStatus.SC_NOT_FOUND, "This api is invalid!"));
             }
         }
     }
@@ -65,5 +72,18 @@ public class ApiAuthFilter implements Filter {
     @Override
     public void destroy() {
 
+    }
+
+    /**
+     * 响应抛异常封装
+     * @param response
+     * @param r
+     * @throws IOException
+     */
+    private void getErrorResponse(HttpServletResponse response, R r) throws IOException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json");
+        response.getWriter()
+                .write(JSONUtils.objToString(r));
     }
 }
