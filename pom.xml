@@ -9,7 +9,7 @@
   <packaging>pom</packaging>
   <version>${zh-version}</version>
   <modules>
-      <module>zh-shiro</module>
+      <module>zh-main</module>
       <module>zh-common</module>
       <module>zh-auth</module>
   </modules>
