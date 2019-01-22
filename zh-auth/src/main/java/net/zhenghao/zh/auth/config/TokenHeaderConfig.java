@@ -1,6 +1,7 @@
 package net.zhenghao.zh.auth.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * 🙃
@@ -12,8 +13,8 @@ import org.springframework.beans.factory.annotation.Value;
  * @date :2019/01/19 15:22
  * TokenConfig.java
  */
-
-public class TokenConfig {
+@Configuration
+public class TokenHeaderConfig {
 
     @Value("${zh-admin.jwt.token-header}")
     private String tokenHeader;

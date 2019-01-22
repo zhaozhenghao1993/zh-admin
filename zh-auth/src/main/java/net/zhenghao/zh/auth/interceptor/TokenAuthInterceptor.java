@@ -31,13 +31,13 @@ public class TokenAuthInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        System.out.println(2);
+        // System.out.println(2);
         super.postHandle(request, response, handler, modelAndView);
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        System.out.println(3);
+        // System.out.println(3);
         super.afterCompletion(request, response, handler, ex);
     }
 }

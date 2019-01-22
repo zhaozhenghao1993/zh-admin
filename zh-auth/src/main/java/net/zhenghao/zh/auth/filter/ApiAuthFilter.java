@@ -1,10 +1,13 @@
 package net.zhenghao.zh.auth.filter;
 
 
+import net.zhenghao.zh.auth.config.TokenHeaderConfig;
 import net.zhenghao.zh.auth.core.RequestHandlerAdapter;
+import net.zhenghao.zh.common.constant.HttpStatusConstant;
 import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.jwt.JWTInfo;
 import net.zhenghao.zh.common.utils.JSONUtils;
-import org.apache.http.HttpStatus;
+import net.zhenghao.zh.common.utils.JWTTokenUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +42,12 @@ public class ApiAuthFilter implements Filter {
     private String routes;
 
     @Autowired
+    private TokenHeaderConfig tokenHeaderConfig;
+
+    @Autowired
+    private JWTTokenUtils jwtTokenUtils;
+
+    @Autowired
     private RequestHandlerAdapter requestHandlerAdapter;
 
     @Override
@@ -54,24 +63,35 @@ public class ApiAuthFilter implements Filter {
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
             String uri = httpServletRequest.getRequestURI();
             String method = httpServletRequest.getMethod();
-            if (uri.startsWith(routes)) {
-                String newPath = uri.replace(routes, "");
-                if (requestHandlerAdapter.validateAnnoFilterChain(newPath, method)) {
-                    RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher(newPath);
-                    requestDispatcher.forward(request, response);
-                }
-                requestHandlerAdapter.validateAnnoFilterChain(uri, method);
 
-            } else {
-                LOGGER.error("This api is invalid!");
-                getErrorResponse(httpServletResponse, R.error(HttpStatus.SC_NOT_FOUND, "This api is invalid!"));
+            if (!uri.startsWith(routes)) {
+                LOGGER.error("{},This api is invalid!", uri);
+                getErrorResponse(httpServletResponse, R.error(HttpStatusConstant.REQUEST_API_INVALID, "This api is invalid!"));
+                return;
             }
+
+            String newPath = uri.replace(routes, "");
+
+            // 匿名访问过滤
+            if (requestHandlerAdapter.validateAnnoFilterChain(newPath, method)) {
+                RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher(newPath);
+                requestDispatcher.forward(request, response);
+                return;
+            }
+
+            requestHandlerAdapter.validateAnnoFilterChain(uri, method);
         }
     }
 
     @Override
     public void destroy() {
 
+    }
+
+    private JWTInfo getJWTUser(HttpServletRequest request) {
+        String authToken = null;
+        authToken = request.getHeader(tokenHeaderConfig.getTokenHeader());
+        return null;
     }
 
     /**
