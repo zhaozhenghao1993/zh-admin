@@ -79,6 +79,9 @@ public class ApiAuthFilter implements Filter {
                 return;
             }
 
+            RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher(newPath);
+            requestDispatcher.forward(request, response);
+
             requestHandlerAdapter.validateAnnoFilterChain(uri, method);
         }
     }
