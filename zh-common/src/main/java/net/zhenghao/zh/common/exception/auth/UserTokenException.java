@@ -14,13 +14,13 @@ import net.zhenghao.zh.common.exception.BaseException;
  * UserTokenException.java
  */
 
-public class UserTokenException  extends BaseException {
+public class UserTokenException extends BaseException {
 
     public UserTokenException(String message) {
-        super(message, HttpStatusConstant.TOKEN_SIGNATURE_ERROR);
+        super(HttpStatusConstant.TOKEN_SIGNATURE_ERROR, message);
     }
 
     public UserTokenException(String message, int code) {
-        super(message, code);
+        super(code, message);
     }
 }
