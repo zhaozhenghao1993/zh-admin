@@ -1,6 +1,8 @@
 package net.zhenghao.zh.auth.filter;
 
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.SignatureException;
 import net.zhenghao.zh.auth.config.TokenHeaderConfig;
 import net.zhenghao.zh.auth.core.RequestHandlerAdapter;
 import net.zhenghao.zh.common.constant.HttpStatusConstant;
@@ -8,6 +10,7 @@ import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.jwt.JWTInfo;
 import net.zhenghao.zh.common.utils.JSONUtils;
 import net.zhenghao.zh.common.utils.JWTTokenUtils;
+import net.zhenghao.zh.common.utils.UserAuthUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +51,9 @@ public class ApiAuthFilter implements Filter {
     private JWTTokenUtils jwtTokenUtils;
 
     @Autowired
+    private UserAuthUtils userAuthUtils;
+
+    @Autowired
     private RequestHandlerAdapter requestHandlerAdapter;
 
     @Override
@@ -79,6 +85,13 @@ public class ApiAuthFilter implements Filter {
                 return;
             }
 
+            // 获取用户信息
+            JWTInfo jwtInfo = getJWTUser(httpServletRequest, httpServletResponse);
+            if (jwtInfo == null) {
+                return;
+            }
+
+            System.out.println("哈哈");
             RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher(newPath);
             requestDispatcher.forward(request, response);
 
@@ -91,10 +104,26 @@ public class ApiAuthFilter implements Filter {
 
     }
 
-    private JWTInfo getJWTUser(HttpServletRequest request) {
+    private JWTInfo getJWTUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authToken = null;
+        JWTInfo jwtInfo = null;
         authToken = request.getHeader(tokenHeaderConfig.getTokenHeader());
-        return null;
+        try {
+            jwtInfo = userAuthUtils.getInfoFromToken(authToken);
+        } catch (ExpiredJwtException ex) {
+            LOGGER.error("User token expired!");
+            getErrorResponse(response, R.error(HttpStatusConstant.TOKEN_EXPIRED_FORBIDDEN, "User token expired!"));
+        } catch (SignatureException ex) {
+            LOGGER.error("User token signature error!");
+            getErrorResponse(response, R.error(HttpStatusConstant.TOKEN_SIGNATURE_ERROR, "User token signature error!"));
+        } catch (IllegalArgumentException ex) {
+            LOGGER.error("User token is null or empty!");
+            getErrorResponse(response, R.error(HttpStatusConstant.TOKEN_NULL_FORBIDDEN, "User token is null or empty!"));
+        } catch (Exception ex) {
+            LOGGER.error("User token other exception!");
+            getErrorResponse(response, R.error(HttpStatusConstant.TOKEN_OTHER_EXCEPTION, "User token other exception!"));
+        }
+        return jwtInfo;
     }
 
     /**

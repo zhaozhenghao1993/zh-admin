@@ -35,6 +35,11 @@ public class HttpStatusConstant {
     public static final int TOKEN_NULL_FORBIDDEN = 40303;
 
     /**
+     * token 其他异常
+     */
+    public static final int TOKEN_OTHER_EXCEPTION = 40304;
+
+    /**
      * 请求 api 格式错误,请求无效
      */
     public static final int REQUEST_API_INVALID = 40401;

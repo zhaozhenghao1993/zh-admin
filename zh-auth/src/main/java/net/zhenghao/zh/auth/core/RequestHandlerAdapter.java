@@ -32,7 +32,7 @@ public class RequestHandlerAdapter {
      * @return
      */
     public boolean validateAnnoFilterChain(String uri, String method) {
-        if (filterChainConfig.getAnnoFilterChain().stream().filter(permission -> uri.equals(permission.getUri()) && method.equals(permission.getMethod())).findAny().isPresent()) {
+        if (filterChainConfig.getAnnoFilterChain().stream().filter(permission -> validate(uri, method, permission.getUri(), permission.getMethod())).findAny().isPresent()) {
             return true;
         }
         return false;
@@ -56,12 +56,18 @@ public class RequestHandlerAdapter {
         return false;
     }
 
-    public static boolean test(String requestUri, String requestMethod, String uri, String method) {
-        // String uri = permissionInfo.getUri();
+    /**
+     * 正则验证restful api 匹配
+     * @param requestUri        请求uri
+     * @param requestMethod     请求method
+     * @param uri               规则uri       例: /test/demo/{id}
+     * @param method            规则method
+     * @return
+     */
+    public static boolean validate(String requestUri, String requestMethod, String uri, String method) {
         if (uri.indexOf("{") > 0) {
             uri = uri.replaceAll("\\{[^}]+\\}", "[a-zA-Z\\\\d]+");
         }
-
         String regEx = "^" + uri + "$";
         return (Pattern.compile(regEx).matcher(requestUri).find())
                 && method.equals(requestMethod);
@@ -73,6 +79,6 @@ public class RequestHandlerAdapter {
         String uri = "/user/{id}/edit/{name}";
         String method = "GET";
 
-        System.out.println(test(requestUri, requestMethod, uri, method));
+        System.out.println(validate(requestUri, requestMethod, uri, method));
     }
 }

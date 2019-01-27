@@ -20,7 +20,7 @@ public class UserTokenException extends BaseException {
         super(HttpStatusConstant.TOKEN_SIGNATURE_ERROR, message);
     }
 
-    public UserTokenException(String message, int code) {
+    public UserTokenException(int code, String message) {
         super(code, message);
     }
 }

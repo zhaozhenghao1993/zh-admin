@@ -2,6 +2,7 @@ package net.zhenghao.zh.common.handler;
 
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.exception.auth.ApiInvalidException;
+import net.zhenghao.zh.common.exception.auth.UserTokenException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -27,6 +28,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ApiInvalidException.class)
     public R apiInvalidExceptionHandler(HttpServletResponse response, ApiInvalidException ex) {
         response.setStatus(404);
+        LOGGER.error(ex.getMessage(), ex);
+        return R.error(ex.getCode(), ex.getMessage());
+    }
+
+    @ExceptionHandler(UserTokenException.class)
+    public R userTokenExceptionHandler(HttpServletResponse response, UserTokenException ex) {
+        response.setStatus(403);
         LOGGER.error(ex.getMessage(), ex);
         return R.error(ex.getCode(), ex.getMessage());
     }

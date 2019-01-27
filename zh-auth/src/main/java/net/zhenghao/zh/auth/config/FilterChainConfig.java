@@ -29,6 +29,7 @@ public class FilterChainConfig {
     public void init() {
         annoFilterChainList.add(new SysPermissionEntity("/sys/login", "POST"));
         annoFilterChainList.add(new SysPermissionEntity("/test/demo", "GET"));
+        annoFilterChainList.add(new SysPermissionEntity("/test/getToken", "POST"));
     }
 
     public List<SysPermissionEntity> getAnnoFilterChain() {
