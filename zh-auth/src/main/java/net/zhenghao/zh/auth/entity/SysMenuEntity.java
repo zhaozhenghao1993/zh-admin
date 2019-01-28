@@ -52,7 +52,7 @@ public class SysMenuEntity implements Serializable {
 	private String perms;
 
 	/**
-	 * 类型(0:目录  1:菜单   2:按钮)
+	 * 类型(0:目录  1:菜单   2:按钮	3:uri)
 	 */
 	private Integer type;
 
@@ -67,25 +67,32 @@ public class SysMenuEntity implements Serializable {
 	private Integer orderNum;
 
 	/**
+	 * 描述
+	 */
+	private String description;
+
+	/**
+	 * 创建人name
+	 */
+	private String createUser;
+
+	/**
 	 * 创建时间
 	 */
-	private Timestamp gmtCreate;
+	private Timestamp createTime;
 
 	/**
-	 * 修改时间
+	 * 最后修改人
 	 */
-	private Timestamp gmtModified;
+	private String updateUser;
 
 	/**
-	 * ztree属性
+	 * 最后修改时间
 	 */
-	private Boolean open;
-	
-	private List<?> list;
+	private Timestamp updateTime;
 
 	public SysMenuEntity() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Long getMenuId() {
@@ -168,36 +175,44 @@ public class SysMenuEntity implements Serializable {
 		this.orderNum = orderNum;
 	}
 
-	public Timestamp getGmtCreate() {
-		return gmtCreate;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setGmtCreate(Timestamp gmtCreate) {
-		this.gmtCreate = gmtCreate;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public Timestamp getGmtModified() {
-		return gmtModified;
+	public String getCreateUser() {
+		return createUser;
 	}
 
-	public void setGmtModified(Timestamp gmtModified) {
-		this.gmtModified = gmtModified;
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
 	}
 
-	public Boolean getOpen() {
-		return open;
+	public Timestamp getCreateTime() {
+		return createTime;
 	}
 
-	public void setOpen(Boolean open) {
-		this.open = open;
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
 	}
 
-	public List<?> getList() {
-		return list;
+	public String getUpdateUser() {
+		return updateUser;
 	}
 
-	public void setList(List<?> list) {
-		this.list = list;
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
+
+	public Timestamp getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
 	}
 
 	public static long getSerialversionuid() {
