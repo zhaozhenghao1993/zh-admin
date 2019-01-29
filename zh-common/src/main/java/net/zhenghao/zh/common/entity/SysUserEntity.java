@@ -45,24 +45,34 @@ public class SysUserEntity implements Serializable {
 	private String mobile;
 
 	/**
+	 * 头像
+	 */
+	private String avatar;
+
+	/**
 	 * 状态(0:禁用   1:正常)
 	 */
 	private Integer status;
 
 	/**
-	 * 创建用户id
+	 * 创建人id
 	 */
-	private Long userIdCreate;
+	private String creatorId;
 
 	/**
 	 * 创建时间
 	 */
-	private Timestamp gmtCreate;
+	private Timestamp createTime;
 
 	/**
-	 * 修改时间
+	 * 最后修改人id
 	 */
-	private Timestamp gmtModified;
+	private String modifierId;
+
+	/**
+	 * 最后修改时间
+	 */
+	private Timestamp modifiedTime;
 
 	/**
 	 * 角色id列表
@@ -113,6 +123,14 @@ public class SysUserEntity implements Serializable {
 		this.mobile = mobile;
 	}
 
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
 	public Integer getStatus() {
 		return status;
 	}
@@ -121,28 +139,36 @@ public class SysUserEntity implements Serializable {
 		this.status = status;
 	}
 
-	public Long getUserIdCreate() {
-		return userIdCreate;
+	public String getCreatorId() {
+		return creatorId;
 	}
 
-	public void setUserIdCreate(Long userIdCreate) {
-		this.userIdCreate = userIdCreate;
+	public void setCreatorId(String creatorId) {
+		this.creatorId = creatorId;
 	}
 
-	public Timestamp getGmtCreate() {
-		return gmtCreate;
+	public Timestamp getCreateTime() {
+		return createTime;
 	}
 
-	public void setGmtCreate(Timestamp gmtCreate) {
-		this.gmtCreate = gmtCreate;
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
 	}
 
-	public Timestamp getGmtModified() {
-		return gmtModified;
+	public String getModifierId() {
+		return modifierId;
 	}
 
-	public void setGmtModified(Timestamp gmtModified) {
-		this.gmtModified = gmtModified;
+	public void setModifierId(String modifierId) {
+		this.modifierId = modifierId;
+	}
+
+	public Timestamp getModifiedTime() {
+		return modifiedTime;
+	}
+
+	public void setModifiedTime(Timestamp modifiedTime) {
+		this.modifiedTime = modifiedTime;
 	}
 
 	public List<Long> getRoleIdList() {

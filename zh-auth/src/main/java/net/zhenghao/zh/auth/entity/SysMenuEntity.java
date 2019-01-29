@@ -72,9 +72,9 @@ public class SysMenuEntity implements Serializable {
 	private String description;
 
 	/**
-	 * 创建人name
+	 * 创建人id
 	 */
-	private String createUser;
+	private String creatorId;
 
 	/**
 	 * 创建时间
@@ -82,14 +82,14 @@ public class SysMenuEntity implements Serializable {
 	private Timestamp createTime;
 
 	/**
-	 * 最后修改人
+	 * 最后修改人id
 	 */
-	private String updateUser;
+	private String modifierId;
 
 	/**
 	 * 最后修改时间
 	 */
-	private Timestamp updateTime;
+	private Timestamp modifiedTime;
 
 	public SysMenuEntity() {
 		super();
@@ -183,12 +183,12 @@ public class SysMenuEntity implements Serializable {
 		this.description = description;
 	}
 
-	public String getCreateUser() {
-		return createUser;
+	public String getCreatorId() {
+		return creatorId;
 	}
 
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
+	public void setCreatorId(String creatorId) {
+		this.creatorId = creatorId;
 	}
 
 	public Timestamp getCreateTime() {
@@ -199,20 +199,20 @@ public class SysMenuEntity implements Serializable {
 		this.createTime = createTime;
 	}
 
-	public String getUpdateUser() {
-		return updateUser;
+	public String getModifierId() {
+		return modifierId;
 	}
 
-	public void setUpdateUser(String updateUser) {
-		this.updateUser = updateUser;
+	public void setModifierId(String modifierId) {
+		this.modifierId = modifierId;
 	}
 
-	public Timestamp getUpdateTime() {
-		return updateTime;
+	public Timestamp getModifiedTime() {
+		return modifiedTime;
 	}
 
-	public void setUpdateTime(Timestamp updateTime) {
-		this.updateTime = updateTime;
+	public void setModifiedTime(Timestamp modifiedTime) {
+		this.modifiedTime = modifiedTime;
 	}
 
 	public static long getSerialversionuid() {

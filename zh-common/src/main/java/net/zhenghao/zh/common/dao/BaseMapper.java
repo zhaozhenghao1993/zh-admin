@@ -116,7 +116,6 @@ public interface BaseMapper<T> {
 	
 	/**
 	 * 查询列表
-	 * @param query
 	 * @return
 	 */
 	List<T> list();
