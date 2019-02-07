@@ -1,7 +1,7 @@
 package net.zhenghao.zh.auth.dao;
 
 import net.zhenghao.zh.common.dao.BaseMapper;
-import net.zhenghao.zh.shiro.entity.SysUserRoleEntity;
+import net.zhenghao.zh.auth.entity.SysUserRoleEntity;
 import org.mybatis.spring.annotation.MapperScan;
 
 import java.util.List;

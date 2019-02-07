@@ -37,37 +37,37 @@ public class SysRoleServiceImpl implements SysRoleService {
 
 	@Override
 	public R saveRole(SysRoleEntity role) {
-		int count = sysRoleManager.saveRole(role);
+		int count = sysRoleMapper.save(role);
 		return CommonUtils.msg(count);
 	}
 
 	@Override
 	public R getRoleById(Long id) {
-		SysRoleEntity role = sysRoleManager.getRoleById(id);
+		SysRoleEntity role = sysRoleMapper.getObjectById(id);
 		return CommonUtils.msg(role);
 	}
 
 	@Override
 	public R updateRole(SysRoleEntity role) {
-		int count = sysRoleManager.updateRole(role);
+		int count = sysRoleMapper.update(role);
 		return CommonUtils.msg(count);
 	}
 
 	@Override
 	public R batchRemove(Long[] id) {
-		int count = sysRoleManager.batchRemove(id);
+		int count = sysRoleMapper.batchRemove(id);
 		return CommonUtils.msg(id, count);
 	}
 
 	@Override
 	public R listRole() {
-		List<SysRoleEntity> roleList = sysRoleManager.listRole();
+		List<SysRoleEntity> roleList = sysRoleMapper.list();
 		return CommonUtils.msgNotNull(roleList);
 	}
 
 	@Override
 	public R updateRoleAuthorization(SysRoleEntity role) {
-		int count = sysRoleManager.updateRoleAuthorization(role);
+		int count = sysRoleMapper.update(role);
 		return CommonUtils.msg(count);
 	}
 

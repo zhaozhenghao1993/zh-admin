@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="net.zhenghao.zh.shiro.dao.SysMenuMapper">
+<mapper namespace="net.zhenghao.zh.auth.dao.SysMenuMapper">
 
 	<resultMap id="UserMenuResult" type="SysMenuEntity">
 		<id property="menuId" column="menu_id" />
@@ -10,8 +10,8 @@
 		<result property="url" column="url" />
 		<result property="type" column="type" />
 		<result property="icon" column="icon" />
-		<collection property="list" javaType="ArrayList" ofType="net.zhenghao.zh.shiro.entity.SysMenuEntity"
-					resultMap="net.zhenghao.zh.shiro.dao.SysMenuMapper.UserMenuResult" columnPrefix="c_"/>
+		<collection property="list" javaType="ArrayList" ofType="net.zhenghao.zh.auth.entity.SysMenuEntity"
+					resultMap="net.zhenghao.zh.auth.dao.SysMenuMapper.UserMenuResult" columnPrefix="c_"/>
 	</resultMap>
 
 	<select id="list" resultType="SysMenuEntity">

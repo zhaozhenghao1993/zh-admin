@@ -1,13 +1,13 @@
 package net.zhenghao.zh.auth.service.impl;
 
+import net.zhenghao.zh.auth.dao.SysUserMapper;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.entity.SysUserEntity;
 import net.zhenghao.zh.common.utils.CommonUtils;
 import net.zhenghao.zh.common.utils.MD5Utils;
-import net.zhenghao.zh.shiro.manager.SysUserManager;
-import net.zhenghao.zh.shiro.service.SysUserService;
+import net.zhenghao.zh.auth.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,45 +26,46 @@ import java.util.Set;
 public class SysUserServiceImpl implements SysUserService {
 	
 	@Autowired
-	private SysUserManager sysUserManager;
+	private SysUserMapper sysUserMapper;
 
 	@Override
 	public Page<SysUserEntity> listUser(Map<String, Object> params) {
 		Query form = new Query(params);
 		Page<SysUserEntity> page = new Page<>(form);
-		sysUserManager.listUser(page, form);
+		sysUserMapper.listForPage(page, form);
 		return page;
 	}
 
 	@Override
 	public R saveUser(SysUserEntity user) {
 		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
-		int count = sysUserManager.saveUser(user);
+		int count = sysUserMapper.save(user);
 		return CommonUtils.msg(count);
 	}
 
 	@Override
 	public R getUserById(Long userId) {
-		SysUserEntity user = sysUserManager.getById(userId);
+		SysUserEntity user = sysUserMapper.getObjectById(userId);
 		return CommonUtils.msg(user);
 	}
 
 	@Override
 	public R updateUser(SysUserEntity user) {
-		int count = sysUserManager.updateUser(user);
+		int count = sysUserMapper.update(user);
 		return CommonUtils.msg(count);
 	}
 
 	@Override
 	public R batchRemove(Long[] id) {
-		int count = sysUserManager.batchRemove(id);
+		int count = sysUserMapper.batchRemove(id);
 		return CommonUtils.msg(id, count);
 	}
 
 	@Override
 	public R listUserPerms(Long userId) {
-		Set<String> perms = sysUserManager.listUserPerms(userId);//得到用户下所有的按钮权限等
-		return CommonUtils.msgNotNull(perms);
+		//Set<String> perms = sysUserMapper.(userId);//得到用户下所有的按钮权限等
+		//return CommonUtils.msgNotNull(perms);
+		return R.ok();
 	}
 
 	@Override
@@ -78,7 +79,7 @@ public class SysUserServiceImpl implements SysUserService {
 		query.put("userId", user.getUserId());
 		query.put("pswd", pswd);
 		query.put("newPswd", newPswd);
-		int count = sysUserManager.updatePswdByUser(query);
+		int count = sysUserMapper.updatePswdByUser(query);
 		if(!CommonUtils.isIntThanZero(count)) {
 			return R.error("原密码错误");
 		}
@@ -87,21 +88,23 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Override
 	public R updateUserEnable(Long[] id) {
-		int count = sysUserManager.updateUserEnable(id);
-		return CommonUtils.msg(id, count);
+		//int count = sysUserMapper.updateUserEnable(id);
+		//return CommonUtils.msg(id, count);
+		return R.ok();
 	}
 
 	@Override
 	public R updateUserDisable(Long[] id) {
-		int count = sysUserManager.updateUserDisable(id);
-		return CommonUtils.msg(id, count);
+		// int count = sysUserMapper.updateUserDisable(id);
+		// return CommonUtils.msg(id, count);
+		return R.ok();
 	}
 
 	@Override
 	public R updatePswd(SysUserEntity user) {
-		SysUserEntity currUser = sysUserManager.getUserById(user.getUserId());
+		SysUserEntity currUser = sysUserMapper.getObjectById(user.getUserId());
 		user.setPassword(MD5Utils.encrypt(currUser.getUsername(), user.getPassword()));
-		int count = sysUserManager.updatePswd(user);
+		int count = sysUserMapper.updatePswd(user);
 		return CommonUtils.msg(count);
 	}
 

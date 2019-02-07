@@ -1,8 +1,9 @@
 package net.zhenghao.zh.auth.dao;
 
 import net.zhenghao.zh.common.dao.BaseMapper;
-import net.zhenghao.zh.shiro.entity.SysRoleEntity;
+import net.zhenghao.zh.auth.entity.SysRoleEntity;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * SysRoleMapper.java
  */
 @MapperScan
+@Component
 public interface SysRoleMapper extends BaseMapper<SysRoleEntity>{
 
 	/**

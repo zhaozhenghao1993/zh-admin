@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="net.zhenghao.zh.shiro.dao.SysUserMapper">
+<mapper namespace="net.zhenghao.zh.auth.dao.SysUserMapper">
 
 	<select id="listForPage" resultType="SysUserEntity" flushCache="true">
 		SELECT

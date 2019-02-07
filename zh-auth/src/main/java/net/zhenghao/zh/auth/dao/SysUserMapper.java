@@ -4,6 +4,7 @@ import net.zhenghao.zh.common.dao.BaseMapper;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.SysUserEntity;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * SysUserMapper.java
  */
 @MapperScan
+@Component
 public interface SysUserMapper extends BaseMapper<SysUserEntity> {
 
 	SysUserEntity getByUserName(String username);
