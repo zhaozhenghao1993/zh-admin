@@ -28,11 +28,11 @@ public interface SysMenuMapper extends BaseMapper<SysMenuEntity>{
 	List<SysMenuEntity> listNotButton();
 	
 	/**
-	 * 得到该用户在这个菜单下的按钮权限
+	 * 得到该用户所有URI权限
 	 * @param userId
 	 * @return
 	 */
-	List<String> listUserPerms(Long userId);
+	List<SysMenuEntity> listUserPerms(Long userId);
 
 	/**
 	 * 得到该用户所有菜单

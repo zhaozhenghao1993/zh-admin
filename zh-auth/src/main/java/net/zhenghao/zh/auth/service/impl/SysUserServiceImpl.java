@@ -1,6 +1,8 @@
 package net.zhenghao.zh.auth.service.impl;
 
+import net.zhenghao.zh.auth.dao.SysMenuMapper;
 import net.zhenghao.zh.auth.dao.SysUserMapper;
+import net.zhenghao.zh.auth.entity.SysMenuEntity;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.R;
@@ -11,6 +13,7 @@ import net.zhenghao.zh.auth.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -27,6 +30,9 @@ public class SysUserServiceImpl implements SysUserService {
 	
 	@Autowired
 	private SysUserMapper sysUserMapper;
+
+	@Autowired
+	private SysMenuMapper sysMenuMapper;
 
 	@Override
 	public Page<SysUserEntity> listUser(Map<String, Object> params) {
@@ -63,6 +69,7 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Override
 	public R listUserPerms(Long userId) {
+		List<SysMenuEntity> menus = sysMenuMapper.listUserPerms(userId);
 		//Set<String> perms = sysUserMapper.(userId);//得到用户下所有的按钮权限等
 		//return CommonUtils.msgNotNull(perms);
 		return R.ok();

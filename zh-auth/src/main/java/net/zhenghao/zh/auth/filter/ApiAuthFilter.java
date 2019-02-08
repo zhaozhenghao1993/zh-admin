@@ -77,10 +77,10 @@ public class ApiAuthFilter implements Filter {
             }
 
             String newPath = uri.replace(routes, "");
+            RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher(newPath);
 
             // 匿名访问过滤
             if (requestHandlerAdapter.validateAnnoFilterChain(newPath, method)) {
-                RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher(newPath);
                 requestDispatcher.forward(request, response);
                 return;
             }
@@ -92,7 +92,6 @@ public class ApiAuthFilter implements Filter {
             }
 
             System.out.println("哈哈");
-            RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher(newPath);
             requestDispatcher.forward(request, response);
 
             requestHandlerAdapter.validateAnnoFilterChain(uri, method);
