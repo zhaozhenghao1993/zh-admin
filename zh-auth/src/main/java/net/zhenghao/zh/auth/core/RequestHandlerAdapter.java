@@ -32,14 +32,27 @@ public class RequestHandlerAdapter {
      * @return
      */
     public boolean validateAnnoFilterChain(String uri, String method) {
-        if (filterChainConfig.getAnnoFilterChain().stream().filter(permission -> validate(uri, method, permission.getUri(), permission.getMethod())).findAny().isPresent()) {
+        if (filterChainConfig.getAnnoFilterChainList().stream().filter(permission -> validate(uri, method, permission.getUri(), permission.getMethod())).findAny().isPresent()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 验证当前uri是否为 需要登陆token 且不权限拦截 即可访问
+     * @param uri
+     * @param method
+     * @return
+     */
+    public boolean validateAuthFilterChain(String uri, String method) {
+        if (filterChainConfig.getAuthFilterChainList().stream().filter(permission -> validate(uri, method, permission.getUri(), permission.getMethod())).findAny().isPresent()) {
             return true;
         }
         return false;
     }
 
     public boolean validatePermsFilterChain(String uri, String method, String token) {
-        if (filterChainConfig.getAnnoFilterChain().stream().filter(permission -> uri.equals(permission.getUri()) && method.equals(permission.getMethod())).findAny().isPresent()) {
+        if (filterChainConfig.getAnnoFilterChainList().stream().filter(permission -> uri.equals(permission.getUri()) && method.equals(permission.getMethod())).findAny().isPresent()) {
             return true;
         }
         return false;
@@ -48,7 +61,7 @@ public class RequestHandlerAdapter {
     public boolean dealRequestHandler(HttpServletRequest request, HttpServletResponse response) {
         String requestUri = request.getRequestURI(); //得到请求的资源
         String requestmethod = request.getMethod(); //得到请求URL地址时使用的方法
-        if (filterChainConfig.getAnnoFilterChain().stream().filter(permission -> requestUri.equals(permission.getUri()) && requestmethod.equals(permission.getMethod())).findAny().isPresent()) {
+        if (filterChainConfig.getAnnoFilterChainList().stream().filter(permission -> requestUri.equals(permission.getUri()) && requestmethod.equals(permission.getMethod())).findAny().isPresent()) {
             return true;
         }
 

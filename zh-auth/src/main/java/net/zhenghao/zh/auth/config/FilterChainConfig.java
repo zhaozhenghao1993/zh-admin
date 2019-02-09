@@ -25,18 +25,33 @@ public class FilterChainConfig {
      */
     private List<SysPermissionEntity> annoFilterChainList = new ArrayList<SysPermissionEntity>();
 
+    /**
+     * 需要登陆token 且不权限拦截 即可访问
+     */
+    private List<SysPermissionEntity> authFilterChainList = new ArrayList<SysPermissionEntity>();
+
     @PostConstruct
     public void init() {
         annoFilterChainList.add(new SysPermissionEntity("/sys/login", "POST"));
         annoFilterChainList.add(new SysPermissionEntity("/test/demo", "GET"));
-        annoFilterChainList.add(new SysPermissionEntity("/test/getToken", "POST"));
+        annoFilterChainList.add(new SysPermissionEntity("/test/getToken", "GET"));
+
+        authFilterChainList.add(new SysPermissionEntity("/test/perms", "POST"));
     }
 
-    public List<SysPermissionEntity> getAnnoFilterChain() {
+    public List<SysPermissionEntity> getAnnoFilterChainList() {
         return annoFilterChainList;
     }
 
-    public void setAnnoFilterChain(List<SysPermissionEntity> annoFilterChainList) {
+    public void setAnnoFilterChainList(List<SysPermissionEntity> annoFilterChainList) {
         this.annoFilterChainList = annoFilterChainList;
+    }
+
+    public List<SysPermissionEntity> getAuthFilterChainList() {
+        return authFilterChainList;
+    }
+
+    public void setAuthFilterChainList(List<SysPermissionEntity> authFilterChainList) {
+        this.authFilterChainList = authFilterChainList;
     }
 }

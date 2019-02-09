@@ -91,6 +91,13 @@ public class ApiAuthFilter implements Filter {
                 return;
             }
 
+            // 需要登陆token 且不权限拦截 即可访问
+            if (requestHandlerAdapter.validateAuthFilterChain(newPath, method)) {
+                requestDispatcher.forward(request, response);
+                return;
+            }
+
+
             System.out.println("哈哈");
             requestDispatcher.forward(request, response);
 
