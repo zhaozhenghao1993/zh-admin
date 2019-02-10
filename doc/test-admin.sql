@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2019-01-29 22:22:58
+Date: 2019-02-10 19:28:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -111,22 +111,42 @@ CREATE TABLE `sys_menu` (
   `menu_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `parent_id` bigint(20) DEFAULT NULL COMMENT '父菜单ID，一级菜单为0',
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '菜单名称',
-  `url` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '菜单URL',
+  `uri` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '菜单URI',
+  `method` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '请求method',
   `perms` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '授权(多个用逗号分隔，如：user:list,user:create)',
   `type` int(11) DEFAULT NULL COMMENT '类型   0：目录   1：菜单   2：按钮  3：uri',
   `icon` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
-  `description` varchar(300) DEFAULT NULL COMMENT '描述',
+  `description` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '描述',
   `creator_id` bigint(20) DEFAULT NULL COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `modifier_id` bigint(20) DEFAULT NULL COMMENT '最后修改人name',
   `modified_time` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1 COMMENT='系统菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=latin1 COMMENT='系统菜单';
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
+INSERT INTO `sys_menu` VALUES ('66', '0', '系统管理', null, null, 'sys', '0', null, '0', null, '1', '2019-02-08 15:29:18', null, null);
+INSERT INTO `sys_menu` VALUES ('67', '66', '用户管理', null, null, 'sys:user', '1', null, '0', null, '1', '2019-02-08 15:34:43', null, null);
+INSERT INTO `sys_menu` VALUES ('68', '67', '列表', '/user', 'GET', 'sys:user:view', '3', null, '0', '系统用户列表', '1', '2019-02-09 17:46:31', null, null);
+INSERT INTO `sys_menu` VALUES ('69', '67', '展示', '/user/{id}', 'GET', 'sys:user:show', '3', null, '1', '系统用户详情', '1', '2019-02-09 17:48:20', null, null);
+INSERT INTO `sys_menu` VALUES ('70', '67', '新增', '/user', 'POST', 'sys:user:save', '2', null, '2', '系统用户新增', null, null, null, null);
+INSERT INTO `sys_menu` VALUES ('71', '67', '修改', '/user/{id}', 'PUT', 'sys:user:edit', '2', null, '3', '系统用户修改', null, null, null, null);
+INSERT INTO `sys_menu` VALUES ('72', '67', '删除', '/user/{id}', 'DELETE', 'sys:user:delete', '2', null, '4', '系统用户删除', null, null, null, null);
+INSERT INTO `sys_menu` VALUES ('73', '66', '角色管理', null, null, 'sys:role', '1', null, '1', null, null, null, null, null);
+INSERT INTO `sys_menu` VALUES ('74', '73', '列表', '/role', 'GET', 'sys:role:view', '3', null, '0', '系统角色列表', null, null, null, null);
+INSERT INTO `sys_menu` VALUES ('75', '73', '展示', '/role/{id}', 'GET', 'sys:role:show', '3', null, '1', '系统角色详情', null, null, null, null);
+INSERT INTO `sys_menu` VALUES ('76', '73', '新增', '/role', 'POST', 'sys:role:save', '2', null, '2', '系统角色新增', null, null, null, null);
+INSERT INTO `sys_menu` VALUES ('77', '73', '修改', '/role/{id}', 'PUT', 'sys:role:edit', '2', null, '3', '系统角色修改', null, null, null, null);
+INSERT INTO `sys_menu` VALUES ('78', '73', '删除', '/role/{id}', 'DELETE', 'sys:role:delete', '2', null, '4', '系统角色删除', null, null, null, null);
+INSERT INTO `sys_menu` VALUES ('79', '66', '菜单管理', null, null, 'sys:menu', '1', null, '2', null, null, null, null, null);
+INSERT INTO `sys_menu` VALUES ('80', '79', '列表', '/menu', 'GET', 'sys:menu:view', '3', null, '0', '系统菜单列表', null, null, null, null);
+INSERT INTO `sys_menu` VALUES ('81', '79', '展示', '/menu/{id}', 'GET', 'sys:menu:show', '3', null, '1', '系统菜单详情', null, null, null, null);
+INSERT INTO `sys_menu` VALUES ('82', '79', '新增', '/menu', 'POST', 'sys:menu:save', '2', null, '2', '系统菜单新增', null, null, null, null);
+INSERT INTO `sys_menu` VALUES ('83', '79', '修改', '/menu/{id}', 'PUT', 'sys:menu:edit', '2', null, '3', '系统菜单修改', null, null, null, null);
+INSERT INTO `sys_menu` VALUES ('84', '79', '删除', '/menu/{id}', 'DELETE', 'sys:menu:delete', '2', null, '4', '系统菜单删除', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for sys_role
