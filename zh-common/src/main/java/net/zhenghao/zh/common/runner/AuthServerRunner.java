@@ -29,5 +29,14 @@ public class AuthServerRunner implements CommandLineRunner {
         Map<String, byte[]> keyMap = RsaKeyHelper.generateKey(keyConfig.getRsaSecret());
         keyConfig.setPubKey(keyMap.get("pub"));
         keyConfig.setPriKey(keyMap.get("pri"));
+
+        System.out.println();
+        for (int i = 0; i < keyMap.get("pub").length; i++) {
+            System.out.print(keyMap.get("pub")[i]);
+        }
+        System.out.println();
+        for (int i = 0; i < keyMap.get("pri").length; i++) {
+            System.out.print(keyMap.get("pri")[i]);
+        }
     }
 }

@@ -1,9 +1,11 @@
 package net.zhenghao.zh.auth.service;
 
+import net.zhenghao.zh.auth.entity.SysMenuEntity;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.entity.SysUserEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,6 +18,13 @@ import java.util.Map;
  */
 public interface SysUserService {
 
+	/**
+	 * 获取用户的权限filter chain
+	 * @param userId
+	 * @return
+	 */
+	List<SysMenuEntity> listUserPerms(Long userId);
+
 	Page<SysUserEntity> listUser(Map<String, Object> params);
 	
 	R saveUser(SysUserEntity user);
@@ -26,7 +35,7 @@ public interface SysUserService {
 	
 	R batchRemove(Long[] id);
 	
-	R listUserPerms(Long userId);
+	R listUserButton(Long userId);
 	
 	R updatePswdByUser(SysUserEntity user);
 	

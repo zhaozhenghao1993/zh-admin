@@ -144,15 +144,15 @@
 	
 	<select id="listUserPerms" parameterType="long" resultType="string">
 		SELECT DISTINCT
-			m.perms
+			m.uri,
+			m.method
 		FROM
 			sys_user_role ur
 		LEFT JOIN sys_role_menu rm ON ur.role_id = rm.role_id
 		LEFT JOIN sys_menu m ON rm.menu_id = m.menu_id
 		WHERE
-			ur.user_id = #{value}
-		ORDER BY
-			m.order_num ASC
+			ur.user_id = #{userId}
+		AND (m.type = 2 OR m.type = 3)
 	</select>
 
 	<select id="listUserMenu" parameterType="long" resultMap="UserMenuResult" >

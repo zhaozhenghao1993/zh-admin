@@ -6,6 +6,7 @@ import io.jsonwebtoken.SignatureException;
 import net.zhenghao.zh.auth.config.TokenHeaderConfig;
 import net.zhenghao.zh.auth.core.RequestHandlerAdapter;
 import net.zhenghao.zh.common.constant.HttpStatusConstant;
+import net.zhenghao.zh.common.context.BaseContextHandler;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.jwt.JWTInfo;
 import net.zhenghao.zh.common.utils.JSONUtils;
@@ -93,15 +94,22 @@ public class ApiAuthFilter implements Filter {
 
             // 需要登陆token 且不权限拦截 即可访问
             if (requestHandlerAdapter.validateAuthFilterChain(newPath, method)) {
+                setCurrentUserInfo(jwtInfo);
                 requestDispatcher.forward(request, response);
                 return;
             }
 
+            // 用户所拥有的权限的uri
+            if (requestHandlerAdapter.validatePermsFilterChain(newPath, method, jwtInfo.getUserId())) {
+                setCurrentUserInfo(jwtInfo);
+                requestDispatcher.forward(request, response);
+                return;
+            }
 
-            System.out.println("哈哈");
-            requestDispatcher.forward(request, response);
+            LOGGER.error("{},User Forbidden!Does not has Permission!", uri);
+            getErrorResponse(httpServletResponse, R.error(HttpStatusConstant.USER_API_UNAUTHORIZED, "User Forbidden!Does not has Permission!"));
+            return;
 
-            requestHandlerAdapter.validateAnnoFilterChain(uri, method);
         }
     }
 
@@ -143,5 +151,14 @@ public class ApiAuthFilter implements Filter {
         response.setContentType("application/json");
         response.getWriter()
                 .write(JSONUtils.objToString(r));
+    }
+
+    /**
+     * 记录当前请求token用户信息
+     * @param jwtInfo
+     */
+    private void setCurrentUserInfo(JWTInfo jwtInfo) {
+        BaseContextHandler.setUsername(jwtInfo.getUsername());
+        BaseContextHandler.setUserId(jwtInfo.getUserId());
     }
 }

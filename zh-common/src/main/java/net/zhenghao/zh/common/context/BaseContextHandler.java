@@ -38,9 +38,13 @@ public class BaseContextHandler {
         return map.get(key);
     }
 
-    public static String getUserId(){
+    public static void remove(){
+        threadLocal.remove();
+    }
+
+    public static Long getUserId(){
         Object value = get(SystemConstant.CONTEXT_KEY_USER_ID);
-        return returnObjectValue(value);
+        return (Long) value;
     }
 
     public static String getUsername(){
@@ -55,7 +59,7 @@ public class BaseContextHandler {
 
     public static void setToken(String token){set(SystemConstant.CONTEXT_KEY_USER_TOKEN, token);}
 
-    public static void setUserId(String userId){
+    public static void setUserId(Long userId){
         set(SystemConstant.CONTEXT_KEY_USER_ID, userId);
     }
 

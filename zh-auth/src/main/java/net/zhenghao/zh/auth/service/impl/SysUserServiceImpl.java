@@ -35,6 +35,11 @@ public class SysUserServiceImpl implements SysUserService {
 	private SysMenuMapper sysMenuMapper;
 
 	@Override
+	public List<SysMenuEntity> listUserPerms(Long userId) {
+		return sysMenuMapper.listUserPerms(userId);
+	}
+
+	@Override
 	public Page<SysUserEntity> listUser(Map<String, Object> params) {
 		Query form = new Query(params);
 		Page<SysUserEntity> page = new Page<>(form);
@@ -68,7 +73,7 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public R listUserPerms(Long userId) {
+	public R listUserButton(Long userId) {
 		List<SysMenuEntity> menus = sysMenuMapper.listUserPerms(userId);
 		//Set<String> perms = sysUserMapper.(userId);//得到用户下所有的按钮权限等
 		//return CommonUtils.msgNotNull(perms);

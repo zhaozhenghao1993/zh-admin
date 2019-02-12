@@ -7,7 +7,7 @@
   <groupId>net.zhenghao.zh</groupId>
   <artifactId>zh-admin</artifactId>
   <packaging>pom</packaging>
-  <version>${zh-version}</version>
+  <version>1.0.0</version>
   <modules>
       <module>zh-main</module>
       <module>zh-common</module>
@@ -51,7 +51,6 @@
   </parent>
 
   <properties>
-    <zh-version>1.0.0</zh-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>

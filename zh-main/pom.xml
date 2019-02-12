@@ -14,15 +14,11 @@
     <name>zh-main</name>
     <description>main project for Spring Boot</description>
 
-    <properties>
-
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>net.zhenghao.zh</groupId>
             <artifactId>zh-auth</artifactId>
-            <version>${zh-version}</version>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 

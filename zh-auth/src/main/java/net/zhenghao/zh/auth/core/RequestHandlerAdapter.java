@@ -1,12 +1,15 @@
 package net.zhenghao.zh.auth.core;
 
 import net.zhenghao.zh.auth.config.FilterChainConfig;
+import net.zhenghao.zh.auth.entity.SysMenuEntity;
+import net.zhenghao.zh.auth.service.SysUserService;
 import net.zhenghao.zh.common.jwt.JWTInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -24,6 +27,9 @@ public class RequestHandlerAdapter {
 
     @Autowired
     private FilterChainConfig filterChainConfig;
+
+    @Autowired
+    private SysUserService sysUserService;
 
     /**
      * 验证当前uri是否为直接匿名访问uri
@@ -51,8 +57,17 @@ public class RequestHandlerAdapter {
         return false;
     }
 
-    public boolean validatePermsFilterChain(String uri, String method, String token) {
-        if (filterChainConfig.getAnnoFilterChainList().stream().filter(permission -> uri.equals(permission.getUri()) && method.equals(permission.getMethod())).findAny().isPresent()) {
+    /**
+     * 验证当前uri是否为当前用户所拥有的权限
+     * @param uri
+     * @param method
+     * @param userId
+     * @return
+     */
+    public boolean validatePermsFilterChain(String uri, String method, Long userId) {
+        List<SysMenuEntity> list = sysUserService.listUserPerms(userId);
+        list.stream().forEach(sysMenuEntity -> System.out.println(sysMenuEntity.getUri()));
+        if (list.stream().filter(sysMenuEntity -> uri.equals(sysMenuEntity.getUri()) && method.equals(sysMenuEntity.getMethod())).findAny().isPresent()) {
             return true;
         }
         return false;
