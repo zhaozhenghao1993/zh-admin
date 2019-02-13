@@ -27,6 +27,9 @@ public class AuthServerRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         Map<String, byte[]> keyMap = RsaKeyHelper.generateKey(keyConfig.getRsaSecret());
+        RsaKeyHelper rsaKeyHelper = new RsaKeyHelper();
+        rsaKeyHelper.getPrivateKey("jwt/pkcs8_rsa_private_key.pem");
+        rsaKeyHelper.getPublicKey("jwt/rsa_public_key.pem");
         keyConfig.setPubKey(keyMap.get("pub"));
         keyConfig.setPriKey(keyMap.get("pri"));
 
