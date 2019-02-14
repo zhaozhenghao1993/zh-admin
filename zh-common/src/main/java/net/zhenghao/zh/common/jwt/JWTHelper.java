@@ -6,8 +6,10 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.utils.StringCommonUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
+
+import java.security.PrivateKey;
+import java.security.PublicKey;
 
 /**
  * 🙃
@@ -26,17 +28,16 @@ public class JWTHelper {
      * 密钥加密token
      *
      * @param jwtInfo
-     * @param priKey
      * @param expire
      * @return
      * @throws Exception
      */
-    public static String generateToken(JWTInfo jwtInfo, byte priKey[], int expire) throws Exception {
+    public static String generateToken(JWTInfo jwtInfo, PrivateKey privateKey, int expire) throws Exception {
         String compactJws = Jwts.builder()
                 .setSubject(jwtInfo.getUsername())
                 .claim(SystemConstant.JWT_KEY_USER_ID, jwtInfo.getUserId())
                 .setExpiration(DateTime.now().plusSeconds(expire).toDate())
-                .signWith(SignatureAlgorithm.RS256, RsaKeyHelper.getPrivateKey(priKey))
+                .signWith(SignatureAlgorithm.RS256, privateKey)
                 .compact();
         return compactJws;
     }
@@ -48,8 +49,8 @@ public class JWTHelper {
      * @return
      * @throws Exception
      */
-    public static Jws<Claims> parserToken(String token, byte[] pubKey) throws Exception {
-        Jws<Claims> claimsJws = Jwts.parser().setSigningKey(RsaKeyHelper.getPublicKey(pubKey)).parseClaimsJws(token);
+    public static Jws<Claims> parserToken(String token, PublicKey publicKey) throws Exception {
+        Jws<Claims> claimsJws = Jwts.parser().setSigningKey(publicKey).parseClaimsJws(token);
         return claimsJws;
     }
 
@@ -57,12 +58,11 @@ public class JWTHelper {
      * 获取token中的用户信息
      *
      * @param token
-     * @param pubKey
      * @return
      * @throws Exception
      */
-    public static JWTInfo getInfoFromToken(String token, byte[] pubKey) throws Exception {
-        Jws<Claims> claimsJws = parserToken(token, pubKey);
+    public static JWTInfo getInfoFromToken(String token, PublicKey publicKey) throws Exception {
+        Jws<Claims> claimsJws = parserToken(token, publicKey);
         Claims body = claimsJws.getBody();
         return new JWTInfo(StringCommonUtils.getObjectValue(body.get(SystemConstant.JWT_KEY_USER_ID)), body.getSubject());
     }

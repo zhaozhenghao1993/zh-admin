@@ -1,7 +1,11 @@
 package net.zhenghao.zh.common.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.security.PrivateKey;
+import java.security.PublicKey;
 
 /**
  * 🙃
@@ -17,34 +21,45 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class KeyConfig {
 
-    @Value("${zh-admin.jwt.rsa-secret}")
-    private String rsaSecret;
+    @Value("${zh-admin.jwt.private-key-path}")
+    private String privateKeyPath;
 
-    private byte[] pubKey;
+    @Value("${zh-admin.jwt.public-key-path}")
+    private String publicKeyPath;
 
-    private byte[] priKey;
+    private PrivateKey privateKey;
 
-    public String getRsaSecret() {
-        return rsaSecret;
+    private PublicKey publicKey;
+
+    public String getPrivateKeyPath() {
+        return privateKeyPath;
     }
 
-    public void setRsaSecret(String rsaSecret) {
-        this.rsaSecret = rsaSecret;
+    public void setPrivateKeyPath(String privateKeyPath) {
+        this.privateKeyPath = privateKeyPath;
     }
 
-    public byte[] getPubKey() {
-        return pubKey;
+    public String getPublicKeyPath() {
+        return publicKeyPath;
     }
 
-    public void setPubKey(byte[] pubKey) {
-        this.pubKey = pubKey;
+    public void setPublicKeyPath(String publicKeyPath) {
+        this.publicKeyPath = publicKeyPath;
     }
 
-    public byte[] getPriKey() {
-        return priKey;
+    public PrivateKey getPrivateKey() {
+        return privateKey;
     }
 
-    public void setPriKey(byte[] priKey) {
-        this.priKey = priKey;
+    public void setPrivateKey(PrivateKey privateKey) {
+        this.privateKey = privateKey;
+    }
+
+    public PublicKey getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(PublicKey publicKey) {
+        this.publicKey = publicKey;
     }
 }

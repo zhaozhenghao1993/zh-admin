@@ -65,9 +65,7 @@ public class RequestHandlerAdapter {
      * @return
      */
     public boolean validatePermsFilterChain(String uri, String method, Long userId) {
-        List<SysMenuEntity> list = sysUserService.listUserPerms(userId);
-        list.stream().forEach(sysMenuEntity -> System.out.println(sysMenuEntity.getUri()));
-        if (list.stream().filter(sysMenuEntity -> uri.equals(sysMenuEntity.getUri()) && method.equals(sysMenuEntity.getMethod())).findAny().isPresent()) {
+        if (sysUserService.listUserPerms(userId).stream().filter(sysMenuEntity -> validate(uri, method, sysMenuEntity.getUri(), sysMenuEntity.getMethod())).findAny().isPresent()) {
             return true;
         }
         return false;

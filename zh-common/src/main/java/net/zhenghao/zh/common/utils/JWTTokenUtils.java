@@ -33,7 +33,7 @@ public class JWTTokenUtils {
      * @throws Exception
      */
     public String generateToken(JWTInfo jwtInfo) throws Exception {
-        return JWTHelper.generateToken(jwtInfo, keyConfig.getPriKey(), expire);
+        return JWTHelper.generateToken(jwtInfo, keyConfig.getPrivateKey(), expire);
     }
 
     /**
@@ -43,6 +43,6 @@ public class JWTTokenUtils {
      * @throws Exception
      */
     public JWTInfo getInfoFromToken(String token) throws Exception {
-        return JWTHelper.getInfoFromToken(token, keyConfig.getPubKey());
+        return JWTHelper.getInfoFromToken(token, keyConfig.getPublicKey());
     }
 }

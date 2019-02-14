@@ -142,7 +142,7 @@
 		</foreach>
 	</delete>
 	
-	<select id="listUserPerms" parameterType="long" resultType="string">
+	<select id="listUserPerms" parameterType="long" resultType="SysMenuEntity">
 		SELECT DISTINCT
 			m.uri,
 			m.method

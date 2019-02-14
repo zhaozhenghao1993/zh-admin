@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2019-02-10 19:28:13
+Date: 2019-02-14 20:10:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -178,11 +178,30 @@ CREATE TABLE `sys_role_menu` (
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1 COMMENT='角色菜单关系';
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=latin1 COMMENT='角色菜单关系';
 
 -- ----------------------------
 -- Records of sys_role_menu
 -- ----------------------------
+INSERT INTO `sys_role_menu` VALUES ('66', '1', '66');
+INSERT INTO `sys_role_menu` VALUES ('67', '1', '67');
+INSERT INTO `sys_role_menu` VALUES ('68', '1', '68');
+INSERT INTO `sys_role_menu` VALUES ('69', '1', '69');
+INSERT INTO `sys_role_menu` VALUES ('70', '1', '70');
+INSERT INTO `sys_role_menu` VALUES ('71', '1', '71');
+INSERT INTO `sys_role_menu` VALUES ('72', '1', '72');
+INSERT INTO `sys_role_menu` VALUES ('73', '1', '73');
+INSERT INTO `sys_role_menu` VALUES ('74', '1', '74');
+INSERT INTO `sys_role_menu` VALUES ('75', '1', '75');
+INSERT INTO `sys_role_menu` VALUES ('76', '1', '76');
+INSERT INTO `sys_role_menu` VALUES ('77', '1', '77');
+INSERT INTO `sys_role_menu` VALUES ('78', '1', '78');
+INSERT INTO `sys_role_menu` VALUES ('79', '1', '79');
+INSERT INTO `sys_role_menu` VALUES ('80', '1', '80');
+INSERT INTO `sys_role_menu` VALUES ('81', '1', '81');
+INSERT INTO `sys_role_menu` VALUES ('82', '1', '82');
+INSERT INTO `sys_role_menu` VALUES ('83', '1', '83');
+INSERT INTO `sys_role_menu` VALUES ('84', '1', '84');
 
 -- ----------------------------
 -- Table structure for sys_user

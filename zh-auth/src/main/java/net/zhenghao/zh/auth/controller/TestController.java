@@ -25,6 +25,11 @@ public class TestController {
         return jwtTokenUtils.generateToken(new JWTInfo(1L, "admin"));
     }
 
+    @GetMapping("/getUserInfo")
+    public JWTInfo getToken(String token) throws Exception {
+        return jwtTokenUtils.getInfoFromToken(token);
+    }
+
     @PostMapping("/auth")
     public String auth() {
         return "auth => success";
