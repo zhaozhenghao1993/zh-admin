@@ -35,11 +35,8 @@ public class TokenAuthInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        System.out.println("当前token用户id" + BaseContextHandler.getUserId());
-        System.out.println("当前token用户username" + BaseContextHandler.getUsername());
+        // 清空当前请求token用户信息
         BaseContextHandler.remove();
-        System.out.println("删除后当前token用户id" + BaseContextHandler.getUserId());
-        System.out.println("删除后当前token用户username" + BaseContextHandler.getUsername());
         super.afterCompletion(request, response, handler, ex);
     }
 }

@@ -71,17 +71,6 @@ public class RequestHandlerAdapter {
         return false;
     }
 
-    public boolean dealRequestHandler(HttpServletRequest request, HttpServletResponse response) {
-        String requestUri = request.getRequestURI(); //得到请求的资源
-        String requestmethod = request.getMethod(); //得到请求URL地址时使用的方法
-        if (filterChainConfig.getAnnoFilterChainList().stream().filter(permission -> requestUri.equals(permission.getUri()) && requestmethod.equals(permission.getMethod())).findAny().isPresent()) {
-            return true;
-        }
-
-
-        return false;
-    }
-
     /**
      * 正则验证restful api 匹配
      * @param requestUri        请求uri

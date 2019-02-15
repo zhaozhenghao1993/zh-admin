@@ -34,6 +34,7 @@
 			password,
 			email,
 			mobile,
+			avatar,
 			status
 		FROM
 			sys_user
@@ -80,6 +81,7 @@
 			password,
 			email,
 			mobile,
+			avatar,
 			status
 		FROM 
 			sys_user

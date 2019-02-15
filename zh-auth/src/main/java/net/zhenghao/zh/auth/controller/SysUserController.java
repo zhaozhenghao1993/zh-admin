@@ -23,7 +23,7 @@ import java.util.Map;
  * SysMenuController.java
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/sys/user")
 public class SysUserController extends AbstractController {
 
 	@Resource
