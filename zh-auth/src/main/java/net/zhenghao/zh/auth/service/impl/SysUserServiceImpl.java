@@ -1,7 +1,9 @@
 package net.zhenghao.zh.auth.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import net.zhenghao.zh.auth.dao.SysMenuMapper;
 import net.zhenghao.zh.auth.dao.SysUserMapper;
+import net.zhenghao.zh.auth.dao.SysUserRoleMapper;
 import net.zhenghao.zh.auth.entity.SysMenuEntity;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
@@ -32,6 +34,9 @@ public class SysUserServiceImpl implements SysUserService {
 	private SysUserMapper sysUserMapper;
 
 	@Autowired
+	private SysUserRoleMapper sysUserRoleMapper;
+
+	@Autowired
 	private SysMenuMapper sysMenuMapper;
 
 	@Override
@@ -40,10 +45,16 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
+	public SysUserEntity getUserByName(String username) {
+		return sysUserMapper.getByUserName(username);
+	}
+
+	@Override
 	public Page<SysUserEntity> listUser(Map<String, Object> params) {
-		Query form = new Query(params);
-		Page<SysUserEntity> page = new Page<>(form);
-		sysUserMapper.listForPage(page, form);
+		Query query = new Query(params);
+		Page<SysUserEntity> page = new Page<>(query);
+		PageHelper.startPage(page.getPageNum(), page.getPageSize());
+		page.setData(sysUserMapper.listForPage(query));
 		return page;
 	}
 
@@ -63,6 +74,13 @@ public class SysUserServiceImpl implements SysUserService {
 	@Override
 	public R updateUser(SysUserEntity user) {
 		int count = sysUserMapper.update(user);
+		return CommonUtils.msg(count);
+	}
+
+	@Override
+	public R removeUser(Long id) {
+		sysUserRoleMapper.remove(id);
+		int count = sysUserMapper.remove(id);
 		return CommonUtils.msg(count);
 	}
 

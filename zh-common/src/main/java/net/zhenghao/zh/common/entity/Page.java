@@ -18,7 +18,7 @@ public class Page<T> extends RowBounds {
 	/**
 	 * 页编号:第几页
 	 */
-	protected int pageNo = 1;
+	protected int pageNum = 1;
 	
 	/**
 	 * 页大小:每页的数量
@@ -39,7 +39,7 @@ public class Page<T> extends RowBounds {
 	/**
 	 * 查询结果
 	 */
-	protected List<T> rows = new ArrayList<T>();
+	protected List<T> data = new ArrayList<T>();
 	
 	/**
 	 * 总条数
@@ -55,7 +55,7 @@ public class Page<T> extends RowBounds {
 	 * 计算偏移量
 	 */
 	private void calcOffset(){
-		this.offset = ((pageNo - 1) * pageSize);
+		this.offset = ((pageNum - 1) * pageSize);
 	}
 	
 	/**
@@ -70,15 +70,15 @@ public class Page<T> extends RowBounds {
 		this.calcLimit();
 	}
 	
-	public Page(int pageNo, int pageSize){
-		this.pageNo = pageNo;
+	public Page(int pageNum, int pageSize){
+		this.pageNum = pageNum;
 		this.pageSize = pageSize;
 		this.calcOffset();
 		this.calcLimit();
 	}
 	
 	public Page(Query search){
-		this.pageNo = search.getAsInt("pageNumber");
+		this.pageNum = search.getAsInt("pageNum");
 		this.pageSize = search.getAsInt("pageSize");
 		this.calcOffset();
 		this.calcLimit();
@@ -88,8 +88,8 @@ public class Page<T> extends RowBounds {
 	 * 获得当前页面的页号,序号从1开始,默认为1
 	 * @return
 	 */
-	public int getPageNo(){
-		return pageNo;
+	public int getPageNum(){
+		return pageNum;
 	}
 	
 	/**
@@ -100,11 +100,11 @@ public class Page<T> extends RowBounds {
     }
     
     /**
-     * 根据pageNo和pageSize计算当前页第一条记录在总结果集中的位置
+     * 根据pageNum和pageSize计算当前页第一条记录在总结果集中的位置
      * @return
      */
     public int getFirst(){
-    	return ((pageNo - 1) * pageSize) + 1;
+    	return ((pageNum - 1) * pageSize) + 1;
     }
     
     /**
@@ -122,15 +122,15 @@ public class Page<T> extends RowBounds {
      * 取得页内的记录列表
      * @return
      */
-    public List<T> getRows(){
-    	return rows;
+    public List<T> getData(){
+    	return data;
     }
     
     /**
      * 设置页内的记录列表.
      */
-    public void setRows(final List<T> rows) {
-        this.rows = rows;
+    public void setData(final List<T> data) {
+        this.data = data;
     }
     
     /**

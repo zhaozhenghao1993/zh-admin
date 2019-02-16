@@ -39,15 +39,6 @@ public class SysUserController extends AbstractController {
     }
 
 	/**
-	 * 获取用户信息
-	 * @return
-	 */
-	@GetMapping("/{id}")
-	public R show(@PathVariable("id") Long userId) {
-		return sysUserService.getUserById(userId);
-	}
-
-	/**
 	 * 获取登录用户权限
 	 * @return
 	 */
@@ -57,25 +48,36 @@ public class SysUserController extends AbstractController {
 	}
 
 	/**
+	 * 获取用户信息列表
+	 * @return
+	 */
+	@GetMapping("")
+	public Page<SysUserEntity> list(@RequestParam Map<String, Object> params) {
+		if (getUserId() != SystemConstant.SUPER_ADMIN) {
+			params.put("creatorId", getUserId());
+		}
+		return sysUserService.listUser(params);
+	}
+
+	/**
+	 * 获取用户信息
+	 * @return
+	 */
+	@GetMapping("/{id}")
+	public R show(@PathVariable("id") Long userId) {
+		return sysUserService.getUserById(userId);
+	}
+
+	/**
 	 * 新增用户
 	 * @param user
 	 * @return
 	 */
 	@SysLog("新增用户")
-	@RequestMapping("/save")
+	@PostMapping("")
 	public R save(@RequestBody SysUserEntity user) {
-		// user.setUserIdCreate(getUserId());
+		user.setCreatorId(getUserId());
 		return sysUserService.saveUser(user);
-	}
-
-	/**
-	 * 根据id查询详情
-	 * @param userId
-	 * @return
-	 */
-	@RequestMapping("/infoUser")
-	public R getById(@RequestBody Long userId) {
-		return sysUserService.getUserById(userId);
 	}
 
 	/**
@@ -84,20 +86,21 @@ public class SysUserController extends AbstractController {
 	 * @return
 	 */
 	@SysLog("修改用户")
-	@RequestMapping("/update")
-	public R update(@RequestBody SysUserEntity user) {
+	@PutMapping("/{id}")
+	public R edit(@PathVariable("id") Long userId ,@RequestBody SysUserEntity user) {
+		user.setUserId(userId);
+		user.setModifierId(getUserId());
 		return sysUserService.updateUser(user);
 	}
 
 	/**
 	 * 删除
-	 * @param id
 	 * @return
 	 */
 	@SysLog("删除用户")
-	@RequestMapping("/remove")
-	public R batchRemove(@RequestBody Long[] id) {
-		return sysUserService.batchRemove(id);
+	@DeleteMapping("/{id}")
+	public R remove(@PathVariable("id") Long userId) {
+		return sysUserService.removeUser(userId);
 	}
 
 	/**

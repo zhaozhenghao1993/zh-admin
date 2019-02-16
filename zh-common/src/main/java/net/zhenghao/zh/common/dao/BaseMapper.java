@@ -1,6 +1,5 @@
 package net.zhenghao.zh.common.dao;
 
-import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 
 import java.util.List;
@@ -101,11 +100,10 @@ public interface BaseMapper<T> {
 	
 	/**
 	 * 分页查询列表
-	 * @param page
 	 * @param query
 	 * @return
 	 */
-	List<T> listForPage(Page<T> page, Query query);
+	List<T> listForPage(Query query);
 	
 	/**
 	 * 查询列表(带查询条件)

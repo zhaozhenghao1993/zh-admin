@@ -35,7 +35,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 	@Override
 	public List<SysMenuEntity> listMenu(Map<String, Object> params) {
 		Query query = new Query(params);
-		List<SysMenuEntity> menuList = sysMenuMapper.listForPage(new Page(query), query);
+		List<SysMenuEntity> menuList = sysMenuMapper.listForPage(query);
 		return menuList;
 	}
 

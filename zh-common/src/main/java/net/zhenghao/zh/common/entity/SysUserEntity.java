@@ -57,7 +57,7 @@ public class SysUserEntity implements Serializable {
 	/**
 	 * 创建人id
 	 */
-	private String creatorId;
+	private Long creatorId;
 
 	/**
 	 * 创建时间
@@ -67,7 +67,7 @@ public class SysUserEntity implements Serializable {
 	/**
 	 * 最后修改人id
 	 */
-	private String modifierId;
+	private Long modifierId;
 
 	/**
 	 * 最后修改时间
@@ -139,11 +139,11 @@ public class SysUserEntity implements Serializable {
 		this.status = status;
 	}
 
-	public String getCreatorId() {
+	public Long getCreatorId() {
 		return creatorId;
 	}
 
-	public void setCreatorId(String creatorId) {
+	public void setCreatorId(Long creatorId) {
 		this.creatorId = creatorId;
 	}
 
@@ -155,11 +155,11 @@ public class SysUserEntity implements Serializable {
 		this.createTime = createTime;
 	}
 
-	public String getModifierId() {
+	public Long getModifierId() {
 		return modifierId;
 	}
 
-	public void setModifierId(String modifierId) {
+	public void setModifierId(Long modifierId) {
 		this.modifierId = modifierId;
 	}
 

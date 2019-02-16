@@ -1,5 +1,6 @@
 package net.zhenghao.zh.common.handler;
 
+import net.zhenghao.zh.common.constant.HttpStatusConstant;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.exception.auth.ApiInvalidException;
 import net.zhenghao.zh.common.exception.auth.UserTokenException;
@@ -37,5 +38,12 @@ public class GlobalExceptionHandler {
         response.setStatus(403);
         LOGGER.error(ex.getMessage(), ex);
         return R.error(ex.getCode(), ex.getMessage());
+    }
+
+    @ExceptionHandler(Exception.class)
+    public R otherExceptionHandler(HttpServletResponse response, Exception ex) {
+        response.setStatus(500);
+        LOGGER.error(ex.getMessage(), ex);
+        return R.error(HttpStatusConstant.EXCEPTION_OTHER_CODE, ex.toString());
     }
 }

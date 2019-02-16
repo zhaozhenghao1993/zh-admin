@@ -25,4 +25,8 @@ public class UserAuthUtils {
     public JWTInfo getInfoFromToken(String token) throws Exception {
         return jwtTokenUtils.getInfoFromToken(token);
     }
+
+    public String getTokenFromJWTInfo(JWTInfo jwtInfo) throws Exception {
+        return jwtTokenUtils.generateToken(jwtInfo);
+    }
 }

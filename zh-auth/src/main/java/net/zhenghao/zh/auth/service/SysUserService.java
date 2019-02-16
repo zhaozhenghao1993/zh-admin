@@ -25,6 +25,8 @@ public interface SysUserService {
 	 */
 	List<SysMenuEntity> listUserPerms(Long userId);
 
+	SysUserEntity getUserByName(String username);
+
 	Page<SysUserEntity> listUser(Map<String, Object> params);
 	
 	R saveUser(SysUserEntity user);
@@ -32,6 +34,8 @@ public interface SysUserService {
 	R getUserById(Long userId);
 	
 	R updateUser(SysUserEntity user);
+
+	R removeUser(Long id);
 	
 	R batchRemove(Long[] id);
 	

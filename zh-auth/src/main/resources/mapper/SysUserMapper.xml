@@ -9,13 +9,14 @@
 			username,
 			email,
 			mobile,
+			avatar,
 			status,
-			gmt_create
+			create_time
 		FROM
 			sys_user
 		<where>
-			<if test="userIdCreate != null">
-				AND user_id_create = #{userIdCreate}
+			<if test="creatorId != null">
+				AND creator_id = #{creatorId}
 			</if>
 			<if test="username != null and username.trim() != ''">
 				AND username LIKE concat('%',#{username},'%')
@@ -59,17 +60,19 @@
 			password,
 			email,
 			mobile,
+			avatar,
 			status,
-			user_id_create,
-			gmt_create
+			creator_id,
+			create_time
 		)
 		VALUES (
 			#{username},
 			#{password},
 			#{email},
 			#{mobile},
+			#{avatar},
 			#{status},
-			#{userIdCreate},
+			#{creatorId},
 			NOW()
 		)
 	</insert>
@@ -78,7 +81,6 @@
 		SELECT
 			user_id,
 			username,
-			password,
 			email,
 			mobile,
 			avatar,
@@ -95,11 +97,21 @@
 			<if test="username != null">username = #{username}, </if>
 			<if test="email != null">email = #{email}, </if>
 			<if test="mobile != null">mobile = #{mobile}, </if>
+			<if test="avatar != null">avatar = #{avatar}, </if>
 			<if test="status != null">status = #{status}, </if>
-			gmt_modified = NOW()
+			modifier_id = #{modifierId},
+			modified_time = NOW()
 		</set>
 		where user_id = #{userId}
 	</update>
+
+	<delete id="remove">
+		DELETE
+		FROM
+			sys_user
+		WHERE
+			user_id = #{value}
+	</delete>
 	
 	<delete id="batchRemove">
 		DELETE
