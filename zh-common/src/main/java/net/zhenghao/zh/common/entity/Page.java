@@ -78,8 +78,8 @@ public class Page<T> extends RowBounds {
 	}
 	
 	public Page(Query search){
-		this.pageNum = search.getAsInt("pageNum");
-		this.pageSize = search.getAsInt("pageSize");
+		this.pageNum = search.getAsInt("pageNum") == null ? this.pageNum : search.getAsInt("pageNum");
+		this.pageSize = search.getAsInt("pageSize") == null ? this.pageSize : search.getAsInt("pageNum");
 		this.calcOffset();
 		this.calcLimit();
 	}
