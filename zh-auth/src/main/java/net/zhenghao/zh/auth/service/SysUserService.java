@@ -40,7 +40,9 @@ public interface SysUserService {
 	R batchRemove(Long[] id);
 	
 	R listUserButton(Long userId);
-	
+
+	R listUserMenu(Long userId);
+
 	R updatePswdByUser(SysUserEntity user);
 	
 	R updateUserEnable(Long[] id);

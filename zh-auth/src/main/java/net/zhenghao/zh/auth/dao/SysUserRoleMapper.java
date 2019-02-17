@@ -25,6 +25,10 @@ public interface SysUserRoleMapper extends BaseMapper<SysUserRoleEntity> {
 	 * @return
 	 */
 	List<Long> listUserRoleId(Long userId);
+
+	int removeByUserId(Long id);
+
+	int removeByRoleId(Long id);
 	
 	int batchRemoveByUserId(Long[] id);
 	

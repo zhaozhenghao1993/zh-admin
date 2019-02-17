@@ -14,12 +14,20 @@
 		</foreach>
 	</insert>
 	
-	<delete id="remove">
+	<delete id="removeByUserId">
 		DELETE
 		FROM
 			sys_user_role
 		WHERE
 			user_id = #{value}
+	</delete>
+
+	<delete id="removeByRoleId">
+		DELETE
+		FROM
+			sys_user_role
+		WHERE
+			role_id = #{value}
 	</delete>
 	
 	<delete id="batchRemoveByUserId">

@@ -42,9 +42,18 @@ public class SysUserController extends AbstractController {
 	 * 获取登录用户权限
 	 * @return
 	 */
-	@RequestMapping("/button")
+	@GetMapping("/button")
 	public R listUserButton() {
 		return sysUserService.listUserButton(getUserId());
+	}
+
+	/**
+	 * 获取登录用户权限
+	 * @return
+	 */
+	@GetMapping("/menu")
+	public R menu() {
+		return sysUserService.listUserMenu(getUserId());
 	}
 
 	/**

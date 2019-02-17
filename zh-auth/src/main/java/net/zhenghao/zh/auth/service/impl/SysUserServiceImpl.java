@@ -17,14 +17,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  *
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2017年12月7日 上午9:10:21
+ * @date  :2019年2月17日 上午9:10:21
  * SysUserServiceImpl.java
  */
 @Service("sysUserService")
@@ -34,10 +33,10 @@ public class SysUserServiceImpl implements SysUserService {
 	private SysUserMapper sysUserMapper;
 
 	@Autowired
-	private SysUserRoleMapper sysUserRoleMapper;
+	private SysMenuMapper sysMenuMapper;
 
 	@Autowired
-	private SysMenuMapper sysMenuMapper;
+	private SysUserRoleMapper sysUserRoleMapper;
 
 	@Override
 	public List<SysMenuEntity> listUserPerms(Long userId) {
@@ -62,40 +61,58 @@ public class SysUserServiceImpl implements SysUserService {
 	public R saveUser(SysUserEntity user) {
 		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
 		int count = sysUserMapper.save(user);
+		Query query = new Query();
+		query.put("userId", user.getUserId());
+		query.put("roleIdList", user.getRoleIdList());
+		sysUserRoleMapper.save(query);
 		return CommonUtils.msg(count);
 	}
 
 	@Override
 	public R getUserById(Long userId) {
 		SysUserEntity user = sysUserMapper.getObjectById(userId);
+		List<Long> roleId = sysUserRoleMapper.listUserRoleId(userId);
+		user.setRoleIdList(roleId);
 		return CommonUtils.msg(user);
 	}
 
 	@Override
 	public R updateUser(SysUserEntity user) {
+		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
 		int count = sysUserMapper.update(user);
+		Long userId = user.getUserId();
+		sysUserRoleMapper.remove(userId);
+		Query query = new Query();
+		query.put("userId", userId);
+		query.put("roleIdList", user.getRoleIdList());
+		sysUserRoleMapper.save(query);
 		return CommonUtils.msg(count);
 	}
 
 	@Override
 	public R removeUser(Long id) {
-		sysUserRoleMapper.remove(id);
 		int count = sysUserMapper.remove(id);
+		sysUserRoleMapper.removeByUserId(id);
 		return CommonUtils.msg(count);
 	}
 
 	@Override
 	public R batchRemove(Long[] id) {
 		int count = sysUserMapper.batchRemove(id);
+		sysUserRoleMapper.batchRemoveByUserId(id);
 		return CommonUtils.msg(id, count);
 	}
 
 	@Override
 	public R listUserButton(Long userId) {
-		List<SysMenuEntity> menus = sysMenuMapper.listUserPerms(userId);
-		//Set<String> perms = sysUserMapper.(userId);//得到用户下所有的按钮权限等
-		//return CommonUtils.msgNotNull(perms);
-		return R.ok();
+		List<String> buttons = sysMenuMapper.listUserButton(userId);
+		return CommonUtils.msgNotNull(buttons);
+	}
+
+	@Override
+	public R listUserMenu(Long userId) {
+		List<SysMenuEntity> menus = sysMenuMapper.listUserMenu(userId);
+		return CommonUtils.msgNotNull(menus);
 	}
 
 	@Override

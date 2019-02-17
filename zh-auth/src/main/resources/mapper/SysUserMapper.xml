@@ -99,7 +99,7 @@
 			<if test="mobile != null">mobile = #{mobile}, </if>
 			<if test="avatar != null">avatar = #{avatar}, </if>
 			<if test="status != null">status = #{status}, </if>
-			modifier_id = #{modifierId},
+			<if test="modifierId != null">modifier_id = #{modifierId},</if>
 			modified_time = NOW()
 		</set>
 		where user_id = #{userId}

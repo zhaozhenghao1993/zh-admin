@@ -1,5 +1,6 @@
 package net.zhenghao.zh.common.utils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 
@@ -36,8 +37,11 @@ public class MD5Utils {
 	 * @return
 	 */
 	public static String encrypt(String username, String pswd) {
-		String newPassword = new SimpleHash(ALGORITH_NAME, pswd, ByteSource.Util.bytes(username + SALT), HASH_ITERATIONS).toHex();
-		return newPassword;
+		if (StringUtils.isNotEmpty(username) && StringUtils.isNotEmpty(pswd)) {
+			String newPassword = new SimpleHash(ALGORITH_NAME, pswd, ByteSource.Util.bytes(username + SALT), HASH_ITERATIONS).toHex();
+			return newPassword;
+		}
+		return null;
 	}
 	
 	public static void main(String[] args) {

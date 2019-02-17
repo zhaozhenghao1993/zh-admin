@@ -19,6 +19,10 @@ import java.util.List;
 @Component
 public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenuEntity> {
 
+	int removeByMenuId(Long id);
+
+	int removeByRoleId(Long id);
+
 	int batchRemoveByMenuId(Long[] id);
 	
 	int batchRemoveByRoleId(Long[] id);

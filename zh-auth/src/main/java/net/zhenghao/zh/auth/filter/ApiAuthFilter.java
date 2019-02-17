@@ -5,12 +5,14 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
 import net.zhenghao.zh.auth.config.TokenHeaderConfig;
 import net.zhenghao.zh.auth.core.RequestHandlerAdapter;
+import net.zhenghao.zh.auth.dao.SysUserMapper;
+import net.zhenghao.zh.auth.service.SysUserService;
 import net.zhenghao.zh.common.constant.HttpStatusConstant;
 import net.zhenghao.zh.common.context.BaseContextHandler;
 import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.entity.SysUserEntity;
 import net.zhenghao.zh.common.jwt.JWTInfo;
 import net.zhenghao.zh.common.utils.JSONUtils;
-import net.zhenghao.zh.common.utils.JWTTokenUtils;
 import net.zhenghao.zh.common.utils.UserAuthUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +31,7 @@ import java.io.IOException;
  * 🙃
  * 🙃 api地址过滤器
  * 🙃 注：@order值越小越先执行
- * 将/api/v1/user/info 转发至 /user/info，禁止直接访问/user/info
+ * 将/api/v1/sys/user/info 转发至 /sys/user/info，禁止直接访问/user/info
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
  * @date :2019/01/13 19:55
@@ -49,7 +51,7 @@ public class ApiAuthFilter implements Filter {
     private TokenHeaderConfig tokenHeaderConfig;
 
     @Autowired
-    private JWTTokenUtils jwtTokenUtils;
+    private SysUserMapper sysUserMapper;
 
     @Autowired
     private UserAuthUtils userAuthUtils;
@@ -92,6 +94,19 @@ public class ApiAuthFilter implements Filter {
                 return;
             }
 
+            // 检测当前token用户信息
+            SysUserEntity user = sysUserMapper.getObjectById(jwtInfo.getUserId());
+            if (user == null) {
+                LOGGER.error("{},Token exception! Account does not exist!", uri);
+                getErrorResponse(httpServletResponse, R.error(HttpStatusConstant.USER_UNKNOWN_ACCOUNT, "Token exception! Account does not exist!"));
+                return;
+            }
+            if (user.getStatus() == 0) {
+                LOGGER.error("{},Token exception! Account locked!", uri);
+                getErrorResponse(httpServletResponse, R.error(HttpStatusConstant.USER_UNKNOWN_ACCOUNT, "Token exception! Account locked!"));
+                return;
+            }
+
             // 需要登陆token 且不权限拦截 即可访问
             if (requestHandlerAdapter.validateAuthFilterChain(newPath, method)) {
                 setCurrentUserInfo(jwtInfo);
@@ -109,7 +124,6 @@ public class ApiAuthFilter implements Filter {
             LOGGER.error("{},User Forbidden!Does not has Permission!", uri);
             getErrorResponse(httpServletResponse, R.error(HttpStatusConstant.USER_API_UNAUTHORIZED, "User Forbidden!Does not has Permission!"));
             return;
-
         }
     }
 

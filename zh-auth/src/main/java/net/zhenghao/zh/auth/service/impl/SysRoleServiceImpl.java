@@ -1,6 +1,9 @@
 package net.zhenghao.zh.auth.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import net.zhenghao.zh.auth.dao.SysRoleMapper;
+import net.zhenghao.zh.auth.dao.SysRoleMenuMapper;
+import net.zhenghao.zh.auth.dao.SysUserRoleMapper;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.R;
@@ -27,11 +30,18 @@ public class SysRoleServiceImpl implements SysRoleService {
 	@Autowired
 	private SysRoleMapper sysRoleMapper;
 
+	@Autowired
+	private SysUserRoleMapper sysUserRoleMapper;
+
+	@Autowired
+	private SysRoleMenuMapper sysRoleMenuMapper;
+
 	@Override
 	public Page<SysRoleEntity> listRole(Map<String, Object> params) {
 		Query query = new Query(params);
 		Page<SysRoleEntity> page = new Page<>(query);
-		sysRoleMapper.listForPage(query);
+		PageHelper.startPage(page.getPageNum(), page.getPageSize());
+		page.setData(sysRoleMapper.listForPage(query));
 		return page;
 	}
 
@@ -44,12 +54,22 @@ public class SysRoleServiceImpl implements SysRoleService {
 	@Override
 	public R getRoleById(Long id) {
 		SysRoleEntity role = sysRoleMapper.getObjectById(id);
+		List<Long> menuId = sysRoleMenuMapper.listMenuId(id);
+		role.setMenuIdList(menuId);
 		return CommonUtils.msg(role);
 	}
 
 	@Override
 	public R updateRole(SysRoleEntity role) {
 		int count = sysRoleMapper.update(role);
+		return CommonUtils.msg(count);
+	}
+
+	@Override
+	public R removeRole(Long id) {
+		int count = sysRoleMapper.remove(id);
+		sysUserRoleMapper.removeByRoleId(id);
+		sysRoleMenuMapper.removeByRoleId(id);
 		return CommonUtils.msg(count);
 	}
 
@@ -67,7 +87,12 @@ public class SysRoleServiceImpl implements SysRoleService {
 
 	@Override
 	public R updateRoleAuthorization(SysRoleEntity role) {
-		int count = sysRoleMapper.update(role);
+		Long roleId = role.getRoleId();
+		sysRoleMenuMapper.remove(roleId);
+		Query query = new Query();
+		query.put("roleId", roleId);
+		query.put("menuIdList", role.getMenuIdList());
+		int count = sysRoleMenuMapper.save(query);
 		return CommonUtils.msg(count);
 	}
 

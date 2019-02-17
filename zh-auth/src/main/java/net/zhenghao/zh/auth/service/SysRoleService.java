@@ -23,6 +23,8 @@ public interface SysRoleService {
 	R getRoleById(Long id);
 	
 	R updateRole(SysRoleEntity role);
+
+	R removeRole(Long id);
 	
 	R batchRemove(Long[] id);
 	

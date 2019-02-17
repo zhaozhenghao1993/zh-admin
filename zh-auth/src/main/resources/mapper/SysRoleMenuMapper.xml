@@ -49,12 +49,20 @@
 	</delete>
 	
 	
-	<delete id="remove">
+	<delete id="removeByRoleId">
 		DELETE
-		FROM 
+		FROM
 			sys_role_menu
-		WHERE 
+		WHERE
 			role_id = #{value}
+	</delete>
+
+	<delete id="removeByMenuId">
+		DELETE
+		FROM
+			sys_role_menu
+		WHERE
+			menu_id = #{value}
 	</delete>
 	
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>

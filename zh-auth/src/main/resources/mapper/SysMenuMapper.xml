@@ -155,64 +155,30 @@
 		AND (m.type = 2 OR m.type = 3)
 	</select>
 
-	<select id="listUserMenu" parameterType="long" resultMap="UserMenuResult" >
-		SELECT
-			p.menu_id,
-			p.parent_id,
-			p.`name`,
-			p.url,
-			p.type,
-			p.icon,
-			c.menu_id AS c_menu_id,
-			c.parent_id AS c_parent_id,
-			c.`name` AS c_name,
-			c.url AS c_url,
-			c.type AS c_type,
-			c.icon AS c_icon
+	<select id="listUserButton" parameterType="long" resultType="String">
+		SELECT DISTINCT
+			m.perms
 		FROM
-		(
-			SELECT DISTINCT
-				rm.menu_id,
-				m.parent_id,
-				m.`name`,
-				m.url,
-				m.type,
-				m.icon,
-				m.order_num
-			FROM
-				sys_user_role ur
-			LEFT JOIN sys_role_menu rm ON ur.role_id = rm.role_id
-			LEFT JOIN sys_menu m ON rm.menu_id = m.menu_id
-			WHERE
-				ur.user_id = #{userId}
-			AND (
-				m.parent_id = 0
-				OR m.parent_id IS NULL
-				)
-		) p
-		LEFT JOIN (
-			SELECT DISTINCT
-				rm.menu_id,
-				m.parent_id,
-				m.`name`,
-				m.url,
-				m.type,
-				m.icon,
-				m.order_num
-			FROM
-				sys_user_role ur
-			LEFT JOIN sys_role_menu rm ON ur.role_id = rm.role_id
-			LEFT JOIN sys_menu m ON rm.menu_id = m.menu_id
-			WHERE
-				ur.user_id = #{userId}
-				AND (
-				m.parent_id != 0
-				OR m.parent_id IS NOT NULL
-				)
-		) c ON p.menu_id = c.parent_id
-		ORDER BY
-		p.order_num ASC,
-		c.order_num ASC
+			sys_user_role ur
+		LEFT JOIN sys_role_menu rm ON ur.role_id = rm.role_id
+		LEFT JOIN sys_menu m ON rm.menu_id = m.menu_id
+		WHERE
+			ur.user_id = #{userId}
+		AND m.type = 2
+	</select>
+
+	<select id="listUserMenu" parameterType="long" resultType="SysMenuEntity" >
+		SELECT DISTINCT
+			m.name,
+			m.perms,
+			m.icon
+		FROM
+			sys_user_role ur
+		LEFT JOIN sys_role_menu rm ON ur.role_id = rm.role_id
+		LEFT JOIN sys_menu m ON rm.menu_id = m.menu_id
+		WHERE
+			ur.user_id = #{userId}
+		AND (m.type = 0 OR m.type = 1)
 	</select>
 	
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>

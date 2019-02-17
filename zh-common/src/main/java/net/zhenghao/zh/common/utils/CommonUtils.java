@@ -59,7 +59,6 @@ public class CommonUtils {
 	public static R msgNotNull(Object data) {
 		return R.ok().put(SystemConstant.DATA_ROWS, data);
 	}
-	
  
 	/**
 	 * 删除提示
