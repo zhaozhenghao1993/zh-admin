@@ -95,15 +95,7 @@ public class ApiAuthFilter implements Filter {
             }
 
             // 检测当前token用户信息
-            SysUserEntity user = sysUserMapper.getObjectById(jwtInfo.getUserId());
-            if (user == null) {
-                LOGGER.error("{},Token exception! Account does not exist!", uri);
-                getErrorResponse(httpServletResponse, R.error(HttpStatusConstant.USER_UNKNOWN_ACCOUNT, "Token exception! Account does not exist!"));
-                return;
-            }
-            if (user.getStatus() == 0) {
-                LOGGER.error("{},Token exception! Account locked!", uri);
-                getErrorResponse(httpServletResponse, R.error(HttpStatusConstant.USER_UNKNOWN_ACCOUNT, "Token exception! Account locked!"));
+            if (!validateUserInfo(jwtInfo, httpServletResponse)) {
                 return;
             }
 
@@ -152,6 +144,29 @@ public class ApiAuthFilter implements Filter {
             getErrorResponse(response, R.error(HttpStatusConstant.TOKEN_OTHER_EXCEPTION, "User token other exception!"));
         }
         return jwtInfo;
+    }
+
+    /**
+     * 检测当前token用户信息
+     * @param jwtInfo
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    private boolean validateUserInfo(JWTInfo jwtInfo, HttpServletResponse response) throws IOException {
+        boolean bool = true;
+        SysUserEntity user = sysUserMapper.getObjectById(jwtInfo.getUserId());
+        if (user == null) {
+            LOGGER.error("Token exception! Account does not exist!");
+            getErrorResponse(response, R.error(HttpStatusConstant.USER_UNKNOWN_ACCOUNT, "Token exception! Account does not exist!"));
+            bool = false;
+        }
+        if (user.getStatus() == 0) {
+            LOGGER.error("Token exception! Account locked!");
+            getErrorResponse(response, R.error(HttpStatusConstant.USER_UNKNOWN_ACCOUNT, "Token exception! Account locked!"));
+            bool = false;
+        }
+        return bool;
     }
 
     /**
