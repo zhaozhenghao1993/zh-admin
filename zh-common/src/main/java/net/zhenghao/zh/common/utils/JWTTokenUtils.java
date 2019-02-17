@@ -1,8 +1,8 @@
 package net.zhenghao.zh.common.utils;
 
-import net.zhenghao.zh.common.config.KeyConfig;
 import net.zhenghao.zh.common.jwt.JWTHelper;
 import net.zhenghao.zh.common.jwt.JWTInfo;
+import net.zhenghao.zh.common.jwt.RsaKeyManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ public class JWTTokenUtils {
     private int expire;
 
     @Autowired
-    private KeyConfig keyConfig;
+    private RsaKeyManager rsaKeyManager;
 
     /**
      * 私钥生成jwt token
@@ -33,7 +33,7 @@ public class JWTTokenUtils {
      * @throws Exception
      */
     public String generateToken(JWTInfo jwtInfo) throws Exception {
-        return JWTHelper.generateToken(jwtInfo, keyConfig.getPrivateKey(), expire);
+        return JWTHelper.generateToken(jwtInfo, rsaKeyManager.getPrivateKey(), expire);
     }
 
     /**
@@ -43,6 +43,6 @@ public class JWTTokenUtils {
      * @throws Exception
      */
     public JWTInfo getInfoFromToken(String token) throws Exception {
-        return JWTHelper.getInfoFromToken(token, keyConfig.getPublicKey());
+        return JWTHelper.getInfoFromToken(token, rsaKeyManager.getPublicKey());
     }
 }
