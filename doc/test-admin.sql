@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2019-02-16 22:57:04
+Date: 2019-02-18 22:00:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -131,19 +131,19 @@ CREATE TABLE `sys_menu` (
 INSERT INTO `sys_menu` VALUES ('66', '0', '系统管理', null, null, 'sys', '0', null, '0', null, '1', '2019-02-08 15:29:18', null, null);
 INSERT INTO `sys_menu` VALUES ('67', '66', '用户管理', null, null, 'sys:user', '1', null, '0', null, '1', '2019-02-08 15:34:43', null, null);
 INSERT INTO `sys_menu` VALUES ('68', '67', '列表', '/sys/user', 'GET', 'sys:user:view', '3', null, '0', '系统用户列表', '1', '2019-02-09 17:46:31', null, null);
-INSERT INTO `sys_menu` VALUES ('69', '67', '展示', '/sys/user/{id}', 'GET', 'sys:user:show', '3', null, '1', '系统用户详情', '1', '2019-02-09 17:48:20', null, null);
+INSERT INTO `sys_menu` VALUES ('69', '67', '展示', '/sys/user/{id}', 'GET', 'sys:user:info', '3', null, '1', '系统用户详情', '1', '2019-02-09 17:48:20', null, null);
 INSERT INTO `sys_menu` VALUES ('70', '67', '新增', '/sys/user', 'POST', 'sys:user:save', '2', null, '2', '系统用户新增', '1', '2019-02-15 22:20:55', null, null);
 INSERT INTO `sys_menu` VALUES ('71', '67', '修改', '/sys/user/{id}', 'PUT', 'sys:user:edit', '2', null, '3', '系统用户修改', '1', '2019-02-15 22:20:58', null, null);
 INSERT INTO `sys_menu` VALUES ('72', '67', '删除', '/sys/user/{id}', 'DELETE', 'sys:user:remove', '2', null, '4', '系统用户删除', '1', '2019-02-15 22:21:00', null, null);
 INSERT INTO `sys_menu` VALUES ('73', '66', '角色管理', null, null, 'sys:role', '1', null, '1', null, '1', '2019-02-15 22:21:03', null, null);
 INSERT INTO `sys_menu` VALUES ('74', '73', '列表', '/sys/role', 'GET', 'sys:role:view', '3', null, '0', '系统角色列表', '1', '2019-02-15 22:21:05', null, null);
-INSERT INTO `sys_menu` VALUES ('75', '73', '展示', '/sys/role/{id}', 'GET', 'sys:role:show', '3', null, '1', '系统角色详情', '1', '2019-02-15 22:21:09', null, null);
+INSERT INTO `sys_menu` VALUES ('75', '73', '展示', '/sys/role/{id}', 'GET', 'sys:role:info', '3', null, '1', '系统角色详情', '1', '2019-02-15 22:21:09', null, null);
 INSERT INTO `sys_menu` VALUES ('76', '73', '新增', '/sys/role', 'POST', 'sys:role:save', '2', null, '2', '系统角色新增', '1', '2019-02-15 22:21:11', null, null);
 INSERT INTO `sys_menu` VALUES ('77', '73', '修改', '/sys/role/{id}', 'PUT', 'sys:role:edit', '2', null, '3', '系统角色修改', '1', '2019-02-15 22:21:13', null, null);
 INSERT INTO `sys_menu` VALUES ('78', '73', '删除', '/sys/role/{id}', 'DELETE', 'sys:role:remove', '2', null, '4', '系统角色删除', '1', '2019-02-15 22:21:16', null, null);
 INSERT INTO `sys_menu` VALUES ('79', '66', '菜单管理', null, null, 'sys:menu', '1', null, '2', null, '1', '2019-02-15 22:21:18', null, null);
 INSERT INTO `sys_menu` VALUES ('80', '79', '列表', '/sys/menu', 'GET', 'sys:menu:view', '3', null, '0', '系统菜单列表', '1', '2019-02-15 22:21:22', null, null);
-INSERT INTO `sys_menu` VALUES ('81', '79', '展示', '/sys/menu/{id}', 'GET', 'sys:menu:show', '3', null, '1', '系统菜单详情', '1', '2019-02-15 22:21:24', null, null);
+INSERT INTO `sys_menu` VALUES ('81', '79', '展示', '/sys/menu/{id}', 'GET', 'sys:menu:info', '3', null, '1', '系统菜单详情', '1', '2019-02-15 22:21:24', null, null);
 INSERT INTO `sys_menu` VALUES ('82', '79', '新增', '/sys/menu', 'POST', 'sys:menu:save', '2', null, '2', '系统菜单新增', '1', '2019-02-15 22:21:26', null, null);
 INSERT INTO `sys_menu` VALUES ('83', '79', '修改', '/sys/menu/{id}', 'PUT', 'sys:menu:edit', '2', null, '3', '系统菜单修改', '1', '2019-02-15 22:21:27', null, null);
 INSERT INTO `sys_menu` VALUES ('84', '79', '删除', '/sys/menu/{id}', 'DELETE', 'sys:menu:remove', '2', null, '4', '系统菜单删除', '1', '2019-02-15 22:21:29', null, null);
