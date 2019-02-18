@@ -27,7 +27,8 @@
 					p.menu_id = m.parent_id
 			) AS parentName,
 			m.name,
-			m.url,
+			m.uri,
+			m.method,
 			m.perms,
 			m.type,
 			m.icon,
@@ -58,7 +59,8 @@
 			menu_id,
 			parent_id,
 			name,
-			url,
+			uri,
+			method,
 			type,
 			icon
 		FROM
@@ -73,22 +75,26 @@
 		INSERT INTO sys_menu (
 			parent_id,
 			name,
-			url,
+			uri,
+			method,
 			perms,
 			type,
 			icon,
 			order_num,
-			gmt_create
+			creator_id,
+			create_time
 		)
 		VALUES (
 			#{parentId},
 			#{name},
-			#{url},
+			#{uri},
+			#{method,},
 			#{perms},
 			#{type},
 			#{icon},
 			#{orderNum},
-			NOW()
+			#{creatorId},
+			now()
 		)
 	</insert>
 
@@ -105,11 +111,13 @@
 					p.menu_id = m.parent_id
 			) AS parentName,
 			m.name,
-			m.url,
+			m.uri,
+			m.method,
 			m.perms,
 			m.type,
 			m.icon,
-			m.order_num
+			m.order_num,
+			create_time
 		FROM
 			sys_menu m
 		WHERE
@@ -121,12 +129,14 @@
 		<set> 
 			<if test="parentId != null">parent_id = #{parentId}, </if>
 			<if test="name != null">name = #{name}, </if>
-			<if test="url != null">url = #{url}, </if>
+			<if test="uri != null">uri = #{uri}, </if>
+			<if test="method != null">method = #{method}, </if>
 			<if test="perms != null">perms = #{perms}, </if>
 			<if test="type != null">type = #{type}, </if>
 			<if test="icon != null">icon = #{icon}, </if>
 			<if test="orderNum != null">order_num = #{orderNum}, </if>
-			gmt_modified = NOW()
+			<if test="modifierId != null">modifier_id = #{modifierId},</if>
+			modifiedTime = NOW()
 		</set>
 		where menu_id = #{menuId}
 	</update>

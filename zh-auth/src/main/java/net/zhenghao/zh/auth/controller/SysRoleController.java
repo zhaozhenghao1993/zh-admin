@@ -37,10 +37,11 @@ public class SysRoleController extends AbstractController {
 
 	/**
 	 * 根据id查询详情
+	 * @param roleId
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	public R show(@PathVariable("id") Long roleId) {
+	public R info(@PathVariable("id") Long roleId) {
 		return sysRoleService.getRoleById(roleId);
 	}
 	
@@ -72,7 +73,7 @@ public class SysRoleController extends AbstractController {
 	 */
 	@SysLog("修改角色")
 	@PutMapping("/{id}")
-	public R updateRole(@PathVariable("id") Long roleId ,@RequestBody SysRoleEntity role) {
+	public R updateRole(@PathVariable("id") Long roleId, @RequestBody SysRoleEntity role) {
 		role.setRoleId(roleId);
 		role.setModifierId(getUserId());
 		return sysRoleService.updateRole(role);

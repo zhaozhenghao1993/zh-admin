@@ -5,10 +5,7 @@ import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.auth.entity.SysMenuEntity;
 import net.zhenghao.zh.auth.service.SysMenuService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -28,28 +25,29 @@ public class SysMenuController extends AbstractController {
 
 	@Resource
 	private SysMenuService sysMenuService;
-	
-	/**
-	 * 用户菜单
-	 * @return
-	 */
-	@RequestMapping("/user")
-	public R user() {
-		return sysMenuService.listUserMenu(getUserId());
-	}
-	
+
 	/**
 	 * 菜单列表
 	 * @param params
 	 * @return
 	 */
-	@RequestMapping("/list")
+	@GetMapping("")
 	public List<SysMenuEntity> listMenu(@RequestParam Map<String, Object> params) {
 		return sysMenuService.listMenu(params);
 	}
+
+	/**
+	 * 查询详情
+	 * @param menuId
+	 * @return
+	 */
+	@GetMapping("/{id}")
+	public R info(@PathVariable("id") Long menuId) {
+		return sysMenuService.getMenuById(menuId);
+	}
 	
 	/**
-	 * 选择菜单(添加、修改)
+	 * 选择除按钮的菜单(添加、修改)
 	 * @return
 	 */
 	@RequestMapping("/select")
@@ -63,40 +61,33 @@ public class SysMenuController extends AbstractController {
 	 * @return
 	 */
 	@SysLog("新增菜单")
-	@RequestMapping("/save")
+	@PostMapping("")
 	public R save(@RequestBody SysMenuEntity menu) {
+		menu.setCreatorId(getUserId());
 		return sysMenuService.saveMenu(menu);
 	}
-	
-	/**
-	 * 查询详情
-	 * @param id
-	 * @return
-	 */
-	@RequestMapping("/info")
-	public R info(@RequestBody Long id) {
-		return sysMenuService.getMenuById(id);
-	}
-	
+
 	/**
 	 * 修改菜单
 	 * @param menu
 	 * @return
 	 */
 	@SysLog("修改菜单")
-	@RequestMapping("/update")
-	public R update(@RequestBody SysMenuEntity menu) {
+	@PutMapping("/{id}")
+	public R update(@PathVariable("id") Long menuId, @RequestBody SysMenuEntity menu) {
+		menu.setMenuId(menuId);
+		menu.setModifierId(getUserId());
 		return sysMenuService.updateMenu(menu);
 	}
 	
 	/**
 	 * 删除菜单
-	 * @param id
+	 * @param menuId
 	 * @return
 	 */
 	@SysLog("删除菜单")
-	@RequestMapping("/remove")
-	public R remove(@RequestBody Long[] id) {
-		return sysMenuService.batchRemove(id);
+	@DeleteMapping("/{id}")
+	public R remove(@PathVariable("id") Long menuId) {
+		return sysMenuService.remove(menuId);
 	}
 }

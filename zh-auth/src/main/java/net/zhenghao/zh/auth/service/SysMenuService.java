@@ -15,8 +15,6 @@ import java.util.Map;
  * SysMenuService.java
  */
 public interface SysMenuService {
-
-	R listUserMenu(Long userId);
 	
 	List<SysMenuEntity> listMenu(Map<String, Object> params);
 	
@@ -27,6 +25,8 @@ public interface SysMenuService {
 	R getMenuById(Long id);
 	
 	R updateMenu(SysMenuEntity menu);
+
+	R remove(Long id);
 	
 	R batchRemove(Long[] id);
 	

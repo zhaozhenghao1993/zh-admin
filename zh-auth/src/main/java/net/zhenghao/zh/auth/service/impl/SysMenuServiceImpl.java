@@ -1,6 +1,7 @@
 package net.zhenghao.zh.auth.service.impl;
 
 import net.zhenghao.zh.auth.dao.SysMenuMapper;
+import net.zhenghao.zh.auth.dao.SysRoleMenuMapper;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.R;
@@ -27,10 +28,8 @@ public class SysMenuServiceImpl implements SysMenuService {
 	@Autowired
 	private SysMenuMapper sysMenuMapper;
 
-	@Override
-	public R listUserMenu(Long userId) {
-		return R.ok().put("menuList", sysMenuMapper.listUserMenu(userId));
-	}
+	@Autowired
+	private SysRoleMenuMapper sysRoleMenuMapper;
 
 	@Override
 	public List<SysMenuEntity> listMenu(Map<String, Object> params) {
@@ -65,6 +64,13 @@ public class SysMenuServiceImpl implements SysMenuService {
 	@Override
 	public R updateMenu(SysMenuEntity menu) {
 		int count = sysMenuMapper.update(menu);
+		return CommonUtils.msg(count);
+	}
+
+	@Override
+	public R remove(Long id) {
+		int count = sysMenuMapper.remove(id);
+		sysRoleMenuMapper.removeByMenuId(id);
 		return CommonUtils.msg(count);
 	}
 

@@ -70,10 +70,11 @@ public class SysUserController extends AbstractController {
 
 	/**
 	 * 获取用户信息
+	 * @param userId
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	public R show(@PathVariable("id") Long userId) {
+	public R info(@PathVariable("id") Long userId) {
 		return sysUserService.getUserById(userId);
 	}
 
@@ -96,7 +97,7 @@ public class SysUserController extends AbstractController {
 	 */
 	@SysLog("修改用户")
 	@PutMapping("/{id}")
-	public R edit(@PathVariable("id") Long userId ,@RequestBody SysUserEntity user) {
+	public R edit(@PathVariable("id") Long userId, @RequestBody SysUserEntity user) {
 		user.setUserId(userId);
 		user.setModifierId(getUserId());
 		return sysUserService.updateUser(user);
@@ -104,6 +105,7 @@ public class SysUserController extends AbstractController {
 
 	/**
 	 * 删除
+	 * @param userId
 	 * @return
 	 */
 	@SysLog("删除用户")
