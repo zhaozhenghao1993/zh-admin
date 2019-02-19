@@ -63,7 +63,6 @@
     <jjwt.version>0.9.1</jjwt.version>
     <joda.version>2.10.1</joda.version>
     <shiro.version>1.4.0</shiro.version>
-    <shiro-redis.version>3.2.2</shiro-redis.version>
     <commons.version>3.8.1</commons.version>
     <httpclient.version>4.5.5</httpclient.version>
     <mybatis-ehcache.version>1.0.0</mybatis-ehcache.version>
@@ -170,18 +169,6 @@
       <groupId>org.apache.shiro</groupId>
       <artifactId>shiro-spring</artifactId>
       <version>${shiro.version}</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>slf4j-api</artifactId>
-          <groupId>org.slf4j</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <!-- shiro redis (shiro缓存)-->
-    <dependency>
-      <groupId>org.crazycake</groupId>
-      <artifactId>shiro-redis</artifactId>
-      <version>${shiro-redis.version}</version>
       <exclusions>
         <exclusion>
           <artifactId>slf4j-api</artifactId>
