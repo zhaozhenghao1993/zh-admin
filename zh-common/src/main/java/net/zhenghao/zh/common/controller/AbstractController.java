@@ -1,8 +1,6 @@
 package net.zhenghao.zh.common.controller;
 
 import net.zhenghao.zh.common.context.BaseContextHandler;
-import net.zhenghao.zh.common.entity.SysUserEntity;
-import net.zhenghao.zh.common.utils.ShiroUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

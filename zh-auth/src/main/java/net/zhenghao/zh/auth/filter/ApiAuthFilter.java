@@ -42,7 +42,7 @@ import java.io.IOException;
 @Component
 public class ApiAuthFilter implements Filter {
 
-    private Logger LOGGER = LoggerFactory.getLogger(ApiAuthFilter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApiAuthFilter.class);
 
     @Value("${zh-admin.auth.routes}")
     private String routes;
