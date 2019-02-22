@@ -21,7 +21,7 @@ public class BaseContextHandler {
     private BaseContextHandler() {
     }
 
-    public static ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<>();
+    private static ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<>();
 
     public static void set(String key, Object value) {
         Map<String, Object> map = threadLocal.get();

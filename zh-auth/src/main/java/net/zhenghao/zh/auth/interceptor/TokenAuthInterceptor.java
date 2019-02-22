@@ -2,7 +2,6 @@ package net.zhenghao.zh.auth.interceptor;
 
 import net.zhenghao.zh.common.context.BaseContextHandler;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;

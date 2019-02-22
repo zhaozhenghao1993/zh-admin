@@ -1,7 +1,9 @@
 package net.zhenghao.zh.common.jwt;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.security.*;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
@@ -26,7 +28,7 @@ public class RsaKeyHelper {
      * @return
      * @throws Exception
      */
-    public PublicKey loadPublicKey(String filename) throws Exception {
+    public PublicKey loadPublicKey(String filename) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
         InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filename);
         byte[] bytes = new byte[resourceAsStream.available()];
         resourceAsStream.read(bytes);
@@ -44,7 +46,7 @@ public class RsaKeyHelper {
      * @return
      * @throws Exception
      */
-    public PrivateKey loadPrivateKey(String filename) throws Exception {
+    public PrivateKey loadPrivateKey(String filename) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
         InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filename);
         byte[] bytes = new byte[resourceAsStream.available()];
         resourceAsStream.read(bytes);

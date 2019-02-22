@@ -213,5 +213,4 @@ public class SysMenuEntity implements Serializable {
 	public void setModifiedTime(Timestamp modifiedTime) {
 		this.modifiedTime = modifiedTime;
 	}
-	
 }

@@ -143,19 +143,18 @@ public class ApiAuthFilter implements Filter {
      * @throws IOException
      */
     private boolean validateUserInfo(JWTInfo jwtInfo, HttpServletResponse response) throws IOException {
-        boolean bool = true;
         SysUserEntity user = sysUserMapper.getObjectById(jwtInfo.getUserId());
         if (user == null) {
             logger.error("Token exception! Account does not exist!");
             getErrorResponse(response, R.error(HttpStatusConstant.USER_UNKNOWN_ACCOUNT, "Token exception! Account does not exist!"));
-            bool = false;
+            return false;
         }
         if (user.getStatus() == 0) {
             logger.error("Token exception! Account locked!");
             getErrorResponse(response, R.error(HttpStatusConstant.USER_UNKNOWN_ACCOUNT, "Token exception! Account locked!"));
-            bool = false;
+            return false;
         }
-        return bool;
+        return true;
     }
 
     /**

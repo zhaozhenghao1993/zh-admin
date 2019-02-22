@@ -45,7 +45,7 @@ public class MD5Utils {
 	public static void main(String[] args) {
 		String password = "123";
 		String username = "admin";
-		System.err.println(encrypt(username, password));
+		encrypt(username, password);
 	}
 
 }

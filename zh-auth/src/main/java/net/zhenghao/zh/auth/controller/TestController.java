@@ -21,12 +21,12 @@ public class TestController {
     }
 
     @GetMapping("/getToken")
-    public String getToken() throws Exception {
+    public String getToken() {
         return jwtTokenUtils.generateToken(new JWTInfo(1L, "admin"));
     }
 
     @GetMapping("/getUserInfo")
-    public JWTInfo getToken(String token) throws Exception {
+    public JWTInfo getToken(String token) {
         return jwtTokenUtils.getInfoFromToken(token);
     }
 
