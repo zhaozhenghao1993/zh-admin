@@ -50,10 +50,11 @@ public class Query extends HashMap<String, Object>{
     }
 
     public Boolean getAsBoolean(String name) {
+	    Boolean bool = null;
         Object value = this.get(name);
         if (value != null)
-            return Boolean.valueOf(value.toString());
-        return null;
+            bool =  Boolean.valueOf(value.toString());
+        return bool;
     }
 
     public java.util.Date getAsDate(String name) {

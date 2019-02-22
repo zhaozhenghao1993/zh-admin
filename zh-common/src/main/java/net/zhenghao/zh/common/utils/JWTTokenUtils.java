@@ -32,7 +32,7 @@ public class JWTTokenUtils {
      * @return
      * @throws Exception
      */
-    public String generateToken(JWTInfo jwtInfo) throws Exception {
+    public String generateToken(JWTInfo jwtInfo) {
         return JWTHelper.generateToken(jwtInfo, rsaKeyManager.getPrivateKey(), expire);
     }
 
@@ -42,7 +42,7 @@ public class JWTTokenUtils {
      * @return
      * @throws Exception
      */
-    public JWTInfo getInfoFromToken(String token) throws Exception {
+    public JWTInfo getInfoFromToken(String token) {
         return JWTHelper.getInfoFromToken(token, rsaKeyManager.getPublicKey());
     }
 }

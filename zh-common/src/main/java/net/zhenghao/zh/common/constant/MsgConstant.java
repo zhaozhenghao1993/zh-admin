@@ -9,6 +9,9 @@ package net.zhenghao.zh.common.constant;
  */
 public class MsgConstant {
 
+	private MsgConstant() {
+	}
+
 	/**
 	 * 操作成功
 	 */
@@ -36,6 +39,6 @@ public class MsgConstant {
 	 * @return
 	 */
 	public static String removeFailed(int total, int process){
-		return "本次共处理:"+String.valueOf(total)+"条,成功:"+String.valueOf(process)+"条!";
+		return "本次共处理:"+ total +"条,成功:"+ process +"条!";
 	}
 }

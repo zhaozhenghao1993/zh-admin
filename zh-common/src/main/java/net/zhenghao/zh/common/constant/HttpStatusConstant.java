@@ -14,6 +14,9 @@ package net.zhenghao.zh.common.constant;
 
 public class HttpStatusConstant {
 
+    private HttpStatusConstant() {
+    }
+
     /**
      * 该用户对此api无权限
      */

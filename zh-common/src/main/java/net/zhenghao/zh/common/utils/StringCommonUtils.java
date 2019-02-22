@@ -13,6 +13,9 @@ package net.zhenghao.zh.common.utils;
 
 public class StringCommonUtils {
 
+    private StringCommonUtils() {
+    }
+
     public static String getObjectValue(Object obj){
         return obj==null ? "" : obj.toString();
     }

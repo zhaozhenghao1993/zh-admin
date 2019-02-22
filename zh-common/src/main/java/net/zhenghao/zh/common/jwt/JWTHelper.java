@@ -24,6 +24,9 @@ import java.security.PublicKey;
 
 public class JWTHelper {
 
+    private JWTHelper() {
+    }
+
     /**
      * 密钥加密token
      *
@@ -32,14 +35,13 @@ public class JWTHelper {
      * @return
      * @throws Exception
      */
-    public static String generateToken(JWTInfo jwtInfo, PrivateKey privateKey, int expire) throws Exception {
-        String compactJws = Jwts.builder()
+    public static String generateToken(JWTInfo jwtInfo, PrivateKey privateKey, int expire) {
+        return Jwts.builder()
                 .setSubject(jwtInfo.getUsername())
                 .claim(SystemConstant.JWT_KEY_USER_ID, jwtInfo.getUserId())
                 .setExpiration(DateTime.now().plusSeconds(expire).toDate())
                 .signWith(SignatureAlgorithm.RS256, privateKey)
                 .compact();
-        return compactJws;
     }
 
     /**
@@ -49,9 +51,8 @@ public class JWTHelper {
      * @return
      * @throws Exception
      */
-    public static Jws<Claims> parserToken(String token, PublicKey publicKey) throws Exception {
-        Jws<Claims> claimsJws = Jwts.parser().setSigningKey(publicKey).parseClaimsJws(token);
-        return claimsJws;
+    public static Jws<Claims> parserToken(String token, PublicKey publicKey) {
+        return Jwts.parser().setSigningKey(publicKey).parseClaimsJws(token);
     }
 
     /**
@@ -61,7 +62,7 @@ public class JWTHelper {
      * @return
      * @throws Exception
      */
-    public static JWTInfo getInfoFromToken(String token, PublicKey publicKey) throws Exception {
+    public static JWTInfo getInfoFromToken(String token, PublicKey publicKey) {
         Jws<Claims> claimsJws = parserToken(token, publicKey);
         Claims body = claimsJws.getBody();
         return new JWTInfo(StringCommonUtils.getObjectValue(body.get(SystemConstant.JWT_KEY_USER_ID)), body.getSubject());

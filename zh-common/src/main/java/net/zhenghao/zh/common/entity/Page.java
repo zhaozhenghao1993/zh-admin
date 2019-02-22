@@ -39,7 +39,7 @@ public class Page<T> extends RowBounds {
 	/**
 	 * 查询结果
 	 */
-	protected List<T> data = new ArrayList<T>();
+	protected List<T> data = new ArrayList<>();
 	
 	/**
 	 * 总条数
@@ -79,7 +79,7 @@ public class Page<T> extends RowBounds {
 	
 	public Page(Query search){
 		this.pageNum = search.getAsInt("pageNum") == null ? this.pageNum : search.getAsInt("pageNum");
-		this.pageSize = search.getAsInt("pageSize") == null ? this.pageSize : search.getAsInt("pageNum");
+		this.pageSize = search.getAsInt("pageSize") == null ? this.pageSize : search.getAsInt("pageSize");
 		this.calcOffset();
 		this.calcLimit();
 	}
@@ -110,10 +110,12 @@ public class Page<T> extends RowBounds {
     /**
      * 根据pageNo和pageSize计算当前页第一条记录在总结果集中的位置,序号从0开始.
      */
+    @Override
     public int getOffset() {
         return offset;
     }
 
+	@Override
     public int getLimit() {
         return limit;
     }

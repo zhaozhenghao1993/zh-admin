@@ -1,15 +1,10 @@
 package net.zhenghao.zh.auth.core;
 
 import net.zhenghao.zh.auth.config.FilterChainConfig;
-import net.zhenghao.zh.auth.entity.SysMenuEntity;
 import net.zhenghao.zh.auth.service.SysUserService;
-import net.zhenghao.zh.common.jwt.JWTInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -38,10 +33,11 @@ public class RequestHandlerAdapter {
      * @return
      */
     public boolean validateAnnoFilterChain(String uri, String method) {
-        if (filterChainConfig.getAnnoFilterChainList().stream().filter(permission -> validate(uri, method, permission.getUri(), permission.getMethod())).findAny().isPresent()) {
-            return true;
+        boolean bool = false;
+        if (filterChainConfig.getAnnoFilterChainList().stream().anyMatch(permission -> validate(uri, method, permission.getUri(), permission.getMethod()))) {
+            bool = true;
         }
-        return false;
+        return bool;
     }
 
     /**
@@ -51,10 +47,11 @@ public class RequestHandlerAdapter {
      * @return
      */
     public boolean validateAuthFilterChain(String uri, String method) {
-        if (filterChainConfig.getAuthFilterChainList().stream().filter(permission -> validate(uri, method, permission.getUri(), permission.getMethod())).findAny().isPresent()) {
-            return true;
+        boolean bool = false;
+        if (filterChainConfig.getAuthFilterChainList().stream().anyMatch(permission -> validate(uri, method, permission.getUri(), permission.getMethod()))) {
+            bool = true;
         }
-        return false;
+        return bool;
     }
 
     /**
@@ -65,10 +62,11 @@ public class RequestHandlerAdapter {
      * @return
      */
     public boolean validatePermsFilterChain(String uri, String method, Long userId) {
-        if (sysUserService.listUserPerms(userId).stream().filter(sysMenuEntity -> validate(uri, method, sysMenuEntity.getUri(), sysMenuEntity.getMethod())).findAny().isPresent()) {
-            return true;
+        boolean bool = false;
+        if (sysUserService.listUserPerms(userId).stream().anyMatch(sysMenuEntity -> validate(uri, method, sysMenuEntity.getUri(), sysMenuEntity.getMethod()))) {
+            bool = true;
         }
-        return false;
+        return bool;
     }
 
     /**
@@ -80,20 +78,11 @@ public class RequestHandlerAdapter {
      * @return
      */
     public static boolean validate(String requestUri, String requestMethod, String uri, String method) {
-        if (uri.indexOf("{") > 0) {
+        if (uri.indexOf('{') >= 1) {
             uri = uri.replaceAll("\\{[^}]+\\}", "[a-zA-Z\\\\d]+");
         }
         String regEx = "^" + uri + "$";
         return (Pattern.compile(regEx).matcher(requestUri).find())
                 && method.equals(requestMethod);
-    }
-
-    public static void main(String[] args) {
-        String requestUri = "/user/1/edit/haha";
-        String requestMethod = "GET";
-        String uri = "/user/{id}/edit/{name}";
-        String method = "GET";
-
-        System.out.println(validate(requestUri, requestMethod, uri, method));
     }
 }

@@ -1,16 +1,10 @@
 package net.zhenghao.zh.common.jwt;
 
-import sun.misc.BASE64Decoder;
-
-import java.io.DataInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Base64;
 
 /**
  * 🙃
@@ -34,11 +28,10 @@ public class RsaKeyHelper {
      */
     public PublicKey loadPublicKey(String filename) throws Exception {
         InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filename);
-        byte[] bytes = new byte[0];
-        bytes = new byte[resourceAsStream.available()];
+        byte[] bytes = new byte[resourceAsStream.available()];
         resourceAsStream.read(bytes);
-        BASE64Decoder base64Decoder= new BASE64Decoder();
-        byte[] buffer= base64Decoder.decodeBuffer(new String(bytes));
+        Base64.Decoder decoder = Base64.getDecoder();
+        byte[] buffer= decoder.decode(new String(bytes));
         X509EncodedKeySpec spec = new X509EncodedKeySpec(buffer);
         KeyFactory kf = KeyFactory.getInstance("RSA");
         return kf.generatePublic(spec);
@@ -53,11 +46,10 @@ public class RsaKeyHelper {
      */
     public PrivateKey loadPrivateKey(String filename) throws Exception {
         InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filename);
-        byte[] bytes = new byte[0];
-        bytes = new byte[resourceAsStream.available()];
+        byte[] bytes = new byte[resourceAsStream.available()];
         resourceAsStream.read(bytes);
-        BASE64Decoder base64Decoder= new BASE64Decoder();
-        byte[] buffer= base64Decoder.decodeBuffer(new String(bytes));
+        Base64.Decoder decoder = Base64.getDecoder();
+        byte[] buffer= decoder.decode(new String(bytes));
         PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(buffer);
         KeyFactory kf = KeyFactory.getInstance("RSA");
         return kf.generatePrivate(spec);

@@ -23,12 +23,12 @@ public class FilterChainConfig {
     /**
      * 可以直接匿名访问
      */
-    private List<SysPermissionEntity> annoFilterChainList = new ArrayList<SysPermissionEntity>();
+    private List<SysPermissionEntity> annoFilterChainList = new ArrayList<>();
 
     /**
      * 需要登陆token 且不权限拦截 即可访问
      */
-    private List<SysPermissionEntity> authFilterChainList = new ArrayList<SysPermissionEntity>();
+    private List<SysPermissionEntity> authFilterChainList = new ArrayList<>();
 
     @PostConstruct
     public void init() {

@@ -18,6 +18,9 @@ import org.apache.commons.lang3.StringUtils;
 
 public class JSONUtils {
 
+    private JSONUtils() {
+    }
+
     private static ObjectMapper objectMapper = new ObjectMapper();
 
     /**

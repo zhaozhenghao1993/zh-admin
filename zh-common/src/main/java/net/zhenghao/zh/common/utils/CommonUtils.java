@@ -13,17 +13,21 @@ import net.zhenghao.zh.common.entity.R;
  * CommonUtils.java
  */
 public class CommonUtils {
-	
+
+	private CommonUtils() {
+	}
+
 	/**
 	 * 判断整数是否大于零
 	 * @param number
 	 * @return
 	 */
 	public static boolean isIntThanZero(int number){
+		boolean bool = false;
 		if (number > 0) {
-			return true;
+			bool = true;
 		}
-		return false;
+		return bool;
 	}
 	
 	/**
@@ -80,9 +84,10 @@ public class CommonUtils {
 	
 	
 	public static boolean isNullOrEmpty(Object obj) {
+		boolean bool = false;
 		if (obj == null) {
-			return true;
+			bool = true;
 		}
-		return false;
+		return bool;
 	}
 }

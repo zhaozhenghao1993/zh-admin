@@ -6,7 +6,6 @@ import io.jsonwebtoken.SignatureException;
 import net.zhenghao.zh.auth.config.TokenHeaderConfig;
 import net.zhenghao.zh.auth.core.RequestHandlerAdapter;
 import net.zhenghao.zh.auth.dao.SysUserMapper;
-import net.zhenghao.zh.auth.service.SysUserService;
 import net.zhenghao.zh.common.constant.HttpStatusConstant;
 import net.zhenghao.zh.common.context.BaseContextHandler;
 import net.zhenghao.zh.common.entity.R;
@@ -42,7 +41,7 @@ import java.io.IOException;
 @Component
 public class ApiAuthFilter implements Filter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ApiAuthFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(ApiAuthFilter.class);
 
     @Value("${zh-admin.auth.routes}")
     private String routes;
@@ -60,13 +59,8 @@ public class ApiAuthFilter implements Filter {
     private RequestHandlerAdapter requestHandlerAdapter;
 
     @Override
-    public void init(FilterConfig filterConfig) {
-
-    }
-
-    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        LOGGER.info("check token and user permission....");
+        logger.info("check token and user permission....");
         if (request instanceof HttpServletRequest) {
             HttpServletRequest httpServletRequest = (HttpServletRequest) request;
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
@@ -74,7 +68,7 @@ public class ApiAuthFilter implements Filter {
             String method = httpServletRequest.getMethod();
 
             if (!uri.startsWith(routes)) {
-                LOGGER.error("{},This api is invalid!", uri);
+                logger.error("{},This api is invalid!", uri);
                 getErrorResponse(httpServletResponse, R.error(HttpStatusConstant.REQUEST_API_INVALID, "This api is invalid!"));
                 return;
             }
@@ -113,15 +107,10 @@ public class ApiAuthFilter implements Filter {
                 return;
             }
 
-            LOGGER.error("{},User Forbidden!Does not has Permission!", uri);
+            logger.error("{},User Forbidden!Does not has Permission!", uri);
             getErrorResponse(httpServletResponse, R.error(HttpStatusConstant.USER_API_UNAUTHORIZED, "User Forbidden!Does not has Permission!"));
             return;
         }
-    }
-
-    @Override
-    public void destroy() {
-
     }
 
     private JWTInfo getJWTUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -131,16 +120,16 @@ public class ApiAuthFilter implements Filter {
         try {
             jwtInfo = userAuthUtils.getInfoFromToken(authToken);
         } catch (ExpiredJwtException ex) {
-            LOGGER.error("User token expired!");
+            logger.error("User token expired!");
             getErrorResponse(response, R.error(HttpStatusConstant.TOKEN_EXPIRED_FORBIDDEN, "User token expired!"));
         } catch (SignatureException ex) {
-            LOGGER.error("User token signature error!");
+            logger.error("User token signature error!");
             getErrorResponse(response, R.error(HttpStatusConstant.TOKEN_SIGNATURE_ERROR, "User token signature error!"));
         } catch (IllegalArgumentException ex) {
-            LOGGER.error("User token is null or empty!");
+            logger.error("User token is null or empty!");
             getErrorResponse(response, R.error(HttpStatusConstant.TOKEN_NULL_FORBIDDEN, "User token is null or empty!"));
         } catch (Exception ex) {
-            LOGGER.error("User token other exception!");
+            logger.error("User token other exception!");
             getErrorResponse(response, R.error(HttpStatusConstant.TOKEN_OTHER_EXCEPTION, "User token other exception!"));
         }
         return jwtInfo;
@@ -157,12 +146,12 @@ public class ApiAuthFilter implements Filter {
         boolean bool = true;
         SysUserEntity user = sysUserMapper.getObjectById(jwtInfo.getUserId());
         if (user == null) {
-            LOGGER.error("Token exception! Account does not exist!");
+            logger.error("Token exception! Account does not exist!");
             getErrorResponse(response, R.error(HttpStatusConstant.USER_UNKNOWN_ACCOUNT, "Token exception! Account does not exist!"));
             bool = false;
         }
         if (user.getStatus() == 0) {
-            LOGGER.error("Token exception! Account locked!");
+            logger.error("Token exception! Account locked!");
             getErrorResponse(response, R.error(HttpStatusConstant.USER_UNKNOWN_ACCOUNT, "Token exception! Account locked!"));
             bool = false;
         }

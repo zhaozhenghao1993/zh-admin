@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class IPUtils {
 
+	private IPUtils() {
+	}
+
 	private static Logger logger = LoggerFactory.getLogger(IPUtils.class);
 	
 	/**
@@ -28,7 +31,9 @@ public class IPUtils {
 	 * 中第一个非unknown的有效IP字符串，则为真实IP地址
 	 */
 	public static String getIpAddr(HttpServletRequest request) {
-		String ip = null, unknown = "unknown", seperator = ",";
+		String ip = null;
+		String unknown = "unknown";
+		String seperator = ",";
 		int maxLength = 15;
 		
 		try {

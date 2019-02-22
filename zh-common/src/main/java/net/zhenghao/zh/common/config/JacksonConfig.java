@@ -25,7 +25,6 @@ public class JacksonConfig {
     @Primary
     @ConditionalOnMissingBean(ObjectMapper.class)
     public ObjectMapper getObjectMapper(Jackson2ObjectMapperBuilder builder) {
-        ObjectMapper objectMapper = builder.build();
-        return objectMapper;
+        return builder.build();
     }
 }

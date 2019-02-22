@@ -26,8 +26,7 @@ public class MD5Utils {
 	 * @return
 	 */
 	public static String encrypt(String pswd) {
-		String newPassword = new SimpleHash(ALGORITH_NAME, pswd, ByteSource.Util.bytes(SALT), HASH_ITERATIONS).toHex();
-		return newPassword;
+		return new SimpleHash(ALGORITH_NAME, pswd, ByteSource.Util.bytes(SALT), HASH_ITERATIONS).toHex();
 	}
 	
 	/**
@@ -38,8 +37,7 @@ public class MD5Utils {
 	 */
 	public static String encrypt(String username, String pswd) {
 		if (StringUtils.isNotEmpty(username) && StringUtils.isNotEmpty(pswd)) {
-			String newPassword = new SimpleHash(ALGORITH_NAME, pswd, ByteSource.Util.bytes(username + SALT), HASH_ITERATIONS).toHex();
-			return newPassword;
+			return new SimpleHash(ALGORITH_NAME, pswd, ByteSource.Util.bytes(username + SALT), HASH_ITERATIONS).toHex();
 		}
 		return null;
 	}
@@ -47,7 +45,7 @@ public class MD5Utils {
 	public static void main(String[] args) {
 		String password = "123";
 		String username = "admin";
-		System.out.println(encrypt(username, password));
+		System.err.println(encrypt(username, password));
 	}
 
 }

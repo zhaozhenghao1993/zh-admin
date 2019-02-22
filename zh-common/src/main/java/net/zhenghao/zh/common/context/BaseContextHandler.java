@@ -18,12 +18,15 @@ import java.util.Map;
 
 public class BaseContextHandler {
 
+    private BaseContextHandler() {
+    }
+
     public static ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<>();
 
     public static void set(String key, Object value) {
         Map<String, Object> map = threadLocal.get();
         if (map == null) {
-            map = new HashMap<String, Object>();
+            map = new HashMap<>();
             threadLocal.set(map);
         }
         map.put(key, value);
@@ -32,7 +35,7 @@ public class BaseContextHandler {
     public static Object get(String key){
         Map<String, Object> map = threadLocal.get();
         if (map == null) {
-            map = new HashMap<String, Object>();
+            map = new HashMap<>();
             threadLocal.set(map);
         }
         return map.get(key);

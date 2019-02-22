@@ -1,7 +1,5 @@
 package net.zhenghao.zh.common.utils;
 
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.SignatureException;
 import net.zhenghao.zh.common.jwt.JWTInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,11 +20,11 @@ public class UserAuthUtils {
     @Autowired
     private JWTTokenUtils jwtTokenUtils;
 
-    public JWTInfo getInfoFromToken(String token) throws Exception {
+    public JWTInfo getInfoFromToken(String token) {
         return jwtTokenUtils.getInfoFromToken(token);
     }
 
-    public String getTokenFromJWTInfo(JWTInfo jwtInfo) throws Exception {
+    public String getTokenFromJWTInfo(JWTInfo jwtInfo) {
         return jwtTokenUtils.generateToken(jwtInfo);
     }
 }

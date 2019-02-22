@@ -2,7 +2,6 @@ package net.zhenghao.zh.auth.service.impl;
 
 import net.zhenghao.zh.auth.dao.SysMenuMapper;
 import net.zhenghao.zh.auth.dao.SysRoleMenuMapper;
-import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.utils.CommonUtils;
@@ -34,8 +33,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 	@Override
 	public List<SysMenuEntity> listMenu(Map<String, Object> params) {
 		Query query = new Query(params);
-		List<SysMenuEntity> menuList = sysMenuMapper.listForPage(query);
-		return menuList;
+		return sysMenuMapper.listForPage(query);
 	}
 
 	@Override

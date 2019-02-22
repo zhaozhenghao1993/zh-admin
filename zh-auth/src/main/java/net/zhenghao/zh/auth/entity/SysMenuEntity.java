@@ -2,7 +2,6 @@ package net.zhenghao.zh.auth.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
 
 /**
  * 菜单
@@ -213,10 +212,6 @@ public class SysMenuEntity implements Serializable {
 
 	public void setModifiedTime(Timestamp modifiedTime) {
 		this.modifiedTime = modifiedTime;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 	
 }
