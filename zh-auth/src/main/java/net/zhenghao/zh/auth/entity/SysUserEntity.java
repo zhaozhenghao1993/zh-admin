@@ -1,4 +1,4 @@
-package net.zhenghao.zh.common.entity;
+package net.zhenghao.zh.auth.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -75,7 +75,17 @@ public class SysUserEntity implements Serializable {
 	 * 角色id列表
 	 */
 	private List<Long> roleIdList;
-	
+
+	/**
+	 * 角色名称列表
+	 */
+	private List<SysRoleEntity> roles;
+
+	/**
+	 * 权限列表
+	 */
+	private List<SysMenuEntity> perms;
+
 	public SysUserEntity(){
 		super();
 	}
@@ -176,4 +186,19 @@ public class SysUserEntity implements Serializable {
 		this.roleIdList = roleIdList;
 	}
 
+	public List<SysRoleEntity> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<SysRoleEntity> roles) {
+		this.roles = roles;
+	}
+
+	public List<SysMenuEntity> getPerms() {
+		return perms;
+	}
+
+	public void setPerms(List<SysMenuEntity> perms) {
+		this.perms = perms;
+	}
 }

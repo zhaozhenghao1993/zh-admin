@@ -20,9 +20,9 @@ import java.util.List;
 public interface SysRoleMapper extends BaseMapper<SysRoleEntity>{
 
 	/**
-	 * 根据用户id查询该用户的角色标识
+	 * 根据用户id查询该用户的角色
 	 * @param userId
 	 * @return
 	 */
-	List<String> listUserRoles(Long userId);
+	List<SysRoleEntity> listUserRoles(Long userId);
 }

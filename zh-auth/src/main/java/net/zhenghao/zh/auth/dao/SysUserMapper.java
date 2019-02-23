@@ -1,8 +1,8 @@
 package net.zhenghao.zh.auth.dao;
 
+import net.zhenghao.zh.auth.entity.SysUserEntity;
 import net.zhenghao.zh.common.dao.BaseMapper;
 import net.zhenghao.zh.common.entity.Query;
-import net.zhenghao.zh.common.entity.SysUserEntity;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.stereotype.Component;
 

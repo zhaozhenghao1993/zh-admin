@@ -1,16 +1,16 @@
 package net.zhenghao.zh.auth.controller;
 
+import net.zhenghao.zh.auth.entity.SysUserEntity;
 import net.zhenghao.zh.auth.service.SysUserService;
 import net.zhenghao.zh.common.constant.HttpStatusConstant;
 import net.zhenghao.zh.common.entity.R;
-import net.zhenghao.zh.common.entity.SysUserEntity;
 import net.zhenghao.zh.common.jwt.JWTInfo;
 import net.zhenghao.zh.common.utils.MD5Utils;
 import net.zhenghao.zh.common.utils.UserAuthUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * 用户controller
@@ -31,7 +31,9 @@ public class SysLoginController {
 	private UserAuthUtils userAuthUtils;
 
 	@PostMapping("/login")
-	public R login(String username, String password) {
+	public R login(@RequestBody Map<String, Object> params) {
+		String username = params.get("username").toString();
+		String password = params.get("password").toString();
 		password = MD5Utils.encrypt(username, password);
 		return validate(username, password);
 	}

@@ -95,8 +95,10 @@
 		</foreach>
 	</delete>
 	
-	<select id="listUserRoles" parameterType="long" resultType="string">
+	<select id="listUserRoles" parameterType="long" resultType="SysRoleEntity">
 		SELECT DISTINCT
+			r.role_id,
+			r.role_name,
 			r.role_sign
 		FROM
 			sys_user_role ur

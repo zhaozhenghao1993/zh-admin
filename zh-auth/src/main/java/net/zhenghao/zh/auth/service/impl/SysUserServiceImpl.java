@@ -2,13 +2,14 @@ package net.zhenghao.zh.auth.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import net.zhenghao.zh.auth.dao.SysMenuMapper;
+import net.zhenghao.zh.auth.dao.SysRoleMapper;
 import net.zhenghao.zh.auth.dao.SysUserMapper;
 import net.zhenghao.zh.auth.dao.SysUserRoleMapper;
 import net.zhenghao.zh.auth.entity.SysMenuEntity;
+import net.zhenghao.zh.auth.entity.SysUserEntity;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.R;
-import net.zhenghao.zh.common.entity.SysUserEntity;
 import net.zhenghao.zh.common.utils.CommonUtils;
 import net.zhenghao.zh.common.utils.MD5Utils;
 import net.zhenghao.zh.auth.service.SysUserService;
@@ -33,6 +34,9 @@ public class SysUserServiceImpl implements SysUserService {
 	private SysUserMapper sysUserMapper;
 
 	@Autowired
+	private SysRoleMapper sysRoleMapper;
+
+	@Autowired
 	private SysMenuMapper sysMenuMapper;
 
 	@Autowired
@@ -55,6 +59,14 @@ public class SysUserServiceImpl implements SysUserService {
 		PageHelper.startPage(page.getPageNum(), page.getPageSize());
 		page.setData(sysUserMapper.listForPage(query));
 		return page;
+	}
+
+	@Override
+	public R getUserInfo(Long userId) {
+		SysUserEntity user = sysUserMapper.getObjectById(userId);
+		user.setRoles(sysRoleMapper.listUserRoles(userId));
+		user.setPerms(sysMenuMapper.listUserMenu(userId));
+		return CommonUtils.msg(user);
 	}
 
 	@Override

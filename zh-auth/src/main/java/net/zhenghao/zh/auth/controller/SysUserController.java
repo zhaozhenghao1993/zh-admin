@@ -1,11 +1,11 @@
 package net.zhenghao.zh.auth.controller;
 
+import net.zhenghao.zh.auth.entity.SysUserEntity;
 import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
-import net.zhenghao.zh.common.entity.SysUserEntity;
 import net.zhenghao.zh.auth.service.SysUserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +35,7 @@ public class SysUserController extends AbstractController {
      */
     @GetMapping("/info")
     public R info() {
-        return sysUserService.getUserById(getUserId());
+        return sysUserService.getUserInfo(getUserId());
     }
 
 	/**

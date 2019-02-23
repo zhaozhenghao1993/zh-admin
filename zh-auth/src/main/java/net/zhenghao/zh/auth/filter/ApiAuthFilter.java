@@ -6,10 +6,10 @@ import io.jsonwebtoken.SignatureException;
 import net.zhenghao.zh.auth.config.TokenHeaderConfig;
 import net.zhenghao.zh.auth.core.RequestHandlerAdapter;
 import net.zhenghao.zh.auth.dao.SysUserMapper;
+import net.zhenghao.zh.auth.entity.SysUserEntity;
 import net.zhenghao.zh.common.constant.HttpStatusConstant;
 import net.zhenghao.zh.common.context.BaseContextHandler;
 import net.zhenghao.zh.common.entity.R;
-import net.zhenghao.zh.common.entity.SysUserEntity;
 import net.zhenghao.zh.common.jwt.JWTInfo;
 import net.zhenghao.zh.common.utils.JSONUtils;
 import net.zhenghao.zh.common.utils.UserAuthUtils;
@@ -60,12 +60,12 @@ public class ApiAuthFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        logger.info("check token and user permission....");
         if (request instanceof HttpServletRequest) {
             HttpServletRequest httpServletRequest = (HttpServletRequest) request;
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
             String uri = httpServletRequest.getRequestURI();
             String method = httpServletRequest.getMethod();
+            logger.info("{} ==> check token and user permission....", uri);
 
             if (!uri.startsWith(routes)) {
                 logger.error("{},This api is invalid!", uri);
@@ -151,7 +151,7 @@ public class ApiAuthFilter implements Filter {
         }
         if (user.getStatus() == 0) {
             logger.error("Token exception! Account locked!");
-            getErrorResponse(response, R.error(HttpStatusConstant.USER_UNKNOWN_ACCOUNT, "Token exception! Account locked!"));
+            getErrorResponse(response, R.error(HttpStatusConstant.USER_LOCKED_ACCOUNT, "Token exception! Account locked!"));
             return false;
         }
         return true;
