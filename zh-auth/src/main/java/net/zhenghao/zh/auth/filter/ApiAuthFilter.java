@@ -65,7 +65,7 @@ public class ApiAuthFilter implements Filter {
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
             String uri = httpServletRequest.getRequestURI();
             String method = httpServletRequest.getMethod();
-            logger.info("{} ==> check token and user permission....", uri);
+            logger.info("{}::{} ==> check token and user permission....", uri, method);
 
             if (!uri.startsWith(routes)) {
                 logger.error("{},This api is invalid!", uri);
