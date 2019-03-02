@@ -32,8 +32,7 @@ public class SysMenuController extends AbstractController {
 	 * @return
 	 */
 	@GetMapping("")
-	public List<SysMenuEntity> listMenu(@RequestParam Map<String, Object> params, @RequestBody(required = false) Map<String, Object> paramsBody) {
-		if (paramsBody != null) params.putAll(paramsBody);
+	public List<SysMenuEntity> listMenu(@RequestParam Map<String, Object> params) {
 		return sysMenuService.listMenu(params);
 	}
 

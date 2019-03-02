@@ -1,7 +1,5 @@
 package net.zhenghao.zh.common.entity;
 
-import org.apache.ibatis.session.RowBounds;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +12,8 @@ import java.util.List;
  * Page.java
  */
 public class Page<T> {
+
+	private int code = 0;
 	
 	/**
 	 * 页编号:第几页
@@ -50,7 +50,15 @@ public class Page<T> {
 		this.pageNum = search.getAsInt("pageNum") == null ? this.pageNum : search.getAsInt("pageNum");
 		this.pageSize = search.getAsInt("pageSize") == null ? this.pageSize : search.getAsInt("pageSize");
 	}
-	
+
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
 	/**
 	 * 获得当前页面的页号,序号从1开始,默认为1
 	 * @return
