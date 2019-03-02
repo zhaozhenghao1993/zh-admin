@@ -61,7 +61,8 @@ public class SysUserController extends AbstractController {
 	 * @return
 	 */
 	@GetMapping("")
-	public Page<SysUserEntity> list(@RequestParam Map<String, Object> params) {
+	public Page<SysUserEntity> list(@RequestParam Map<String, Object> params, @RequestBody(required = false) Map<String, Object> paramsBody) {
+		if (paramsBody != null) params.putAll(paramsBody);
 		if (getUserId() != SystemConstant.SUPER_ADMIN) {
 			params.put("creatorId", getUserId());
 		}

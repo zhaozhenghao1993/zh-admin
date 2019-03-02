@@ -21,7 +21,7 @@ public class Query extends HashMap<String, Object>{
 	}
 	
 	public Query(Map<String, Object> params){
-		this.putAll(params);
+	    this.putAll(params);
 	}
 	
 	public Double getAsDouble(String name) {

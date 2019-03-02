@@ -13,7 +13,7 @@ import java.util.List;
  * @date  :2017年11月20日 下午3:39:18
  * Page.java
  */
-public class Page<T> extends RowBounds {
+public class Page<T> {
 	
 	/**
 	 * 页编号:第几页
@@ -24,16 +24,6 @@ public class Page<T> extends RowBounds {
 	 * 页大小:每页的数量
 	 */
 	protected int pageSize = 10;
-	
-	/**
-	 * 偏移量:第一条数据在表中的位置
-	 */
-	protected int offset;
-	
-	/**
-	 * 限定数:每页的数量
-	 */
-	protected int limit;
 	
 	// --结果-- //
 	/**
@@ -51,37 +41,14 @@ public class Page<T> extends RowBounds {
 	 */
 	protected int totalPages;
 	
-	/**
-	 * 计算偏移量
-	 */
-	private void calcOffset(){
-		this.offset = ((pageNum - 1) * pageSize);
-	}
-	
-	/**
-	 * 计算限定数
-	 */
-	private void calcLimit(){
-		this.limit = pageSize;
-	}
-	
-	public Page(){
-		this.calcOffset();
-		this.calcLimit();
-	}
-	
 	public Page(int pageNum, int pageSize){
 		this.pageNum = pageNum;
 		this.pageSize = pageSize;
-		this.calcOffset();
-		this.calcLimit();
 	}
 	
 	public Page(Query search){
 		this.pageNum = search.getAsInt("pageNum") == null ? this.pageNum : search.getAsInt("pageNum");
 		this.pageSize = search.getAsInt("pageSize") == null ? this.pageSize : search.getAsInt("pageSize");
-		this.calcOffset();
-		this.calcLimit();
 	}
 	
 	/**
@@ -108,19 +75,6 @@ public class Page<T> extends RowBounds {
     }
     
     /**
-     * 根据pageNo和pageSize计算当前页第一条记录在总结果集中的位置,序号从0开始.
-     */
-    @Override
-    public int getOffset() {
-        return offset;
-    }
-
-	@Override
-    public int getLimit() {
-        return limit;
-    }
-    
-    /**
      * 取得页内的记录列表
      * @return
      */
@@ -133,6 +87,7 @@ public class Page<T> extends RowBounds {
      */
     public void setData(final List<T> data) {
         this.data = data;
+		this.setTotal(data);
     }
     
     /**
@@ -145,9 +100,15 @@ public class Page<T> extends RowBounds {
     /**
      * 设置总记录数.
      */
-    public void setTotal(final int total) {
-        this.total = total;
-        this.totalPages = this.getTotalPages();
+    public void setTotal(List<T> data) {
+		this.data = data;
+		if (data instanceof com.github.pagehelper.Page) {
+			this.total = (int)((com.github.pagehelper.Page)data).getTotal();
+			this.totalPages = ((com.github.pagehelper.Page)data).getPages();
+		} else {
+			this.total = data.size();
+			this.totalPages = 1;
+		}
     }
     
     /**
