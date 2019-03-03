@@ -20,8 +20,9 @@
 			</if>
 			<if test="username != null and username.trim() != ''">
 				AND username LIKE concat('%',#{username},'%')
-				OR email LIKE concat('%',#{username},'%')
-				OR mobile LIKE concat('%',#{username},'%')
+			</if>
+			<if test="status != null and status.trim() != ''">
+				AND status = #{status}
 			</if>
 		</where>
 		ORDER BY
