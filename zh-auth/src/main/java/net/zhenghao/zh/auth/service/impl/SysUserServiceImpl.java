@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -109,16 +110,22 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Override
 	public R removeUser(Long id) {
+		if (id == 1L) {
+			return R.error("admin不能删除!");
+		}
 		int count = sysUserMapper.remove(id);
 		sysUserRoleMapper.removeByUserId(id);
 		return CommonUtils.msg(count);
 	}
 
 	@Override
-	public R batchRemove(Long[] id) {
-		int count = sysUserMapper.batchRemove(id);
-		sysUserRoleMapper.batchRemoveByUserId(id);
-		return CommonUtils.msg(id, count);
+	public R batchRemove(Long[] ids) {
+		if (Arrays.stream(ids).anyMatch(id -> id == 1L)) {
+			return R.error("包含admin不能删除!");
+		}
+		int count = sysUserMapper.batchRemove(ids);
+		sysUserRoleMapper.batchRemoveByUserId(ids);
+		return CommonUtils.msg(ids, count);
 	}
 
 	@Override

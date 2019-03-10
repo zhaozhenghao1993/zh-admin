@@ -115,6 +115,17 @@ public class SysUserController extends AbstractController {
 	}
 
 	/**
+	 * 批量删除
+	 * @param ids
+	 * @return
+	 */
+	@SysLog("批量删除用户")
+	@DeleteMapping("")
+	public R batchRemove(@RequestBody Long[] ids) {
+		return sysUserService.batchRemove(ids);
+	}
+
+	/**
 	 * 用户修改密码
 	 * @param pswd
 	 * @param newPswd
@@ -131,24 +142,24 @@ public class SysUserController extends AbstractController {
 
 	/**
 	 * 启用账户
-	 * @param id
+	 * @param ids
 	 * @return
 	 */
 	@SysLog("启用账号")
 	@RequestMapping("/enable")
-	public R updateUserEnable(@RequestBody Long[] id) {
-		return sysUserService.updateUserEnable(id);
+	public R updateUserEnable(@RequestBody Long[] ids) {
+		return sysUserService.updateUserEnable(ids);
 	}
 
 	/**
 	 * 禁用账户
-	 * @param id
+	 * @param ids
 	 * @return
 	 */
 	@SysLog("禁用账户")
 	@RequestMapping("/disable")
-	public R updateUserDisable(@RequestBody Long[] id) {
-		return sysUserService.updateUserDisable(id);
+	public R updateUserDisable(@RequestBody Long[] ids) {
+		return sysUserService.updateUserDisable(ids);
 	}
 
 	/**
