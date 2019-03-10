@@ -27,6 +27,7 @@ spring:
     active: dev
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss #日期格式化
+    time-zone: GMT+8
     serialization:
       indent_output: true #格式化输出
       fail_on_empty_beans: false #忽略无法转换的对象

@@ -15,6 +15,7 @@ import net.zhenghao.zh.common.utils.MD5Utils;
 import net.zhenghao.zh.auth.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ import java.util.Map;
  * SysUserServiceImpl.java
  */
 @Service("sysUserService")
+@Transactional
 public class SysUserServiceImpl implements SysUserService {
 	
 	@Autowired
@@ -73,10 +75,12 @@ public class SysUserServiceImpl implements SysUserService {
 	public R saveUser(SysUserEntity user) {
 		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
 		int count = sysUserMapper.save(user);
-		Query query = new Query();
-		query.put("userId", user.getUserId());
-		query.put("roleIdList", user.getRoleIdList());
-		sysUserRoleMapper.save(query);
+		if (user.getRoleIdList() != null) {
+			Query query = new Query();
+			query.put("userId", user.getUserId());
+			query.put("roleIdList", user.getRoleIdList());
+			sysUserRoleMapper.save(query);
+		}
 		return CommonUtils.msg(count);
 	}
 
@@ -92,12 +96,14 @@ public class SysUserServiceImpl implements SysUserService {
 	public R updateUser(SysUserEntity user) {
 		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
 		int count = sysUserMapper.update(user);
-		Long userId = user.getUserId();
-		sysUserRoleMapper.remove(userId);
-		Query query = new Query();
-		query.put("userId", userId);
-		query.put("roleIdList", user.getRoleIdList());
-		sysUserRoleMapper.save(query);
+		if (user.getRoleIdList() != null) {
+			Long userId = user.getUserId();
+			sysUserRoleMapper.remove(userId);
+			Query query = new Query();
+			query.put("userId", userId);
+			query.put("roleIdList", user.getRoleIdList());
+			sysUserRoleMapper.save(query);
+		}
 		return CommonUtils.msg(count);
 	}
 
