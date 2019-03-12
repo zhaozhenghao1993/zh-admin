@@ -168,8 +168,9 @@ public class SysUserController extends AbstractController {
 	 * @return
 	 */
 	@SysLog("重置密码")
-	@RequestMapping("/reset")
-	public R updatePswd(@RequestBody SysUserEntity user) {
+	@PutMapping("/{id}/reset")
+	public R updatePswd(@PathVariable("id") Long userId, @RequestBody SysUserEntity user) {
+		user.setUserId(userId);
 		return sysUserService.updatePswd(user);
 	}
 	
