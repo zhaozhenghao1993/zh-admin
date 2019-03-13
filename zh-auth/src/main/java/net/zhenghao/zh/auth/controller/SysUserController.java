@@ -146,7 +146,7 @@ public class SysUserController extends AbstractController {
 	 * @return
 	 */
 	@SysLog("启用账号")
-	@RequestMapping("/enable")
+	@PutMapping("/enable")
 	public R updateUserEnable(@RequestBody Long[] ids) {
 		return sysUserService.updateUserEnable(ids);
 	}
@@ -156,8 +156,8 @@ public class SysUserController extends AbstractController {
 	 * @param ids
 	 * @return
 	 */
-	@SysLog("禁用账户")
-	@RequestMapping("/disable")
+	@SysLog("锁定账户")
+	@PutMapping("/disable")
 	public R updateUserDisable(@RequestBody Long[] ids) {
 		return sysUserService.updateUserDisable(ids);
 	}

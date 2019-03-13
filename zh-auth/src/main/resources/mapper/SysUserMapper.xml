@@ -149,7 +149,7 @@
 			status = #{status}
 		WHERE
 			user_id IN
-		<foreach item="userId" collection="id" open="(" separator="," close=")">
+		<foreach item="userId" collection="ids" open="(" separator="," close=")">
 			#{userId}
 		</foreach> 
 	</update>

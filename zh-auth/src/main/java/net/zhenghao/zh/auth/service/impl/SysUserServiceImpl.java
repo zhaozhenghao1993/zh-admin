@@ -7,6 +7,7 @@ import net.zhenghao.zh.auth.dao.SysUserMapper;
 import net.zhenghao.zh.auth.dao.SysUserRoleMapper;
 import net.zhenghao.zh.auth.entity.SysMenuEntity;
 import net.zhenghao.zh.auth.entity.SysUserEntity;
+import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.R;
@@ -159,17 +160,21 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public R updateUserEnable(Long[] id) {
-		//int count = sysUserMapper.updateUserEnable(id);
-		//return CommonUtils.msg(id, count);
-		return R.ok();
+	public R updateUserEnable(Long[] ids) {
+		Query query = new Query();
+		query.put("ids", ids);
+		query.put("status", SystemConstant.StatusType.ENABLE.getValue());
+		int count = sysUserMapper.updateUserStatus(query);
+		return CommonUtils.msg(ids, count);
 	}
 
 	@Override
-	public R updateUserDisable(Long[] id) {
-		// int count = sysUserMapper.updateUserDisable(id);
-		// return CommonUtils.msg(id, count);
-		return R.ok();
+	public R updateUserDisable(Long[] ids) {
+		Query query = new Query();
+		query.put("ids", ids);
+		query.put("status", SystemConstant.StatusType.DISABLE.getValue());
+		int count = sysUserMapper.updateUserStatus(query);
+		return CommonUtils.msg(ids, count);
 	}
 
 	@Override
