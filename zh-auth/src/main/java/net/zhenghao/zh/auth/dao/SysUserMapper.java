@@ -20,6 +20,18 @@ import java.util.List;
 @Component
 public interface SysUserMapper extends BaseMapper<SysUserEntity> {
 
+	/**
+	 * 根据 username 获取 SysUserEntity 数量
+	 * @param username
+	 * @return
+	 */
+	int getCountByUserName(String username);
+
+	/**
+	 * 根据 username 获取 SysUserEntity
+	 * @param username
+	 * @return
+	 */
 	SysUserEntity getByUserName(String username);
 	/**
 	 * 根据用户id得到对应菜单id

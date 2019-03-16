@@ -37,6 +37,15 @@
 			</otherwise>
 		</choose>
 	</select>
+
+	<select id="getCountByUserName" resultType="java.lang.Integer">
+		SELECT
+			COUNT(1)
+		FROM
+			sys_user
+		WHERE
+			username = #{username}
+	</select>
 	
 	<select id="getByUserName" resultType="SysUserEntity">
 		SELECT

@@ -14,6 +14,7 @@ import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.utils.CommonUtils;
 import net.zhenghao.zh.common.utils.MD5Utils;
 import net.zhenghao.zh.auth.service.SysUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,6 +76,12 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Override
 	public R saveUser(SysUserEntity user) {
+		if (StringUtils.isBlank(user.getUsername())) {
+			return R.error("The username cannot be empty !");
+		}
+		if (sysUserMapper.getCountByUserName(user.getUsername()) > 0) {
+			return R.error("The username already exists !");
+		}
 		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
 		int count = sysUserMapper.save(user);
 		if (user.getRoleIdList() != null) {
@@ -96,7 +103,13 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Override
 	public R updateUser(SysUserEntity user) {
-		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
+		if (StringUtils.isBlank(user.getUsername())) {
+			return R.error("The username cannot be empty !");
+		}
+		SysUserEntity userEntity = sysUserMapper.getByUserName(user.getUsername());
+		if (userEntity != null && userEntity.getUserId() != user.getUserId()) {
+			return R.error("The username already exists !");
+		}
 		int count = sysUserMapper.update(user);
 		if (user.getRoleIdList() != null) {
 			Long userId = user.getUserId();
