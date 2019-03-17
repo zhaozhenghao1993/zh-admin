@@ -29,9 +29,21 @@
 			<if test="roleName != null and roleName.trim() != ''">
 				AND role_name LIKE concat('%',#{roleName},'%') 
 			</if>
+			<if test="roleSign != null and roleSign.trim() != ''">
+				AND role_sign LIKE concat('%',#{roleSign},'%')
+			</if>
 		</where>
-		ORDER BY
-			role_id ASC
+		<choose>
+			<when test="sortOrder != null and sortOrder=='ascend'">
+				ORDER BY create_time
+			</when>
+			<when test="sortOrder != null and sortOrder=='descend'">
+				ORDER BY create_time DESC
+			</when>
+			<otherwise>
+				ORDER BY role_id DESC
+			</otherwise>
+		</choose>
 	</select>
 	
 	<insert id="save">
