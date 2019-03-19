@@ -136,7 +136,7 @@
 			<if test="icon != null">icon = #{icon}, </if>
 			<if test="orderNum != null">order_num = #{orderNum}, </if>
 			<if test="modifierId != null">modifier_id = #{modifierId},</if>
-			modifiedTime = NOW()
+			modified_time = NOW()
 		</set>
 		where menu_id = #{menuId}
 	</update>

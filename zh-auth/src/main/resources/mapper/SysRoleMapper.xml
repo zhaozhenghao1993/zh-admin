@@ -82,7 +82,7 @@
 			<if test="roleSign != null">role_sign = #{roleSign}, </if>
 			<if test="remark != null">remark = #{remark}, </if>
 			<if test="modifierId != null">modifier_id = #{modifierId},</if>
-			modifiedTime = NOW()
+			modified_time = NOW()
 		</set>
 		WHERE
 			role_id = #{roleId}
