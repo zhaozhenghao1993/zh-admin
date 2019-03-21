@@ -23,9 +23,9 @@ public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenuEntity> {
 
 	int removeByRoleId(Long id);
 
-	int batchRemoveByMenuId(Long[] id);
+	int batchRemoveByMenuId(Long[] ids);
 	
-	int batchRemoveByRoleId(Long[] id);
+	int batchRemoveByRoleId(Long[] ids);
 	
 	List<Long> listMenuId(Long id);
 }

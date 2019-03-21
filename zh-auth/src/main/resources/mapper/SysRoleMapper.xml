@@ -93,7 +93,7 @@
 		FROM
 			sys_role
 		WHERE
-			user_id = #{value}
+			role_id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">

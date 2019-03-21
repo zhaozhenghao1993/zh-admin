@@ -75,9 +75,10 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
-	public R batchRemove(Long[] id) {
-		int count = sysMenuMapper.batchRemove(id);
-		return CommonUtils.msg(id, count);
+	public R batchRemove(Long[] ids) {
+		int count = sysMenuMapper.batchRemove(ids);
+		sysRoleMenuMapper.batchRemoveByMenuId(ids);
+		return CommonUtils.msg(ids, count);
 	}
 
 }

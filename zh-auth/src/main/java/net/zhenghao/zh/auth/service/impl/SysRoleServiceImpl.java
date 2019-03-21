@@ -76,9 +76,11 @@ public class SysRoleServiceImpl implements SysRoleService {
 	}
 
 	@Override
-	public R batchRemove(Long[] id) {
-		int count = sysRoleMapper.batchRemove(id);
-		return CommonUtils.msg(id, count);
+	public R batchRemove(Long[] ids) {
+		int count = sysRoleMapper.batchRemove(ids);
+		sysUserRoleMapper.batchRemoveByRoleId(ids);
+		sysRoleMenuMapper.batchRemoveByRoleId(ids);
+		return CommonUtils.msg(ids, count);
 	}
 
 	@Override
