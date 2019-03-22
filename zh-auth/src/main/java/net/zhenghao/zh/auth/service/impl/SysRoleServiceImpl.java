@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -69,6 +70,9 @@ public class SysRoleServiceImpl implements SysRoleService {
 
 	@Override
 	public R removeRole(Long id) {
+		if (id == 1L) {
+			return R.error("内置admin角色不能删除!");
+		}
 		int count = sysRoleMapper.remove(id);
 		sysUserRoleMapper.removeByRoleId(id);
 		sysRoleMenuMapper.removeByRoleId(id);
@@ -77,6 +81,9 @@ public class SysRoleServiceImpl implements SysRoleService {
 
 	@Override
 	public R batchRemove(Long[] ids) {
+		if (Arrays.stream(ids).anyMatch(id -> id == 1L)) {
+			return R.error("包含内置admin角色不能删除!");
+		}
 		int count = sysRoleMapper.batchRemove(ids);
 		sysUserRoleMapper.batchRemoveByRoleId(ids);
 		sysRoleMenuMapper.batchRemoveByRoleId(ids);

@@ -2,6 +2,7 @@ package net.zhenghao.zh.auth.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * 菜单
@@ -84,6 +85,8 @@ public class SysMenuEntity implements Serializable {
 	 * 最后修改人id
 	 */
 	private Long modifierId;
+
+	private List<SysMenuEntity> children;
 
 	/**
 	 * 最后修改时间
@@ -212,5 +215,13 @@ public class SysMenuEntity implements Serializable {
 
 	public void setModifiedTime(Timestamp modifiedTime) {
 		this.modifiedTime = modifiedTime;
+	}
+
+	public List<SysMenuEntity> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<SysMenuEntity> children) {
+		this.children = children;
 	}
 }

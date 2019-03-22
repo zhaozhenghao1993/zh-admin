@@ -2,13 +2,13 @@ package net.zhenghao.zh.auth.controller;
 
 import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.controller.AbstractController;
+import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.auth.entity.SysMenuEntity;
 import net.zhenghao.zh.auth.service.SysMenuService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,7 +32,7 @@ public class SysMenuController extends AbstractController {
 	 * @return
 	 */
 	@GetMapping("")
-	public List<SysMenuEntity> listMenu(@RequestParam Map<String, Object> params) {
+	public Page<SysMenuEntity> listMenu(@RequestParam Map<String, Object> params) {
 		return sysMenuService.listMenu(params);
 	}
 

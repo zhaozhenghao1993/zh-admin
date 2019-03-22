@@ -3,18 +3,22 @@
 
 <mapper namespace="net.zhenghao.zh.auth.dao.SysMenuMapper">
 
-	<resultMap id="UserMenuResult" type="SysMenuEntity">
+	<resultMap id="MenuListResult" type="SysMenuEntity">
 		<id property="menuId" column="menu_id" />
 		<result property="parentId" column="parent_id" />
 		<result property="name" column="name" />
-		<result property="url" column="url" />
+		<result property="uri" column="uri" />
+		<result property="method" column="method" />
+		<result property="perms" column="perms" />
 		<result property="type" column="type" />
 		<result property="icon" column="icon" />
-		<collection property="list" javaType="ArrayList" ofType="net.zhenghao.zh.auth.entity.SysMenuEntity"
-					resultMap="net.zhenghao.zh.auth.dao.SysMenuMapper.UserMenuResult" columnPrefix="c_"/>
+		<result property="orderNum" column="order_num" />
+		<result property="description" column="description" />
+		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.auth.entity.SysMenuEntity" column="menu_id"
+					select="listParentId" />
 	</resultMap>
 
-	<select id="list" resultType="SysMenuEntity">
+	<select id="list" resultMap="MenuListResult">
 		SELECT
 			m.menu_id,
 			m.parent_id,
@@ -32,9 +36,40 @@
 			m.perms,
 			m.type,
 			m.icon,
-			m.order_num
+			m.order_num,
+			m.description
 		FROM
 			sys_menu m
+		WHERE
+			m.parent_id = 0
+		ORDER BY
+			m.order_num ASC
+	</select>
+
+	<select id="listParentId" parameterType="java.lang.Long" resultMap="MenuListResult">
+		SELECT
+			m.menu_id,
+			m.parent_id,
+			(
+				SELECT
+					p.name
+				FROM
+					sys_menu p
+				WHERE
+					p.menu_id = m.parent_id
+			) AS parentName,
+			m.name,
+			m.uri,
+			m.method,
+			m.perms,
+			m.type,
+			m.icon,
+			m.order_num,
+			m.description
+		FROM
+			sys_menu m
+		WHERE
+			m.parent_id = #{parentId}
 		ORDER BY
 			m.order_num ASC
 	</select>
@@ -49,24 +84,6 @@
 			sys_menu
 		WHERE
 			type != 2
-		ORDER BY
-			order_num ASC
-	</select>
-	
-	
-	<select id="listParentId" resultType="SysMenuEntity">
-		SELECT
-			menu_id,
-			parent_id,
-			name,
-			uri,
-			method,
-			type,
-			icon
-		FROM
-			sys_menu
-		WHERE
-			parent_id = #{parentId}
 		ORDER BY
 			order_num ASC
 	</select>

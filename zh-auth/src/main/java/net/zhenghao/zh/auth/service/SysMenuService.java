@@ -1,5 +1,6 @@
 package net.zhenghao.zh.auth.service;
 
+import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.auth.entity.SysMenuEntity;
 
@@ -16,7 +17,7 @@ import java.util.Map;
  */
 public interface SysMenuService {
 	
-	List<SysMenuEntity> listMenu(Map<String, Object> params);
+	Page<SysMenuEntity> listMenu(Map<String, Object> params);
 	
 	R listNotButton();
 	

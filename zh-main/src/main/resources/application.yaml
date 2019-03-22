@@ -31,7 +31,7 @@ spring:
     serialization:
       indent_output: true #格式化输出
       fail_on_empty_beans: false #忽略无法转换的对象
-    defaultPropertyInclusion: NON_NULL #设置空如何序列化
+    defaultPropertyInclusion: NON_EMPTY #设置空如何序列化
     deserialization:
       fail_on_unknown_properties: false #允许对象忽略json中不存在的属性
     parser:
