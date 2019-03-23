@@ -18,6 +18,24 @@
 					select="listParentId" />
 	</resultMap>
 
+	<resultMap id="MenuVoListNotButtonResult" type="SysMenuVO">
+		<id property="key" column="menu_id" />
+		<result property="parentId" column="parent_id" />
+		<result property="value" column="menu_id" />
+		<result property="title" column="name" />
+		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.auth.vo.SysMenuVO" column="menu_id"
+					select="listTreeNotButtonParentId" />
+	</resultMap>
+
+	<resultMap id="MenuVoListResult" type="SysMenuVO">
+		<id property="key" column="menu_id" />
+		<result property="parentId" column="parent_id" />
+		<result property="value" column="menu_id" />
+		<result property="title" column="name" />
+		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.auth.vo.SysMenuVO" column="menu_id"
+					select="listTreeParentId" />
+	</resultMap>
+
 	<select id="list" resultMap="MenuListResult">
 		SELECT
 			m.menu_id,
@@ -73,19 +91,59 @@
 		ORDER BY
 			m.order_num ASC
 	</select>
-	
-	<select id="listNotButton" resultType="SysMenuEntity" flushCache="true">
+
+	<select id="listTreeNotButton" resultMap="MenuVoListNotButtonResult" flushCache="true">
 		SELECT
-			menu_id,
-			parent_id,
-			name,
-			type
+			m.menu_id,
+			m.parent_id,
+			m.name
 		FROM
-			sys_menu
+			sys_menu m
 		WHERE
-			type != 2
+			m.parent_id = 0
 		ORDER BY
-			order_num ASC
+			m.order_num ASC
+	</select>
+
+	<select id="listTreeNotButtonParentId" parameterType="java.lang.Long" resultMap="MenuVoListNotButtonResult">
+		SELECT
+			m.menu_id,
+			m.parent_id,
+			m.name
+		FROM
+			sys_menu m
+		WHERE
+			m.parent_id = #{parentId}
+		AND
+			( m.type = 0 OR m.type = 1 )
+		ORDER BY
+			m.order_num ASC
+	</select>
+
+	<select id="listTree" resultMap="MenuVoListResult" flushCache="true">
+		SELECT
+			m.menu_id,
+			m.parent_id,
+			m.name
+		FROM
+			sys_menu m
+		WHERE
+			m.parent_id = 0
+		ORDER BY
+			m.order_num ASC
+	</select>
+
+	<select id="listTreeParentId" parameterType="java.lang.Long" resultMap="MenuVoListResult">
+		SELECT
+			m.menu_id,
+			m.parent_id,
+			m.name
+		FROM
+			sys_menu m
+		WHERE
+			m.parent_id = #{parentId}
+		ORDER BY
+			m.order_num ASC
 	</select>
 
 	<insert id="save">
@@ -98,6 +156,7 @@
 			type,
 			icon,
 			order_num,
+			description,
 			creator_id,
 			create_time
 		)
@@ -110,6 +169,7 @@
 			#{type},
 			#{icon},
 			#{orderNum},
+			#{description},
 			#{creatorId},
 			now()
 		)
@@ -134,6 +194,7 @@
 			m.type,
 			m.icon,
 			m.order_num,
+			m.description,
 			create_time
 		FROM
 			sys_menu m
@@ -152,6 +213,7 @@
 			<if test="type != null">type = #{type}, </if>
 			<if test="icon != null">icon = #{icon}, </if>
 			<if test="orderNum != null">order_num = #{orderNum}, </if>
+			<if test="description != null">description = #{description}, </if>
 			<if test="modifierId != null">modifier_id = #{modifierId},</if>
 			modified_time = NOW()
 		</set>

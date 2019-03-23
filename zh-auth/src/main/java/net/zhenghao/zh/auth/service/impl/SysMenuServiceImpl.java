@@ -2,6 +2,7 @@ package net.zhenghao.zh.auth.service.impl;
 
 import net.zhenghao.zh.auth.dao.SysMenuMapper;
 import net.zhenghao.zh.auth.dao.SysRoleMenuMapper;
+import net.zhenghao.zh.auth.vo.SysMenuVO;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.R;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,14 +44,21 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
-	public R listNotButton() {
-		List<SysMenuEntity> menuList = sysMenuMapper.listNotButton();
-		SysMenuEntity root = new SysMenuEntity();
-		root.setMenuId(0L);
-		root.setName("一级菜单");
-		root.setParentId(-1L);
-		menuList.add(root);
-		return CommonUtils.msgNotNull(menuList);
+	public R listTree(Map<String, Object> params) {
+		List<SysMenuVO> listRoot = new ArrayList<>();
+		if (params.get("isNotButton") != null && "true".equals(params.get("isNotButton"))) {
+			List<SysMenuVO> menuList = sysMenuMapper.listTreeNotButton();
+			SysMenuVO root = new SysMenuVO();
+			root.setKey("0");
+			root.setTitle("主目录");
+			root.setValue("0");
+			root.setParentId("-1");
+			root.setChildren(menuList);
+			listRoot.add(root);
+		} else {
+			listRoot = sysMenuMapper.listTree();
+		}
+		return CommonUtils.msgNotNull(listRoot);
 	}
 
 	@Override

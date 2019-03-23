@@ -19,7 +19,7 @@ public interface SysMenuService {
 	
 	Page<SysMenuEntity> listMenu(Map<String, Object> params);
 	
-	R listNotButton();
+	R listTree(Map<String, Object> params);
 	
 	R saveMenu(SysMenuEntity menu);
 

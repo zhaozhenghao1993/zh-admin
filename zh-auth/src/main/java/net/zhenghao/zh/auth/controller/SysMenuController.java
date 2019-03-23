@@ -50,9 +50,9 @@ public class SysMenuController extends AbstractController {
 	 * 选择除按钮的菜单(添加、修改)
 	 * @return
 	 */
-	@RequestMapping("/select")
-	public R select() {
-		return sysMenuService.listNotButton();
+	@GetMapping("/tree")
+	public R select(@RequestParam Map<String, Object> params) {
+		return sysMenuService.listTree(params);
 	}
 	
 	/**

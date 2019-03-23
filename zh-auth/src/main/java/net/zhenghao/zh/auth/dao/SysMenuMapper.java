@@ -1,7 +1,9 @@
 package net.zhenghao.zh.auth.dao;
 
+import net.zhenghao.zh.auth.vo.SysMenuVO;
 import net.zhenghao.zh.common.dao.BaseMapper;
 import net.zhenghao.zh.auth.entity.SysMenuEntity;
+import net.zhenghao.zh.common.entity.Query;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.stereotype.Component;
 
@@ -22,10 +24,16 @@ public interface SysMenuMapper extends BaseMapper<SysMenuEntity>{
 	List<SysMenuEntity> listParentId(Long parentId);
 	
 	/**
-	 * 得到非按钮的菜单
+	 * 得到Tree列表(不含button)
 	 * @return
 	 */
-	List<SysMenuEntity> listNotButton();
+	List<SysMenuVO> listTreeNotButton();
+
+	/**
+	 * 得到Tree列表
+	 * @return
+	 */
+	List<SysMenuVO> listTree();
 	
 	/**
 	 * 得到该用户所有URI权限

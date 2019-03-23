@@ -1,0 +1,8 @@
+2019-02-23 00:04:55,335 INFO (StartupInfoLogger.java:50)- Starting ZhAdminApplicationTests on DESKTOP-FR3S3ED with PID 8164 (started by 73672 in D:\IdeaProjects\zh-admin\zh-main)
+2019-02-23 00:04:55,339 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.1.RELEASE, Spring v5.1.3.RELEASE
+2019-02-23 00:04:55,340 INFO (SpringApplication.java:679)- The following profiles are active: dev
+2019-02-23 00:04:59,687 INFO (StartupInfoLogger.java:59)- Started ZhAdminApplicationTests in 4.714 seconds (JVM running for 5.576)
+2019-02-23 00:11:40,100 INFO (StartupInfoLogger.java:50)- Starting ZhAdminApplicationTests on DESKTOP-FR3S3ED with PID 14304 (started by 73672 in D:\IdeaProjects\zh-admin\zh-main)
+2019-02-23 00:11:40,101 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.1.RELEASE, Spring v5.1.3.RELEASE
+2019-02-23 00:11:40,103 INFO (SpringApplication.java:679)- The following profiles are active: dev
+2019-02-23 00:11:44,121 INFO (StartupInfoLogger.java:59)- Started ZhAdminApplicationTests in 4.328 seconds (JVM running for 5.218)
