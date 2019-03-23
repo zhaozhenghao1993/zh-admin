@@ -81,6 +81,10 @@ public class SysMenuServiceImpl implements SysMenuService {
 
 	@Override
 	public R remove(Long id) {
+		int childCount = sysMenuMapper.getChildCountByMenuId(id);
+		if (childCount > 0) {
+			return R.error("该菜单含有子菜单,请先删除子菜单!");
+		}
 		int count = sysMenuMapper.remove(id);
 		sysRoleMenuMapper.removeByMenuId(id);
 		return CommonUtils.msg(count);

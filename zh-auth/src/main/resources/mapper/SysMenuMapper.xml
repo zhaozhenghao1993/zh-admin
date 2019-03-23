@@ -146,6 +146,15 @@
 			m.order_num ASC
 	</select>
 
+	<select id="getChildCountByMenuId" resultType="java.lang.Integer">
+		SELECT
+			COUNT(1)
+		FROM
+			sys_menu
+		WHERE
+			parent_id = #{value}
+	</select>
+
 	<insert id="save">
 		INSERT INTO sys_menu (
 			parent_id,
@@ -219,6 +228,14 @@
 		</set>
 		where menu_id = #{menuId}
 	</update>
+
+	<delete id="remove">
+		DELETE
+		FROM
+			sys_menu
+		WHERE
+			menu_id = #{value}
+	</delete>
 	
 	<delete id="batchRemove">
 		DELETE
