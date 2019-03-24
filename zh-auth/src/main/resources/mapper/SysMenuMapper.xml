@@ -11,7 +11,6 @@
 		<result property="method" column="method" />
 		<result property="perms" column="perms" />
 		<result property="type" column="type" />
-		<result property="icon" column="icon" />
 		<result property="orderNum" column="order_num" />
 		<result property="description" column="description" />
 		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.auth.entity.SysMenuEntity" column="menu_id"
@@ -53,7 +52,6 @@
 			m.method,
 			m.perms,
 			m.type,
-			m.icon,
 			m.order_num,
 			m.description
 		FROM
@@ -81,7 +79,6 @@
 			m.method,
 			m.perms,
 			m.type,
-			m.icon,
 			m.order_num,
 			m.description
 		FROM
@@ -163,7 +160,6 @@
 			method,
 			perms,
 			type,
-			icon,
 			order_num,
 			description,
 			creator_id,
@@ -176,7 +172,6 @@
 			#{method,},
 			#{perms},
 			#{type},
-			#{icon},
 			#{orderNum},
 			#{description},
 			#{creatorId},
@@ -201,10 +196,9 @@
 			m.method,
 			m.perms,
 			m.type,
-			m.icon,
 			m.order_num,
 			m.description,
-			create_time
+			m.create_time
 		FROM
 			sys_menu m
 		WHERE
@@ -220,7 +214,6 @@
 			<if test="method != null">method = #{method}, </if>
 			<if test="perms != null">perms = #{perms}, </if>
 			<if test="type != null">type = #{type}, </if>
-			<if test="icon != null">icon = #{icon}, </if>
 			<if test="orderNum != null">order_num = #{orderNum}, </if>
 			<if test="description != null">description = #{description}, </if>
 			<if test="modifierId != null">modifier_id = #{modifierId},</if>

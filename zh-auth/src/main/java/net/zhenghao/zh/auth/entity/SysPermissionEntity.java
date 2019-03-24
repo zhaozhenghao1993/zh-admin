@@ -46,11 +46,6 @@ public class SysPermissionEntity {
      */
     private String perms;
 
-    /**
-     * 菜单图标
-     */
-    private String icon;
-
     public String getName() {
         return name;
     }
@@ -89,13 +84,5 @@ public class SysPermissionEntity {
 
     public void setPerms(String perms) {
         this.perms = perms;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
     }
 }

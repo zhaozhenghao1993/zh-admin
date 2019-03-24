@@ -5,6 +5,7 @@ import net.zhenghao.zh.auth.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -62,6 +63,7 @@ public class RequestHandlerAdapter {
      * @return
      */
     public boolean validatePermsFilterChain(String uri, String method, Long userId) {
+        List list = sysUserService.listUserPerms(userId);
         boolean bool = false;
         if (sysUserService.listUserPerms(userId).stream().anyMatch(sysMenuEntity -> validate(uri, method, sysMenuEntity.getUri(), sysMenuEntity.getMethod()))) {
             bool = true;
@@ -71,6 +73,9 @@ public class RequestHandlerAdapter {
 
     /**
      * 正则验证restful api 匹配
+     * 注：2019-03-24 21：39 ==> 正则规则由 [a-zA-Z\\\\d] 改为 [\\d]
+     * 为避免 /sys/user/enable :: PUT 匹配 /sys/user/{id} :: PUT 成功，造成权限混乱
+     * 将正则改为 restful 只能匹配 {id} 数字
      * @param requestUri        请求uri
      * @param requestMethod     请求method
      * @param uri               规则uri       例: /test/demo/{id}
@@ -79,7 +84,7 @@ public class RequestHandlerAdapter {
      */
     public static boolean validate(String requestUri, String requestMethod, String uri, String method) {
         if (uri.indexOf('{') >= 1) {
-            uri = uri.replaceAll("\\{[^}]+\\}", "[a-zA-Z\\\\d]+");
+            uri = uri.replaceAll("\\{[^}]+\\}", "[\\\\d]+");
         }
         String regEx = "^" + uri + "$";
         return (Pattern.compile(regEx).matcher(requestUri).find())

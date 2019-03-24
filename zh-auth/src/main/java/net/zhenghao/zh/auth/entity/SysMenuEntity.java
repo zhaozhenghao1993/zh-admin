@@ -57,11 +57,6 @@ public class SysMenuEntity implements Serializable {
 	private Integer type;
 
 	/**
-	 * 菜单图标
-	 */
-	private String icon;
-
-	/**
 	 * 排序
 	 */
 	private Integer orderNum;
@@ -159,14 +154,6 @@ public class SysMenuEntity implements Serializable {
 
 	public void setType(Integer type) {
 		this.type = type;
-	}
-
-	public String getIcon() {
-		return icon;
-	}
-
-	public void setIcon(String icon) {
-		this.icon = icon;
 	}
 
 	public Integer getOrderNum() {

@@ -49,7 +49,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 		if (params.get("isNotButton") != null && "true".equals(params.get("isNotButton"))) {
 			List<SysMenuVO> menuList = sysMenuMapper.listTreeNotButton();
 			SysMenuVO root = new SysMenuVO();
-			root.setKey("0");
+			root.setKey(0L);
 			root.setTitle("主目录");
 			root.setValue("0");
 			root.setParentId("-1");

@@ -18,7 +18,7 @@ public class SysMenuVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String key;
+    private Long key;
 
     private String parentId;
 
@@ -28,11 +28,11 @@ public class SysMenuVO implements Serializable {
 
     private List<SysMenuVO> children;
 
-    public String getKey() {
+    public Long getKey() {
         return key;
     }
 
-    public void setKey(String key) {
+    public void setKey(Long key) {
         this.key = key;
     }
 
