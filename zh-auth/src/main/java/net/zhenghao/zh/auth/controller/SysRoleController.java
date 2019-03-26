@@ -10,6 +10,7 @@ import net.zhenghao.zh.auth.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -103,12 +104,13 @@ public class SysRoleController extends AbstractController {
 	
 	/**
 	 * 分配权限
-	 * @param role
+	 * @param roleId
+	 * @param menuIdList
 	 * @return
 	 */
 	@SysLog(value = "分配权限", type = "AUTHORIZATION")
-	@PostMapping("/authorize")
-	public R updateRoleAuthorization(@RequestBody SysRoleEntity role) {
-		return sysRoleService.updateRoleAuthorization(role);
+	@PutMapping("/{id}/authorize")
+	public R updateRoleAuthorization(@PathVariable("id") Long roleId, @RequestBody List<Long> menuIdList) {
+		return sysRoleService.updateRoleAuthorization(roleId, menuIdList);
 	}
 }

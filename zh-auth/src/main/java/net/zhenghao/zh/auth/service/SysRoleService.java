@@ -4,6 +4,7 @@ import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.auth.entity.SysRoleEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,6 +31,6 @@ public interface SysRoleService {
 	
 	R listRole();
 	
-	R updateRoleAuthorization(SysRoleEntity role);
+	R updateRoleAuthorization(Long roleId, List<Long> menuIdList);
 	
 }
