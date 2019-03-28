@@ -113,7 +113,7 @@ public class SysUserServiceImpl implements SysUserService {
 		int count = sysUserMapper.update(user);
 		if (user.getRoleIdList() != null) {
 			Long userId = user.getUserId();
-			sysUserRoleMapper.remove(userId);
+			sysUserRoleMapper.removeByUserId(userId);
 			Query query = new Query();
 			query.put("userId", userId);
 			query.put("roleIdList", user.getRoleIdList());
