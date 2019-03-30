@@ -1,6 +1,7 @@
 package net.zhenghao.zh.auth.controller;
 
 import net.zhenghao.zh.auth.entity.SysUserEntity;
+import net.zhenghao.zh.auth.vo.SysUserPasswordVO;
 import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.controller.AbstractController;
@@ -42,18 +43,38 @@ public class SysUserController extends AbstractController {
 	 * 获取登录用户权限
 	 * @return
 	 */
-	@GetMapping("/button")
-	public R listUserButton() {
-		return sysUserService.listUserButton(getUserId());
-	}
-
-	/**
-	 * 获取登录用户权限
-	 * @return
-	 */
 	@GetMapping("/menu")
 	public R menu() {
 		return sysUserService.listUserMenu(getUserId());
+	}
+
+	/**
+	 * 更新当前用户的个人基础信息
+	 * @return
+	 */
+	@PutMapping("/profile")
+	public R profile(@RequestBody SysUserEntity user) {
+		user.setUserId(getUserId());
+		user.setModifierId(getUserId());
+		user.setUsername(null);
+		user.setStatus(null);
+		return sysUserService.profileUser(user);
+	}
+
+	/**
+	 * 当前用户修改密码
+	 * @param password
+	 * @return
+	 */
+	@SysLog("修改密码")
+	@PutMapping("/profile/password")
+	public R updatePswdByUser(@RequestBody SysUserPasswordVO password) {
+		SysUserEntity user = new SysUserEntity();
+		user.setUserId(getUserId());
+		user.setUsername(getUserName());
+		user.setPassword(password.getOldPassword()); // 原密码
+		user.setEmail(password.getPassword()); // 邮箱临时存储新密码
+		return sysUserService.updatePasswordByUser(user);
 	}
 
 	/**
@@ -126,21 +147,6 @@ public class SysUserController extends AbstractController {
 	}
 
 	/**
-	 * 用户修改密码
-	 * @param pswd
-	 * @param newPswd
-	 * @return
-	 */
-	@SysLog("修改密码")
-	@RequestMapping("/updatePswd")
-	public R updatePswdByUser(String pswd, String newPswd) {
-		SysUserEntity user = (SysUserEntity) sysUserService.getUserById(getUserId()).get("data");
-		user.setPassword(pswd);//原密码
-		user.setEmail(newPswd);//邮箱临时存储新密码
-		return sysUserService.updatePswdByUser(user);
-	}
-
-	/**
 	 * 启用账户
 	 * @param ids
 	 * @return
@@ -171,7 +177,7 @@ public class SysUserController extends AbstractController {
 	@PutMapping("/{id}/reset")
 	public R updatePswd(@PathVariable("id") Long userId, @RequestBody SysUserEntity user) {
 		user.setUserId(userId);
-		return sysUserService.updatePswd(user);
+		return sysUserService.updatePassword(user);
 	}
 	
 }

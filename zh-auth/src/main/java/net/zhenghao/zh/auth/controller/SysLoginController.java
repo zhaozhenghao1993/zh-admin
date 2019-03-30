@@ -50,7 +50,7 @@ public class SysLoginController {
 			return R.error(HttpStatusConstant.USER_INCORRECT_CREDENTIALS, "Account credentials incorrect!");
 		}
 		//账号锁定
-		if (user.getStatus() == 0) {
+		if (user.getStatus() == 1) {
 			return R.error(HttpStatusConstant.USER_LOCKED_ACCOUNT, "Account locked!");
 		}
 		try {

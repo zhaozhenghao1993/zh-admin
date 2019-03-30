@@ -49,13 +49,6 @@ public interface SysMenuMapper extends BaseMapper<SysMenuEntity>{
 	List<SysMenuEntity> listUserPerms(Long userId);
 
 	/**
-	 * 得到该用户所有Button权限
-	 * @param userId
-	 * @return
-	 */
-	List<String> listUserButton(Long userId);
-
-	/**
 	 * 得到该用户所有菜单
 	 * @param userId
 	 * @return

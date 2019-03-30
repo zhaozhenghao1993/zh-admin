@@ -254,18 +254,6 @@
 		AND (m.type = 2 OR m.type = 3)
 	</select>
 
-	<select id="listUserButton" parameterType="long" resultType="String">
-		SELECT DISTINCT
-			m.perms
-		FROM
-			sys_user_role ur
-		LEFT JOIN sys_role_menu rm ON ur.role_id = rm.role_id
-		LEFT JOIN sys_menu m ON rm.menu_id = m.menu_id
-		WHERE
-			ur.user_id = #{userId}
-		AND m.type = 2
-	</select>
-
 	<select id="listUserMenu" parameterType="long" resultType="SysMenuEntity" >
 		SELECT DISTINCT
 			m.menu_id,

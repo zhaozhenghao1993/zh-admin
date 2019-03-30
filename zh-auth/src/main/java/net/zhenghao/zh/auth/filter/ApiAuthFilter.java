@@ -8,6 +8,7 @@ import net.zhenghao.zh.auth.core.RequestHandlerAdapter;
 import net.zhenghao.zh.auth.dao.SysUserMapper;
 import net.zhenghao.zh.auth.entity.SysUserEntity;
 import net.zhenghao.zh.common.constant.HttpStatusConstant;
+import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.context.BaseContextHandler;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.jwt.JWTInfo;
@@ -149,7 +150,7 @@ public class ApiAuthFilter implements Filter {
             getErrorResponse(response, R.error(HttpStatusConstant.USER_UNKNOWN_ACCOUNT, "Token exception! Account does not exist!"));
             return false;
         }
-        if (user.getStatus() == 0) {
+        if (user.getStatus() == SystemConstant.StatusType.DISABLE.getValue()) {
             logger.error("Token exception! Account locked!");
             getErrorResponse(response, R.error(HttpStatusConstant.USER_LOCKED_ACCOUNT, "Token exception! Account locked!"));
             return false;

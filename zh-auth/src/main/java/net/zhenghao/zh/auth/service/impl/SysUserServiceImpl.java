@@ -75,6 +75,12 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
+	public R profileUser(SysUserEntity user) {
+		int count = sysUserMapper.update(user);
+		return CommonUtils.msg(count);
+	}
+
+	@Override
 	public R saveUser(SysUserEntity user) {
 		if (StringUtils.isBlank(user.getUsername())) {
 			return R.error("The username cannot be empty !");
@@ -84,7 +90,7 @@ public class SysUserServiceImpl implements SysUserService {
 		}
 		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
 		int count = sysUserMapper.save(user);
-		if (user.getRoleIdList() != null) {
+		if (user.getRoleIdList() != null && !user.getRoleIdList().isEmpty()) {
 			Query query = new Query();
 			query.put("userId", user.getUserId());
 			query.put("roleIdList", user.getRoleIdList());
@@ -111,9 +117,9 @@ public class SysUserServiceImpl implements SysUserService {
 			return R.error("The username already exists !");
 		}
 		int count = sysUserMapper.update(user);
-		if (user.getRoleIdList() != null) {
-			Long userId = user.getUserId();
-			sysUserRoleMapper.removeByUserId(userId);
+		Long userId = user.getUserId();
+		sysUserRoleMapper.removeByUserId(userId);
+		if (user.getRoleIdList() != null && !user.getRoleIdList().isEmpty()) {
 			Query query = new Query();
 			query.put("userId", userId);
 			query.put("roleIdList", user.getRoleIdList());
@@ -143,29 +149,23 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public R listUserButton(Long userId) {
-		List<String> buttons = sysMenuMapper.listUserButton(userId);
-		return CommonUtils.msgNotNull(buttons);
-	}
-
-	@Override
 	public R listUserMenu(Long userId) {
 		List<SysMenuEntity> menus = sysMenuMapper.listUserMenu(userId);
 		return CommonUtils.msgNotNull(menus);
 	}
 
 	@Override
-	public R updatePswdByUser(SysUserEntity user) {
+	public R updatePasswordByUser(SysUserEntity user) {
 		String username = user.getUsername();
-		String pswd = user.getPassword();
-		String newPswd = user.getEmail();
-		pswd = MD5Utils.encrypt(username, pswd);
-		newPswd = MD5Utils.encrypt(username, newPswd);
+		String password = user.getPassword();
+		String newPassword = user.getEmail();
+		password = MD5Utils.encrypt(username, password);
+		newPassword = MD5Utils.encrypt(username, newPassword);
 		Query query = new Query();
 		query.put("userId", user.getUserId());
-		query.put("pswd", pswd);
-		query.put("newPswd", newPswd);
-		int count = sysUserMapper.updatePswdByUser(query);
+		query.put("password", password);
+		query.put("newPassword", newPassword);
+		int count = sysUserMapper.updatePasswordByUser(query);
 		if(!CommonUtils.isIntThanZero(count)) {
 			return R.error("原密码错误");
 		}
@@ -191,10 +191,10 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public R updatePswd(SysUserEntity user) {
+	public R updatePassword(SysUserEntity user) {
 		SysUserEntity currUser = sysUserMapper.getObjectById(user.getUserId());
 		user.setPassword(MD5Utils.encrypt(currUser.getUsername(), user.getPassword()));
-		int count = sysUserMapper.updatePswd(user);
+		int count = sysUserMapper.updatePassword(user);
 		return CommonUtils.msg(count);
 	}
 

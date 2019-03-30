@@ -103,24 +103,24 @@ public class SystemConstant {
 	public enum StatusType {
 		
 		/**
-		 * 禁用,隐藏,失败
-		 */
-		DISABLE(0),
-		
-		/**
 		 * 可用,显示,成功
 		 */
-		ENABLE(1),
+		ENABLE(0),
+		
+		/**
+		 * 禁用,隐藏,失败,锁定
+		 */
+		DISABLE(1),
 		
 		/**
 		 * 显示
 		 */
-		SHOW(1),
+		SHOW(0),
 		
 		/**
 		 * 隐藏
 		 */
-		HIDDEN(0);
+		HIDDEN(1);
 		
 		private int value;
 		

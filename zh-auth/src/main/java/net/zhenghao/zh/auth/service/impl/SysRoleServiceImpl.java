@@ -98,11 +98,13 @@ public class SysRoleServiceImpl implements SysRoleService {
 
 	@Override
 	public R updateRoleAuthorization(Long roleId, List<Long> menuIdList) {
-		sysRoleMenuMapper.removeByRoleId(roleId);
-		Query query = new Query();
-		query.put("roleId", roleId);
-		query.put("menuIdList", menuIdList);
-		int count = sysRoleMenuMapper.save(query);
+		int count = sysRoleMenuMapper.removeByRoleId(roleId);
+		if (!menuIdList.isEmpty()) {
+			Query query = new Query();
+			query.put("roleId", roleId);
+			query.put("menuIdList", menuIdList);
+			count = sysRoleMenuMapper.save(query);
+		}
 		return CommonUtils.msg(count);
 	}
 

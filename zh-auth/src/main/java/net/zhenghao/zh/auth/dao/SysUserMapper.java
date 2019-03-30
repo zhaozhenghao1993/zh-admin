@@ -45,7 +45,7 @@ public interface SysUserMapper extends BaseMapper<SysUserEntity> {
 	 * @param query
 	 * @return
 	 */
-	int updatePswdByUser(Query query);
+	int updatePasswordByUser(Query query);
 	
 	/**
 	 * 批量修改用户状态
@@ -59,5 +59,5 @@ public interface SysUserMapper extends BaseMapper<SysUserEntity> {
 	 * @param user
 	 * @return
 	 */
-	int updatePswd(SysUserEntity user);
+	int updatePassword(SysUserEntity user);
 }

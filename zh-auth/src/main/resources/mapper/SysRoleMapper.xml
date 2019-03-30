@@ -56,7 +56,7 @@
 		)
 		VALUES (
 			#{roleName},
-			#{roleSign}, 
+			#{roleSign},
 			#{remark}, 
 			#{creatorId},
 			now()

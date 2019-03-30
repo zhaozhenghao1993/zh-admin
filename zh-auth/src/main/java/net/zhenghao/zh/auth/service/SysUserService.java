@@ -30,6 +30,8 @@ public interface SysUserService {
 	Page<SysUserEntity> listUser(Map<String, Object> params);
 
 	R getUserInfo(Long userId);
+
+	R profileUser(SysUserEntity user);
 	
 	R saveUser(SysUserEntity user);
 	
@@ -40,17 +42,15 @@ public interface SysUserService {
 	R removeUser(Long id);
 	
 	R batchRemove(Long[] id);
-	
-	R listUserButton(Long userId);
 
 	R listUserMenu(Long userId);
 
-	R updatePswdByUser(SysUserEntity user);
+	R updatePasswordByUser(SysUserEntity user);
 	
 	R updateUserEnable(Long[] id);
 	
 	R updateUserDisable(Long[] id);
 	
-	R updatePswd(SysUserEntity user);
+	R updatePassword(SysUserEntity user);
 	
 }

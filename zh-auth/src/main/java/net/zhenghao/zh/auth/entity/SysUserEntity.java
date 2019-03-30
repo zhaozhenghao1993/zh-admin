@@ -32,6 +32,11 @@ public class SysUserEntity implements Serializable {
 	private String password;
 
 	/**
+	 * 姓名
+	 */
+	private String name;
+
+	/**
 	 * 邮箱
 	 */
 	private String email;
@@ -112,6 +117,14 @@ public class SysUserEntity implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {

@@ -7,6 +7,7 @@
 		SELECT
 			user_id,
 			username,
+			`name`,
 			email,
 			mobile,
 			avatar,
@@ -19,7 +20,7 @@
 				AND creator_id = #{creatorId}
 			</if>
 			<if test="username != null and username.trim() != ''">
-				AND username LIKE concat('%',#{username},'%')
+				AND (username LIKE concat('%',#{username},'%') OR `name` LIKE concat('%',#{username},'%'))
 			</if>
 			<if test="status != null and status.trim() != ''">
 				AND status = #{status}
@@ -52,6 +53,7 @@
 			user_id,
 			username,
 			password,
+			`name`,
 			email,
 			mobile,
 			avatar,
@@ -77,6 +79,7 @@
 		INSERT INTO sys_user (
 			username,
 			password,
+			`name`,
 			email,
 			mobile,
 			avatar,
@@ -87,6 +90,7 @@
 		VALUES (
 			#{username},
 			#{password},
+			#{name},
 			#{email},
 			#{mobile},
 			#{avatar},
@@ -100,6 +104,7 @@
 		SELECT
 			user_id,
 			username,
+			`name`,
 			email,
 			mobile,
 			avatar,
@@ -113,7 +118,7 @@
 	<update id="update">
 		UPDATE sys_user
 		<set> 
-			<if test="username != null">username = #{username}, </if>
+			<if test="name != null">`name` = #{name}, </if>
 			<if test="email != null">email = #{email}, </if>
 			<if test="mobile != null">mobile = #{mobile}, </if>
 			<if test="avatar != null">avatar = #{avatar}, </if>
@@ -143,12 +148,12 @@
 		</foreach>
 	</delete>
 	
-	<update id="updatePswdByUser">
+	<update id="updatePasswordByUser">
 		UPDATE sys_user
 		SET
-			password = #{newPswd}
+			password = #{newPassword}
 		WHERE
-			user_id = #{userId} AND password = #{pswd}
+			user_id = #{userId} AND password = #{password}
 	</update>
 	
 	
@@ -164,7 +169,7 @@
 	</update>
 	
 	
-	<update id="updatePswd">
+	<update id="updatePassword">
 		UPDATE sys_user
 		SET
 			password = #{password}
