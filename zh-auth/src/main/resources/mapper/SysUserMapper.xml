@@ -108,6 +108,8 @@
 			email,
 			mobile,
 			avatar,
+			theme,
+			color,
 			status
 		FROM 
 			sys_user
@@ -173,6 +175,22 @@
 		UPDATE sys_user
 		SET
 			password = #{password}
+		WHERE
+			user_id = #{userId}
+	</update>
+
+	<update id="updateThemeByUserId">
+		UPDATE sys_user
+		SET
+			theme = #{theme}
+		WHERE
+			user_id = #{userId}
+	</update>
+
+	<update id="updateColorByUserId">
+		UPDATE sys_user
+		SET
+			color = #{color}
 		WHERE
 			user_id = #{userId}
 	</update>

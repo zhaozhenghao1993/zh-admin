@@ -57,6 +57,15 @@ public class SysUserEntity implements Serializable {
 	private Integer status;
 
 	/**
+	 * 个人主题，dark（默认）,light
+	 */
+	private String theme;
+
+	/**
+	 * 主题色: 1  薄暮  ,2  火山  ,3  日暮  ,4  明青  ,5  极光绿  ,6  拂晓蓝（默认）,7  极客蓝 ,8 酱紫
+	 */
+	private Integer color;
+	/**
 	 * 创建人id
 	 */
 	private Long creatorId;
@@ -149,6 +158,22 @@ public class SysUserEntity implements Serializable {
 
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+
+	public String getTheme() {
+		return theme;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
+
+	public Integer getColor() {
+		return color;
+	}
+
+	public void setColor(Integer color) {
+		this.color = color;
 	}
 
 	public Integer getStatus() {

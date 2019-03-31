@@ -42,6 +42,8 @@ public class FilterChainConfig {
         authFilterChainList.add(new SysPermissionEntity("/sys/user/info", "GET"));
         authFilterChainList.add(new SysPermissionEntity("/sys/user/profile", "PUT"));
         authFilterChainList.add(new SysPermissionEntity("/sys/user/profile/password", "PUT"));
+        authFilterChainList.add(new SysPermissionEntity("/sys/user/profile/theme", "PUT"));
+        authFilterChainList.add(new SysPermissionEntity("/sys/user/profile/color", "PUT"));
     }
 
     public List<SysPermissionEntity> getAnnoFilterChainList() {

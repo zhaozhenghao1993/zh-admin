@@ -198,4 +198,16 @@ public class SysUserServiceImpl implements SysUserService {
 		return CommonUtils.msg(count);
 	}
 
+	@Override
+	public R updateThemeByUserId(SysUserEntity user) {
+		int count = sysUserMapper.updateThemeByUserId(user);
+		return CommonUtils.msg(count);
+	}
+
+	@Override
+	public R updateColorByUserId(SysUserEntity user) {
+		int count = sysUserMapper.updateColorByUserId(user);
+		return CommonUtils.msg(count);
+	}
+
 }

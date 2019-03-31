@@ -52,5 +52,9 @@ public interface SysUserService {
 	R updateUserDisable(Long[] id);
 	
 	R updatePassword(SysUserEntity user);
-	
+
+	R updateThemeByUserId(SysUserEntity user);
+
+	R updateColorByUserId(SysUserEntity user);
+
 }

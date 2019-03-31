@@ -60,4 +60,18 @@ public interface SysUserMapper extends BaseMapper<SysUserEntity> {
 	 * @return
 	 */
 	int updatePassword(SysUserEntity user);
+
+	/**
+	 * 根据用户id修改主题
+	 * @param user
+	 * @return
+	 */
+	int updateThemeByUserId(SysUserEntity user);
+
+	/**
+	 * 根据用户id修改主题
+	 * @param user
+	 * @return
+	 */
+	int updateColorByUserId(SysUserEntity user);
 }

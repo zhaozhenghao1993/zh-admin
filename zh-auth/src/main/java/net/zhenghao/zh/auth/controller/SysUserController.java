@@ -78,6 +78,26 @@ public class SysUserController extends AbstractController {
 	}
 
 	/**
+	 * 更新当前用户主题
+	 * @return
+	 */
+	@PutMapping("/profile/theme")
+	public R theme(@RequestBody SysUserEntity user) {
+		user.setUserId(getUserId());
+		return sysUserService.updateThemeByUserId(user);
+	}
+
+	/**
+	 * 更新当前用户主题颜色
+	 * @return
+	 */
+	@PutMapping("/profile/color")
+	public R color(@RequestBody SysUserEntity user) {
+		user.setUserId(getUserId());
+		return sysUserService.updateColorByUserId(user);
+	}
+
+	/**
 	 * 获取用户信息列表
 	 * @return
 	 */
