@@ -29,6 +29,6 @@ public interface SysMenuService {
 
 	R remove(Long id);
 	
-	R batchRemove(Long[] id);
+	R batchRemove(Long[] ids);
 	
 }

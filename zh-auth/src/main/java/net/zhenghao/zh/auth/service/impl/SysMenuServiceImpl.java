@@ -2,7 +2,7 @@ package net.zhenghao.zh.auth.service.impl;
 
 import net.zhenghao.zh.auth.dao.SysMenuMapper;
 import net.zhenghao.zh.auth.dao.SysRoleMenuMapper;
-import net.zhenghao.zh.auth.vo.SysMenuVO;
+import net.zhenghao.zh.auth.vo.SysTreeVO;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.R;
@@ -45,10 +45,10 @@ public class SysMenuServiceImpl implements SysMenuService {
 
 	@Override
 	public R listTree(Map<String, Object> params) {
-		List<SysMenuVO> listRoot = new ArrayList<>();
+		List<SysTreeVO> listRoot = new ArrayList<>();
 		if (params.get("isNotButton") != null && "true".equals(params.get("isNotButton"))) {
-			List<SysMenuVO> menuList = sysMenuMapper.listTreeNotButton();
-			SysMenuVO root = new SysMenuVO();
+			List<SysTreeVO> menuList = sysMenuMapper.listTreeNotButton();
+			SysTreeVO root = new SysTreeVO();
 			root.setKey(0L);
 			root.setTitle("主目录");
 			root.setValue("0");

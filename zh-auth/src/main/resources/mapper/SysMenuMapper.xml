@@ -17,22 +17,22 @@
 					select="listParentId" />
 	</resultMap>
 
-	<resultMap id="MenuVoListNotButtonResult" type="SysMenuVO">
+	<resultMap id="MenuVoListNotButtonResult" type="SysTreeVO">
 		<id property="key" column="menu_id" />
 		<result property="parentId" column="parent_id" />
 		<result property="value" column="menu_id" />
 		<result property="title" column="name" />
-		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.auth.vo.SysMenuVO" column="menu_id"
-					select="listTreeNotButtonParentId" />
+		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.auth.vo.SysTreeVO" column="menu_id"
+                    select="listTreeNotButtonParentId" />
 	</resultMap>
 
-	<resultMap id="MenuVoListResult" type="SysMenuVO">
+	<resultMap id="MenuVoListResult" type="SysTreeVO">
 		<id property="key" column="menu_id" />
 		<result property="parentId" column="parent_id" />
 		<result property="value" column="menu_id" />
 		<result property="title" column="name" />
-		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.auth.vo.SysMenuVO" column="menu_id"
-					select="listTreeParentId" />
+		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.auth.vo.SysTreeVO" column="menu_id"
+                    select="listTreeParentId" />
 	</resultMap>
 
 	<select id="list" resultMap="MenuListResult">

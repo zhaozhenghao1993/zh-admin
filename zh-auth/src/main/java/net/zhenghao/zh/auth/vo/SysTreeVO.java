@@ -11,10 +11,10 @@ import java.util.List;
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
  * @date :2019/03/23 14:50
- * SysMenuVO.java
+ * SysTreeVO.java
  */
 
-public class SysMenuVO implements Serializable {
+public class SysTreeVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,7 +26,7 @@ public class SysMenuVO implements Serializable {
 
     private String title;
 
-    private List<SysMenuVO> children;
+    private List<SysTreeVO> children;
 
     public Long getKey() {
         return key;
@@ -60,11 +60,11 @@ public class SysMenuVO implements Serializable {
         this.title = title;
     }
 
-    public List<SysMenuVO> getChildren() {
+    public List<SysTreeVO> getChildren() {
         return children;
     }
 
-    public void setChildren(List<SysMenuVO> children) {
+    public void setChildren(List<SysTreeVO> children) {
         this.children = children;
     }
 }

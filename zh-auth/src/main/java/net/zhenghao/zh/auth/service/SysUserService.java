@@ -41,15 +41,15 @@ public interface SysUserService {
 
 	R removeUser(Long id);
 	
-	R batchRemove(Long[] id);
+	R batchRemove(Long[] ids);
 
 	R listUserMenu(Long userId);
 
 	R updatePasswordByUser(SysUserEntity user);
 	
-	R updateUserEnable(Long[] id);
+	R updateUserEnable(Long[] ids);
 	
-	R updateUserDisable(Long[] id);
+	R updateUserDisable(Long[] ids);
 	
 	R updatePassword(SysUserEntity user);
 

@@ -27,7 +27,7 @@ public interface SysRoleService {
 
 	R removeRole(Long id);
 	
-	R batchRemove(Long[] id);
+	R batchRemove(Long[] ids);
 	
 	R listRole();
 	
