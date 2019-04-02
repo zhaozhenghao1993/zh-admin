@@ -46,6 +46,13 @@ public class SysOrgServiceImpl implements SysOrgService {
 
 	@Override
 	public R saveOrg(SysOrgEntity org) {
+		SysOrgEntity orgParent = sysOrgMapper.getObjectById(org.getParentId());
+		if (orgParent != null) {
+			String ancestors = orgParent.getAncestors() + "," + orgParent.getOrgId();
+			org.setAncestors(ancestors);
+		} else {
+			org.setAncestors(orgParent.getOrgId() + "");
+		}
 		int count = sysOrgMapper.save(org);
 		return CommonUtils.msg(count);
 	}
@@ -58,6 +65,13 @@ public class SysOrgServiceImpl implements SysOrgService {
 
 	@Override
 	public R updateOrg(SysOrgEntity org) {
+		SysOrgEntity orgParent = sysOrgMapper.getObjectById(org.getParentId());
+		if (orgParent != null) {
+			String ancestors = orgParent.getAncestors() + "," + orgParent.getOrgId();
+			org.setAncestors(ancestors);
+		} else {
+			org.setAncestors(orgParent.getOrgId() + "");
+		}
 		int count = sysOrgMapper.update(org);
 		return CommonUtils.msg(count);
 	}
@@ -66,7 +80,7 @@ public class SysOrgServiceImpl implements SysOrgService {
 	public R remove(Long id) {
 		int childCount = sysOrgMapper.getChildCountByOrgId(id);
 		if (childCount > 0) {
-			return R.error("该菜单含有子组织,请先删除子组织!");
+			return R.error("该组织含有子组织,请先删除子组织!");
 		}
 		int count = sysOrgMapper.remove(id);
 		return CommonUtils.msg(count);
