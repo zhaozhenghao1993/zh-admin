@@ -34,7 +34,7 @@ public class Page<T> {
 	/**
 	 * 总条数
 	 */
-	protected int total;
+	protected int totalCount;
 	
 	/**
 	 * 总页数
@@ -101,8 +101,8 @@ public class Page<T> {
     /**
      * 取得总记录数, 默认值为-1.
      */
-    public int getTotal() {
-        return total;
+    public int getTotalCount() {
+        return totalCount;
     }
     
     /**
@@ -111,10 +111,10 @@ public class Page<T> {
     public void setTotal(List<T> data) {
 		this.data = data;
 		if (data instanceof com.github.pagehelper.Page) {
-			this.total = (int)((com.github.pagehelper.Page)data).getTotal();
+			this.totalCount = (int)((com.github.pagehelper.Page)data).getTotal();
 			this.totalPages = ((com.github.pagehelper.Page)data).getPages();
 		} else {
-			this.total = data.size();
+			this.totalCount = data.size();
 			this.totalPages = 1;
 		}
     }
@@ -123,11 +123,11 @@ public class Page<T> {
      * 根据pageSize与total计算总页数, 默认值为-1.
      */
     public int getTotalPages(){
-    	if (total < 0) {
+    	if (totalCount < 0) {
 			return -1;
 		}
-    	int pages = total / pageSize;
-    	return total % pageSize > 0 ? ++pages : pages;
+    	int pages = totalCount / pageSize;
+    	return totalCount % pageSize > 0 ? ++pages : pages;
     }
     
     public void setTotalPages(int totalPages) {
