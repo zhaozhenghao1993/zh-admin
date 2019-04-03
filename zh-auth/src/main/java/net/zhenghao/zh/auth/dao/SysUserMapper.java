@@ -28,6 +28,13 @@ public interface SysUserMapper extends BaseMapper<SysUserEntity> {
 	int getCountByUserName(String username);
 
 	/**
+	 * 根据 orgId 获取 SysUserEntity 数量
+	 * @param orgId
+	 * @return
+	 */
+	int getCountByOrgId(Long orgId);
+
+	/**
 	 * 根据 username 获取 SysUserEntity
 	 * @param username
 	 * @return

@@ -22,6 +22,11 @@ public class SysUserEntity implements Serializable {
 	private Long userId;
 
 	/**
+	 * 组织id
+	 */
+	private Long orgId;
+
+	/**
 	 * 用户名
 	 */
 	private String username;

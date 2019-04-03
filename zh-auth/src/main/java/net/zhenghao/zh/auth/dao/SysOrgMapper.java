@@ -3,6 +3,7 @@ package net.zhenghao.zh.auth.dao;
 import net.zhenghao.zh.auth.entity.SysOrgEntity;
 import net.zhenghao.zh.auth.vo.SysTreeVO;
 import net.zhenghao.zh.common.dao.BaseMapper;
+import net.zhenghao.zh.common.entity.Query;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.stereotype.Component;
 
@@ -31,5 +32,12 @@ public interface SysOrgMapper extends BaseMapper<SysOrgEntity>{
 	 * @return
 	 */
 	int getChildCountByOrgId(Long orgId);
+
+	/**
+	 * 更新组织parentId时，需一同更新所有子组织的祖级列表
+	 * @param query
+	 * @return
+	 */
+	int updateChildAncestorsById(Query query);
 	
 }

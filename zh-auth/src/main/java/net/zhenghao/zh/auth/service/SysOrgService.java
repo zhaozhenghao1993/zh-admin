@@ -18,7 +18,7 @@ public interface SysOrgService {
 	
 	Page<SysOrgEntity> listOrg(Map<String, Object> params);
 	
-	R listTree();
+	R listTree(Map<String, Object> params);
 	
 	R saveOrg(SysOrgEntity org);
 

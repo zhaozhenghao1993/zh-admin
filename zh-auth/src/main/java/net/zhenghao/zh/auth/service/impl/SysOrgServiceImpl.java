@@ -1,6 +1,7 @@
 package net.zhenghao.zh.auth.service.impl;
 
 import net.zhenghao.zh.auth.dao.SysOrgMapper;
+import net.zhenghao.zh.auth.dao.SysUserMapper;
 import net.zhenghao.zh.auth.entity.SysOrgEntity;
 import net.zhenghao.zh.auth.service.SysOrgService;
 import net.zhenghao.zh.auth.vo.SysTreeVO;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +32,9 @@ public class SysOrgServiceImpl implements SysOrgService {
 	@Autowired
 	private SysOrgMapper sysOrgMapper;
 
+	@Autowired
+	private SysUserMapper sysUserMapper;
+
 	@Override
 	public Page<SysOrgEntity> listOrg(Map<String, Object> params) {
 		Query query = new Query(params);
@@ -39,20 +44,33 @@ public class SysOrgServiceImpl implements SysOrgService {
 	}
 
 	@Override
-	public R listTree() {
-		List<SysTreeVO> list = sysOrgMapper.listTree();
-		return CommonUtils.msgNotNull(list);
+	public R listTree(Map<String, Object> params) {
+		List<SysTreeVO> listRoot = new ArrayList<>();
+		if (params.get("isRoot") != null && "true".equals(params.get("isRoot"))) {
+			List<SysTreeVO> menuList = sysOrgMapper.listTree();
+			SysTreeVO root = new SysTreeVO();
+			root.setKey(0L);
+			root.setTitle("主目录");
+			root.setValue("0");
+			root.setParentId("-1");
+			root.setChildren(menuList);
+			listRoot.add(root);
+		} else {
+			listRoot = sysOrgMapper.listTree();
+		}
+		return CommonUtils.msgNotNull(listRoot);
 	}
 
 	@Override
 	public R saveOrg(SysOrgEntity org) {
 		SysOrgEntity orgParent = sysOrgMapper.getObjectById(org.getParentId());
+		String ancestors;
 		if (orgParent != null) {
-			String ancestors = orgParent.getAncestors() + "," + orgParent.getOrgId();
-			org.setAncestors(ancestors);
+			ancestors = orgParent.getAncestors() + "," + orgParent.getOrgId();
 		} else {
-			org.setAncestors(orgParent.getOrgId() + "");
+			ancestors = org.getParentId() + "";
 		}
+		org.setAncestors(ancestors);
 		int count = sysOrgMapper.save(org);
 		return CommonUtils.msg(count);
 	}
@@ -65,12 +83,23 @@ public class SysOrgServiceImpl implements SysOrgService {
 
 	@Override
 	public R updateOrg(SysOrgEntity org) {
-		SysOrgEntity orgParent = sysOrgMapper.getObjectById(org.getParentId());
-		if (orgParent != null) {
-			String ancestors = orgParent.getAncestors() + "," + orgParent.getOrgId();
+		SysOrgEntity oldOrg = sysOrgMapper.getObjectById(org.getOrgId());
+		// 更新前先对比和之前的parentId是否有不同，如果不同则开始处理
+		if (org.getParentId() != oldOrg.getParentId()) {
+			String ancestors;
+			SysOrgEntity orgParent = sysOrgMapper.getObjectById(org.getParentId());
+			if (orgParent != null) {
+				ancestors = orgParent.getAncestors() + "," + orgParent.getOrgId();
+			} else {
+				ancestors = org.getParentId() + "";
+			}
 			org.setAncestors(ancestors);
-		} else {
-			org.setAncestors(orgParent.getOrgId() + "");
+			// 更新所有子列表的 ancestors 字段
+			Query query = new Query();
+			query.put("oldAncestors", oldOrg.getAncestors());
+			query.put("newAncestors", ancestors);
+			query.put("orgId", org.getOrgId());
+			sysOrgMapper.updateChildAncestorsById(query);
 		}
 		int count = sysOrgMapper.update(org);
 		return CommonUtils.msg(count);
@@ -81,6 +110,10 @@ public class SysOrgServiceImpl implements SysOrgService {
 		int childCount = sysOrgMapper.getChildCountByOrgId(id);
 		if (childCount > 0) {
 			return R.error("该组织含有子组织,请先删除子组织!");
+		}
+		int userCount = sysUserMapper.getCountByOrgId(id);
+		if (userCount > 0) {
+			return R.error("该组织含有用户,请先处理组织下的用户!");
 		}
 		int count = sysOrgMapper.remove(id);
 		return CommonUtils.msg(count);

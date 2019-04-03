@@ -18,7 +18,7 @@
 		<id property="key" column="org_id" />
 		<result property="parentId" column="parent_id" />
 		<result property="value" column="org_id" />
-		<result property="title" column="name" />
+		<result property="title" column="org_name" />
 		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.auth.vo.SysTreeVO" column="org_id"
                     select="listTreeParentId" />
 	</resultMap>
@@ -27,6 +27,7 @@
 		SELECT
 			o.org_id,
 			o.parent_id,
+			o.ancestors,
 			o.org_name,
 			o.order_num,
 			o.create_time
@@ -42,6 +43,7 @@
 		SELECT
 			o.org_id,
 			o.parent_id,
+			o.ancestors,
 			o.org_name,
 			o.order_num,
 			o.create_time
@@ -79,7 +81,7 @@
 			o.order_num ASC
 	</select>
 
-	<select id="getChildCountByMenuId" resultType="java.lang.Integer">
+	<select id="getChildCountByOrgId" resultType="java.lang.Integer">
 		SELECT
 			COUNT(1)
 		FROM
@@ -107,7 +109,7 @@
 		)
 	</insert>
 
-	<select id="getObjectById" resultType="SysMenuEntity">
+	<select id="getObjectById" resultType="SysOrgEntity">
 		SELECT
 			org_id,
 			parent_id,
@@ -132,6 +134,14 @@
 			modified_time = NOW()
 		</set>
 		where org_id = #{orgId}
+	</update>
+
+	<update id="updateChildAncestorsById">
+		UPDATE sys_org
+		<set>
+			ancestors = replace (ancestors, #{oldAncestors}, #{newAncestors})
+		</set>
+		where FIND_IN_SET (#{orgId}, ancestors)
 	</update>
 
 	<delete id="remove">

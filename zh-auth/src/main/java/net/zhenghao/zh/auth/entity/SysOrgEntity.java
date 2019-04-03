@@ -27,7 +27,7 @@ public class SysOrgEntity implements Serializable {
 	private Long parentId;
 
 	/**
-	 * 组级列表
+	 * 祖级列表
 	 */
 	private String ancestors;
 

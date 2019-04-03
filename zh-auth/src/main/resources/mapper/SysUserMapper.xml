@@ -47,6 +47,15 @@
 		WHERE
 			username = #{username}
 	</select>
+
+	<select id="getCountByOrgId" resultType="java.lang.Integer">
+		  SELECT
+			COUNT(1)
+		FROM
+			sys_user
+		WHERE
+			org_id = #{orgId}
+	</select>
 	
 	<select id="getByUserName" resultType="SysUserEntity">
 		SELECT

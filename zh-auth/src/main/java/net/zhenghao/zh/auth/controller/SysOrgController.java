@@ -52,7 +52,7 @@ public class SysOrgController extends AbstractController {
 	 */
 	@GetMapping("/tree")
 	public R select(@RequestParam Map<String, Object> params) {
-		return sysOrgService.listTree();
+		return sysOrgService.listTree(params);
 	}
 	
 	/**
