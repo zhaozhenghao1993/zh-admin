@@ -6,6 +6,7 @@
 	<select id="listForPage" resultType="SysUserEntity" flushCache="true">
 		SELECT
 			user_id,
+			org_id,
 			username,
 			`name`,
 			email,
@@ -24,6 +25,9 @@
 			</if>
 			<if test="status != null and status.trim() != ''">
 				AND status = #{status}
+			</if>
+			<if test="orgId != null and orgId != 0">
+				AND (org_id = #{orgId} OR org_id IN ( SELECT o.org_id FROM sys_org o WHERE FIND_IN_SET (#{orgId}, ancestors) ))
 			</if>
 		</where>
 		<choose>
@@ -49,7 +53,7 @@
 	</select>
 
 	<select id="getCountByOrgId" resultType="java.lang.Integer">
-		  SELECT
+		SELECT
 			COUNT(1)
 		FROM
 			sys_user
@@ -60,6 +64,7 @@
 	<select id="getByUserName" resultType="SysUserEntity">
 		SELECT
 			user_id,
+			org_id,
 			username,
 			password,
 			`name`,
@@ -86,6 +91,7 @@
 
 	<insert id="save" parameterType="SysUserEntity" useGeneratedKeys="true" keyProperty="userId">
 		INSERT INTO sys_user (
+			org_id,
 			username,
 			password,
 			`name`,
@@ -97,6 +103,7 @@
 			create_time
 		)
 		VALUES (
+			#{orgId,},
 			#{username},
 			#{password},
 			#{name},
@@ -112,6 +119,7 @@
 	<select id="getObjectById" resultType="SysUserEntity">
 		SELECT
 			user_id,
+			org_id,
 			username,
 			`name`,
 			email,
@@ -129,6 +137,7 @@
 	<update id="update">
 		UPDATE sys_user
 		<set> 
+			<if test="orgId != null">org_id = #{orgId}, </if>
 			<if test="name != null">`name` = #{name}, </if>
 			<if test="email != null">email = #{email}, </if>
 			<if test="mobile != null">mobile = #{mobile}, </if>

@@ -117,6 +117,14 @@ public class SysUserEntity implements Serializable {
 		this.userId = userId;
 	}
 
+	public Long getOrgId() {
+		return orgId;
+	}
+
+	public void setOrgId(Long orgId) {
+		this.orgId = orgId;
+	}
+
 	public String getUsername() {
 		return username;
 	}
