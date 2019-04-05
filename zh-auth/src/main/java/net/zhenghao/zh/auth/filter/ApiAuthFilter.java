@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -39,7 +38,6 @@ import java.io.IOException;
  */
 @Order(1)
 @WebFilter(filterName = "ApiAuthFilter", urlPatterns = "/*")
-@Component
 public class ApiAuthFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(ApiAuthFilter.class);

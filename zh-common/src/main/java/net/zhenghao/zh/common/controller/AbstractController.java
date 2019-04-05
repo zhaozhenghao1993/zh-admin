@@ -1,8 +1,6 @@
 package net.zhenghao.zh.common.controller;
 
 import net.zhenghao.zh.common.context.BaseContextHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Controller公共组件
@@ -13,8 +11,6 @@ import org.slf4j.LoggerFactory;
  * AbstractController.java
  */
 public abstract class AbstractController {
-
-	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * 获取当前请求token的用户id

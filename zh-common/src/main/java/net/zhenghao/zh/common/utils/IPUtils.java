@@ -19,7 +19,7 @@ public class IPUtils {
 	private IPUtils() {
 	}
 
-	private static Logger logger = LoggerFactory.getLogger(IPUtils.class);
+	private static final Logger logger = LoggerFactory.getLogger(IPUtils.class);
 	
 	/**
 	 * 获取IP地址

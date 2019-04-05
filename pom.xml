@@ -12,6 +12,7 @@
       <module>zh-main</module>
       <module>zh-common</module>
       <module>zh-auth</module>
+      <module>zh-monitor</module>
   </modules>
 
   <name>zh-admin</name>
