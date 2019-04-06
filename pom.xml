@@ -65,9 +65,9 @@
     <joda.version>2.10.1</joda.version>
     <shiro.version>1.4.0</shiro.version>
     <commons.version>3.8.1</commons.version>
-    <httpclient.version>4.5.5</httpclient.version>
     <mybatis-ehcache.version>1.0.0</mybatis-ehcache.version>
     <ehcache.version>2.10.4</ehcache.version>
+    <oshi.version>3.13.0</oshi.version>
   </properties>
 
   <dependencies>
@@ -133,24 +133,6 @@
       <artifactId>spring-boot-starter-data-redis</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>com.auth0</groupId>
-      <artifactId>java-jwt</artifactId>
-      <version>${jwt.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt</artifactId>
-      <version>${jjwt.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>joda-time</groupId>
-      <artifactId>joda-time</artifactId>
-      <version>${joda.version}</version>
-    </dependency>
-
     <!--shiro-->
     <dependency>
       <groupId>org.apache.shiro</groupId>
@@ -170,13 +152,6 @@
       <version>${commons.version}</version>
     </dependency>
 
-    <!-- http连接修改为httpclient -->
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-      <version>${httpclient.version}</version>
-    </dependency>
-
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -184,5 +159,33 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.auth0</groupId>
+        <artifactId>java-jwt</artifactId>
+        <version>${jwt.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt</artifactId>
+        <version>${jjwt.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>joda-time</groupId>
+        <artifactId>joda-time</artifactId>
+        <version>${joda.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.oshi</groupId>
+        <artifactId>oshi-core</artifactId>
+        <version>${oshi.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
 </project>
