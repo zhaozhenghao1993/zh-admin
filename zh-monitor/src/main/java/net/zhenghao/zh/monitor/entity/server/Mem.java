@@ -31,7 +31,7 @@ public class Mem {
     /**
      * JVM空闲内存使用率(M)
      */
-    private int usedPercent;
+    private Integer usedPercent;
 
     public String getTotal() {
         return total;
@@ -57,11 +57,11 @@ public class Mem {
         this.free = free;
     }
 
-    public int getUsedPercent() {
+    public Integer getUsedPercent() {
         return usedPercent;
     }
 
-    public void setUsedPercent(int usedPercent) {
+    public void setUsedPercent(Integer usedPercent) {
         this.usedPercent = usedPercent;
     }
 }

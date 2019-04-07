@@ -16,7 +16,7 @@ public class SysDisk {
     /**
      * 盘符路径
      */
-    private String diskName;
+    private String dirName;
 
     /**
      * 盘符类型
@@ -46,14 +46,14 @@ public class SysDisk {
     /**
      * 资源的使用率
      */
-    private int usedPercent;
+    private String usedPercent;
 
-    public String getDiskName() {
-        return diskName;
+    public String getDirName() {
+        return dirName;
     }
 
-    public void setDiskName(String diskName) {
-        this.diskName = diskName;
+    public void setDirName(String dirName) {
+        this.dirName = dirName;
     }
 
     public String getDiskType() {
@@ -96,11 +96,11 @@ public class SysDisk {
         this.used = used;
     }
 
-    public int getUsedPercent() {
+    public String getUsedPercent() {
         return usedPercent;
     }
 
-    public void setUsedPercent(int usedPercent) {
+    public void setUsedPercent(String usedPercent) {
         this.usedPercent = usedPercent;
     }
 }

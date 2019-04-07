@@ -38,7 +38,7 @@ public class Jvm {
     /**
      * JVM空闲内存使用率(M)
      */
-    private int usedPercent;
+    private Integer usedPercent;
 
     /**
      * JDK版本
@@ -49,6 +49,11 @@ public class Jvm {
      * JDK路径
      */
     private String home;
+
+    /**
+     * Java名称
+     */
+    private String name;
 
     public String getTotal() {
         return total;
@@ -82,11 +87,11 @@ public class Jvm {
         this.used = used;
     }
 
-    public int getUsedPercent() {
+    public Integer getUsedPercent() {
         return usedPercent;
     }
 
-    public void setUsedPercent(int usedPercent) {
+    public void setUsedPercent(Integer usedPercent) {
         this.usedPercent = usedPercent;
     }
 
@@ -104,6 +109,14 @@ public class Jvm {
 
     public void setHome(String home) {
         this.home = home;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**

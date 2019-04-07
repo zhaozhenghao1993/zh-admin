@@ -1,9 +1,18 @@
 package net.zhenghao.zh.monitor.entity;
 
+import net.zhenghao.zh.common.utils.DataHandleUtils;
+import net.zhenghao.zh.common.utils.FileUtils;
+import net.zhenghao.zh.common.utils.IPUtils;
 import net.zhenghao.zh.monitor.entity.server.App;
 import net.zhenghao.zh.monitor.entity.server.Jvm;
 import net.zhenghao.zh.monitor.entity.server.Sys;
 import net.zhenghao.zh.monitor.entity.server.SysDisk;
+import oshi.SystemInfo;
+import oshi.hardware.HardwareAbstractionLayer;
+import oshi.software.os.FileSystem;
+import oshi.software.os.OSFileStore;
+import oshi.software.os.OperatingSystem;
+import oshi.software.os.windows.WindowsOperatingSystem;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +30,8 @@ import java.util.Properties;
  */
 
 public class ServerBaseEntity {
+
+    private static SystemInfo systemInfo = new SystemInfo();
 
     /**
      * JVM相关信息
@@ -74,11 +85,19 @@ public class ServerBaseEntity {
         this.sysDisks = sysDisks;
     }
 
+    public void init() {
+        Properties props = System.getProperties();
+        setJvmInfo(props);
+        setSysInfo(props);
+        setAppInfo(props);
+        setSysFiles(systemInfo.getOperatingSystem());
+    }
+
     /**
      * 设置Java虚拟机
      */
-    private void setJvmInfo() {
-        Properties props = System.getProperties();
+    private void setJvmInfo(Properties props) {
+        jvm.setName(props.getProperty("java.vm.name"));
         jvm.setVersion(props.getProperty("java.version"));
         jvm.setHome(props.getProperty("java.home"));
     }
@@ -86,13 +105,44 @@ public class ServerBaseEntity {
     /**
      * 设置服务器信息
      */
-    private void setSysInfo()
-    {
-        Properties props = System.getProperties();
-        /*sys.setComputerName(IpUtils.getHostName());
-        sys.setComputerIp(IpUtils.getHostIp());
+    private void setSysInfo(Properties props) {
+        sys.setServerName(IPUtils.getHostName());
+        sys.setServerIp(IPUtils.getHostIp());
         sys.setOsName(props.getProperty("os.name"));
         sys.setOsArch(props.getProperty("os.arch"));
-        sys.setUserDir(props.getProperty("user.dir"));*/
+    }
+
+    /**
+     * 设置App应用信息
+     */
+    private void setAppInfo(Properties props) {
+        app.setAppDir(props.getProperty("user.dir"));
+    }
+
+    /**
+     * 设置磁盘信息
+     */
+    private void setSysFiles(OperatingSystem os) {
+        FileSystem fileSystem = os.getFileSystem();
+        OSFileStore[] fsArray = fileSystem.getFileStores();
+        for (OSFileStore fs : fsArray) {
+            long free = fs.getUsableSpace();
+            long total = fs.getTotalSpace();
+            long used = total - free;
+            SysDisk sysDisk = new SysDisk();
+            sysDisk.setDirName(fs.getMount());
+            sysDisk.setDiskType(fs.getType());
+            sysDisk.setFileSystem(fs.getName());
+            sysDisk.setTotal(FileUtils.convertFileSize(total));
+            sysDisk.setFree(FileUtils.convertFileSize(free));
+            sysDisk.setUsed(FileUtils.convertFileSize(used));
+            int percent = 0;
+            try {
+                percent = Integer.parseInt(DataHandleUtils.accuracy(used, total, 0));
+            } catch (NumberFormatException e) {
+            }
+            sysDisk.setUsedPercent(percent + "%");
+            sysDisks.add(sysDisk);
+        }
     }
 }

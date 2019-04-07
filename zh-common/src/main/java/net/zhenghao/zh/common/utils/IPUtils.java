@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 /**
  * IP地址
@@ -58,7 +60,6 @@ public class IPUtils {
 		}
 		
 		//使用代理,则获取第一个IP地址
-		//isNotEmpty  =>  原作者是isEmpty  感觉有问题
 		if (StringUtils.isNotEmpty(ip) && ip.length() > maxLength) {
 			int idx = ip.indexOf(seperator);
 			if (idx > 0) {
@@ -76,5 +77,31 @@ public class IPUtils {
 	public static String getIpAddr() {
 		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
 		return getIpAddr(request);
+	}
+
+	/**
+	 * 获取服务器内网IP
+	 * @return
+	 */
+	public static String getHostIp() {
+		try {
+			return InetAddress.getLocalHost().getHostAddress();
+		}
+		catch (UnknownHostException e) {
+		}
+		return "127.0.0.1";
+	}
+
+	/**
+	 * 获取服务器内网名称
+	 * @return
+	 */
+	public static String getHostName() {
+		try {
+			return InetAddress.getLocalHost().getHostName();
+		}
+		catch (UnknownHostException e) {
+		}
+		return "未知";
 	}
 }

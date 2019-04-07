@@ -27,4 +27,28 @@ public class App {
      * 上传文件路径
      */
     private String uploadDir;
+
+    public String getAppDir() {
+        return appDir;
+    }
+
+    public void setAppDir(String appDir) {
+        this.appDir = appDir;
+    }
+
+    public String getLogDir() {
+        return logDir;
+    }
+
+    public void setLogDir(String logDir) {
+        this.logDir = logDir;
+    }
+
+    public String getUploadDir() {
+        return uploadDir;
+    }
+
+    public void setUploadDir(String uploadDir) {
+        this.uploadDir = uploadDir;
+    }
 }

@@ -67,7 +67,7 @@
     <commons.version>3.8.1</commons.version>
     <mybatis-ehcache.version>1.0.0</mybatis-ehcache.version>
     <ehcache.version>2.10.4</ehcache.version>
-    <oshi.version>3.13.0</oshi.version>
+    <oshi.version>3.9.1</oshi.version>
   </properties>
 
   <dependencies>

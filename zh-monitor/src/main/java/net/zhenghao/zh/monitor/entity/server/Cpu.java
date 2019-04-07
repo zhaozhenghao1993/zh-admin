@@ -16,52 +16,26 @@ public class Cpu {
     /**
      * 核心数
      */
-    private int cpuNum;
-
-    /**
-     * CPU总的使用率
-     */
-    private int totalPercent;
-
-    /**
-     * CPU系统使用率
-     */
-    private int sysPercent;
+    private Integer cpuNum;
 
     /**
      * CPU用户使用率
      */
-    private int usedPercent;
+    private Integer usedPercent;
 
-    public int getCpuNum() {
+    public Integer getCpuNum() {
         return cpuNum;
     }
 
-    public void setCpuNum(int cpuNum) {
+    public void setCpuNum(Integer cpuNum) {
         this.cpuNum = cpuNum;
     }
 
-    public int getTotalPercent() {
-        return totalPercent;
-    }
-
-    public void setTotalPercent(int totalPercent) {
-        this.totalPercent = totalPercent;
-    }
-
-    public int getSysPercent() {
-        return sysPercent;
-    }
-
-    public void setSysPercent(int sysPercent) {
-        this.sysPercent = sysPercent;
-    }
-
-    public int getUsedPercent() {
+    public Integer getUsedPercent() {
         return usedPercent;
     }
 
-    public void setUsedPercent(int usedPercent) {
+    public void setUsedPercent(Integer usedPercent) {
         this.usedPercent = usedPercent;
     }
 }
