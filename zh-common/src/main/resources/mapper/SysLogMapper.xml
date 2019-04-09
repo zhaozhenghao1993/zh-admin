@@ -14,10 +14,12 @@
 			method,
 			params,
 			ip,
+			browser,
+			os,
 			result,
 			remark,
 			type,
-			gmt_create
+			create_time
 		FROM
 			sys_log
 		<where>
@@ -25,15 +27,17 @@
 				type = #{type}
 			</if>
 			<if test=" startDate != null and startDate != '' and endDate != null and endDate != '' ">
-				AND DATE_FORMAT( gmt_create, '%Y-%m-%d') BETWEEN #{startDate} AND #{endDate}
+				AND DATE_FORMAT(create_time, '%Y-%m-%d') BETWEEN #{startDate} AND #{endDate}
 			</if>
 			<if test="username != null and username.trim() != ''">
 				AND username LIKE concat('%',#{username},'%')
-				OR operation LIKE concat('%',#{username},'%')
+			</if>
+			<if test="operation != null and operation.trim() != ''">
+				AND operation LIKE concat('%',#{operation},'%')
 			</if>
 		</where>
 		ORDER BY
-			gmt_create DESC
+			create_time DESC
 	</select>
 	
 	<insert id="save">
@@ -45,10 +49,12 @@
 			method,
 			params,
 			ip,
+			browser,
+			os,
 			result,
 			remark,
 			type,
-			gmt_create
+			create_time
 		)
 		VALUES (
 			#{userId},
@@ -58,6 +64,8 @@
 			#{method}, 
 			#{params}, 
 			#{ip}, 
+			#{browser},
+			#{os},
 			#{result},
 			#{remark},
 			#{type},

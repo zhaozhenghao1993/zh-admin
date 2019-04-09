@@ -73,12 +73,7 @@ public class SystemConstant {
 		/**
 		 * 授权日志
 		 */
-		AUTHORIZATION(5),
-
-		/**
-		 * 微信日志
-		 */
-		WECHAT(6);
+		AUTHORIZATION(5);
 		
 		private int value;
 		

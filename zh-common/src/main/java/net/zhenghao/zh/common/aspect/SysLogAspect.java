@@ -1,5 +1,6 @@
 package net.zhenghao.zh.common.aspect;
 
+import eu.bitwalker.useragentutils.UserAgent;
 import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.context.BaseContextHandler;
@@ -67,15 +68,14 @@ public class SysLogAspect {
 		sysLog.setMethod(className + "." + methodName + "()");
 		//请求的参数
 		Object[] args = joinPoint.getArgs();
-		try{
-			String params = JSONUtils.objToString(args[0]);
-			sysLog.setParams(params);
-		}catch (Exception e){
-
-		}
+		String params = JSONUtils.objToString(args[0]);
+		sysLog.setParams(params);
 		
-		//设置IP地址
+		//设置IP地址 浏览器 操作系统
+		UserAgent userAgent = IPUtils.getUserAgent();
 		sysLog.setIp(IPUtils.getIpAddr());
+		sysLog.setBrowser(userAgent.getBrowser().getName());
+		sysLog.setOs(userAgent.getOperatingSystem().getName());
 
 		//用户名
 		sysLog.setUserId(BaseContextHandler.getUserId());
@@ -124,15 +124,14 @@ public class SysLogAspect {
 		sysLog.setMethod(className + "." + methodName + "()");
 		//请求的参数
 		Object[] args = joinPoint.getArgs();
-		try {
-			String params = JSONUtils.objToString(args[0]);
-			sysLog.setParams(params);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-		//设置IP地址
+		String params = JSONUtils.objToString(args[0]);
+		sysLog.setParams(params);
+
+		//设置IP地址 浏览器 操作系统
+		UserAgent userAgent = IPUtils.getUserAgent();
 		sysLog.setIp(IPUtils.getIpAddr());
+		sysLog.setBrowser(userAgent.getBrowser().getName());
+		sysLog.setOs(userAgent.getOperatingSystem().getName());
 		
 		//用户名
 		sysLog.setUserId(BaseContextHandler.getUserId());

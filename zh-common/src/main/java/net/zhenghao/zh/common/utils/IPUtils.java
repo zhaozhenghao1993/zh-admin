@@ -1,5 +1,6 @@
 package net.zhenghao.zh.common.utils;
 
+import eu.bitwalker.useragentutils.UserAgent;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,6 +78,19 @@ public class IPUtils {
 	public static String getIpAddr() {
 		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
 		return getIpAddr(request);
+	}
+
+	/**
+	 * 获取请求 Header 'User-Agent'
+	 * 操作系统和浏览器
+	 * // 获取客户端操作系统
+	 * String os = userAgent.getOperatingSystem().getName();
+	 * // 获取客户端浏览器
+	 * String browser = userAgent.getBrowser().getName();
+	 * @return
+	 */
+	public static UserAgent getUserAgent() {
+		return UserAgent.parseUserAgentString(HttpContextUtils.getHttpServletRequest().getHeader("User-Agent"));
 	}
 
 	/**

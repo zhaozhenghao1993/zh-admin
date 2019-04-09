@@ -68,6 +68,7 @@
     <mybatis-ehcache.version>1.0.0</mybatis-ehcache.version>
     <ehcache.version>2.10.4</ehcache.version>
     <oshi.version>3.9.1</oshi.version>
+    <bitwalker.version>1.19</bitwalker.version>
   </properties>
 
   <dependencies>
@@ -184,6 +185,13 @@
         <groupId>com.github.oshi</groupId>
         <artifactId>oshi-core</artifactId>
         <version>${oshi.version}</version>
+      </dependency>
+
+      <!-- 解析客户端操作系统、浏览器等 -->
+      <dependency>
+        <groupId>eu.bitwalker</groupId>
+        <artifactId>UserAgentUtils</artifactId>
+        <version>${bitwalker.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

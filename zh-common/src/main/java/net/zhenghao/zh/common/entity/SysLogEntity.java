@@ -56,12 +56,22 @@ public class SysLogEntity implements Serializable{
 	private Long time;
 	
 	/**
-	 * 操作ip地址
+	 * 操作方ip地址
 	 */
 	private String ip;
+
+	/**
+	 * 操作方浏览器
+	 */
+	private String browser;
+
+	/**
+	 * 操作方系统
+	 */
+	private String os;
 	
 	/**
-	 * 操作结果 1-成功 0-失败
+	 * 操作结果 0-成功 1-失败
 	 */
 	private Integer result;
 	
@@ -78,7 +88,7 @@ public class SysLogEntity implements Serializable{
 	/**
 	 * 创建时间
 	 */
-	private Timestamp gmtCreate;
+	private Timestamp createTime;
 
 	public SysLogEntity() {
 		super();
@@ -148,12 +158,20 @@ public class SysLogEntity implements Serializable{
 		this.ip = ip;
 	}
 
-	public Timestamp getGmtCreate() {
-		return gmtCreate;
+	public String getBrowser() {
+		return browser;
 	}
 
-	public void setGmtCreate(Timestamp gmtCreate) {
-		this.gmtCreate = gmtCreate;
+	public void setBrowser(String browser) {
+		this.browser = browser;
+	}
+
+	public String getOs() {
+		return os;
+	}
+
+	public void setOs(String os) {
+		this.os = os;
 	}
 
 	public Integer getResult() {
@@ -179,5 +197,12 @@ public class SysLogEntity implements Serializable{
 	public void setType(Integer type) {
 		this.type = type;
 	}
-	
+
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
 }
