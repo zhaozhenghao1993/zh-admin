@@ -1,13 +1,12 @@
 package net.zhenghao.zh.common.aspect;
 
 import net.zhenghao.zh.common.constant.SystemConstant;
+import net.zhenghao.zh.common.context.BaseContextHandler;
+import net.zhenghao.zh.common.dao.SysLogMapper;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.entity.SysLogEntity;
-import net.zhenghao.zh.common.entity.SysUserEntity;
-import net.zhenghao.zh.common.manager.SysLogManager;
 import net.zhenghao.zh.common.utils.IPUtils;
 import net.zhenghao.zh.common.utils.JSONUtils;
-import net.zhenghao.zh.common.utils.ShiroUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -32,10 +31,10 @@ import java.util.Map;
 public class LoginLogAspect {
 
 	@Autowired
-	private SysLogManager sysLogManager;
+    private SysLogMapper sysLogMapper;
 	
 	
-	@AfterReturning(pointcut = "execution(* net.zhenghao.zh.shiro.controller.SysLoginController.login(..))", returning = "retValue")
+	@AfterReturning(pointcut = "execution(* net.zhenghao.zh.auth.controller.SysLoginController.login(..))", returning = "retValue")
 	public void doAfterReturning(JoinPoint joinPoint, Object retValue) {
 		SysLogEntity sysLog = new SysLogEntity();
 		
@@ -56,16 +55,11 @@ public class LoginLogAspect {
         
         //请求的参数
         Object[] args = joinPoint.getArgs();
-        try{
-            Map<String, Object> userMap = new HashMap<>(4);
-            userMap.put("username", args[0]);
-            userMap.put("password", args[1]);
-            userMap.put("captcha", args[2]);
-            String params = JSONUtils.beanToJson(userMap);
-            sysLog.setParams(params);
-        }catch (Exception e){
-
-        }
+        Map<String, Object> userMap = new HashMap<>(4);
+        userMap.put("username", args[0]);
+        userMap.put("password", args[1]);
+        String params = JSONUtils.objToString(userMap);
+        sysLog.setParams(params);
         
       //用户信息及操作结果
         R r = (R) retValue;
@@ -73,9 +67,8 @@ public class LoginLogAspect {
         if (code == 0) {
             try {
                 //登录成功
-                SysUserEntity sysUserEntity = ShiroUtils.getUserEntity();
-                sysLog.setUserId(sysUserEntity.getUserId());
-                sysLog.setUsername(sysUserEntity.getUsername());
+                sysLog.setUserId(BaseContextHandler.getUserId());
+                sysLog.setUsername(BaseContextHandler.getUsername());
                 sysLog.setResult(SystemConstant.StatusType.ENABLE.getValue());
                 sysLog.setRemark("登录成功");
             } catch (Exception e) {
@@ -92,25 +85,14 @@ public class LoginLogAspect {
             sysLog.setRemark("登录失败：" + r.get("msg"));
         }
 
-        sysLogManager.saveLog(sysLog);
-
-        //登陆后发送邮件请求进入消息队列
-        /*SysMailEntity mail = new SysMailEntity();
-        mail.setSendPersonal("zh-security");
-        mail.setReceiveMail("736720794@qq.com");
-        mail.setReceivePersonal("赵正浩");
-        mail.setSubject("zh-security登陆");
-        String userInfoTemplate = "登陆信息如下:☕username:%s☕ip:%s☕param:%s☕remark:%s";
-        String userInfoString = String.format(userInfoTemplate, sysLog.getUsername(), sysLog.getIp(), sysLog.getParams(), sysLog.getRemark());
-        mail.setContent(userInfoString);
-        KafkaMqMail.sendMsgToKafka(mail);*/
+        sysLogMapper.save(sysLog);
 	}
 	
 	/**
 	 * 登出日志
 	 * @param joinPoint
 	 */
-	@Before("execution(* net.zhenghao.zh.shiro.controller.SysLoginController.logout(..))")
+	@Before("execution(* net.zhenghao.zh.auth.controller.SysLoginController.logout(..))")
 	public void doBefore(JoinPoint joinPoint) {
 		SysLogEntity sysLog = new SysLogEntity();
 		
@@ -131,9 +113,8 @@ public class LoginLogAspect {
         
         //用户信息及操作结果
         try {
-            SysUserEntity sysUserEntity = ShiroUtils.getUserEntity();
-            sysLog.setUserId(sysUserEntity.getUserId());
-            sysLog.setUsername(sysUserEntity.getUsername());
+            sysLog.setUserId(BaseContextHandler.getUserId());
+            sysLog.setUsername(BaseContextHandler.getUsername());
             sysLog.setResult(SystemConstant.StatusType.ENABLE.getValue());
             sysLog.setRemark("退出系统");
         } catch (Exception e) {
@@ -143,6 +124,6 @@ public class LoginLogAspect {
             sysLog.setRemark("退出系统：" + e.getMessage());
         }
 
-        sysLogManager.saveLog(sysLog);
+        sysLogMapper.save(sysLog);
 	}
 }
