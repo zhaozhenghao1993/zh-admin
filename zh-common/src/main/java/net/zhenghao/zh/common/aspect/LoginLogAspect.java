@@ -5,8 +5,10 @@ import net.zhenghao.zh.common.context.BaseContextHandler;
 import net.zhenghao.zh.common.dao.SysLogMapper;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.entity.SysLogEntity;
+import net.zhenghao.zh.common.jwt.JWTInfo;
 import net.zhenghao.zh.common.utils.IPUtils;
 import net.zhenghao.zh.common.utils.JSONUtils;
+import net.zhenghao.zh.common.utils.JWTTokenUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -32,6 +34,9 @@ public class LoginLogAspect {
 
 	@Autowired
     private SysLogMapper sysLogMapper;
+
+	@Autowired
+    private JWTTokenUtils jwtTokenUtils;
 	
 	
 	@AfterReturning(pointcut = "execution(* net.zhenghao.zh.auth.controller.SysLoginController.login(..))", returning = "retValue")
@@ -55,7 +60,8 @@ public class LoginLogAspect {
         
         //请求的参数
         Object[] args = joinPoint.getArgs();
-        String params = JSONUtils.objToString(args[0]);
+        Map<String, Object> userMap = (Map<String, Object>) args[0];
+        String params = JSONUtils.objToString(userMap);
         sysLog.setParams(params);
         
       //用户信息及操作结果
@@ -63,14 +69,16 @@ public class LoginLogAspect {
         int code = (int) r.get("code");
         if (code == 0) {
             //登录成功
-            sysLog.setUserId(BaseContextHandler.getUserId());
-            sysLog.setUsername(BaseContextHandler.getUsername());
+            String token = (String) r.get("token");
+            JWTInfo jwtInfo = jwtTokenUtils.getInfoFromToken(token);
+            sysLog.setUserId(jwtInfo.getUserId());
+            sysLog.setUsername(jwtInfo.getUsername());
             sysLog.setResult(SystemConstant.StatusType.ENABLE.getValue());
             sysLog.setRemark("登录成功");
         } else {
             //登录失败
             sysLog.setUserId(-1L);
-            sysLog.setUsername(String.valueOf(args[0]));
+            sysLog.setUsername(String.valueOf(userMap.get("username")));
             sysLog.setResult(SystemConstant.StatusType.DISABLE.getValue());
             sysLog.setRemark("登录失败：" + r.get("msg"));
         }
