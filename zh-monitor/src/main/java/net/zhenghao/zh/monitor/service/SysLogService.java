@@ -1,4 +1,4 @@
-package net.zhenghao.zh.common.service;
+package net.zhenghao.zh.monitor.service;
 
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
@@ -18,7 +18,7 @@ public interface SysLogService {
 
 	Page<SysLogEntity> listLog(Map<String, Object> params);
 	
-	R batchRemove(Long[] id);
+	R batchRemove(Long[] ids);
 	
 	R batchRemoveAll();
 }

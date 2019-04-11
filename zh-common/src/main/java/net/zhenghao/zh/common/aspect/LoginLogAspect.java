@@ -55,28 +55,18 @@ public class LoginLogAspect {
         
         //请求的参数
         Object[] args = joinPoint.getArgs();
-        Map<String, Object> userMap = new HashMap<>(4);
-        userMap.put("username", args[0]);
-        userMap.put("password", args[1]);
-        String params = JSONUtils.objToString(userMap);
+        String params = JSONUtils.objToString(args[0]);
         sysLog.setParams(params);
         
       //用户信息及操作结果
         R r = (R) retValue;
         int code = (int) r.get("code");
         if (code == 0) {
-            try {
-                //登录成功
-                sysLog.setUserId(BaseContextHandler.getUserId());
-                sysLog.setUsername(BaseContextHandler.getUsername());
-                sysLog.setResult(SystemConstant.StatusType.ENABLE.getValue());
-                sysLog.setRemark("登录成功");
-            } catch (Exception e) {
-                sysLog.setUserId(-1L);
-                sysLog.setUsername("获取用户信息为空");
-                sysLog.setResult(SystemConstant.StatusType.DISABLE.getValue());
-                sysLog.setRemark("登录：" + e.getMessage());
-            }
+            //登录成功
+            sysLog.setUserId(BaseContextHandler.getUserId());
+            sysLog.setUsername(BaseContextHandler.getUsername());
+            sysLog.setResult(SystemConstant.StatusType.ENABLE.getValue());
+            sysLog.setRemark("登录成功");
         } else {
             //登录失败
             sysLog.setUserId(-1L);
@@ -112,17 +102,10 @@ public class LoginLogAspect {
         sysLog.setMethod(className + "." + methodName + "()");
         
         //用户信息及操作结果
-        try {
-            sysLog.setUserId(BaseContextHandler.getUserId());
-            sysLog.setUsername(BaseContextHandler.getUsername());
-            sysLog.setResult(SystemConstant.StatusType.ENABLE.getValue());
-            sysLog.setRemark("退出系统");
-        } catch (Exception e) {
-            sysLog.setUserId(-1L);
-            sysLog.setUsername("获取用户信息为空");
-            sysLog.setResult(SystemConstant.StatusType.DISABLE.getValue());
-            sysLog.setRemark("退出系统：" + e.getMessage());
-        }
+        sysLog.setUserId(BaseContextHandler.getUserId());
+        sysLog.setUsername(BaseContextHandler.getUsername());
+        sysLog.setResult(SystemConstant.StatusType.ENABLE.getValue());
+        sysLog.setRemark("退出系统");
 
         sysLogMapper.save(sysLog);
 	}

@@ -1,4 +1,4 @@
-package net.zhenghao.zh.common.service.impl;
+package net.zhenghao.zh.monitor.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import net.zhenghao.zh.common.dao.SysLogMapper;
@@ -6,8 +6,8 @@ import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.entity.SysLogEntity;
-import net.zhenghao.zh.common.service.SysLogService;
 import net.zhenghao.zh.common.utils.CommonUtils;
+import net.zhenghao.zh.monitor.service.SysLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,9 +37,9 @@ public class SysLogServiceImpl implements SysLogService {
 	}
 
 	@Override
-	public R batchRemove(Long[] id) {
-		int count = sysLogMapper.batchRemove(id);
-		return CommonUtils.msg(id, count);
+	public R batchRemove(Long[] ids) {
+		int count = sysLogMapper.batchRemove(ids);
+		return CommonUtils.msg(ids, count);
 	}
 
 	@Override
