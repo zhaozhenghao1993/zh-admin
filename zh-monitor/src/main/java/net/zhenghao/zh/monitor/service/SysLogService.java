@@ -20,5 +20,5 @@ public interface SysLogService {
 	
 	R batchRemove(Long[] ids);
 	
-	R batchRemoveAll();
+	R batchRemoveAll(Integer type);
 }

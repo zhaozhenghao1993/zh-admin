@@ -57,7 +57,7 @@ public class SysUserEntity implements Serializable {
 	private String avatar;
 
 	/**
-	 * 状态(0:禁用   1:正常)
+	 * 状态(0:正常   1:禁用)
 	 */
 	private Integer status;
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 /**
- * 系统日志
+ * 系统日志监控
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
@@ -20,8 +20,8 @@ import java.util.Map;
  * SysLogController.java
  */
 @RestController
-@RequestMapping("/sys/log")
-public class SysLogController extends AbstractController {
+@RequestMapping("/monitor/log")
+public class MonitorLogController extends AbstractController {
 
 	@Autowired
 	private SysLogService sysLogService;
@@ -32,7 +32,7 @@ public class SysLogController extends AbstractController {
 	 * @return
 	 */
 	@GetMapping("")
-	public Page<SysLogEntity> listLog(@RequestBody Map<String, Object> params){
+	public Page<SysLogEntity> listLog(@RequestParam Map<String, Object> params){
 		return sysLogService.listLog(params);
 	}
 	
@@ -52,8 +52,8 @@ public class SysLogController extends AbstractController {
 	 * @return
 	 */
 	@SysLog("清空日志")
-	@DeleteMapping("/clear")
-	public R batchRemoveAll(){
-		return sysLogService.batchRemoveAll();
+	@DeleteMapping("/{type}/clear")
+	public R batchRemoveAll(@PathVariable("type") Integer type){
+		return sysLogService.batchRemoveAll(type);
 	}
 }

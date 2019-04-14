@@ -16,5 +16,5 @@ import org.springframework.stereotype.Component;
 @Component
 public interface SysLogMapper extends BaseMapper<SysLogEntity> {
 	
-	int batchRemoveAll();
+	int batchRemoveAll(Integer type);
 }

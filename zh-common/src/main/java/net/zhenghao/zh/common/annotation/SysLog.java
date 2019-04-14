@@ -1,5 +1,7 @@
 package net.zhenghao.zh.common.annotation;
 
+import net.zhenghao.zh.common.constant.SystemConstant;
+
 import java.lang.annotation.*;
 
 /**
@@ -17,8 +19,8 @@ import java.lang.annotation.*;
 public @interface SysLog {
 	
 	String value() default "";
-	
-	String type() default "";
+
+	SystemConstant.LogType type() default SystemConstant.LogType.OPERATION;
 	
 }
 /**

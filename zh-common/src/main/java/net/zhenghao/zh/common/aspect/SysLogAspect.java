@@ -68,7 +68,7 @@ public class SysLogAspect {
 		sysLog.setMethod(className + "." + methodName + "()");
 		//请求的参数
 		Object[] args = joinPoint.getArgs();
-		String params = JSONUtils.objToString(args[0]);
+		String params = JSONUtils.objToString(args);
 		sysLog.setParams(params);
 		
 		//设置IP地址 浏览器 操作系统
@@ -82,8 +82,8 @@ public class SysLogAspect {
 		sysLog.setUsername(BaseContextHandler.getUsername());
 		
 		//操作状态和结果
-		sysLog.setResult(SystemConstant.StatusType.DISABLE.getValue());
-		sysLog.setRemark("异常信息：" + ex.getMessage());
+		sysLog.setStatus(SystemConstant.StatusType.DISABLE.getValue());
+		sysLog.setRemark("异常信息：" + ex);
 
 		sysLogMapper.save(sysLog);
 	}
@@ -91,7 +91,7 @@ public class SysLogAspect {
 	@Around("logPointCut()")
 	public Object around(ProceedingJoinPoint point) throws Throwable {
 		long beginTime = System.currentTimeMillis();
-		//执行方法(这里应该是获取被注解的方法执行时长)
+		//执行方法
 		Object result = point.proceed();
 		//执行时长(毫秒)
 		long time = System.currentTimeMillis() - beginTime;
@@ -109,12 +109,7 @@ public class SysLogAspect {
 		if (syslog != null) {
 			//获取注解上面的描述,set到sysLog类中
 			sysLog.setOperation(syslog.value());
-			String type = syslog.type();
-			if (StringUtils.isNotBlank(type)) {
-				sysLog.setType(SystemConstant.LogType.valueOf(type).getValue());
-			} else {
-				sysLog.setType(SystemConstant.LogType.OPERATION.getValue());
-			}
+			sysLog.setType(syslog.type().getValue());
 		}
 		//请求的方法名
 		//例:net.zhenghao.zh.common.controller.SysLogController
@@ -124,7 +119,7 @@ public class SysLogAspect {
 		sysLog.setMethod(className + "." + methodName + "()");
 		//请求的参数
 		Object[] args = joinPoint.getArgs();
-		String params = JSONUtils.objToString(args[0]);
+		String params = JSONUtils.objToString(args);
 		sysLog.setParams(params);
 
 		//设置IP地址 浏览器 操作系统
@@ -145,12 +140,12 @@ public class SysLogAspect {
 			int code = (int) r.get("code");
 			if(code == 0) {
 				//操作成功
-				sysLog.setResult(SystemConstant.StatusType.ENABLE.getValue());
+				sysLog.setStatus(SystemConstant.StatusType.ENABLE.getValue());
 
 				//响应时间：ms
 				sysLog.setRemark("响应时间：" + time + "ms");
 			} else {
-				sysLog.setResult(SystemConstant.StatusType.DISABLE.getValue());
+				sysLog.setStatus(SystemConstant.StatusType.DISABLE.getValue());
 				sysLog.setRemark(String.valueOf(r.get("msg")));
 			}
 		}

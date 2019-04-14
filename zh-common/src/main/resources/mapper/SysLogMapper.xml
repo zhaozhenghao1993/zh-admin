@@ -16,28 +16,40 @@
 			ip,
 			browser,
 			os,
-			result,
+			status,
 			remark,
 			type,
 			create_time
 		FROM
 			sys_log
 		<where>
-			<if test=" type != null and type != '' ">
-				type = #{type}
-			</if>
-			<if test=" startDate != null and startDate != '' and endDate != null and endDate != '' ">
-				AND DATE_FORMAT(create_time, '%Y-%m-%d') BETWEEN #{startDate} AND #{endDate}
-			</if>
 			<if test="username != null and username.trim() != ''">
 				AND username LIKE concat('%',#{username},'%')
 			</if>
 			<if test="operation != null and operation.trim() != ''">
 				AND operation LIKE concat('%',#{operation},'%')
 			</if>
+			<if test="status != null and status.trim() != ''">
+				AND status = #{status}
+			</if>
+			<if test=" type != null and type != '' ">
+				AND type = #{type}
+			</if>
+			<if test=" startDate != null and startDate != '' and endDate != null and endDate != '' ">
+				AND DATE_FORMAT(create_time, '%Y-%m-%d') BETWEEN #{startDate} AND #{endDate}
+			</if>
 		</where>
-		ORDER BY
-			create_time DESC
+		<choose>
+			<when test="sortOrder != null and sortOrder=='ascend'">
+				ORDER BY create_time
+			</when>
+			<when test="sortOrder != null and sortOrder=='descend'">
+				ORDER BY create_time DESC
+			</when>
+			<otherwise>
+				ORDER BY id DESC
+			</otherwise>
+		</choose>
 	</select>
 	
 	<insert id="save">
@@ -51,7 +63,7 @@
 			ip,
 			browser,
 			os,
-			result,
+			status,
 			remark,
 			type,
 			create_time
@@ -66,7 +78,7 @@
 			#{ip}, 
 			#{browser},
 			#{os},
-			#{result},
+			#{status},
 			#{remark},
 			#{type},
 			NOW()

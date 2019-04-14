@@ -71,9 +71,9 @@ public class SysLogEntity implements Serializable{
 	private String os;
 	
 	/**
-	 * 操作结果 0-成功 1-失败
+	 * 操作状态 0-成功 1-失败
 	 */
-	private Integer result;
+	private Integer status;
 	
 	/**
 	 * 操作描述
@@ -174,12 +174,12 @@ public class SysLogEntity implements Serializable{
 		this.os = os;
 	}
 
-	public Integer getResult() {
-		return result;
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setResult(Integer result) {
-		this.result = result;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	public String getRemark() {

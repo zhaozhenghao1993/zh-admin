@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/monitor/server")
-public class ServerMonitorController {
+public class MonitorServerController {
 
     @GetMapping("/base")
     public R baseInfo() {

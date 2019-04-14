@@ -1,5 +1,6 @@
 package net.zhenghao.zh.common.aspect;
 
+import eu.bitwalker.useragentutils.UserAgent;
 import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.context.BaseContextHandler;
 import net.zhenghao.zh.common.dao.SysLogMapper;
@@ -45,9 +46,12 @@ public class LoginLogAspect {
 		
 		//日志类型
         sysLog.setType(SystemConstant.LogType.LOGIN.getValue());
-        
-        //ip地址
+
+        //设置IP地址 浏览器 操作系统
+        UserAgent userAgent = IPUtils.getUserAgent();
         sysLog.setIp(IPUtils.getIpAddr());
+        sysLog.setBrowser(userAgent.getBrowser().getName());
+        sysLog.setOs(userAgent.getOperatingSystem().getName());
 
         //用户操作
         sysLog.setOperation("登录");
@@ -73,13 +77,13 @@ public class LoginLogAspect {
             JWTInfo jwtInfo = jwtTokenUtils.getInfoFromToken(token);
             sysLog.setUserId(jwtInfo.getUserId());
             sysLog.setUsername(jwtInfo.getUsername());
-            sysLog.setResult(SystemConstant.StatusType.ENABLE.getValue());
+            sysLog.setStatus(SystemConstant.StatusType.ENABLE.getValue());
             sysLog.setRemark("登录成功");
         } else {
             //登录失败
             sysLog.setUserId(-1L);
             sysLog.setUsername(String.valueOf(userMap.get("username")));
-            sysLog.setResult(SystemConstant.StatusType.DISABLE.getValue());
+            sysLog.setStatus(SystemConstant.StatusType.DISABLE.getValue());
             sysLog.setRemark("登录失败：" + r.get("msg"));
         }
 
@@ -97,8 +101,11 @@ public class LoginLogAspect {
 		//日志类型
         sysLog.setType(SystemConstant.LogType.LOGIN.getValue());
 
-        //ip地址
+        //设置IP地址 浏览器 操作系统
+        UserAgent userAgent = IPUtils.getUserAgent();
         sysLog.setIp(IPUtils.getIpAddr());
+        sysLog.setBrowser(userAgent.getBrowser().getName());
+        sysLog.setOs(userAgent.getOperatingSystem().getName());
 
         //用户操作
         sysLog.setOperation("退出登陆");
@@ -112,7 +119,7 @@ public class LoginLogAspect {
         //用户信息及操作结果
         sysLog.setUserId(BaseContextHandler.getUserId());
         sysLog.setUsername(BaseContextHandler.getUsername());
-        sysLog.setResult(SystemConstant.StatusType.ENABLE.getValue());
+        sysLog.setStatus(SystemConstant.StatusType.ENABLE.getValue());
         sysLog.setRemark("退出系统");
 
         sysLogMapper.save(sysLog);

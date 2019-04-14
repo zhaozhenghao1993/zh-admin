@@ -42,7 +42,7 @@ spring:
 mybatis:
   configuration:
     mapUnderscoreToCamelCase: true
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath*:mapper/*.xml
   type-aliases-package: net.zhenghao.zh
 
 

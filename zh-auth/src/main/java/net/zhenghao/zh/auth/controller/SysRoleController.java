@@ -108,7 +108,7 @@ public class SysRoleController extends AbstractController {
 	 * @param menuIdList
 	 * @return
 	 */
-	@SysLog(value = "分配权限", type = "AUTHORIZATION")
+	@SysLog(value = "分配权限", type = SystemConstant.LogType.AUTHORIZATION)
 	@PutMapping("/{id}/authorize")
 	public R updateRoleAuthorization(@PathVariable("id") Long roleId, @RequestBody List<Long> menuIdList) {
 		return sysRoleService.updateRoleAuthorization(roleId, menuIdList);

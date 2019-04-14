@@ -1,5 +1,7 @@
 package net.zhenghao.zh.auth.controller;
 
+import net.zhenghao.zh.auth.entity.SysUserEntity;
+import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.jwt.JWTInfo;
 import net.zhenghao.zh.common.utils.JWTTokenUtils;
 import net.zhenghao.zh.common.utils.RedisUtils;
@@ -48,5 +50,13 @@ public class TestController {
     @GetMapping("/get")
     public String get() {
         return (String) redisUtils.get("aa");
+    }
+
+    @GetMapping("/exception")
+    @SysLog("注解日志异常测试")
+    public String exception() {
+        SysUserEntity user = null;
+        System.out.println(user.getUsername());
+        return "exception => success";
     }
 }

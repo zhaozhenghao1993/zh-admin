@@ -66,7 +66,6 @@ public class SysUserController extends AbstractController {
 	 * @param password
 	 * @return
 	 */
-	@SysLog("修改密码")
 	@PutMapping("/profile/password")
 	public R updatePswdByUser(@RequestBody SysUserPasswordVO password) {
 		SysUserEntity user = new SysUserEntity();

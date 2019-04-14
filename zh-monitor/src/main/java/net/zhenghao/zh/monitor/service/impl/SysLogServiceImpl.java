@@ -43,8 +43,8 @@ public class SysLogServiceImpl implements SysLogService {
 	}
 
 	@Override
-	public R batchRemoveAll() {
-		int count = sysLogMapper.batchRemoveAll();
+	public R batchRemoveAll(Integer type) {
+		int count = sysLogMapper.batchRemoveAll(type);
 		return CommonUtils.msg(count);
 	}
 
