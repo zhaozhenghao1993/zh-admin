@@ -25,6 +25,11 @@
             <artifactId>zh-monitor</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>net.zhenghao.zh</groupId>
+            <artifactId>zh-generator</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>

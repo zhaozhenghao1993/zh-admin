@@ -13,6 +13,7 @@
       <module>zh-common</module>
       <module>zh-auth</module>
       <module>zh-monitor</module>
+      <module>zh-generator</module>
   </modules>
 
   <name>zh-admin</name>
@@ -69,6 +70,7 @@
     <ehcache.version>2.10.4</ehcache.version>
     <oshi.version>3.9.1</oshi.version>
     <bitwalker.version>1.19</bitwalker.version>
+    <velocity.version>1.7</velocity.version>
   </properties>
 
   <dependencies>
@@ -192,6 +194,12 @@
         <groupId>eu.bitwalker</groupId>
         <artifactId>UserAgentUtils</artifactId>
         <version>${bitwalker.version}</version>
+      </dependency>
+
+      <dependency>
+        <artifactId>velocity</artifactId>
+        <groupId>org.apache.velocity</groupId>
+        <version>${velocity.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
