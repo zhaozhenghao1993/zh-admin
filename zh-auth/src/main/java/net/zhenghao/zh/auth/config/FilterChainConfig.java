@@ -39,13 +39,14 @@ public class FilterChainConfig {
         annoFilterChainList.add(new SysPermissionEntity("/test/set", "GET"));
         annoFilterChainList.add(new SysPermissionEntity("/test/get", "GET"));
         annoFilterChainList.add(new SysPermissionEntity("/test/exception", "GET"));
+        annoFilterChainList.add(new SysPermissionEntity("/tool/generator/code", "GET"));
 
         authFilterChainList.add(new SysPermissionEntity("/sys/user/info", "GET"));
         authFilterChainList.add(new SysPermissionEntity("/sys/user/profile", "PUT"));
         authFilterChainList.add(new SysPermissionEntity("/sys/user/profile/password", "PUT"));
         authFilterChainList.add(new SysPermissionEntity("/sys/user/profile/theme", "PUT"));
         authFilterChainList.add(new SysPermissionEntity("/sys/user/profile/color", "PUT"));
-        authFilterChainList.add(new SysPermissionEntity("/monitor/log", "GET"));
+        authFilterChainList.add(new SysPermissionEntity("/tool/generator", "GET"));
     }
 
     public List<SysPermissionEntity> getAnnoFilterChainList() {

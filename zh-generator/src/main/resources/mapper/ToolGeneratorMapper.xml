@@ -6,25 +6,25 @@
     <select id="listTable" resultType="TableEntity" flushCache="true">
         SELECT
             table_name,
-            engine obj_name,
+            engine,
             table_comment,
             create_time
         FROM
             information_schema.tables
         WHERE
             table_schema = (SELECT DATABASE())
-            <if test="name != null and name.trim() != ''">
-                AND table_name LIKE concat('%', #{name}, '%')
+            <if test="tableName != null and tableName.trim() != ''">
+                AND table_name LIKE concat('%', #{tableName}, '%')
             </if>
         <choose>
-            <when test="sortOrder != null and sortOrder=='ascend'">
+            <when test="sortOrder != null and sortOrder == 'ascend'">
                 ORDER BY create_time
             </when>
-            <when test="sortOrder != null and sortOrder=='descend'">
+            <when test="sortOrder != null and sortOrder == 'descend'">
                 ORDER BY create_time DESC
             </when>
             <otherwise>
-                ORDER BY id DESC
+                ORDER BY create_time DESC
             </otherwise>
         </choose>
     </select>

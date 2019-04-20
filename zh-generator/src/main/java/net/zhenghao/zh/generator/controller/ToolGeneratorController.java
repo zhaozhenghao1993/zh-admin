@@ -1,8 +1,26 @@
 package net.zhenghao.zh.generator.controller;
 
+import net.zhenghao.zh.common.controller.AbstractController;
+import net.zhenghao.zh.common.entity.Page;
+import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.utils.JSONUtils;
+import net.zhenghao.zh.generator.entity.GeneratorParamEntity;
+import net.zhenghao.zh.generator.entity.TableEntity;
+import net.zhenghao.zh.generator.service.ToolGeneratorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.io.IOException;
+import java.util.Map;
+
 /**
  * 🙃
- * 🙃
+ * 🙃 代码生成器
  * 🙃
  *
  * @author:zhaozhenghao
@@ -10,6 +28,39 @@ package net.zhenghao.zh.generator.controller;
  * @date :2019/04/17 22:07
  * ToolGeneratorController.java
  */
+@Controller
+@RequestMapping("/tool/generator")
+public class ToolGeneratorController extends AbstractController {
 
-public class ToolGeneratorController {
+    @Autowired
+    private ToolGeneratorService toolGeneratorService;
+
+    /**
+     * 数据库列表
+     * @param params
+     * @return
+     */
+    @GetMapping("")
+    @ResponseBody
+    public Page<TableEntity> listTable(@RequestParam Map<String, Object> params){
+        return toolGeneratorService.listTable(params);
+    }
+
+    /**
+     * 生成代码
+     * @param params
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    @GetMapping("/code")
+    public void generator(@Valid GeneratorParamEntity params, BindingResult results, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (results.hasErrors()) {
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/json");
+            response.getWriter().write(JSONUtils.objToString(R.error(results.getFieldError().getDefaultMessage())));
+            return;
+        }
+        System.out.println("success");
+    }
 }

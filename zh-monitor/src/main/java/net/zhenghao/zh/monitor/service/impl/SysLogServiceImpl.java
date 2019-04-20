@@ -21,7 +21,7 @@ import java.util.Map;
  * @date  :2017年11月22日 下午2:08:50
  * SysLogServiceImpl.java
  */
-@Service("SysLogService")
+@Service("sysLogService")
 public class SysLogServiceImpl implements SysLogService {
 
 	@Autowired
