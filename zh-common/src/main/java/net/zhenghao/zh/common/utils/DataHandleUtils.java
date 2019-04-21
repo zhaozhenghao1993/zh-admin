@@ -17,6 +17,8 @@ import java.text.NumberFormat;
 
 public class DataHandleUtils {
 
+    private DataHandleUtils() {}
+
     /**
      * 计算正确率或百分比
      * @param num

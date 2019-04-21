@@ -24,7 +24,7 @@
 			sys_role
 		<where>
 			<if test="userIdCreate != null">
-				and creator_id = #{creatorId}
+				AND creator_id = #{creatorId}
 			</if>
 			<if test="roleName != null and roleName.trim() != ''">
 				AND role_name LIKE concat('%',#{roleName},'%') 

@@ -1,0 +1,70 @@
+package ${package}.${module}.service.impl;
+
+import com.github.pagehelper.PageHelper;
+import ${package}.${module}.dao.${className}Mapper;
+import net.zhenghao.zh.common.entity.Page;
+import net.zhenghao.zh.common.entity.Query;
+import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.utils.CommonUtils;
+import ${package}.${module}.entity.${className}Entity;
+import ${package}.${module}.service.${className}Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Map;
+
+/**
+ * ${comments}
+ *
+ * @author:${author}
+ * @Email :${email}
+ * @date  :${datetime}
+ * ${className}ServiceImpl.java
+ */
+@Service("${objName}Service")
+public class ${className}ServiceImpl implements ${className}Service {
+
+	@Autowired
+	private ${className}Mapper ${objName}Mapper;
+	
+	@Override
+	public Page<${className}Entity> list${className}(Map<String, Object> params) {
+		Query query = new Query(params);
+		Page<${className}Entity> page = new Page<>(query);
+        PageHelper.startPage(page.getPageNum(), page.getPageSize());
+        page.setData(${objName}Mapper.listForPage(query));
+		return page;
+	}
+
+    @Override
+    public R get${className}ById(Long id) {
+		${className}Entity ${objName} = ${objName}Mapper.get${className}ById(id);
+        return CommonUtils.msg(${objName});
+    }
+
+	@Override
+	public R save${className}(${className}Entity ${objName}) {
+		int count = ${objName}Mapper.save${className}(${objName});
+		return CommonUtils.msg(count);
+	}
+
+	@Override
+	public R update${className}(${className}Entity ${objName}) {
+		int count = ${objName}Mapper.update${className}(${objName});
+		return CommonUtils.msg(count);
+	}
+
+    @Override
+    public R remove${className}(Long id) {
+        int count = ${objName}Mapper.remove(id);
+        return CommonUtils.msg(count);
+    }
+
+	@Override
+	public R batchRemove(Long[] ids) {
+		int count = ${objName}Mapper.batchRemove(ids);
+		return CommonUtils.msg(ids, count);
+	}
+	
+}

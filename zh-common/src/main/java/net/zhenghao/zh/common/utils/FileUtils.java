@@ -13,6 +13,8 @@ package net.zhenghao.zh.common.utils;
 
 public class FileUtils {
 
+    private FileUtils() {}
+
     /**
      * 字节转换
      *

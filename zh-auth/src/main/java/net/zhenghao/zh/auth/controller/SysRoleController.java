@@ -96,7 +96,7 @@ public class SysRoleController extends AbstractController {
 	 * @param ids
 	 * @return
 	 */
-	@SysLog("删除角色")
+	@SysLog("批量删除角色")
 	@DeleteMapping("")
 	public R batchRemove(@RequestBody Long[] ids) {
 		return sysRoleService.batchRemove(ids);

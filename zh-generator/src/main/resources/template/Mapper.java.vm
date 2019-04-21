@@ -1,0 +1,20 @@
+package ${package}.${module}.dao;
+
+import net.zhenghao.zh.common.dao.BaseMapper;
+import ${package}.${module}.entity.${className}Entity;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.stereotype.Component;
+
+/**
+ * ${comments}
+ *
+ * @author:${author}
+ * @Email :${email}
+ * @date  :${datetime}
+ * ${className}Mapper.java
+ */
+@MapperScan
+@Component
+public interface ${className}Mapper extends BaseMapper<${className}Entity> {
+	
+}

@@ -1,0 +1,44 @@
+package ${package}.${module}.entity;
+
+import java.io.Serializable;
+import java.sql.Timestamp;
+
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+
+/**
+ * ${comments}
+ *
+ * @author:${author}
+ * @Email :${email}
+ * @date  :${datetime}
+ * ${className}Entity.java
+ */
+public class ${className}Entity implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+#foreach ($column in $columns)
+	/**
+	 * $column.columnComment
+	 */
+	private $column.fieldType $column.fieldName;
+	
+#end
+	
+	public ${className}Entity() {
+		super();
+	}
+	
+#foreach ($column in $columns)
+	public void set${column.methodName}($column.fieldType $column.fieldName) {
+		this.$column.fieldName = $column.fieldName;
+	}
+	
+	public $column.fieldType get${column.methodName}() {
+		return $column.fieldName;
+	}
+	
+#end
+}

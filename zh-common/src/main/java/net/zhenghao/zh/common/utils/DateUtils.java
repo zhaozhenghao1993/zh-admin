@@ -15,8 +15,10 @@ import java.util.Date;
  * @date  :2017年11月22日 下午2:43:47
  * DateUtils.java
  */
-public class DateUtils extends org.apache.commons.lang3.time.DateUtils
-{
+public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
+
+    private DateUtils() {}
+
     public static String YYYY = "yyyy";
 
     public static String YYYY_MM = "yyyy-MM";
@@ -221,7 +223,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
      * @param timeMillis
      * @return
      */
-    public static String formatDateTime(long timeMillis){
+    public static String formatDateTime(long timeMillis) {
         long day = timeMillis/(24*60*60*1000);
         long hour = (timeMillis/(60*60*1000)-day*24);
         long min = ((timeMillis/(60*1000))-day*24*60-hour*60);

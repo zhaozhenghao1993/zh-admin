@@ -17,7 +17,7 @@ import java.util.List;
 
 public class TableEntity implements Serializable {
 
-    private static final long serialVersionUID = -3286516055317826298L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * 表名
@@ -45,7 +45,7 @@ public class TableEntity implements Serializable {
     private List<ColumnEntity> columns;
 
     /**
-     * 类名，作为实例对象使用（SysUser）
+     * 类名，作为实例对象使用（sysUser）
      */
     private String objName;
 

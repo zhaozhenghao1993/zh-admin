@@ -1,0 +1,47 @@
+import { axios } from '@/utils/request'
+
+export function ${functionCode}List (parameter) {
+  return axios({
+    url: '/${requestMapping}',
+    method: 'get',
+    params: parameter
+  })
+}
+
+export function ${functionCode}Info (id) {
+    return axios({
+        url: '/${requestMapping}' + id,
+        method: 'get'
+    })
+}
+
+export function ${functionCode}Save (parameter) {
+  return axios({
+    url: '/${requestMapping}',
+    method: 'post',
+    data: parameter
+  })
+}
+
+export function ${functionCode}Edit (id, parameter) {
+  return axios({
+    url: '/${requestMapping}' + id,
+    method: 'put',
+    data: parameter
+  })
+}
+
+export function ${functionCode}Delete (id) {
+  return axios({
+    url: '/${requestMapping}' + id,
+    method: 'delete'
+  })
+}
+
+export function ${functionCode}BatchDelete (parameter) {
+  return axios({
+    url: '/${requestMapping}',
+    method: 'delete',
+    data: parameter
+  })
+}

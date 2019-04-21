@@ -65,7 +65,8 @@
     <jjwt.version>0.9.1</jjwt.version>
     <joda.version>2.10.1</joda.version>
     <shiro.version>1.4.0</shiro.version>
-    <commons.version>3.8.1</commons.version>
+    <commons-lang3.version>3.8.1</commons-lang3.version>
+    <commons-configuration2.version>2.4</commons-configuration2.version>
     <mybatis-ehcache.version>1.0.0</mybatis-ehcache.version>
     <ehcache.version>2.10.4</ehcache.version>
     <oshi.version>3.9.1</oshi.version>
@@ -152,7 +153,13 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>${commons.version}</version>
+      <version>${commons-lang3.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-configuration2</artifactId>
+      <version>${commons-configuration2.version}</version>
     </dependency>
 
     <dependency>

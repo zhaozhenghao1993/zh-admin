@@ -41,7 +41,7 @@ public class MonitorLogController extends AbstractController {
 	 * @param ids
 	 * @return
 	 */
-	@SysLog("删除日志")
+	@SysLog("批量删除日志")
 	@DeleteMapping("")
 	public R batchRemove(@RequestBody Long[] ids){
 		return sysLogService.batchRemove(ids);

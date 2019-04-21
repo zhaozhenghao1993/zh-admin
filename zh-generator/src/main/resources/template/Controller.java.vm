@@ -1,0 +1,97 @@
+package ${package}.${module}.controller;
+
+import net.zhenghao.zh.common.annotation.SysLog;
+import net.zhenghao.zh.common.controller.AbstractController;
+import net.zhenghao.zh.common.entity.Page;
+import net.zhenghao.zh.common.entity.R;
+import ${package}.${module}.entity.${className}Entity;
+import ${package}.${module}.service.${className}Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+
+/**
+ * ${comments}
+ *
+ * @author:${author}
+ * @Email :${email}
+ * @date  :${datetime}
+ * ${className}Controller.java
+ */
+@RestController
+@RequestMapping("/${requestMapping}")
+public class ${className}Controller extends AbstractController {
+
+	@Autowired
+	private ${className}Service ${objName}Service;
+	
+	/**
+	 * 列表
+	 * @param params
+	 * @return
+	 */
+	@GetMapping("")
+	public Page<${className}Entity> list(@RequestBody Map<String, Object> params) {
+		return ${objName}Service.list${className}(params);
+	}
+
+    /**
+     * 根据id查询详情
+     * @param ${pk.fieldName}
+     * @return
+     */
+    @GetMapping("/{id}")
+    public R info(@PathVariable("id") Long id) {
+        return ${objName}Service.get${className}ById(id);
+    }
+
+    /**
+	 * 新增
+	 * @param ${objName}
+	 * @return
+	 */
+    @SysLog("新增${comments}")
+    @PostMapping("")
+    public R save(@RequestBody ${className}Entity ${objName}) {
+        ${objName}.setCreatorId(getUserId());
+        return ${objName}Service.save${className}(${objName});
+    }
+
+    /**
+	 * 修改
+	 * @param ${pk.fieldName}
+	 * @param ${objName}
+	 * @return
+	 */
+    @SysLog("修改${comments}")
+    @PutMapping("/{id}")
+    public R update(@PathVariable("id") Long id, @RequestBody ${className}Entity ${objName}) {
+        ${objName}.set${pk.methodName}(id);
+        ${objName}.setModifierId(getUserId());
+        return ${objName}Service.update${className}(${objName});
+    }
+
+    /**
+	 * 删除
+	 * @param ${pk.fieldName}
+	 * @return
+	 */
+    @SysLog("删除${comments}")
+    @DeleteMapping("/{id}")
+    public R remove(@PathVariable("id") Long id) {
+        return ${objName}Service.remove${className}(id);
+    }
+
+    /**
+	 * 批量删除
+	 * @param ids
+	 * @return
+	 */
+    @SysLog("批量删除${comments}")
+    @DeleteMapping("")
+    public R batchRemove(@RequestBody Long[] ids) {
+        return ${objName}Service.batchRemove(ids);
+    }
+	
+}

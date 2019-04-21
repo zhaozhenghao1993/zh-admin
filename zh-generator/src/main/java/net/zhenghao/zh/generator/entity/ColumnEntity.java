@@ -15,7 +15,7 @@ import java.io.Serializable;
 
 public class ColumnEntity implements Serializable {
 
-    private static final long serialVersionUID = -8563193571559903873L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * 列名
