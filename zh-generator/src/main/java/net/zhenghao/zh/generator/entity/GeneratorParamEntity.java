@@ -40,7 +40,7 @@ public class GeneratorParamEntity {
     private String requestMapping;
 
     /**
-     * 页面路径，用户管理base/user
+     * 页面路径，用户管理system/user
      */
     @NotBlank(message = "页面路径不能为空 !")
     private String viewPath;
