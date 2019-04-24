@@ -1,16 +1,27 @@
 package net.zhenghao.zh.generator.core;
 
 import net.zhenghao.zh.common.exception.BaseException;
+import net.zhenghao.zh.common.utils.DateUtils;
+import net.zhenghao.zh.generator.entity.ColumnEntity;
+import net.zhenghao.zh.generator.entity.GeneratorParamEntity;
+import net.zhenghao.zh.generator.entity.TableEntity;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 /**
  * 🙃
@@ -26,6 +37,84 @@ import java.util.List;
 public class GeneratorHandler {
 
     private GeneratorHandler() {}
+
+    public static void generatorCode(TableEntity table, List<ColumnEntity> columns, GeneratorParamEntity params, ZipOutputStream zip) {
+        //配置信息
+        Configuration config = getConfig();
+        //表名转换成Java类名
+        String className = tableToJava(table.getTableName(), config.getString("tablePrefix"));// sys_user -> SysUser
+        table.setClassName(className);//SysUser
+        table.setObjName(StringUtils.uncapitalize(className));// sysUser
+
+        //列信息
+        for (ColumnEntity column : columns) {
+            //列明转换，java属性名及对应方法名
+            String columnName = columnToJava(column.getColumnName());// user_id -> UserId
+            column.setFieldName(StringUtils.uncapitalize(columnName));// userId
+            column.setMethodName(columnName);// UserId
+            //列数据类型转换
+            String fieldType = config.getString(column.getDataType(), "unknowType");
+            column.setFieldType(fieldType);
+            // 主键判断
+            if ("PRI".equals(column.getColumnKey()) && table.getPk() == null) {
+                table.setPk(column);
+            }
+        }
+        table.setColumns(columns);
+
+        // 没主键，则第一个字段为主键
+        if (table.getPk() == null) {
+            table.setPk(table.getColumns().get(0));
+        }
+
+        //设置velocity资源加载器
+        Properties prop = new Properties();
+        prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+        Velocity.init(prop);
+
+        //封装模板数据
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("tableName", table.getTableName());
+        map.put("comments", table.getTableComment());
+        map.put("pk", table.getPk());
+        map.put("className", table.getClassName());
+        map.put("objName", table.getObjName());
+        map.put("functionCode", params.getFunctionCode());
+        map.put("functionMethod", WordUtils.capitalizeFully(params.getFunctionCode()));
+        map.put("requestMapping", params.getRequestMapping());
+        map.put("viewPath", params.getViewPath());
+        map.put("authKey", urlToAuthKey(params.getRequestMapping()));
+        map.put("columns", table.getColumns());
+        map.put("package", config.getString("package"));
+        map.put("module", params.getModule());
+        map.put("author", config.getString("author"));
+        map.put("email", config.getString("email"));
+        map.put("datetime", DateUtils.dateTimeNow("yyyy/MM/dd HH:mm"));
+        VelocityContext context = new VelocityContext(map);
+
+        //获取模板列表
+        List<String> templates = getTemplates();
+        for (String template : templates) {
+            //渲染模板
+            // StringWriter sw = new StringWriter();
+
+            try(StringWriter sw = new StringWriter()) {
+                Template tpl = Velocity.getTemplate(template, "UTF-8");
+                tpl.merge(context, sw);
+                //添加zip
+                if ("0".equals(params.getType())) {
+                    zip.putNextEntry(new ZipEntry(getFileName(template, table.getClassName(), params.getModule(),
+                            WordUtils.capitalizeFully(params.getFunctionCode()), config.getString("package"), params.getViewPath())));
+                } else {
+                    zip.putNextEntry(new ZipEntry(getFileName(template, table.getClassName(), params.getFunctionCode(), WordUtils.capitalizeFully(params.getFunctionCode()))));
+                }
+                IOUtils.write(sw.toString(), zip, "UTF-8");
+                zip.closeEntry();
+            } catch (IOException e) {
+                throw new BaseException("渲染模板失败，表名：" + table.getTableName(), e);
+            }
+        }
+    }
 
     private static List<String> getTemplates() {
         List<String> templates = new ArrayList<String>();
@@ -136,7 +225,7 @@ public class GeneratorHandler {
     /**
      * 获取文件名，带包名
      */
-    public static String getFileName(String template, String className, String module, String functionCode,
+    public static String getFileName(String template, String className, String module,
                                      String functionMethod, String packageName, String viewPath) {
         String packagePath = "java" + File.separator;
         String webPath = "vue" + File.separator;

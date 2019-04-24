@@ -67,6 +67,7 @@
     <shiro.version>1.4.0</shiro.version>
     <commons-lang3.version>3.8.1</commons-lang3.version>
     <commons-configuration2.version>2.4</commons-configuration2.version>
+    <commons-io.version>2.6</commons-io.version>
     <mybatis-ehcache.version>1.0.0</mybatis-ehcache.version>
     <ehcache.version>2.10.4</ehcache.version>
     <oshi.version>3.9.1</oshi.version>
@@ -157,12 +158,6 @@
     </dependency>
 
     <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-configuration2</artifactId>
-      <version>${commons-configuration2.version}</version>
-    </dependency>
-
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
@@ -207,6 +202,18 @@
         <artifactId>velocity</artifactId>
         <groupId>org.apache.velocity</groupId>
         <version>${velocity.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-configuration2</artifactId>
+        <version>${commons-configuration2.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${commons-io.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
