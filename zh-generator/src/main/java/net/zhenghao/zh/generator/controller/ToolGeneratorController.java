@@ -7,6 +7,7 @@ import net.zhenghao.zh.common.utils.JSONUtils;
 import net.zhenghao.zh.generator.entity.GeneratorParamEntity;
 import net.zhenghao.zh.generator.entity.TableEntity;
 import net.zhenghao.zh.generator.service.ToolGeneratorService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -61,6 +62,12 @@ public class ToolGeneratorController extends AbstractController {
             response.getWriter().write(JSONUtils.objToString(R.error(results.getFieldError().getDefaultMessage())));
             return;
         }
-        System.out.println("success");
+        byte[] code = toolGeneratorService.generator(params);
+        String attachment = "attachment; filename=" + params.getTableName() + ".zip";
+        response.reset();
+        response.setHeader("Content-Disposition", attachment);
+        response.addHeader("Content-Length", "" + code.length);
+        response.setContentType("application/octet-stream; charset=UTF-8");
+        IOUtils.write(code, response.getOutputStream());
     }
 }

@@ -95,9 +95,6 @@ public class GeneratorHandler {
         //获取模板列表
         List<String> templates = getTemplates();
         for (String template : templates) {
-            //渲染模板
-            // StringWriter sw = new StringWriter();
-
             try(StringWriter sw = new StringWriter()) {
                 Template tpl = Velocity.getTemplate(template, "UTF-8");
                 tpl.merge(context, sw);
@@ -265,7 +262,7 @@ public class GeneratorHandler {
             return webPath + "view" + File.separator + viewPath + File.separator + functionMethod + "Modal.vue";
         }
 
-        if (template.contains("edit.html.vm")) {
+        if (template.contains("List.vue.vm")) {
             return webPath + "view" + File.separator + viewPath + File.separator + functionMethod + "List.vue";
         }
 

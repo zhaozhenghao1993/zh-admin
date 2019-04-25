@@ -139,12 +139,6 @@ export default {
         onOk () {
           return ${functionCode}Delete(record.${pk.fieldName}).then(() => {
             that.$message.success('删除成功')
-          }).catch(err => {
-            that.$message.error(err.msg)
-          }).finally(() => {
-            that.$refs.table.refresh(false)
-            // 批量删除完毕后清空复选框
-            that.$refs.table.clearSelected()
           })
         },
         onCancel () {
@@ -162,12 +156,6 @@ export default {
         onOk () {
           return ${functionCode}BatchDelete(selectedRowKeys).then(() => {
             that.$message.success('删除成功')
-          }).catch(err => {
-            that.$message.error(err.msg)
-          }).finally(() => {
-            that.$refs.table.refresh(false)
-            // 批量删除完毕后清空复选框
-            that.$refs.table.clearSelected()
           })
         },
         onCancel () {
