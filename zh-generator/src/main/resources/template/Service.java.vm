@@ -16,13 +16,13 @@ public interface ${className}Service {
 
 	Page<${className}Entity> list${className}(Map<String, Object> params);
 
-    R get${className}ById(Long id);
+    R get${className}ById(Long ${pk.fieldName});
 
 	R save${className}(${className}Entity ${objName});
 
 	R update${className}(${className}Entity ${objName});
 
-    R remove${className}(Long id);
+    R remove${className}(Long ${pk.fieldName});
 	
 	R batchRemove(Long[] ids);
 	

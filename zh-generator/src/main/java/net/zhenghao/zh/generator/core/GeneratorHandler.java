@@ -255,7 +255,7 @@ public class GeneratorHandler {
         }
 
         if (template.contains("api.js.vm")) {
-            return webPath + "api" + File.separator + viewPath + File.separator + ".js";
+            return webPath + "api" + File.separator + viewPath + ".js";
         }
 
         if (template.contains("Modal.vue.vm")) {

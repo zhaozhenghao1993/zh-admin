@@ -42,8 +42,8 @@ public class ${className}Controller extends AbstractController {
      * @return
      */
     @GetMapping("/{id}")
-    public R info(@PathVariable("id") Long id) {
-        return ${objName}Service.get${className}ById(id);
+    public R info(@PathVariable("id") Long ${pk.fieldName}) {
+        return ${objName}Service.get${className}ById(${pk.fieldName});
     }
 
     /**
@@ -66,8 +66,8 @@ public class ${className}Controller extends AbstractController {
 	 */
     @SysLog("修改${comments}")
     @PutMapping("/{id}")
-    public R update(@PathVariable("id") Long id, @RequestBody ${className}Entity ${objName}) {
-        ${objName}.set${pk.methodName}(id);
+    public R update(@PathVariable("id") Long ${pk.fieldName}, @RequestBody ${className}Entity ${objName}) {
+        ${objName}.set${pk.methodName}(${pk.fieldName});
         ${objName}.setModifierId(getUserId());
         return ${objName}Service.update${className}(${objName});
     }
@@ -79,8 +79,8 @@ public class ${className}Controller extends AbstractController {
 	 */
     @SysLog("删除${comments}")
     @DeleteMapping("/{id}")
-    public R remove(@PathVariable("id") Long id) {
-        return ${objName}Service.remove${className}(id);
+    public R remove(@PathVariable("id") Long ${pk.fieldName}) {
+        return ${objName}Service.remove${className}(${pk.fieldName});
     }
 
     /**

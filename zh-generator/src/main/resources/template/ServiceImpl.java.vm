@@ -38,8 +38,8 @@ public class ${className}ServiceImpl implements ${className}Service {
 	}
 
     @Override
-    public R get${className}ById(Long id) {
-		${className}Entity ${objName} = ${objName}Mapper.get${className}ById(id);
+    public R get${className}ById(Long ${pk.fieldName}) {
+		${className}Entity ${objName} = ${objName}Mapper.get${className}ById(${pk.fieldName});
         return CommonUtils.msg(${objName});
     }
 
@@ -56,8 +56,8 @@ public class ${className}ServiceImpl implements ${className}Service {
 	}
 
     @Override
-    public R remove${className}(Long id) {
-        int count = ${objName}Mapper.remove(id);
+    public R remove${className}(Long ${pk.fieldName}) {
+        int count = ${objName}Mapper.remove(${pk.fieldName});
         return CommonUtils.msg(count);
     }
 
