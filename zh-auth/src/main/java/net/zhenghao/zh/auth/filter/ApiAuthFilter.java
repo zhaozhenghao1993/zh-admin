@@ -106,7 +106,7 @@ public class ApiAuthFilter implements Filter {
                 return;
             }
 
-            logger.error("{},User Forbidden!Does not has Permission!", uri);
+            logger.error("{}::{},User Forbidden!Does not has Permission!", uri, method);
             getErrorResponse(httpServletResponse, R.error(HttpStatusConstant.USER_API_UNAUTHORIZED, "User Forbidden!Does not has Permission!"));
             return;
         }
