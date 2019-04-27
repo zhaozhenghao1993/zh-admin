@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.zhenghao.zh.auth.dao.SysPostMapper">
+
+	<select id="listForPage" resultType="SysPostEntity" flushCache="true">
+		SELECT
+			`post_id`, 
+			`post_code`, 
+			`post_name`, 
+			`order_num`, 
+			`creator_id`, 
+			`create_time`, 
+			`modifier_id`, 
+			`modified_time`
+		FROM
+			sys_post
+		ORDER BY
+			post_id DESC
+	</select>
+	
+	<insert id="save">
+		INSERT INTO sys_post (
+			`post_code`, 
+			`post_name`, 
+			`order_num`, 
+			`creator_id`, 
+			`create_time`, 
+			`modifier_id`, 
+			`modified_time`
+		)
+		VALUES (
+			#{postCode}, 
+			#{postName}, 
+			#{orderNum}, 
+			#{creatorId}, 
+			#{createTime}, 
+			#{modifierId}, 
+			#{modifiedTime}
+		)
+	</insert>
+	
+	<select id="getObjectById" resultType="SysPostEntity">
+		SELECT
+			`post_id`, 
+			`post_code`, 
+			`post_name`, 
+			`order_num`, 
+			`creator_id`, 
+			`create_time`, 
+			`modifier_id`, 
+			`modified_time`
+		FROM
+			sys_post
+		WHERE
+			post_id = #{postId}
+	</select>
+	
+	<update id="update">
+		UPDATE sys_post
+	 	<set>
+			<if test="postCode != null">`post_code` = #{postCode}, </if>
+			<if test="postName != null">`post_name` = #{postName}, </if>
+			<if test="orderNum != null">`order_num` = #{orderNum}, </if>
+			<if test="creatorId != null">`creator_id` = #{creatorId}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="modifierId != null">`modifier_id` = #{modifierId}, </if>
+			<if test="modifiedTime != null">`modified_time` = #{modifiedTime}</if>
+		</set>
+		WHERE
+			post_id = #{postId}
+	</update>
+
+    <delete id="remove">
+        DELETE
+        FROM
+			sys_post
+        WHERE
+			post_id = #{value}
+    </delete>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			sys_post
+		WHERE
+			post_id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+	
+</mapper>

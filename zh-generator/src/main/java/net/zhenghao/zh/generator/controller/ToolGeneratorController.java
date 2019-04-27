@@ -1,5 +1,6 @@
 package net.zhenghao.zh.generator.controller;
 
+import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
@@ -55,6 +56,7 @@ public class ToolGeneratorController extends AbstractController {
      * @throws IOException
      */
     @GetMapping("/code")
+    @SysLog("生成代码")
     public void generator(@Valid GeneratorParamEntity params, BindingResult results, HttpServletRequest request, HttpServletResponse response) throws IOException {
         if (results.hasErrors()) {
             response.setCharacterEncoding("UTF-8");

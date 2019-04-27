@@ -85,8 +85,8 @@ export default {
       columns: [
 #foreach($column in $columns)
         {
-            title : "$column.columnComment",
-            dataIndex : "$column.fieldName"
+          title: '$column.columnComment',
+          dataIndex: '$column.fieldName'
         },
 #end$!empty
         {
@@ -139,6 +139,12 @@ export default {
         onOk () {
           return ${functionCode}Delete(record.${pk.fieldName}).then(() => {
             that.$message.success('删除成功')
+          }).catch(err => {
+            that.$message.error('删除失败')
+          }).finally(() => {
+            that.$refs.table.refresh(false)
+            // 批量删除完毕后清空复选框
+            that.$refs.table.clearSelected()
           })
         },
         onCancel () {
@@ -156,6 +162,12 @@ export default {
         onOk () {
           return ${functionCode}BatchDelete(selectedRowKeys).then(() => {
             that.$message.success('删除成功')
+          }).catch(err => {
+            that.$message.error('删除失败')
+          }).finally(() => {
+            that.$refs.table.refresh(false)
+            // 批量删除完毕后清空复选框
+            that.$refs.table.clearSelected()
           })
         },
         onCancel () {

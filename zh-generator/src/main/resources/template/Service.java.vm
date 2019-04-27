@@ -4,6 +4,8 @@ import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
 import ${package}.${module}.entity.${className}Entity;
 
+import java.util.Map;
+
 /**
  * ${comments}
  *

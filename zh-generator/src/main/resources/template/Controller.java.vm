@@ -32,7 +32,7 @@ public class ${className}Controller extends AbstractController {
 	 * @return
 	 */
 	@GetMapping("")
-	public Page<${className}Entity> list(@RequestBody Map<String, Object> params) {
+	public Page<${className}Entity> list(@RequestParam Map<String, Object> params) {
 		return ${objName}Service.list${className}(params);
 	}
 

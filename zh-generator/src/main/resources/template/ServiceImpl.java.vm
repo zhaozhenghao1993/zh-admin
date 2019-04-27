@@ -23,6 +23,7 @@ import java.util.Map;
  * ${className}ServiceImpl.java
  */
 @Service("${objName}Service")
+@Transactional
 public class ${className}ServiceImpl implements ${className}Service {
 
 	@Autowired
@@ -39,19 +40,19 @@ public class ${className}ServiceImpl implements ${className}Service {
 
     @Override
     public R get${className}ById(Long ${pk.fieldName}) {
-		${className}Entity ${objName} = ${objName}Mapper.get${className}ById(${pk.fieldName});
+		${className}Entity ${objName} = ${objName}Mapper.getObjectById(${pk.fieldName});
         return CommonUtils.msg(${objName});
     }
 
 	@Override
 	public R save${className}(${className}Entity ${objName}) {
-		int count = ${objName}Mapper.save${className}(${objName});
+		int count = ${objName}Mapper.save(${objName});
 		return CommonUtils.msg(count);
 	}
 
 	@Override
 	public R update${className}(${className}Entity ${objName}) {
-		int count = ${objName}Mapper.update${className}(${objName});
+		int count = ${objName}Mapper.update(${objName});
 		return CommonUtils.msg(count);
 	}
 

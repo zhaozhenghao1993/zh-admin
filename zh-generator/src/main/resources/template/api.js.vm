@@ -9,10 +9,10 @@ export function ${functionCode}List (parameter) {
 }
 
 export function ${functionCode}Info (id) {
-    return axios({
-        url: '/${requestMapping}' + id,
-        method: 'get'
-    })
+  return axios({
+    url: '/${requestMapping}/' + id,
+    method: 'get'
+  })
 }
 
 export function ${functionCode}Save (parameter) {
@@ -25,7 +25,7 @@ export function ${functionCode}Save (parameter) {
 
 export function ${functionCode}Edit (id, parameter) {
   return axios({
-    url: '/${requestMapping}' + id,
+    url: '/${requestMapping}/' + id,
     method: 'put',
     data: parameter
   })
@@ -33,7 +33,7 @@ export function ${functionCode}Edit (id, parameter) {
 
 export function ${functionCode}Delete (id) {
   return axios({
-    url: '/${requestMapping}' + id,
+    url: '/${requestMapping}/' + id,
     method: 'delete'
   })
 }
