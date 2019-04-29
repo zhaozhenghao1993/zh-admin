@@ -105,7 +105,7 @@
 			#{orgName},
 			#{orderNum},
 			#{creatorId},
-			now()
+			NOW()
 		)
 	</insert>
 

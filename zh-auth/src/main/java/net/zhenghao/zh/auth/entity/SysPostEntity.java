@@ -20,16 +20,16 @@ public class SysPostEntity implements Serializable {
 	 * 
 	 */
 	private Long postId;
+
+	/**
+	 * 岗位名称
+	 */
+	private String postName;
 	
 	/**
 	 * 岗位编码
 	 */
 	private String postCode;
-	
-	/**
-	 * 岗位名称
-	 */
-	private String postName;
 	
 	/**
 	 * 排序
@@ -68,6 +68,14 @@ public class SysPostEntity implements Serializable {
 	public Long getPostId() {
 		return postId;
 	}
+
+	public void setPostName(String postName) {
+		this.postName = postName;
+	}
+
+	public String getPostName() {
+		return postName;
+	}
 	
 	public void setPostCode(String postCode) {
 		this.postCode = postCode;
@@ -75,14 +83,6 @@ public class SysPostEntity implements Serializable {
 	
 	public String getPostCode() {
 		return postCode;
-	}
-	
-	public void setPostName(String postName) {
-		this.postName = postName;
-	}
-	
-	public String getPostName() {
-		return postName;
 	}
 	
 	public void setOrderNum(Integer orderNum) {

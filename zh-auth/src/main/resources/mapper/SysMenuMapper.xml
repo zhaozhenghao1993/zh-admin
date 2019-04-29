@@ -175,7 +175,7 @@
 			#{orderNum},
 			#{description},
 			#{creatorId},
-			now()
+			NOW()
 		)
 	</insert>
 

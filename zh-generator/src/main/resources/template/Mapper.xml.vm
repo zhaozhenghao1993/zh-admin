@@ -6,7 +6,7 @@
 	<select id="listForPage" resultType="${className}Entity" flushCache="true">
 		SELECT
 #foreach($column in $columns)
-			`$column.columnName`#if($velocityCount != $columns.size()), 
+			`$column.columnName`#if($velocityCount != $columns.size()),
 #end			
 #end$!empty
 		FROM
@@ -14,12 +14,25 @@
 		ORDER BY
 			${pk.columnName} DESC
 	</select>
+
+
+    <select id="getObjectById" resultType="${className}Entity">
+		SELECT
+#foreach($column in $columns)
+			`$column.columnName`#if($velocityCount != $columns.size()),
+#end
+	#end$!empty
+		FROM
+			${tableName}
+		WHERE
+			${pk.columnName} = #{${pk.fieldName}}
+	</select>
 	
 	<insert id="save">
 		INSERT INTO ${tableName} (
 #foreach($column in $columns)
 #if($column.columnName != $pk.columnName || $pk.extra != 'auto_increment')
-			`$column.columnName`#if($velocityCount != $columns.size()), 
+			`$column.columnName`#if($velocityCount != $columns.size()),
 #end
 #end			
 #end$!empty
@@ -27,31 +40,19 @@
 		VALUES (
 #foreach($column in $columns)
 #if($column.columnName != $pk.columnName || $pk.extra != 'auto_increment')
-			#{$column.fieldName}#if($velocityCount != $columns.size()), 
+			#{$column.fieldName}#if($velocityCount != $columns.size()),
 #end
 #end			
 #end$!empty
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="${className}Entity">
-		SELECT
-#foreach($column in $columns)
-			`$column.columnName`#if($velocityCount != $columns.size()), 
-#end			
-#end$!empty
-		FROM
-			${tableName}
-		WHERE
-			${pk.columnName} = #{${pk.fieldName}}
-	</select>
-	
 	<update id="update">
 		UPDATE ${tableName}
 	 	<set>
 #foreach($column in $columns)
 #if($column.columnName != $pk.columnName)
-			<if test="$column.fieldName != null">`$column.columnName` = #{$column.fieldName}#if($velocityCount != $columns.size()), #end</if>
+			<if test="$column.fieldName != null">`$column.columnName` = #{$column.fieldName}#if($velocityCount != $columns.size()),#end</if>
 #end
 #end
 		</set>
