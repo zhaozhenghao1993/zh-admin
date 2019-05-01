@@ -117,7 +117,7 @@
 		LEFT JOIN sys_role r ON ur.role_id = r.role_id
 		LEFT JOIN sys_user u ON ur.user_id = u.user_id
 		WHERE
-			u.user_id = #{role}
+			u.user_id = #{userId}
 	</select>
 	
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>

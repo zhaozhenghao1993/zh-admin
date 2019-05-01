@@ -4,7 +4,7 @@ import net.zhenghao.zh.auth.dao.SysOrgMapper;
 import net.zhenghao.zh.auth.dao.SysUserMapper;
 import net.zhenghao.zh.auth.entity.SysOrgEntity;
 import net.zhenghao.zh.auth.service.SysOrgService;
-import net.zhenghao.zh.auth.vo.SysTreeVO;
+import net.zhenghao.zh.common.vo.SysTreeVO;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.R;

@@ -5,6 +5,8 @@ import net.zhenghao.zh.auth.entity.SysPostEntity;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * 岗位管理
  *
@@ -16,5 +18,11 @@ import org.springframework.stereotype.Component;
 @MapperScan
 @Component
 public interface SysPostMapper extends BaseMapper<SysPostEntity> {
-	
+
+    /**
+     * 根据用户id查询该用户的岗位
+     * @param userId
+     * @return
+     */
+    List<SysPostEntity> listUserPosts(Long userId);
 }

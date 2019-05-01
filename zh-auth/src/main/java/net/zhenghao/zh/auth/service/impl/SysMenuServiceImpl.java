@@ -2,7 +2,7 @@ package net.zhenghao.zh.auth.service.impl;
 
 import net.zhenghao.zh.auth.dao.SysMenuMapper;
 import net.zhenghao.zh.auth.dao.SysRoleMenuMapper;
-import net.zhenghao.zh.auth.vo.SysTreeVO;
+import net.zhenghao.zh.common.vo.SysTreeVO;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.R;

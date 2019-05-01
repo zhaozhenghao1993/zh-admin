@@ -1,4 +1,4 @@
-package net.zhenghao.zh.auth.vo;
+package net.zhenghao.zh.common.vo;
 
 import java.io.Serializable;
 import java.util.List;

@@ -47,11 +47,20 @@ public class SysPostController extends AbstractController {
     }
 
     /**
+     * 岗位list
+     * @return
+     */
+    @GetMapping("/select")
+    public R listPost() {
+        return sysPostService.listPost();
+    }
+
+    /**
 	 * 新增
 	 * @param post
 	 * @return
 	 */
-    @SysLog("新增岗位管理")
+    @SysLog("新增岗位")
     @PostMapping("")
     public R save(@RequestBody SysPostEntity post) {
         post.setCreatorId(getUserId());
@@ -64,7 +73,7 @@ public class SysPostController extends AbstractController {
 	 * @param post
 	 * @return
 	 */
-    @SysLog("修改岗位管理")
+    @SysLog("修改岗位")
     @PutMapping("/{id}")
     public R update(@PathVariable("id") Long postId, @RequestBody SysPostEntity post) {
         post.setPostId(postId);
@@ -77,7 +86,7 @@ public class SysPostController extends AbstractController {
 	 * @param postId
 	 * @return
 	 */
-    @SysLog("删除岗位管理")
+    @SysLog("删除岗位")
     @DeleteMapping("/{id}")
     public R remove(@PathVariable("id") Long postId) {
         return sysPostService.removePost(postId);
@@ -88,7 +97,7 @@ public class SysPostController extends AbstractController {
 	 * @param ids
 	 * @return
 	 */
-    @SysLog("批量删除岗位管理")
+    @SysLog("批量删除岗位")
     @DeleteMapping("")
     public R batchRemove(@RequestBody Long[] ids) {
         return sysPostService.batchRemove(ids);

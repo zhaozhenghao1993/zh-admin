@@ -2,6 +2,7 @@ package net.zhenghao.zh.auth.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import net.zhenghao.zh.auth.dao.SysPostMapper;
+import net.zhenghao.zh.auth.dao.SysUserPostMapper;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.R;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +30,9 @@ public class SysPostServiceImpl implements SysPostService {
 
 	@Autowired
 	private SysPostMapper sysPostMapper;
+
+	@Autowired
+	private SysUserPostMapper sysUserPostMapper;
 	
 	@Override
 	public Page<SysPostEntity> listPost(Map<String, Object> params) {
@@ -45,6 +50,12 @@ public class SysPostServiceImpl implements SysPostService {
     }
 
 	@Override
+	public R listPost() {
+		List<SysPostEntity> postList = sysPostMapper.list();
+		return CommonUtils.msgNotNull(postList);
+	}
+
+	@Override
 	public R savePost(SysPostEntity post) {
 		int count = sysPostMapper.save(post);
 		return CommonUtils.msg(count);
@@ -59,12 +70,14 @@ public class SysPostServiceImpl implements SysPostService {
     @Override
     public R removePost(Long postId) {
         int count = sysPostMapper.remove(postId);
+		sysUserPostMapper.removeByPostId(postId);
         return CommonUtils.msg(count);
     }
 
 	@Override
 	public R batchRemove(Long[] ids) {
 		int count = sysPostMapper.batchRemove(ids);
+		sysUserPostMapper.batchRemoveByPostId(ids);
 		return CommonUtils.msg(ids, count);
 	}
 	

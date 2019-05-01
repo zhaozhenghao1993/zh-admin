@@ -21,7 +21,7 @@
 #foreach($column in $columns)
 			`$column.columnName`#if($velocityCount != $columns.size()),
 #end
-	#end$!empty
+#end$!empty
 		FROM
 			${tableName}
 		WHERE

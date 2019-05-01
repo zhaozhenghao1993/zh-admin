@@ -71,6 +71,6 @@ public class BaseContextHandler {
     }
 
     private static String returnObjectValue(Object value) {
-        return value==null? null:value.toString();
+        return value == null ? null : value.toString();
     }
 }

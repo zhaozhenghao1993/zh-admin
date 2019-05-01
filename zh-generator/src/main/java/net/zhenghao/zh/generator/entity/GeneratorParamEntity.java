@@ -1,6 +1,7 @@
 package net.zhenghao.zh.generator.entity;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 /**
  * 🙃
@@ -13,8 +14,10 @@ import javax.validation.constraints.NotBlank;
  * GeneratorParamEntity.java
  */
 
-public class GeneratorParamEntity {
+public class GeneratorParamEntity implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     /**
      * 表名
      */

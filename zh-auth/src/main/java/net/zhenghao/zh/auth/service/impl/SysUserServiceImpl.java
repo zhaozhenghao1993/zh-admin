@@ -1,10 +1,7 @@
 package net.zhenghao.zh.auth.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import net.zhenghao.zh.auth.dao.SysMenuMapper;
-import net.zhenghao.zh.auth.dao.SysRoleMapper;
-import net.zhenghao.zh.auth.dao.SysUserMapper;
-import net.zhenghao.zh.auth.dao.SysUserRoleMapper;
+import net.zhenghao.zh.auth.dao.*;
 import net.zhenghao.zh.auth.entity.SysMenuEntity;
 import net.zhenghao.zh.auth.entity.SysUserEntity;
 import net.zhenghao.zh.common.constant.SystemConstant;
@@ -45,7 +42,13 @@ public class SysUserServiceImpl implements SysUserService {
 	private SysMenuMapper sysMenuMapper;
 
 	@Autowired
+	private SysPostMapper sysPostMapper;
+
+	@Autowired
 	private SysUserRoleMapper sysUserRoleMapper;
+
+	@Autowired
+	private SysUserPostMapper sysUserPostMapper;
 
 	@Override
 	public List<SysMenuEntity> listUserPerms(Long userId) {
@@ -71,6 +74,7 @@ public class SysUserServiceImpl implements SysUserService {
 		SysUserEntity user = sysUserMapper.getObjectById(userId);
 		user.setRoles(sysRoleMapper.listUserRoles(userId));
 		user.setPerms(sysMenuMapper.listUserMenu(userId));
+		user.setPosts(sysPostMapper.listUserPosts(userId));
 		return CommonUtils.msg(user);
 	}
 
@@ -96,6 +100,12 @@ public class SysUserServiceImpl implements SysUserService {
 			query.put("roleIdList", user.getRoleIdList());
 			sysUserRoleMapper.save(query);
 		}
+		if (user.getPostIdList() != null && !user.getPostIdList().isEmpty()) {
+			Query query = new Query();
+			query.put("userId", user.getUserId());
+			query.put("postIdList", user.getPostIdList());
+			sysUserPostMapper.save(query);
+		}
 		return CommonUtils.msg(count);
 	}
 
@@ -103,7 +113,9 @@ public class SysUserServiceImpl implements SysUserService {
 	public R getUserById(Long userId) {
 		SysUserEntity user = sysUserMapper.getObjectById(userId);
 		List<Long> roleId = sysUserRoleMapper.listUserRoleId(userId);
+		List<Long> postId = sysUserPostMapper.listUserPostId(userId);
 		user.setRoleIdList(roleId);
+		user.setPostIdList(postId);
 		return CommonUtils.msg(user);
 	}
 
@@ -125,6 +137,13 @@ public class SysUserServiceImpl implements SysUserService {
 			query.put("roleIdList", user.getRoleIdList());
 			sysUserRoleMapper.save(query);
 		}
+		sysUserPostMapper.removeByUserId(userId);
+		if (user.getPostIdList() != null && !user.getPostIdList().isEmpty()) {
+			Query query = new Query();
+			query.put("userId", userId);
+			query.put("postIdList", user.getPostIdList());
+			sysUserPostMapper.save(query);
+		}
 		return CommonUtils.msg(count);
 	}
 
@@ -135,6 +154,7 @@ public class SysUserServiceImpl implements SysUserService {
 		}
 		int count = sysUserMapper.remove(id);
 		sysUserRoleMapper.removeByUserId(id);
+		sysUserPostMapper.removeByUserId(id);
 		return CommonUtils.msg(count);
 	}
 
@@ -145,13 +165,8 @@ public class SysUserServiceImpl implements SysUserService {
 		}
 		int count = sysUserMapper.batchRemove(ids);
 		sysUserRoleMapper.batchRemoveByUserId(ids);
+		sysUserPostMapper.batchRemoveByUserId(ids);
 		return CommonUtils.msg(ids, count);
-	}
-
-	@Override
-	public R listUserMenu(Long userId) {
-		List<SysMenuEntity> menus = sysMenuMapper.listUserMenu(userId);
-		return CommonUtils.msgNotNull(menus);
 	}
 
 	@Override

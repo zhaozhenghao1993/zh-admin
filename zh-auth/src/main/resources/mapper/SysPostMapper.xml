@@ -35,6 +35,16 @@
 			</otherwise>
 		</choose>
 	</select>
+
+	<select id="list" resultType="SysPostEntity">
+		SELECT
+			post_id,
+			post_name
+		FROM
+			sys_post
+		ORDER BY
+			order_num ASC
+	</select>
 	
 	<insert id="save">
 		INSERT INTO sys_post (
@@ -100,6 +110,19 @@
 			#{id}
 		</foreach>
 	</delete>
+
+	<select id="listUserPosts" parameterType="long" resultType="SysPostEntity">
+		SELECT DISTINCT
+			p.post_id,
+			p.post_name,
+			p.post_code
+		FROM
+			sys_user_post up
+		LEFT JOIN sys_post p ON up.post_id = p.post_id
+		LEFT JOIN sys_user u ON up.user_id = u.user_id
+		WHERE
+			u.user_id = #{userId}
+	</select>
 	
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 	

@@ -19,7 +19,7 @@
 		<result property="parentId" column="parent_id" />
 		<result property="value" column="org_id" />
 		<result property="title" column="org_name" />
-		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.auth.vo.SysTreeVO" column="org_id"
+		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.common.vo.SysTreeVO" column="org_id"
                     select="listTreeParentId" />
 	</resultMap>
 

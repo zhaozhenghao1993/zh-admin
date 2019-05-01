@@ -20,6 +20,8 @@ public interface SysPostService {
 
     R getPostById(Long postId);
 
+    R listPost();
+
 	R savePost(SysPostEntity post);
 
 	R updatePost(SysPostEntity post);

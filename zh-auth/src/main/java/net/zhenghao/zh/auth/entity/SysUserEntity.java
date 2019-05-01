@@ -105,6 +105,16 @@ public class SysUserEntity implements Serializable {
 	 */
 	private List<SysMenuEntity> perms;
 
+	/**
+	 * 岗位id列表
+	 */
+	private List<Long> postIdList;
+
+	/**
+	 * 岗位列表
+	 */
+	private List<SysPostEntity> posts;
+
 	public SysUserEntity(){
 		super();
 	}
@@ -251,5 +261,21 @@ public class SysUserEntity implements Serializable {
 
 	public void setPerms(List<SysMenuEntity> perms) {
 		this.perms = perms;
+	}
+
+	public List<Long> getPostIdList() {
+		return postIdList;
+	}
+
+	public void setPostIdList(List<Long> postIdList) {
+		this.postIdList = postIdList;
+	}
+
+	public List<SysPostEntity> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<SysPostEntity> posts) {
+		this.posts = posts;
 	}
 }

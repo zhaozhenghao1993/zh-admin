@@ -1,7 +1,7 @@
 package net.zhenghao.zh.auth.dao;
 
 import net.zhenghao.zh.auth.entity.SysOrgEntity;
-import net.zhenghao.zh.auth.vo.SysTreeVO;
+import net.zhenghao.zh.common.vo.SysTreeVO;
 import net.zhenghao.zh.common.dao.BaseMapper;
 import net.zhenghao.zh.common.entity.Query;
 import org.mybatis.spring.annotation.MapperScan;

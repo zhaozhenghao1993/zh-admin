@@ -40,15 +40,6 @@ public class SysUserController extends AbstractController {
     }
 
 	/**
-	 * 获取登录用户权限
-	 * @return
-	 */
-	@GetMapping("/menu")
-	public R menu() {
-		return sysUserService.listUserMenu(getUserId());
-	}
-
-	/**
 	 * 更新当前用户的个人基础信息
 	 * @return
 	 */
