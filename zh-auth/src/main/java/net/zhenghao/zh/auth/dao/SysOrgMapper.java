@@ -28,6 +28,13 @@ public interface SysOrgMapper extends BaseMapper<SysOrgEntity>{
 	List<SysTreeVO> listTree();
 
 	/**
+	 * 根据 OrgId 的 数组字符串查询列表
+	 * @param orgIds   0,1,2
+	 * @return
+	 */
+	List<SysOrgEntity> listByOrgIds(String orgIds);
+
+	/**
 	 * 根据menuId获取子菜单的数量
 	 * @return
 	 */

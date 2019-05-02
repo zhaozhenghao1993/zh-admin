@@ -90,6 +90,18 @@
 			parent_id = #{value}
 	</select>
 
+	<select id="listByOrgIds" resultType="SysOrgEntity">
+		SELECT
+			org_id,
+			org_name
+		FROM
+			sys_org
+		WHERE
+			org_id IN (${value})
+		ORDER BY
+			FIELD(org_id, ${value})
+	</select>
+
 	<insert id="save">
 		INSERT INTO sys_org (
 			parent_id,

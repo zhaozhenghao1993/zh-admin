@@ -115,6 +115,11 @@ public class SysUserEntity implements Serializable {
 	 */
 	private List<SysPostEntity> posts;
 
+	/**
+	 * 组织列表，按照组织级别排序，取当前组织就获取列表最后一个
+	 */
+	private List<SysOrgEntity> orgs;
+
 	public SysUserEntity(){
 		super();
 	}
@@ -277,5 +282,13 @@ public class SysUserEntity implements Serializable {
 
 	public void setPosts(List<SysPostEntity> posts) {
 		this.posts = posts;
+	}
+
+	public List<SysOrgEntity> getOrgs() {
+		return orgs;
+	}
+
+	public void setOrgs(List<SysOrgEntity> orgs) {
+		this.orgs = orgs;
 	}
 }

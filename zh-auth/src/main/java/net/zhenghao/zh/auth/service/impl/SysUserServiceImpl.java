@@ -3,6 +3,7 @@ package net.zhenghao.zh.auth.service.impl;
 import com.github.pagehelper.PageHelper;
 import net.zhenghao.zh.auth.dao.*;
 import net.zhenghao.zh.auth.entity.SysMenuEntity;
+import net.zhenghao.zh.auth.entity.SysOrgEntity;
 import net.zhenghao.zh.auth.entity.SysUserEntity;
 import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.entity.Page;
@@ -45,6 +46,9 @@ public class SysUserServiceImpl implements SysUserService {
 	private SysPostMapper sysPostMapper;
 
 	@Autowired
+	private SysOrgMapper sysOrgMapper;
+
+	@Autowired
 	private SysUserRoleMapper sysUserRoleMapper;
 
 	@Autowired
@@ -75,6 +79,11 @@ public class SysUserServiceImpl implements SysUserService {
 		user.setRoles(sysRoleMapper.listUserRoles(userId));
 		user.setPerms(sysMenuMapper.listUserMenu(userId));
 		user.setPosts(sysPostMapper.listUserPosts(userId));
+		// 设置组织列表
+		if (user.getOrgId() != null && user.getOrgId() != 0L) {
+			SysOrgEntity org = sysOrgMapper.getObjectById(user.getOrgId());
+			user.setOrgs(sysOrgMapper.listByOrgIds(org.getAncestors() + ',' + user.getOrgId()));
+		}
 		return CommonUtils.msg(user);
 	}
 
