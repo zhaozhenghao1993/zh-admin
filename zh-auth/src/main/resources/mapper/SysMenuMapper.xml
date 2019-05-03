@@ -257,6 +257,7 @@
 	<select id="listUserMenu" parameterType="long" resultType="SysMenuEntity" >
 		SELECT DISTINCT
 			m.menu_id,
+			m.parent_id,
 			m.name,
 			m.perms,
 			m.type
