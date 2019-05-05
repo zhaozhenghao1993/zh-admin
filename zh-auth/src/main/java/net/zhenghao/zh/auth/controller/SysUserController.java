@@ -110,6 +110,15 @@ public class SysUserController extends AbstractController {
 	}
 
 	/**
+	 * 获取用户详细信息
+	 * @return
+	 */
+	@GetMapping("/{id}/detail")
+	public R detail(@PathVariable("id") Long userId) {
+		return sysUserService.getUserInfo(userId);
+	}
+
+	/**
 	 * 新增用户
 	 * @param user
 	 * @return
