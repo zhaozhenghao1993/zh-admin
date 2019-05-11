@@ -13,7 +13,7 @@ package net.zhenghao.zh.common.exception;
 
 public class BaseException extends RuntimeException {
 
-    private int code = 200;
+    private int code = 500;
 
     public int getCode() {
         return code;

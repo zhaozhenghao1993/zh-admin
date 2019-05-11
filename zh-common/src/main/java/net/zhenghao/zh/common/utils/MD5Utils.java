@@ -1,11 +1,11 @@
 package net.zhenghao.zh.common.utils;
 
+import net.zhenghao.zh.common.crypto.hash.SimpleHash;
+import net.zhenghao.zh.common.crypto.util.ByteSource;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.crypto.hash.SimpleHash;
-import org.apache.shiro.util.ByteSource;
 
 /**
- * shiro MD5盐值加密
+ * MD5盐值加密
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
@@ -45,7 +45,7 @@ public class MD5Utils {
 	public static void main(String[] args) {
 		String password = "123";
 		String username = "admin";
-		encrypt(username, password);
+		System.out.println(encrypt(username, password));
 	}
 
 }

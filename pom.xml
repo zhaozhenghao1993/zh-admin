@@ -64,7 +64,6 @@
     <jwt.version>3.2.0</jwt.version>
     <jjwt.version>0.9.1</jjwt.version>
     <joda.version>2.10.1</joda.version>
-    <shiro.version>1.4.0</shiro.version>
     <commons-lang3.version>3.8.1</commons-lang3.version>
     <commons-configuration2.version>2.4</commons-configuration2.version>
     <commons-io.version>2.6</commons-io.version>
@@ -136,19 +135,6 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-redis</artifactId>
-    </dependency>
-
-    <!--shiro-->
-    <dependency>
-      <groupId>org.apache.shiro</groupId>
-      <artifactId>shiro-spring</artifactId>
-      <version>${shiro.version}</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>slf4j-api</artifactId>
-          <groupId>org.slf4j</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
     <dependency>
