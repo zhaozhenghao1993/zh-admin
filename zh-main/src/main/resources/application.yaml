@@ -13,6 +13,10 @@ zh-admin:
     expire: 14400
     private-key-path: jwt/pkcs8_rsa_private_key.pem
     public-key-path: jwt/rsa_public_key.pem
+  file:
+    uploads:
+      folder: D:\\zh-admin\\uploads # 文件上传目录
+      path: /uploads/** # 文件上传静态资源对外暴露的访问路径
 
 logging:
   config: classpath:logback.xml

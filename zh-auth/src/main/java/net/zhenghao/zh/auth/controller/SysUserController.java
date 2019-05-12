@@ -126,6 +126,7 @@ public class SysUserController extends AbstractController {
 	@SysLog("新增用户")
 	@PostMapping("")
 	public R save(@RequestBody SysUserEntity user) {
+		user.setAvatar("/avatar.png"); // 给个默认头像
 		user.setCreatorId(getUserId());
 		return sysUserService.saveUser(user);
 	}

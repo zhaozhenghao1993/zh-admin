@@ -24,11 +24,6 @@
         </dependency>
 
         <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>net.zhenghao.zh</groupId>
             <artifactId>zh-common</artifactId>
             <version>1.0.0</version>
