@@ -16,7 +16,7 @@ zh-admin:
   file:
     uploads:
       folder: D:\\zh-admin\\uploads # 文件上传目录
-      path: /uploads/** # 文件上传静态资源对外暴露的访问路径
+      path: /uploads # 文件上传静态资源对外暴露的访问路径
 
 logging:
   config: classpath:logback.xml

@@ -9,6 +9,7 @@ import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.auth.service.SysUserService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -43,8 +44,8 @@ public class SysUserController extends AbstractController {
 	 * 更新当前用户的个人基础信息
 	 * @return
 	 */
-	@PutMapping("/profile")
-	public R profile(@RequestBody SysUserEntity user) {
+	@PostMapping("/profile")
+	public R profile(SysUserEntity user, MultipartFile file) {
 		user.setUserId(getUserId());
 		user.setModifierId(getUserId());
 		user.setUsername(null);

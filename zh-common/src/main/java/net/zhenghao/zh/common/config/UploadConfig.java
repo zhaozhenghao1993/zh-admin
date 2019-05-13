@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 
 @Configuration
-public class UploadsConfig implements WebMvcConfigurer {
+public class UploadConfig implements WebMvcConfigurer {
 
     @Value("${zh-admin.file.uploads.folder}")
     private String folder;
@@ -27,7 +27,7 @@ public class UploadsConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler(path).addResourceLocations("file:" + folder);
+        registry.addResourceHandler(path + "/**").addResourceLocations("file:" + folder);
     }
 
     public String getFolder() {
