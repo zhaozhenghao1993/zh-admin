@@ -199,7 +199,7 @@ public class SystemConstant {
 	
 	
 	/**
-	 * 上传文件类型
+	 * 文件类型
 	 * 
 	 * @author:zhaozhenghao
 	 * @Email :736720794@qq.com
