@@ -7,7 +7,9 @@ server:
 
 zh-admin:
   auth:
-    routes: /api/v1
+    routes: # 有效路由,不能重复且存在交集, 例：/uploads/-/system/user/avatar 不能与 /uploads 共存
+      - /api/v1
+      - /uploads/-/system/user/avatar
   jwt:
     token-header: ZH-TOKEN
     expire: 14400

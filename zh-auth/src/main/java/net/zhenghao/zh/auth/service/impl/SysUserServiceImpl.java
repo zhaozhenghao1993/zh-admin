@@ -5,6 +5,7 @@ import net.zhenghao.zh.auth.dao.*;
 import net.zhenghao.zh.auth.entity.SysMenuEntity;
 import net.zhenghao.zh.auth.entity.SysOrgEntity;
 import net.zhenghao.zh.auth.entity.SysUserEntity;
+import net.zhenghao.zh.auth.handler.UserAvatarHandler;
 import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
@@ -16,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
 import java.util.List;
@@ -54,6 +56,9 @@ public class SysUserServiceImpl implements SysUserService {
 	@Autowired
 	private SysUserPostMapper sysUserPostMapper;
 
+	@Autowired
+	private UserAvatarHandler userAvatarHandler;
+
 	@Override
 	public List<SysMenuEntity> listUserPerms(Long userId) {
 		return sysMenuMapper.listUserPerms(userId);
@@ -88,7 +93,8 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public R profileUser(SysUserEntity user) {
+	public R profileUser(SysUserEntity user, MultipartFile file) {
+		user.setAvatar(userAvatarHandler.avatarHandler(user.getUserId(), file));
 		int count = sysUserMapper.update(user);
 		return CommonUtils.msg(count);
 	}

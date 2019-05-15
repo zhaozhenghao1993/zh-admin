@@ -18,6 +18,16 @@ public class UploadConstant {
      */
     public static final String USER_AVATAR_FOLDER = "/-/system/user/avatar";
 
+    /**
+     * 用户头像默认地址
+     */
+    public static final String USER_AVATAR_DEFAULT_PATH = "/avatar.png";
+
+    /**
+     * 用户头像文件名
+     */
+    public static final String USER_AVATAR_FILE_NAME = "avatar";
+
     public static final Integer USER_AVATAR_FILE_SIZE = 1;
 
     public static final String USER_AVATAR_FILE_SIZE_UNIT = "M";

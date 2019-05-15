@@ -29,11 +29,23 @@ public class UploadUtils {
      * @throws IOException
      */
     public static String uploadFile(MultipartFile file, String folderPath) throws IOException {
+        return uploadFile(file, folderPath, file.getOriginalFilename());
+    }
+
+    /**
+     * 上传文件
+     * @param file
+     * @param folderPath    上传文件的路径
+     * @param fileName    上传文件名
+     * @return
+     * @throws IOException
+     */
+    public static String uploadFile(MultipartFile file, String folderPath, String fileName) throws IOException {
         File fileFolder = new File(folderPath);
         if (!fileFolder.exists() && !fileFolder.isDirectory()) {
             fileFolder.mkdirs();
         }
-        String uploadFilePath = folderPath + File.separator + file.getName();
+        String uploadFilePath = folderPath + File.separator + fileName;
         File uploadFile = new File(uploadFilePath);
         file.transferTo(uploadFile);
         return uploadFilePath;

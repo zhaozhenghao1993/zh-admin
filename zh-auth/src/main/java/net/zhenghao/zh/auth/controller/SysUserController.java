@@ -4,6 +4,7 @@ import net.zhenghao.zh.auth.entity.SysUserEntity;
 import net.zhenghao.zh.auth.vo.SysUserPasswordVO;
 import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.constant.SystemConstant;
+import net.zhenghao.zh.common.constant.UploadConstant;
 import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
@@ -48,9 +49,8 @@ public class SysUserController extends AbstractController {
 	public R profile(SysUserEntity user, MultipartFile file) {
 		user.setUserId(getUserId());
 		user.setModifierId(getUserId());
-		user.setUsername(null);
 		user.setStatus(null);
-		return sysUserService.profileUser(user);
+		return sysUserService.profileUser(user, file);
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class SysUserController extends AbstractController {
 	@SysLog("新增用户")
 	@PostMapping("")
 	public R save(@RequestBody SysUserEntity user) {
-		user.setAvatar("/avatar.png"); // 给个默认头像
+		user.setAvatar(UploadConstant.USER_AVATAR_DEFAULT_PATH); // 给个默认头像
 		user.setCreatorId(getUserId());
 		return sysUserService.saveUser(user);
 	}

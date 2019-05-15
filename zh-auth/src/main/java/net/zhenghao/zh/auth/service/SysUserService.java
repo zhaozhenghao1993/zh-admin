@@ -4,6 +4,7 @@ import net.zhenghao.zh.auth.entity.SysMenuEntity;
 import net.zhenghao.zh.auth.entity.SysUserEntity;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,7 @@ public interface SysUserService {
 
 	R getUserInfo(Long userId);
 
-	R profileUser(SysUserEntity user);
+	R profileUser(SysUserEntity user, MultipartFile file);
 	
 	R saveUser(SysUserEntity user);
 	

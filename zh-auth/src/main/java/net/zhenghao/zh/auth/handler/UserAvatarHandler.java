@@ -32,25 +32,26 @@ public class UserAvatarHandler {
 
     /**
      * 头像上传处理
-     * @param file
      * @param userId 用户id
+     * @param file
      * @return
      */
-    public String avatarHandler(MultipartFile file, Long userId) {
-        // 如果没有文件上传就 return null
+    public String avatarHandler(Long userId, MultipartFile file) {
+        // 如果没有文件上传就 return 默认头像
         if (file == null) {
-            return null;
+            return UploadConstant.USER_AVATAR_DEFAULT_PATH;
         }
-        if (FileUtils.fileType(file.getName()) != SystemConstant.FileType.IMAGE) {
+        if (FileUtils.fileType(file.getOriginalFilename()) != SystemConstant.FileType.IMAGE) {
             throw new BaseException("Please upload images!");
         }
-        if (FileUtils.checkFileSize(file.getSize(), UploadConstant.USER_AVATAR_FILE_SIZE, UploadConstant.USER_AVATAR_FILE_SIZE_UNIT)) {
+        if (!FileUtils.checkFileSize(file.getSize(), UploadConstant.USER_AVATAR_FILE_SIZE, UploadConstant.USER_AVATAR_FILE_SIZE_UNIT)) {
             throw new BaseException("Upload file too large!");
         }
+        String fileName = UploadConstant.USER_AVATAR_FILE_NAME + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
         String folderPath = uploadConfig.getFolder() + UploadConstant.USER_AVATAR_FOLDER + File.separator + userId;
-        String filePath = uploadConfig.getPath() + UploadConstant.USER_AVATAR_FOLDER + File.separator + userId + File.separator + file.getName();
+        String filePath = uploadConfig.getPath() + UploadConstant.USER_AVATAR_FOLDER + "/" + userId + "/" + fileName;
         try {
-            UploadUtils.uploadFile(file,  folderPath);
+            UploadUtils.uploadFile(file, folderPath, fileName);
         } catch (IOException e) {
             throw new BaseException("Upload file Error!");
         }

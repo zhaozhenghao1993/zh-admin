@@ -49,7 +49,8 @@ public class FileUtils {
      *            限制大小
      * @param unit
      *            限制单位（B,K,M,G）
-     * @return
+     * @return true 为满足大小，小于上限
+     *          false 为不满足大小，大于上限
      * 使用
      * // 上传文件格式
      * MultipartFile multipartFile = null;
@@ -62,7 +63,7 @@ public class FileUtils {
      * FileUtil.checkFileSize( file.length(),100,"M")
      */
     public static boolean checkFileSize(Long len, int size, String unit) {
-//        long len = file.length();
+        // long len = file.length();
         double fileSize = 0;
         if ("B".equals(unit.toUpperCase())) {
             fileSize = (double) len;

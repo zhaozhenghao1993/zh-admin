@@ -25,6 +25,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * 🙃
@@ -43,7 +44,7 @@ public class ApiAuthFilter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(ApiAuthFilter.class);
 
     @Value("${zh-admin.auth.routes}")
-    private String routes;
+    private List<String> routes;
 
     @Autowired
     private TokenHeaderConfig tokenHeaderConfig;
@@ -66,13 +67,15 @@ public class ApiAuthFilter implements Filter {
             String method = httpServletRequest.getMethod();
             logger.info("{}::{} ==> check token and user permission....", uri, method);
 
-            if (!uri.startsWith(routes)) {
+            String validRoute = routes.stream().filter(route -> uri.startsWith(route)).findAny().orElse(null);
+
+            if (validRoute == null) {
                 logger.error("{},This api is invalid!", uri);
                 getErrorResponse(httpServletResponse, R.error(HttpStatusConstant.REQUEST_API_INVALID, "This api is invalid!"));
                 return;
             }
 
-            String newPath = uri.replace(routes, "");
+            String newPath = uri.replace(validRoute, "");
             RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher(newPath);
 
             // 匿名访问过滤
