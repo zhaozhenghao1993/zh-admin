@@ -75,12 +75,11 @@ public class ApiAuthFilter implements Filter {
                 return;
             }
 
-            String newPath = uri.replace(validRoute, "");
-            RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher(newPath);
+            String authPath = uri.replace(validRoute, "");
 
             // 匿名访问过滤
-            if (requestHandlerAdapter.validateAnnoFilterChain(newPath, method)) {
-                requestDispatcher.forward(request, response);
+            if (requestHandlerAdapter.validateAnnoFilterChain(authPath, method)) {
+                chain.doFilter(request, response);
                 return;
             }
 
@@ -96,16 +95,16 @@ public class ApiAuthFilter implements Filter {
             }
 
             // 需要登陆token 且不权限拦截 即可访问
-            if (requestHandlerAdapter.validateAuthFilterChain(newPath, method)) {
+            if (requestHandlerAdapter.validateAuthFilterChain(authPath, method)) {
                 setCurrentUserInfo(jwtInfo);
-                requestDispatcher.forward(request, response);
+                chain.doFilter(request, response);
                 return;
             }
 
             // 用户所拥有的权限的uri
-            if (requestHandlerAdapter.validatePermsFilterChain(newPath, method, jwtInfo.getUserId())) {
+            if (requestHandlerAdapter.validatePermsFilterChain(authPath, method, jwtInfo.getUserId())) {
                 setCurrentUserInfo(jwtInfo);
-                requestDispatcher.forward(request, response);
+                chain.doFilter(request, response);
                 return;
             }
 

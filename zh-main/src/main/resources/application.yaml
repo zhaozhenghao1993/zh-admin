@@ -4,6 +4,8 @@ server:
     uri-encoding: UTF-8
     max-threads: 1000
     min-spare-threads: 30
+  servlet:
+    context-path: /api/v1
 
 zh-admin:
   auth:
