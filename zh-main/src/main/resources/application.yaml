@@ -4,10 +4,10 @@ server:
     uri-encoding: UTF-8
     max-threads: 1000
     min-spare-threads: 30
-  servlet:
-    context-path: /api/v1
 
 zh-admin:
+  api:
+    prefix: /api/v1/
   auth:
     routes: # 有效路由,不能重复且存在交集, 例：/uploads/-/system/user/avatar 不能与 /uploads 共存
       - /api/v1
@@ -19,7 +19,7 @@ zh-admin:
     public-key-path: jwt/rsa_public_key.pem
   file:
     uploads:
-      folder: D:\\zh-admin\\uploads # 文件上传目录
+      folder: D:\\zh-admin\\uploads\\ # 文件上传目录,末尾必有/ 或 \\
       path: /uploads # 文件上传静态资源对外暴露的访问路径
 
 logging:

@@ -43,8 +43,8 @@ public class ApiAuthFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(ApiAuthFilter.class);
 
-    @Value("${zh-admin.auth.routes}")
-    private List<String> routes;
+    /*@Value("${zh-admin.auth.routes}")
+    private List<String> routes;*/
 
     @Autowired
     private TokenHeaderConfig tokenHeaderConfig;
@@ -67,7 +67,9 @@ public class ApiAuthFilter implements Filter {
             String method = httpServletRequest.getMethod();
             logger.info("{}::{} ==> check token and user permission....", uri, method);
 
-            String validRoute = routes.stream().filter(route -> uri.startsWith(route)).findAny().orElse(null);
+            chain.doFilter(request, response);
+
+            /*String validRoute = routes.stream().filter(route -> uri.startsWith(route)).findAny().orElse(null);
 
             if (validRoute == null) {
                 logger.error("{},This api is invalid!", uri);
@@ -110,7 +112,7 @@ public class ApiAuthFilter implements Filter {
 
             logger.error("{}::{},User Forbidden!Does not has Permission!", uri, method);
             getErrorResponse(httpServletResponse, R.error(HttpStatusConstant.USER_API_UNAUTHORIZED, "User Forbidden!Does not has Permission!"));
-            return;
+            return;*/
         }
     }
 

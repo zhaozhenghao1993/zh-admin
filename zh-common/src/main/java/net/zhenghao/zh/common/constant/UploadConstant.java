@@ -16,7 +16,7 @@ public class UploadConstant {
     /**
      * 用户头像上传路径
      */
-    public static final String USER_AVATAR_FOLDER = "/-/system/user/avatar";
+    public static final String USER_AVATAR_FOLDER = "-/system/user/avatar";
 
     /**
      * 用户头像默认地址
