@@ -39,7 +39,7 @@ public class LoginLogAspect {
     private JWTTokenUtils jwtTokenUtils;
 	
 	
-	@AfterReturning(pointcut = "execution(* net.zhenghao.zh.auth.controller.SysLoginController.login(..))", returning = "retValue")
+	@AfterReturning(pointcut = "execution(* net.zhenghao.zh.auth.controller.SysLoginController.login(..))", returning = "result")
 	public void doAfterReturning(JoinPoint joinPoint, Object result) {
 		SysLogEntity sysLog = new SysLogEntity();
 		

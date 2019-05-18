@@ -2,6 +2,7 @@ package net.zhenghao.zh.common.handler;
 
 import net.zhenghao.zh.common.constant.HttpStatusConstant;
 import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.entity.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,9 +26,9 @@ public class GlobalExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(Exception.class)
-    public R otherExceptionHandler(HttpServletResponse response, Exception ex) {
+    public Result otherExceptionHandler(HttpServletResponse response, Exception ex) {
         response.setStatus(500);
         logger.error(ex.getMessage(), ex);
-        return R.error(HttpStatusConstant.EXCEPTION_OTHER_CODE, ex.toString());
+        return Result.ofThrowable(HttpStatusConstant.EXCEPTION_OTHER_CODE, ex);
     }
 }

@@ -207,6 +207,7 @@ public class ApiAuthFilter implements Filter {
      */
     private void setCurrentUserInfo(JWTInfo jwtInfo) {
         BaseContextHandler.setUsername(jwtInfo.getUsername());
+        BaseContextHandler.setName(jwtInfo.getName());
         BaseContextHandler.setUserId(jwtInfo.getUserId());
     }
 }

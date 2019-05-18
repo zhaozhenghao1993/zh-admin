@@ -6,9 +6,12 @@ import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.auth.entity.SysMenuEntity;
 import net.zhenghao.zh.auth.service.SysMenuService;
+import net.zhenghao.zh.common.entity.Result;
+import net.zhenghao.zh.common.vo.TreeVO;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,7 +45,7 @@ public class SysMenuController extends AbstractController {
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	public R info(@PathVariable("id") Long menuId) {
+	public Result<SysMenuEntity> info(@PathVariable("id") Long menuId) {
 		return sysMenuService.getMenuById(menuId);
 	}
 	
@@ -51,7 +54,7 @@ public class SysMenuController extends AbstractController {
 	 * @return
 	 */
 	@GetMapping("/tree")
-	public R select(@RequestParam Map<String, Object> params) {
+	public Result<List<TreeVO>> select(@RequestParam Map<String, Object> params) {
 		return sysMenuService.listTree(params);
 	}
 	
@@ -62,7 +65,7 @@ public class SysMenuController extends AbstractController {
 	 */
 	@SysLog("新增菜单")
 	@PostMapping("")
-	public R save(@RequestBody SysMenuEntity menu) {
+	public Result save(@RequestBody SysMenuEntity menu) {
 		menu.setCreatorId(getUserId());
 		return sysMenuService.saveMenu(menu);
 	}
@@ -74,7 +77,7 @@ public class SysMenuController extends AbstractController {
 	 */
 	@SysLog("修改菜单")
 	@PutMapping("/{id}")
-	public R update(@PathVariable("id") Long menuId, @RequestBody SysMenuEntity menu) {
+	public Result update(@PathVariable("id") Long menuId, @RequestBody SysMenuEntity menu) {
 		menu.setMenuId(menuId);
 		menu.setModifierId(getUserId());
 		return sysMenuService.updateMenu(menu);
@@ -87,7 +90,7 @@ public class SysMenuController extends AbstractController {
 	 */
 	@SysLog("删除菜单")
 	@DeleteMapping("/{id}")
-	public R remove(@PathVariable("id") Long menuId) {
+	public Result remove(@PathVariable("id") Long menuId) {
 		return sysMenuService.remove(menuId);
 	}
 }

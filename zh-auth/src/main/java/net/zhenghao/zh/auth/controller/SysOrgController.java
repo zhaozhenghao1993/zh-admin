@@ -6,9 +6,12 @@ import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.entity.Result;
+import net.zhenghao.zh.common.vo.TreeVO;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,7 +45,7 @@ public class SysOrgController extends AbstractController {
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	public R info(@PathVariable("id") Long orgId) {
+	public Result<SysOrgEntity> info(@PathVariable("id") Long orgId) {
 		return sysOrgService.getOrgById(orgId);
 	}
 	
@@ -51,7 +54,7 @@ public class SysOrgController extends AbstractController {
 	 * @return
 	 */
 	@GetMapping("/tree")
-	public R select(@RequestParam Map<String, Object> params) {
+	public Result<List<TreeVO>> select(@RequestParam Map<String, Object> params) {
 		return sysOrgService.listTree(params);
 	}
 	
@@ -62,7 +65,7 @@ public class SysOrgController extends AbstractController {
 	 */
 	@SysLog("新增组织")
 	@PostMapping("")
-	public R save(@RequestBody SysOrgEntity org) {
+	public Result save(@RequestBody SysOrgEntity org) {
 		org.setCreatorId(getUserId());
 		return sysOrgService.saveOrg(org);
 	}
@@ -74,7 +77,7 @@ public class SysOrgController extends AbstractController {
 	 */
 	@SysLog("修改组织")
 	@PutMapping("/{id}")
-	public R update(@PathVariable("id") Long orgId, @RequestBody SysOrgEntity org) {
+	public Result update(@PathVariable("id") Long orgId, @RequestBody SysOrgEntity org) {
 		org.setOrgId(orgId);
 		org.setModifierId(getUserId());
 		return sysOrgService.updateOrg(org);
@@ -87,7 +90,7 @@ public class SysOrgController extends AbstractController {
 	 */
 	@SysLog("删除组织")
 	@DeleteMapping("/{id}")
-	public R remove(@PathVariable("id") Long orgId) {
+	public Result remove(@PathVariable("id") Long orgId) {
 		return sysOrgService.remove(orgId);
 	}
 }

@@ -7,6 +7,7 @@ import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.auth.entity.SysRoleEntity;
 import net.zhenghao.zh.auth.service.SysRoleService;
+import net.zhenghao.zh.common.entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +43,7 @@ public class SysRoleController extends AbstractController {
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	public R info(@PathVariable("id") Long roleId) {
+	public Result<SysRoleEntity> info(@PathVariable("id") Long roleId) {
 		return sysRoleService.getRoleById(roleId);
 	}
 	
@@ -51,7 +52,7 @@ public class SysRoleController extends AbstractController {
 	 * @return
 	 */
 	@GetMapping("/select")
-	public R listRole() {
+	public Result<List<SysRoleEntity>> listRole() {
 		return sysRoleService.listRole();
 	}
 	
@@ -62,7 +63,7 @@ public class SysRoleController extends AbstractController {
 	 */
 	@SysLog("新增角色")
 	@PostMapping("")
-	public R saveRole(@RequestBody SysRoleEntity role) {
+	public Result saveRole(@RequestBody SysRoleEntity role) {
 		role.setCreatorId(getUserId());
 		return sysRoleService.saveRole(role);
 	}
@@ -74,7 +75,7 @@ public class SysRoleController extends AbstractController {
 	 */
 	@SysLog("修改角色")
 	@PutMapping("/{id}")
-	public R updateRole(@PathVariable("id") Long roleId, @RequestBody SysRoleEntity role) {
+	public Result updateRole(@PathVariable("id") Long roleId, @RequestBody SysRoleEntity role) {
 		role.setRoleId(roleId);
 		role.setModifierId(getUserId());
 		return sysRoleService.updateRole(role);
@@ -87,7 +88,7 @@ public class SysRoleController extends AbstractController {
 	 */
 	@SysLog("删除角色")
 	@DeleteMapping("/{id}")
-	public R remove(@PathVariable("id") Long roleId) {
+	public Result remove(@PathVariable("id") Long roleId) {
 		return sysRoleService.removeRole(roleId);
 	}
 	
@@ -98,7 +99,7 @@ public class SysRoleController extends AbstractController {
 	 */
 	@SysLog("批量删除角色")
 	@DeleteMapping("")
-	public R batchRemove(@RequestBody Long[] ids) {
+	public Result batchRemove(@RequestBody Long[] ids) {
 		return sysRoleService.batchRemove(ids);
 	}
 	
@@ -110,7 +111,7 @@ public class SysRoleController extends AbstractController {
 	 */
 	@SysLog(value = "分配权限", type = SystemConstant.LogType.AUTHORIZATION)
 	@PutMapping("/{id}/authorize")
-	public R updateRoleAuthorization(@PathVariable("id") Long roleId, @RequestBody List<Long> menuIdList) {
+	public Result updateRoleAuthorization(@PathVariable("id") Long roleId, @RequestBody List<Long> menuIdList) {
 		return sysRoleService.updateRoleAuthorization(roleId, menuIdList);
 	}
 }

@@ -55,6 +55,11 @@ public class BaseContextHandler {
         return returnObjectValue(value);
     }
 
+    public static String getName(){
+        Object value = get(SystemConstant.CONTEXT_KEY_NAME);
+        return returnObjectValue(value);
+    }
+
     public static String getToken(){
         Object value = get(SystemConstant.CONTEXT_KEY_USER_TOKEN);
         return returnObjectValue(value);
@@ -68,6 +73,10 @@ public class BaseContextHandler {
 
     public static void setUsername(String username){
         set(SystemConstant.CONTEXT_KEY_USERNAME, username);
+    }
+
+    public static void setName(String name){
+        set(SystemConstant.CONTEXT_KEY_NAME, name);
     }
 
     private static String returnObjectValue(Object value) {

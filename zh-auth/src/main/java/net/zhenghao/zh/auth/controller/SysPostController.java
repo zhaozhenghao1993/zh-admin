@@ -6,9 +6,11 @@ import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.auth.entity.SysPostEntity;
 import net.zhenghao.zh.auth.service.SysPostService;
+import net.zhenghao.zh.common.entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,7 +44,7 @@ public class SysPostController extends AbstractController {
      * @return
      */
     @GetMapping("/{id}")
-    public R info(@PathVariable("id") Long postId) {
+    public Result<SysPostEntity> info(@PathVariable("id") Long postId) {
         return sysPostService.getPostById(postId);
     }
 
@@ -51,7 +53,7 @@ public class SysPostController extends AbstractController {
      * @return
      */
     @GetMapping("/select")
-    public R listPost() {
+    public Result<List<SysPostEntity>> listPost() {
         return sysPostService.listPost();
     }
 
@@ -62,7 +64,7 @@ public class SysPostController extends AbstractController {
 	 */
     @SysLog("新增岗位")
     @PostMapping("")
-    public R save(@RequestBody SysPostEntity post) {
+    public Result save(@RequestBody SysPostEntity post) {
         post.setCreatorId(getUserId());
         return sysPostService.savePost(post);
     }
@@ -75,7 +77,7 @@ public class SysPostController extends AbstractController {
 	 */
     @SysLog("修改岗位")
     @PutMapping("/{id}")
-    public R update(@PathVariable("id") Long postId, @RequestBody SysPostEntity post) {
+    public Result update(@PathVariable("id") Long postId, @RequestBody SysPostEntity post) {
         post.setPostId(postId);
         post.setModifierId(getUserId());
         return sysPostService.updatePost(post);
@@ -88,7 +90,7 @@ public class SysPostController extends AbstractController {
 	 */
     @SysLog("删除岗位")
     @DeleteMapping("/{id}")
-    public R remove(@PathVariable("id") Long postId) {
+    public Result remove(@PathVariable("id") Long postId) {
         return sysPostService.removePost(postId);
     }
 
@@ -99,7 +101,7 @@ public class SysPostController extends AbstractController {
 	 */
     @SysLog("批量删除岗位")
     @DeleteMapping("")
-    public R batchRemove(@RequestBody Long[] ids) {
+    public Result batchRemove(@RequestBody Long[] ids) {
         return sysPostService.batchRemove(ids);
     }
 	

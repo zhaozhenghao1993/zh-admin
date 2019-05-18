@@ -9,6 +9,7 @@ import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.auth.service.SysUserService;
+import net.zhenghao.zh.common.entity.Result;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,7 +38,7 @@ public class SysUserController extends AbstractController {
      * @return
      */
     @GetMapping("/info")
-    public R info() {
+    public Result<SysUserEntity> info() {
         return sysUserService.getUserInfo(getUserId());
     }
 
@@ -46,7 +47,7 @@ public class SysUserController extends AbstractController {
 	 * @return
 	 */
 	@PostMapping("/profile")
-	public R profile(SysUserEntity user, MultipartFile file) {
+	public Result profile(SysUserEntity user, MultipartFile file) {
 		user.setUserId(getUserId());
 		user.setModifierId(getUserId());
 		user.setStatus(null);
@@ -59,7 +60,7 @@ public class SysUserController extends AbstractController {
 	 * @return
 	 */
 	@PutMapping("/profile/password")
-	public R updatePswdByUser(@RequestBody SysUserPasswordVO password) {
+	public Result updatePswdByUser(@RequestBody SysUserPasswordVO password) {
 		SysUserEntity user = new SysUserEntity();
 		user.setUserId(getUserId());
 		user.setUsername(getUserName());
@@ -73,7 +74,7 @@ public class SysUserController extends AbstractController {
 	 * @return
 	 */
 	@PutMapping("/profile/theme")
-	public R theme(@RequestBody SysUserEntity user) {
+	public Result theme(@RequestBody SysUserEntity user) {
 		user.setUserId(getUserId());
 		return sysUserService.updateThemeByUserId(user);
 	}
@@ -83,7 +84,7 @@ public class SysUserController extends AbstractController {
 	 * @return
 	 */
 	@PutMapping("/profile/color")
-	public R color(@RequestBody SysUserEntity user) {
+	public Result color(@RequestBody SysUserEntity user) {
 		user.setUserId(getUserId());
 		return sysUserService.updateColorByUserId(user);
 	}
@@ -106,7 +107,7 @@ public class SysUserController extends AbstractController {
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	public R info(@PathVariable("id") Long userId) {
+	public Result<SysUserEntity> info(@PathVariable("id") Long userId) {
 		return sysUserService.getUserById(userId);
 	}
 
@@ -115,7 +116,7 @@ public class SysUserController extends AbstractController {
 	 * @return
 	 */
 	@GetMapping("/{id}/detail")
-	public R detail(@PathVariable("id") Long userId) {
+	public Result<SysUserEntity> detail(@PathVariable("id") Long userId) {
 		return sysUserService.getUserInfo(userId);
 	}
 
@@ -126,7 +127,7 @@ public class SysUserController extends AbstractController {
 	 */
 	@SysLog("新增用户")
 	@PostMapping("")
-	public R save(@RequestBody SysUserEntity user) {
+	public Result save(@RequestBody SysUserEntity user) {
 		user.setAvatar(UploadConstant.USER_AVATAR_DEFAULT_PATH); // 给个默认头像
 		user.setCreatorId(getUserId());
 		return sysUserService.saveUser(user);
@@ -139,7 +140,7 @@ public class SysUserController extends AbstractController {
 	 */
 	@SysLog("修改用户")
 	@PutMapping("/{id}")
-	public R edit(@PathVariable("id") Long userId, @RequestBody SysUserEntity user) {
+	public Result edit(@PathVariable("id") Long userId, @RequestBody SysUserEntity user) {
 		user.setUserId(userId);
 		user.setModifierId(getUserId());
 		return sysUserService.updateUser(user);
@@ -152,7 +153,7 @@ public class SysUserController extends AbstractController {
 	 */
 	@SysLog("删除用户")
 	@DeleteMapping("/{id}")
-	public R remove(@PathVariable("id") Long userId) {
+	public Result remove(@PathVariable("id") Long userId) {
 		return sysUserService.removeUser(userId);
 	}
 
@@ -163,7 +164,7 @@ public class SysUserController extends AbstractController {
 	 */
 	@SysLog("批量删除用户")
 	@DeleteMapping("")
-	public R batchRemove(@RequestBody Long[] ids) {
+	public Result batchRemove(@RequestBody Long[] ids) {
 		return sysUserService.batchRemove(ids);
 	}
 
@@ -174,7 +175,7 @@ public class SysUserController extends AbstractController {
 	 */
 	@SysLog("启用账号")
 	@PutMapping("/enable")
-	public R updateUserEnable(@RequestBody Long[] ids) {
+	public Result updateUserEnable(@RequestBody Long[] ids) {
 		return sysUserService.updateUserEnable(ids);
 	}
 
@@ -185,7 +186,7 @@ public class SysUserController extends AbstractController {
 	 */
 	@SysLog("锁定账户")
 	@PutMapping("/disable")
-	public R updateUserDisable(@RequestBody Long[] ids) {
+	public Result updateUserDisable(@RequestBody Long[] ids) {
 		return sysUserService.updateUserDisable(ids);
 	}
 
@@ -196,7 +197,7 @@ public class SysUserController extends AbstractController {
 	 */
 	@SysLog("重置密码")
 	@PutMapping("/{id}/reset")
-	public R updatePswd(@PathVariable("id") Long userId, @RequestBody SysUserEntity user) {
+	public Result updatePswd(@PathVariable("id") Long userId, @RequestBody SysUserEntity user) {
 		user.setUserId(userId);
 		return sysUserService.updatePassword(user);
 	}

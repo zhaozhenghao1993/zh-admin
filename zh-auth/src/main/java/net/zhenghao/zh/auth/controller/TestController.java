@@ -28,7 +28,7 @@ public class TestController {
 
     @GetMapping("/getToken")
     public String getToken() {
-        return jwtTokenUtils.generateToken(new JWTInfo(1L, "admin"));
+        return jwtTokenUtils.generateToken(new JWTInfo(1L, "admin", "Administrator"));
     }
 
     @GetMapping("/getUserInfo")

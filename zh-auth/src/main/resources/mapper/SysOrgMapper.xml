@@ -14,7 +14,7 @@
 					select="listParentId" />
 	</resultMap>
 
-	<resultMap id="TreeListResult" type="SysTreeVO">
+	<resultMap id="TreeListResult" type="TreeVO">
 		<id property="key" column="org_id" />
 		<result property="parentId" column="parent_id" />
 		<result property="value" column="org_id" />
