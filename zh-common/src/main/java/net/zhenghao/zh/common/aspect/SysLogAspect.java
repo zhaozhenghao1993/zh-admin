@@ -5,11 +5,10 @@ import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.context.BaseContextHandler;
 import net.zhenghao.zh.common.dao.SysLogMapper;
-import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.entity.SysLogEntity;
 import net.zhenghao.zh.common.utils.IPUtils;
 import net.zhenghao.zh.common.utils.JSONUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -135,10 +134,9 @@ public class SysLogAspect {
 		sysLog.setTime(time);
 		
 		//操作执行状态
-		if (result instanceof R) {
-			R r = (R) result;
-			int code = (int) r.get("code");
-			if(code == 0) {
+		if (result instanceof Result) {
+			Result r = (Result) result;
+			if(r.isSuccess()) {
 				//操作成功
 				sysLog.setStatus(SystemConstant.StatusType.ENABLE.getValue());
 
@@ -146,7 +144,7 @@ public class SysLogAspect {
 				sysLog.setRemark("响应时间：" + time + "ms");
 			} else {
 				sysLog.setStatus(SystemConstant.StatusType.DISABLE.getValue());
-				sysLog.setRemark(String.valueOf(r.get("msg")));
+				sysLog.setRemark(String.valueOf(r.getMsg()));
 			}
 		}
 		//保存系统日志

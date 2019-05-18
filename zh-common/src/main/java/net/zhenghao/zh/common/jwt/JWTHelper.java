@@ -39,6 +39,7 @@ public class JWTHelper {
         return Jwts.builder()
                 .setSubject(jwtInfo.getUsername())
                 .claim(SystemConstant.JWT_KEY_USER_ID, jwtInfo.getUserId())
+                .claim(SystemConstant.JWT_KEY_NAME, jwtInfo.getName())
                 .setExpiration(DateTime.now().plusSeconds(expire).toDate())
                 .signWith(SignatureAlgorithm.RS256, privateKey)
                 .compact();
@@ -65,6 +66,10 @@ public class JWTHelper {
     public static JWTInfo getInfoFromToken(String token, PublicKey publicKey) {
         Jws<Claims> claimsJws = parserToken(token, publicKey);
         Claims body = claimsJws.getBody();
-        return new JWTInfo(StringCommonUtils.getObjectValue(body.get(SystemConstant.JWT_KEY_USER_ID)), body.getSubject());
+        return new JWTInfo(
+                StringCommonUtils.getObjectValue(body.get(SystemConstant.JWT_KEY_USER_ID)),
+                body.getSubject(),
+                StringCommonUtils.getObjectValue(body.get(SystemConstant.JWT_KEY_NAME)
+                ));
     }
 }

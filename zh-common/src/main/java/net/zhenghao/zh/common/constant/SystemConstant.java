@@ -31,6 +31,11 @@ public class SystemConstant {
 	public static final String CONTEXT_KEY_USERNAME = "currentUserName";
 
 	/**
+	 * 当前用户name key
+	 */
+	public static final String CONTEXT_KEY_NAME = "currentName";
+
+	/**
 	 * 当前用户token key
 	 */
 	public static final String CONTEXT_KEY_USER_TOKEN = "currentUserToken";
@@ -44,6 +49,11 @@ public class SystemConstant {
 	 * JWT username标识
 	 */
 	public static final String JWT_KEY_USERNAME = "username";
+
+	/**
+	 * JWT name标识
+	 */
+	public static final String JWT_KEY_NAME = "name";
 
 	/**
 	 * 日志类型

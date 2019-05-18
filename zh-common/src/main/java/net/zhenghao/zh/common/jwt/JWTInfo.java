@@ -23,14 +23,21 @@ public class JWTInfo {
      */
     private String username;
 
-    public JWTInfo(Long userId, String username) {
+    /**
+     * 用户姓名
+     */
+    private String name;
+
+    public JWTInfo(Long userId, String username, String name) {
         this.userId = userId;
         this.username = username;
+        this.name = name;
     }
 
-    public JWTInfo(String userId, String username) {
+    public JWTInfo(String userId, String username, String name) {
         this.userId = Long.valueOf(userId);
         this.username = username;
+        this.name = name;
     }
 
     public Long getUserId() {
@@ -47,5 +54,13 @@ public class JWTInfo {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

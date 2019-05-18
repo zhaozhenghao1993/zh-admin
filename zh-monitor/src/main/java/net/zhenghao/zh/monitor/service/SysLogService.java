@@ -2,6 +2,7 @@ package net.zhenghao.zh.monitor.service;
 
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.entity.SysLogEntity;
 
 import java.util.Map;
@@ -18,7 +19,7 @@ public interface SysLogService {
 
 	Page<SysLogEntity> listLog(Map<String, Object> params);
 	
-	R batchRemove(Long[] ids);
-	
-	R batchRemoveAll(Integer type);
+	Result batchRemove(Long[] ids);
+
+	Result batchRemoveAll(Integer type);
 }

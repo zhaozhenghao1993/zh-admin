@@ -1,8 +1,9 @@
 package net.zhenghao.zh.auth.service;
 
 import net.zhenghao.zh.common.entity.Page;
-import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.auth.entity.SysMenuEntity;
+import net.zhenghao.zh.common.entity.Result;
+import net.zhenghao.zh.common.vo.TreeVO;
 
 import java.util.List;
 import java.util.Map;
@@ -19,16 +20,16 @@ public interface SysMenuService {
 	
 	Page<SysMenuEntity> listMenu(Map<String, Object> params);
 	
-	R listTree(Map<String, Object> params);
-	
-	R saveMenu(SysMenuEntity menu);
+	Result<List<TreeVO>> listTree(Map<String, Object> params);
 
-	R getMenuById(Long id);
-	
-	R updateMenu(SysMenuEntity menu);
+	Result saveMenu(SysMenuEntity menu);
 
-	R remove(Long id);
-	
-	R batchRemove(Long[] ids);
+	Result<SysMenuEntity> getMenuById(Long id);
+
+	Result updateMenu(SysMenuEntity menu);
+
+	Result remove(Long id);
+
+	Result batchRemove(Long[] ids);
 	
 }

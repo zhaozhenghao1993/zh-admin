@@ -14,6 +14,8 @@ import java.util.List;
 public class Page<T> {
 
 	private int code = 0;
+
+	private boolean success = true;
 	
 	/**
 	 * 页编号:第几页
@@ -57,6 +59,14 @@ public class Page<T> {
 
 	public void setCode(int code) {
 		this.code = code;
+	}
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
 	}
 
 	/**

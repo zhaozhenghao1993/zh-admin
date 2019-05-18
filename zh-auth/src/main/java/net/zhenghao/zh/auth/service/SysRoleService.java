@@ -1,8 +1,8 @@
 package net.zhenghao.zh.auth.service;
 
 import net.zhenghao.zh.common.entity.Page;
-import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.auth.entity.SysRoleEntity;
+import net.zhenghao.zh.common.entity.Result;
 
 import java.util.List;
 import java.util.Map;
@@ -18,19 +18,19 @@ import java.util.Map;
 public interface SysRoleService {
 
 	Page<SysRoleEntity> listRole(Map<String, Object> params);
-	
-	R saveRole(SysRoleEntity role);
-	
-	R getRoleById(Long id);
-	
-	R updateRole(SysRoleEntity role);
 
-	R removeRole(Long id);
-	
-	R batchRemove(Long[] ids);
-	
-	R listRole();
-	
-	R updateRoleAuthorization(Long roleId, List<Long> menuIdList);
+	Result saveRole(SysRoleEntity role);
+
+	Result<SysRoleEntity> getRoleById(Long id);
+
+	Result updateRole(SysRoleEntity role);
+
+	Result removeRole(Long id);
+
+	Result batchRemove(Long[] ids);
+
+	Result<List<SysRoleEntity>> listRole();
+
+	Result updateRoleAuthorization(Long roleId, List<Long> menuIdList);
 	
 }

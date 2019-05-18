@@ -15,7 +15,7 @@ import java.io.Serializable;
 
 public class SysUserPasswordVO implements Serializable {
 
-    private static final long serialVersionUID = -3900792692770569378L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * 老密码

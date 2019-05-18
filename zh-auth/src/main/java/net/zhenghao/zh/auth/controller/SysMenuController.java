@@ -20,7 +20,7 @@ import java.util.Map;
  * SysMenuController.java
  */
 @RestController
-@RequestMapping("/sys/menu")
+@RequestMapping("${zh-admin.api.prefix}/sys/menu")
 public class SysMenuController extends AbstractController {
 
 	@Resource

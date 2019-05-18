@@ -6,7 +6,7 @@ import net.zhenghao.zh.auth.dao.SysRoleMenuMapper;
 import net.zhenghao.zh.auth.dao.SysUserRoleMapper;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
-import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.utils.CommonUtils;
 import net.zhenghao.zh.auth.entity.SysRoleEntity;
 import net.zhenghao.zh.auth.service.SysRoleService;
@@ -49,13 +49,13 @@ public class SysRoleServiceImpl implements SysRoleService {
 	}
 
 	@Override
-	public R saveRole(SysRoleEntity role) {
+	public Result saveRole(SysRoleEntity role) {
 		int count = sysRoleMapper.save(role);
 		return CommonUtils.msg(count);
 	}
 
 	@Override
-	public R getRoleById(Long id) {
+	public Result getRoleById(Long id) {
 		SysRoleEntity role = sysRoleMapper.getObjectById(id);
 		List<Long> menuId = sysRoleMenuMapper.listMenuId(id);
 		role.setMenuIdList(menuId);
@@ -63,15 +63,15 @@ public class SysRoleServiceImpl implements SysRoleService {
 	}
 
 	@Override
-	public R updateRole(SysRoleEntity role) {
+	public Result updateRole(SysRoleEntity role) {
 		int count = sysRoleMapper.update(role);
 		return CommonUtils.msg(count);
 	}
 
 	@Override
-	public R removeRole(Long id) {
+	public Result removeRole(Long id) {
 		if (id == 1L) {
-			return R.error("内置admin角色不能删除!");
+			return Result.ofFail("内置admin角色不能删除!");
 		}
 		int count = sysRoleMapper.remove(id);
 		sysUserRoleMapper.removeByRoleId(id);
@@ -80,9 +80,9 @@ public class SysRoleServiceImpl implements SysRoleService {
 	}
 
 	@Override
-	public R batchRemove(Long[] ids) {
+	public Result batchRemove(Long[] ids) {
 		if (Arrays.stream(ids).anyMatch(id -> id == 1L)) {
-			return R.error("包含内置admin角色不能删除!");
+			return Result.ofFail("包含内置admin角色不能删除!");
 		}
 		int count = sysRoleMapper.batchRemove(ids);
 		sysUserRoleMapper.batchRemoveByRoleId(ids);
@@ -91,13 +91,13 @@ public class SysRoleServiceImpl implements SysRoleService {
 	}
 
 	@Override
-	public R listRole() {
+	public Result<List<SysRoleEntity>> listRole() {
 		List<SysRoleEntity> roleList = sysRoleMapper.list();
 		return CommonUtils.msgNotNull(roleList);
 	}
 
 	@Override
-	public R updateRoleAuthorization(Long roleId, List<Long> menuIdList) {
+	public Result updateRoleAuthorization(Long roleId, List<Long> menuIdList) {
 		int count = sysRoleMenuMapper.removeByRoleId(roleId);
 		if (!menuIdList.isEmpty()) {
 			Query query = new Query();

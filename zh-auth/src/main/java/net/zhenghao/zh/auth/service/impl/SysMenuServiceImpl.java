@@ -2,10 +2,10 @@ package net.zhenghao.zh.auth.service.impl;
 
 import net.zhenghao.zh.auth.dao.SysMenuMapper;
 import net.zhenghao.zh.auth.dao.SysRoleMenuMapper;
-import net.zhenghao.zh.common.vo.SysTreeVO;
+import net.zhenghao.zh.common.entity.Result;
+import net.zhenghao.zh.common.vo.TreeVO;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
-import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.utils.CommonUtils;
 import net.zhenghao.zh.auth.entity.SysMenuEntity;
 import net.zhenghao.zh.auth.service.SysMenuService;
@@ -44,11 +44,11 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
-	public R listTree(Map<String, Object> params) {
-		List<SysTreeVO> listRoot = new ArrayList<>();
+	public Result<List<TreeVO>> listTree(Map<String, Object> params) {
+		List<TreeVO> listRoot = new ArrayList<>();
 		if (params.get("isNotButton") != null && "true".equals(params.get("isNotButton"))) {
-			List<SysTreeVO> menuList = sysMenuMapper.listTreeNotButton();
-			SysTreeVO root = new SysTreeVO();
+			List<TreeVO> menuList = sysMenuMapper.listTreeNotButton();
+			TreeVO root = new TreeVO();
 			root.setKey(0L);
 			root.setTitle("主目录");
 			root.setValue("0");
@@ -62,28 +62,28 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
-	public R saveMenu(SysMenuEntity menu) {
+	public Result saveMenu(SysMenuEntity menu) {
 		int count = sysMenuMapper.save(menu);
 		return CommonUtils.msg(count);
 	}
 
 	@Override
-	public R getMenuById(Long id) {
+	public Result<SysMenuEntity> getMenuById(Long id) {
 		SysMenuEntity menu = sysMenuMapper.getObjectById(id);
 		return CommonUtils.msg(menu);
 	}
 
 	@Override
-	public R updateMenu(SysMenuEntity menu) {
+	public Result updateMenu(SysMenuEntity menu) {
 		int count = sysMenuMapper.update(menu);
 		return CommonUtils.msg(count);
 	}
 
 	@Override
-	public R remove(Long id) {
+	public Result remove(Long id) {
 		int childCount = sysMenuMapper.getChildCountByMenuId(id);
 		if (childCount > 0) {
-			return R.error("该菜单含有子菜单,请先删除子菜单!");
+			return Result.ofFail("该菜单含有子菜单,请先删除子菜单!");
 		}
 		int count = sysMenuMapper.remove(id);
 		sysRoleMenuMapper.removeByMenuId(id);
@@ -91,7 +91,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
-	public R batchRemove(Long[] ids) {
+	public Result batchRemove(Long[] ids) {
 		int count = sysMenuMapper.batchRemove(ids);
 		sysRoleMenuMapper.batchRemoveByMenuId(ids);
 		return CommonUtils.msg(ids, count);

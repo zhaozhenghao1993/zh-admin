@@ -4,9 +4,8 @@ import eu.bitwalker.useragentutils.UserAgent;
 import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.context.BaseContextHandler;
 import net.zhenghao.zh.common.dao.SysLogMapper;
-import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.entity.SysLogEntity;
-import net.zhenghao.zh.common.jwt.JWTInfo;
 import net.zhenghao.zh.common.utils.IPUtils;
 import net.zhenghao.zh.common.utils.JSONUtils;
 import net.zhenghao.zh.common.utils.JWTTokenUtils;
@@ -41,7 +40,7 @@ public class LoginLogAspect {
 	
 	
 	@AfterReturning(pointcut = "execution(* net.zhenghao.zh.auth.controller.SysLoginController.login(..))", returning = "retValue")
-	public void doAfterReturning(JoinPoint joinPoint, Object retValue) {
+	public void doAfterReturning(JoinPoint joinPoint, Object result) {
 		SysLogEntity sysLog = new SysLogEntity();
 		
 		//日志类型
@@ -69,14 +68,10 @@ public class LoginLogAspect {
         sysLog.setParams(params);
         
       //用户信息及操作结果
-        R r = (R) retValue;
-        int code = (int) r.get("code");
-        if (code == 0) {
+        Result r = (Result) result;
+        if (r.isSuccess()) {
             //登录成功
-            String token = (String) r.get("token");
-            JWTInfo jwtInfo = jwtTokenUtils.getInfoFromToken(token);
-            sysLog.setUserId(jwtInfo.getUserId());
-            sysLog.setUsername(jwtInfo.getUsername());
+            sysLog.setUsername(String.valueOf(userMap.get("username")));
             sysLog.setStatus(SystemConstant.StatusType.ENABLE.getValue());
             sysLog.setRemark("登录成功");
         } else {
@@ -84,7 +79,7 @@ public class LoginLogAspect {
             sysLog.setUserId(-1L);
             sysLog.setUsername(String.valueOf(userMap.get("username")));
             sysLog.setStatus(SystemConstant.StatusType.DISABLE.getValue());
-            sysLog.setRemark("登录失败：" + r.get("msg"));
+            sysLog.setRemark("登录失败：" + r.getMsg());
         }
 
         sysLogMapper.save(sysLog);

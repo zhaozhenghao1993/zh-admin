@@ -9,7 +9,7 @@ import net.zhenghao.zh.auth.handler.UserAvatarHandler;
 import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
-import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.utils.CommonUtils;
 import net.zhenghao.zh.common.utils.MD5Utils;
 import net.zhenghao.zh.auth.service.SysUserService;
@@ -79,7 +79,7 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public R getUserInfo(Long userId) {
+	public Result<SysUserEntity> getUserInfo(Long userId) {
 		SysUserEntity user = sysUserMapper.getObjectById(userId);
 		user.setRoles(sysRoleMapper.listUserRoles(userId));
 		user.setPerms(sysMenuMapper.listUserMenu(userId));
@@ -93,19 +93,19 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public R profileUser(SysUserEntity user, MultipartFile file) {
+	public Result profileUser(SysUserEntity user, MultipartFile file) {
 		user.setAvatar(userAvatarHandler.avatarHandler(user.getUserId(), file));
 		int count = sysUserMapper.update(user);
 		return CommonUtils.msg(count);
 	}
 
 	@Override
-	public R saveUser(SysUserEntity user) {
+	public Result saveUser(SysUserEntity user) {
 		if (StringUtils.isBlank(user.getUsername())) {
-			return R.error("The username cannot be empty !");
+			return Result.ofFail("The username cannot be empty !");
 		}
 		if (sysUserMapper.getCountByUserName(user.getUsername()) > 0) {
-			return R.error("The username already exists !");
+			return Result.ofFail("The username already exists !");
 		}
 		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
 		int count = sysUserMapper.save(user);
@@ -125,7 +125,7 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public R getUserById(Long userId) {
+	public Result<SysUserEntity> getUserById(Long userId) {
 		SysUserEntity user = sysUserMapper.getObjectById(userId);
 		List<Long> roleId = sysUserRoleMapper.listUserRoleId(userId);
 		List<Long> postId = sysUserPostMapper.listUserPostId(userId);
@@ -135,13 +135,13 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public R updateUser(SysUserEntity user) {
+	public Result updateUser(SysUserEntity user) {
 		if (StringUtils.isBlank(user.getUsername())) {
-			return R.error("The username cannot be empty !");
+			return Result.ofFail("The username cannot be empty !");
 		}
 		SysUserEntity userEntity = sysUserMapper.getByUserName(user.getUsername());
 		if (userEntity != null && userEntity.getUserId() != user.getUserId()) {
-			return R.error("The username already exists !");
+			return Result.ofFail("The username already exists !");
 		}
 		int count = sysUserMapper.update(user);
 		Long userId = user.getUserId();
@@ -163,9 +163,9 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public R removeUser(Long id) {
+	public Result removeUser(Long id) {
 		if (id == 1L) {
-			return R.error("admin不能删除!");
+			return Result.ofFail("admin不能删除!");
 		}
 		int count = sysUserMapper.remove(id);
 		sysUserRoleMapper.removeByUserId(id);
@@ -174,9 +174,9 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public R batchRemove(Long[] ids) {
+	public Result batchRemove(Long[] ids) {
 		if (Arrays.stream(ids).anyMatch(id -> id == 1L)) {
-			return R.error("包含admin不能删除!");
+			return Result.ofFail("包含admin不能删除!");
 		}
 		int count = sysUserMapper.batchRemove(ids);
 		sysUserRoleMapper.batchRemoveByUserId(ids);
@@ -185,7 +185,7 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public R updatePasswordByUser(SysUserEntity user) {
+	public Result updatePasswordByUser(SysUserEntity user) {
 		String username = user.getUsername();
 		String password = user.getPassword();
 		String newPassword = user.getEmail();
@@ -197,13 +197,13 @@ public class SysUserServiceImpl implements SysUserService {
 		query.put("newPassword", newPassword);
 		int count = sysUserMapper.updatePasswordByUser(query);
 		if(!CommonUtils.isIntThanZero(count)) {
-			return R.error("原密码错误");
+			return Result.ofFail("原密码错误");
 		}
 		return CommonUtils.msg(count);
 	}
 
 	@Override
-	public R updateUserEnable(Long[] ids) {
+	public Result updateUserEnable(Long[] ids) {
 		Query query = new Query();
 		query.put("ids", ids);
 		query.put("status", SystemConstant.StatusType.ENABLE.getValue());
@@ -212,7 +212,7 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public R updateUserDisable(Long[] ids) {
+	public Result updateUserDisable(Long[] ids) {
 		Query query = new Query();
 		query.put("ids", ids);
 		query.put("status", SystemConstant.StatusType.DISABLE.getValue());
@@ -221,7 +221,7 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public R updatePassword(SysUserEntity user) {
+	public Result updatePassword(SysUserEntity user) {
 		SysUserEntity currUser = sysUserMapper.getObjectById(user.getUserId());
 		user.setPassword(MD5Utils.encrypt(currUser.getUsername(), user.getPassword()));
 		int count = sysUserMapper.updatePassword(user);
@@ -229,13 +229,13 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public R updateThemeByUserId(SysUserEntity user) {
+	public Result updateThemeByUserId(SysUserEntity user) {
 		int count = sysUserMapper.updateThemeByUserId(user);
 		return CommonUtils.msg(count);
 	}
 
 	@Override
-	public R updateColorByUserId(SysUserEntity user) {
+	public Result updateColorByUserId(SysUserEntity user) {
 		int count = sysUserMapper.updateColorByUserId(user);
 		return CommonUtils.msg(count);
 	}

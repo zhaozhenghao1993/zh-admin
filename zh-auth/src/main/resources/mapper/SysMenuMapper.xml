@@ -22,7 +22,7 @@
 		<result property="parentId" column="parent_id" />
 		<result property="value" column="menu_id" />
 		<result property="title" column="name" />
-		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.common.vo.SysTreeVO" column="menu_id"
+		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.common.vo.TreeVO" column="menu_id"
                     select="listTreeNotButtonParentId" />
 	</resultMap>
 
@@ -31,7 +31,7 @@
 		<result property="parentId" column="parent_id" />
 		<result property="value" column="menu_id" />
 		<result property="title" column="name" />
-		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.common.vo.SysTreeVO" column="menu_id"
+		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.common.vo.TreeVO" column="menu_id"
                     select="listTreeParentId" />
 	</resultMap>
 

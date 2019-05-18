@@ -86,7 +86,8 @@ public class RequestHandlerAdapter {
     public static boolean validate(String requestUri, String requestMethod, String uri, String method) {
         if (uri.indexOf('{') >= 1) {
             uri = uri.replaceAll("\\{[^}]+\\}", "[\\\\d]+");
-        } else if (uri.indexOf('*') >= 1) {
+        }
+        if (uri.indexOf('*') >= 1) {
             uri = uri.replaceAll("\\*", "[\\\\s\\\\S]*");
         }
         String regEx = "^" + uri + "$";

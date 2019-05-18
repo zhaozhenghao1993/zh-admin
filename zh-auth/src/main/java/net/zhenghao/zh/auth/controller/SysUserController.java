@@ -26,7 +26,7 @@ import java.util.Map;
  * SysMenuController.java
  */
 @RestController
-@RequestMapping("/sys/user")
+@RequestMapping("${zh-admin.api.prefix}/sys/user")
 public class SysUserController extends AbstractController {
 
 	@Resource

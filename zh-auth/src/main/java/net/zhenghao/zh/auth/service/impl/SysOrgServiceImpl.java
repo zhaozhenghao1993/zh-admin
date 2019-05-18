@@ -4,10 +4,10 @@ import net.zhenghao.zh.auth.dao.SysOrgMapper;
 import net.zhenghao.zh.auth.dao.SysUserMapper;
 import net.zhenghao.zh.auth.entity.SysOrgEntity;
 import net.zhenghao.zh.auth.service.SysOrgService;
-import net.zhenghao.zh.common.vo.SysTreeVO;
+import net.zhenghao.zh.common.entity.Result;
+import net.zhenghao.zh.common.vo.TreeVO;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
-import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,11 +44,11 @@ public class SysOrgServiceImpl implements SysOrgService {
 	}
 
 	@Override
-	public R listTree(Map<String, Object> params) {
-		List<SysTreeVO> listRoot = new ArrayList<>();
+	public Result<List<TreeVO>> listTree(Map<String, Object> params) {
+		List<TreeVO> listRoot = new ArrayList<>();
 		if (params.get("isRoot") != null && "true".equals(params.get("isRoot"))) {
-			List<SysTreeVO> menuList = sysOrgMapper.listTree();
-			SysTreeVO root = new SysTreeVO();
+			List<TreeVO> menuList = sysOrgMapper.listTree();
+			TreeVO root = new TreeVO();
 			root.setKey(0L);
 			root.setTitle("主目录");
 			root.setValue("0");
@@ -62,7 +62,7 @@ public class SysOrgServiceImpl implements SysOrgService {
 	}
 
 	@Override
-	public R saveOrg(SysOrgEntity org) {
+	public Result saveOrg(SysOrgEntity org) {
 		SysOrgEntity orgParent = sysOrgMapper.getObjectById(org.getParentId());
 		String ancestors;
 		if (orgParent != null) {
@@ -76,13 +76,13 @@ public class SysOrgServiceImpl implements SysOrgService {
 	}
 
 	@Override
-	public R getOrgById(Long id) {
+	public Result<SysOrgEntity> getOrgById(Long id) {
 		SysOrgEntity org = sysOrgMapper.getObjectById(id);
 		return CommonUtils.msg(org);
 	}
 
 	@Override
-	public R updateOrg(SysOrgEntity org) {
+	public Result updateOrg(SysOrgEntity org) {
 		SysOrgEntity oldOrg = sysOrgMapper.getObjectById(org.getOrgId());
 		// 更新前先对比和之前的parentId是否有不同，如果不同则开始处理
 		if (org.getParentId() != oldOrg.getParentId()) {
@@ -106,14 +106,14 @@ public class SysOrgServiceImpl implements SysOrgService {
 	}
 
 	@Override
-	public R remove(Long id) {
+	public Result remove(Long id) {
 		int childCount = sysOrgMapper.getChildCountByOrgId(id);
 		if (childCount > 0) {
-			return R.error("该组织含有子组织,请先删除子组织!");
+			return Result.ofFail("该组织含有子组织,请先删除子组织!");
 		}
 		int userCount = sysUserMapper.getCountByOrgId(id);
 		if (userCount > 0) {
-			return R.error("该组织含有用户,请先处理组织下的用户!");
+			return Result.ofFail("该组织含有用户,请先处理组织下的用户!");
 		}
 		int count = sysOrgMapper.remove(id);
 		return CommonUtils.msg(count);

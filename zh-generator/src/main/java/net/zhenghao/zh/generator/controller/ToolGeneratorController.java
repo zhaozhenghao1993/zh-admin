@@ -3,7 +3,7 @@ package net.zhenghao.zh.generator.controller;
 import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.Page;
-import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.utils.JSONUtils;
 import net.zhenghao.zh.generator.entity.GeneratorParamEntity;
 import net.zhenghao.zh.generator.entity.TableEntity;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
@@ -31,7 +30,7 @@ import java.util.Map;
  * ToolGeneratorController.java
  */
 @Controller
-@RequestMapping("/tool/generator")
+@RequestMapping("${zh-admin.api.prefix}/tool/generator")
 public class ToolGeneratorController extends AbstractController {
 
     @Autowired
@@ -51,17 +50,16 @@ public class ToolGeneratorController extends AbstractController {
     /**
      * 生成代码
      * @param params
-     * @param request
      * @param response
      * @throws IOException
      */
     @GetMapping("/code")
     @SysLog("生成代码")
-    public void generator(@Valid GeneratorParamEntity params, BindingResult results, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void generator(@Valid GeneratorParamEntity params, BindingResult results, HttpServletResponse response) throws IOException {
         if (results.hasErrors()) {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json");
-            response.getWriter().write(JSONUtils.objToString(R.error(results.getFieldError().getDefaultMessage())));
+            response.getWriter().write(JSONUtils.objToString(Result.ofFail(results.getFieldError().getDefaultMessage())));
             return;
         }
         byte[] code = toolGeneratorService.generator(params);

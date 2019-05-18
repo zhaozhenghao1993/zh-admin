@@ -1,6 +1,7 @@
 package net.zhenghao.zh.monitor.controller;
 
 import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.utils.CommonUtils;
 import net.zhenghao.zh.monitor.entity.ServerBaseEntity;
 import net.zhenghao.zh.monitor.entity.ServerInstantEntity;
@@ -19,18 +20,18 @@ import org.springframework.web.bind.annotation.RestController;
  * ServerMonitorController.java
  */
 @RestController
-@RequestMapping("/monitor/server")
+@RequestMapping("${zh-admin.api.prefix}/monitor/server")
 public class MonitorServerController {
 
     @GetMapping("/base")
-    public R baseInfo() {
+    public Result<ServerBaseEntity> baseInfo() {
         ServerBaseEntity base = new ServerBaseEntity();
         base.init();
         return CommonUtils.msg(base);
     }
 
     @GetMapping("/instant")
-    public R instantInfo() {
+    public Result<ServerInstantEntity> instantInfo() {
         ServerInstantEntity instant = new ServerInstantEntity();
         instant.init();
         return CommonUtils.msg(instant);

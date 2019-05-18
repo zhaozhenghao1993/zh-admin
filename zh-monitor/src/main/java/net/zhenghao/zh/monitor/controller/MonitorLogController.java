@@ -4,6 +4,7 @@ import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.entity.SysLogEntity;
 import net.zhenghao.zh.monitor.service.SysLogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import java.util.Map;
  * SysLogController.java
  */
 @RestController
-@RequestMapping("/monitor/log")
+@RequestMapping("${zh-admin.api.prefix}/monitor/log")
 public class MonitorLogController extends AbstractController {
 
 	@Autowired
@@ -43,7 +44,7 @@ public class MonitorLogController extends AbstractController {
 	 */
 	@SysLog("批量删除日志")
 	@DeleteMapping("")
-	public R batchRemove(@RequestBody Long[] ids){
+	public Result batchRemove(@RequestBody Long[] ids){
 		return sysLogService.batchRemove(ids);
 	}
 	
@@ -53,7 +54,7 @@ public class MonitorLogController extends AbstractController {
 	 */
 	@SysLog("清空日志")
 	@DeleteMapping("/{type}/clear")
-	public R batchRemoveAll(@PathVariable("type") Integer type){
+	public Result batchRemoveAll(@PathVariable("type") Integer type){
 		return sysLogService.batchRemoveAll(type);
 	}
 }

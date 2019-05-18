@@ -22,7 +22,7 @@ import java.util.Map;
  * SysRoleController.java
  */
 @RestController
-@RequestMapping("/sys/role")
+@RequestMapping("${zh-admin.api.prefix}/sys/role")
 public class SysRoleController extends AbstractController {
 
 	@Autowired

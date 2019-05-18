@@ -20,7 +20,7 @@ import java.util.Map;
  * ${className}Controller.java
  */
 @RestController
-@RequestMapping("/${requestMapping}")
+@RequestMapping("${zh-admin.api.prefix}/${requestMapping}")
 public class ${className}Controller extends AbstractController {
 
 	@Autowired

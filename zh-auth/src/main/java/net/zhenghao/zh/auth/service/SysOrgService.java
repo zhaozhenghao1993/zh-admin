@@ -2,8 +2,10 @@ package net.zhenghao.zh.auth.service;
 
 import net.zhenghao.zh.auth.entity.SysOrgEntity;
 import net.zhenghao.zh.common.entity.Page;
-import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.entity.Result;
+import net.zhenghao.zh.common.vo.TreeVO;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,14 +20,14 @@ public interface SysOrgService {
 	
 	Page<SysOrgEntity> listOrg(Map<String, Object> params);
 	
-	R listTree(Map<String, Object> params);
+	Result<List<TreeVO>> listTree(Map<String, Object> params);
 	
-	R saveOrg(SysOrgEntity org);
+	Result saveOrg(SysOrgEntity org);
 
-	R getOrgById(Long id);
-	
-	R updateOrg(SysOrgEntity org);
+	Result<SysOrgEntity> getOrgById(Long id);
 
-	R remove(Long id);
+	Result updateOrg(SysOrgEntity org);
+
+	Result remove(Long id);
 	
 }

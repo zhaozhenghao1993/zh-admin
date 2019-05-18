@@ -1,6 +1,6 @@
 package net.zhenghao.zh.auth.dao;
 
-import net.zhenghao.zh.common.vo.SysTreeVO;
+import net.zhenghao.zh.common.vo.TreeVO;
 import net.zhenghao.zh.common.dao.BaseMapper;
 import net.zhenghao.zh.auth.entity.SysMenuEntity;
 import org.mybatis.spring.annotation.MapperScan;
@@ -26,13 +26,13 @@ public interface SysMenuMapper extends BaseMapper<SysMenuEntity>{
 	 * 得到Tree列表(不含button)
 	 * @return
 	 */
-	List<SysTreeVO> listTreeNotButton();
+	List<TreeVO> listTreeNotButton();
 
 	/**
 	 * 得到Tree列表
 	 * @return
 	 */
-	List<SysTreeVO> listTree();
+	List<TreeVO> listTree();
 
 	/**
 	 * 根据menuId获取子菜单的数量

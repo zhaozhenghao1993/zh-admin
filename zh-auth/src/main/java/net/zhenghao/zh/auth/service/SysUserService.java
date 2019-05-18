@@ -3,7 +3,7 @@ package net.zhenghao.zh.auth.service;
 import net.zhenghao.zh.auth.entity.SysMenuEntity;
 import net.zhenghao.zh.auth.entity.SysUserEntity;
 import net.zhenghao.zh.common.entity.Page;
-import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.entity.Result;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -30,30 +30,30 @@ public interface SysUserService {
 
 	Page<SysUserEntity> listUser(Map<String, Object> params);
 
-	R getUserInfo(Long userId);
+	Result<SysUserEntity> getUserInfo(Long userId);
 
-	R profileUser(SysUserEntity user, MultipartFile file);
-	
-	R saveUser(SysUserEntity user);
-	
-	R getUserById(Long userId);
-	
-	R updateUser(SysUserEntity user);
+	Result profileUser(SysUserEntity user, MultipartFile file);
 
-	R removeUser(Long id);
-	
-	R batchRemove(Long[] ids);
+	Result saveUser(SysUserEntity user);
 
-	R updatePasswordByUser(SysUserEntity user);
-	
-	R updateUserEnable(Long[] ids);
-	
-	R updateUserDisable(Long[] ids);
-	
-	R updatePassword(SysUserEntity user);
+	Result<SysUserEntity> getUserById(Long userId);
 
-	R updateThemeByUserId(SysUserEntity user);
+	Result updateUser(SysUserEntity user);
 
-	R updateColorByUserId(SysUserEntity user);
+	Result removeUser(Long id);
+
+	Result batchRemove(Long[] ids);
+
+	Result updatePasswordByUser(SysUserEntity user);
+
+	Result updateUserEnable(Long[] ids);
+
+	Result updateUserDisable(Long[] ids);
+
+	Result updatePassword(SysUserEntity user);
+
+	Result updateThemeByUserId(SysUserEntity user);
+
+	Result updateColorByUserId(SysUserEntity user);
 
 }

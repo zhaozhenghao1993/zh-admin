@@ -3,7 +3,9 @@ package net.zhenghao.zh.auth.service;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.auth.entity.SysPostEntity;
+import net.zhenghao.zh.common.entity.Result;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,16 +20,16 @@ public interface SysPostService {
 
 	Page<SysPostEntity> listPost(Map<String, Object> params);
 
-    R getPostById(Long postId);
+    Result<SysPostEntity> getPostById(Long postId);
 
-    R listPost();
+	Result<List<SysPostEntity>> listPost();
 
-	R savePost(SysPostEntity post);
+	Result savePost(SysPostEntity post);
 
-	R updatePost(SysPostEntity post);
+	Result updatePost(SysPostEntity post);
 
-    R removePost(Long postId);
-	
-	R batchRemove(Long[] ids);
+	Result removePost(Long postId);
+
+	Result batchRemove(Long[] ids);
 	
 }

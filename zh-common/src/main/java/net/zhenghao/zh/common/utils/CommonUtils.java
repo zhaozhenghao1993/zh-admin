@@ -1,8 +1,7 @@
 package net.zhenghao.zh.common.utils;
 
 import net.zhenghao.zh.common.constant.MsgConstant;
-import net.zhenghao.zh.common.constant.SystemConstant;
-import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.entity.Result;
 
 /**
  * 通用工具类
@@ -35,11 +34,11 @@ public class CommonUtils {
 	 * @param count
 	 * @return
 	 */
-	public static R msg(int count) {
+	public static Result msg(int count) {
 		if (isIntThanZero(count)) {
-			return R.ok(MsgConstant.MSG_OPERATION_SUCCESS);
+			return Result.ofSuccessMsg(MsgConstant.MSG_OPERATION_SUCCESS);
 		}
-		return R.error(MsgConstant.MSG_OPERATION_FAILED);
+		return Result.ofFail(MsgConstant.MSG_OPERATION_FAILED);
 	}
 	
 	
@@ -48,11 +47,11 @@ public class CommonUtils {
 	 * @param data
 	 * @return
 	 */
-	public static R msg(Object data) {
+	public static <R> Result<R> msg(R data) {
 		if (isNullOrEmpty(data)) {
-			return R.error(MsgConstant.MSG_INIT_FORM);
+			return Result.ofFail(MsgConstant.MSG_INIT_FORM);
 		}
-		return R.ok().put(SystemConstant.DATA_ROWS, data);
+		return Result.ofSuccess(data);
 	}
 	
 	/**
@@ -60,8 +59,8 @@ public class CommonUtils {
 	 * @param data
 	 * @return
 	 */
-	public static R msgNotNull(Object data) {
-		return R.ok().put(SystemConstant.DATA_ROWS, data);
+	public static <R> Result<R> msgNotNull(R data) {
+		return Result.ofSuccess(data);
 	}
  
 	/**
@@ -70,14 +69,14 @@ public class CommonUtils {
 	 * @param count
 	 * @return
 	 */
-	public static R msg(Object[] total, int count){
+	public static Result msg(Object[] total, int count){
 		if (total.length == count) {
-			return R.ok(MsgConstant.MSG_OPERATION_SUCCESS);
+			return Result.ofSuccessMsg(MsgConstant.MSG_OPERATION_SUCCESS);
 		}else {
 			if (isIntThanZero(count)) {
-				return R.error(MsgConstant.removeFailed(total.length, count));
+				return Result.ofFail(MsgConstant.removeFailed(total.length, count));
 			}else {
-				return R.error(MsgConstant.MSG_OPERATION_FAILED);
+				return Result.ofFail(MsgConstant.MSG_OPERATION_FAILED);
 			}
 		}
 	}

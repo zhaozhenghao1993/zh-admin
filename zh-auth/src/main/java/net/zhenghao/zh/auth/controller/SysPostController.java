@@ -20,7 +20,7 @@ import java.util.Map;
  * SysPostController.java
  */
 @RestController
-@RequestMapping("/sys/post")
+@RequestMapping("${zh-admin.api.prefix}/sys/post")
 public class SysPostController extends AbstractController {
 
 	@Autowired

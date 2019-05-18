@@ -11,10 +11,10 @@ import java.util.List;
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
  * @date :2019/03/23 14:50
- * SysTreeVO.java
+ * TreeVO.java
  */
 
-public class SysTreeVO implements Serializable {
+public class TreeVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,7 +26,7 @@ public class SysTreeVO implements Serializable {
 
     private String title;
 
-    private List<SysTreeVO> children;
+    private List<TreeVO> children;
 
     public Long getKey() {
         return key;
@@ -60,11 +60,11 @@ public class SysTreeVO implements Serializable {
         this.title = title;
     }
 
-    public List<SysTreeVO> getChildren() {
+    public List<TreeVO> getChildren() {
         return children;
     }
 
-    public void setChildren(List<SysTreeVO> children) {
+    public void setChildren(List<TreeVO> children) {
         this.children = children;
     }
 }

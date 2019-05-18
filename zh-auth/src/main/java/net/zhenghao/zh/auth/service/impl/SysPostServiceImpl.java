@@ -6,6 +6,7 @@ import net.zhenghao.zh.auth.dao.SysUserPostMapper;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.utils.CommonUtils;
 import net.zhenghao.zh.auth.entity.SysPostEntity;
 import net.zhenghao.zh.auth.service.SysPostService;
@@ -44,38 +45,38 @@ public class SysPostServiceImpl implements SysPostService {
 	}
 
     @Override
-    public R getPostById(Long postId) {
+    public Result<SysPostEntity> getPostById(Long postId) {
 		SysPostEntity sysPost = sysPostMapper.getObjectById(postId);
         return CommonUtils.msg(sysPost);
     }
 
 	@Override
-	public R listPost() {
+	public Result<List<SysPostEntity>> listPost() {
 		List<SysPostEntity> postList = sysPostMapper.list();
 		return CommonUtils.msgNotNull(postList);
 	}
 
 	@Override
-	public R savePost(SysPostEntity post) {
+	public Result savePost(SysPostEntity post) {
 		int count = sysPostMapper.save(post);
 		return CommonUtils.msg(count);
 	}
 
 	@Override
-	public R updatePost(SysPostEntity post) {
+	public Result updatePost(SysPostEntity post) {
 		int count = sysPostMapper.update(post);
 		return CommonUtils.msg(count);
 	}
 
     @Override
-    public R removePost(Long postId) {
+    public Result removePost(Long postId) {
         int count = sysPostMapper.remove(postId);
 		sysUserPostMapper.removeByPostId(postId);
         return CommonUtils.msg(count);
     }
 
 	@Override
-	public R batchRemove(Long[] ids) {
+	public Result batchRemove(Long[] ids) {
 		int count = sysPostMapper.batchRemove(ids);
 		sysUserPostMapper.batchRemoveByPostId(ids);
 		return CommonUtils.msg(ids, count);
