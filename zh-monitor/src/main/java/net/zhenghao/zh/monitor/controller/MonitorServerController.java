@@ -4,6 +4,7 @@ import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.utils.CommonUtils;
 import net.zhenghao.zh.monitor.entity.ServerBaseEntity;
 import net.zhenghao.zh.monitor.entity.ServerInstantEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,16 +23,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("${zh-admin.api.prefix}/monitor/server")
 public class MonitorServerController {
 
+    @Autowired
+    private ServerBaseEntity base;
+
+    @Autowired
+    private ServerInstantEntity instant;
+
     @GetMapping("/base")
     public Result<ServerBaseEntity> baseInfo() {
-        ServerBaseEntity base = new ServerBaseEntity();
         base.init();
         return CommonUtils.msg(base);
     }
 
     @GetMapping("/instant")
     public Result<ServerInstantEntity> instantInfo() {
-        ServerInstantEntity instant = new ServerInstantEntity();
         instant.init();
         return CommonUtils.msg(instant);
     }

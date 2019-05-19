@@ -5,6 +5,7 @@ import net.zhenghao.zh.common.utils.FileUtils;
 import net.zhenghao.zh.monitor.entity.server.Cpu;
 import net.zhenghao.zh.monitor.entity.server.Jvm;
 import net.zhenghao.zh.monitor.entity.server.Mem;
+import org.springframework.stereotype.Component;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
@@ -21,7 +22,7 @@ import oshi.util.Util;
  * @date :2019/04/06 17:26
  * ServerInstantEntity.java
  */
-
+@Component
 public class ServerInstantEntity {
 
     private static SystemInfo systemInfo = new SystemInfo();

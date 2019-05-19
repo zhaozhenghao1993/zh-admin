@@ -25,11 +25,6 @@ zh-admin:
 
 logging:
   config: classpath:logback.xml
-  level:
-    net.zhenghao.zh.**.dao: debug #dao所在的包文件
-    org.springframework.jdbc.core: error
-    root: info
-    org.hibernate: ERROR
 
 spring:
   profiles:

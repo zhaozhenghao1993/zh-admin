@@ -1,5 +1,6 @@
 package net.zhenghao.zh.monitor.entity;
 
+import net.zhenghao.zh.common.config.UploadConfig;
 import net.zhenghao.zh.common.utils.DataHandleUtils;
 import net.zhenghao.zh.common.utils.FileUtils;
 import net.zhenghao.zh.common.utils.IPUtils;
@@ -7,6 +8,8 @@ import net.zhenghao.zh.monitor.entity.server.App;
 import net.zhenghao.zh.monitor.entity.server.Jvm;
 import net.zhenghao.zh.monitor.entity.server.Sys;
 import net.zhenghao.zh.monitor.entity.server.SysDisk;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import oshi.SystemInfo;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.FileSystem;
@@ -28,8 +31,11 @@ import java.util.Properties;
  * @date :2019/04/06 17:25
  * ServerBaseEntity.java
  */
-
+@Component
 public class ServerBaseEntity {
+
+    @Autowired
+    private UploadConfig uploadConfig;
 
     private static SystemInfo systemInfo = new SystemInfo();
 
@@ -117,6 +123,7 @@ public class ServerBaseEntity {
      */
     private void setAppInfo(Properties props) {
         app.setAppDir(props.getProperty("user.dir"));
+        app.setUploadDir(uploadConfig.getFolder());
     }
 
     /**
