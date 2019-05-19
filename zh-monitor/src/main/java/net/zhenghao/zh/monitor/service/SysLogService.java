@@ -1,7 +1,6 @@
 package net.zhenghao.zh.monitor.service;
 
 import net.zhenghao.zh.common.entity.Page;
-import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.entity.SysLogEntity;
 

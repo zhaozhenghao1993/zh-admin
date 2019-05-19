@@ -5,7 +5,6 @@ import net.zhenghao.zh.auth.dao.SysPostMapper;
 import net.zhenghao.zh.auth.dao.SysUserPostMapper;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
-import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.utils.CommonUtils;
 import net.zhenghao.zh.auth.entity.SysPostEntity;

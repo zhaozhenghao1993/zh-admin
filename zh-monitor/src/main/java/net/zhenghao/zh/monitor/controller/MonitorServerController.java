@@ -1,6 +1,5 @@
 package net.zhenghao.zh.monitor.controller;
 
-import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.utils.CommonUtils;
 import net.zhenghao.zh.monitor.entity.ServerBaseEntity;

@@ -5,7 +5,6 @@ import net.zhenghao.zh.auth.service.SysOrgService;
 import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.Page;
-import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.vo.TreeVO;
 import org.springframework.web.bind.annotation.*;

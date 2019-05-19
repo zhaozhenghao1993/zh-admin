@@ -7,7 +7,6 @@ import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.constant.UploadConstant;
 import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.Page;
-import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.auth.service.SysUserService;
 import net.zhenghao.zh.common.entity.Result;
 import org.springframework.web.bind.annotation.*;

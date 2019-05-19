@@ -3,7 +3,6 @@ package net.zhenghao.zh.auth.controller;
 import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.Page;
-import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.auth.entity.SysMenuEntity;
 import net.zhenghao.zh.auth.service.SysMenuService;
 import net.zhenghao.zh.common.entity.Result;

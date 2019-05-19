@@ -3,7 +3,7 @@ package ${package}.${module}.controller;
 import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.Page;
-import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.entity.Result;
 import ${package}.${module}.entity.${className}Entity;
 import ${package}.${module}.service.${className}Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ public class ${className}Controller extends AbstractController {
      * @return
      */
     @GetMapping("/{id}")
-    public R info(@PathVariable("id") Long ${pk.fieldName}) {
+    public Result<${className}Entity> info(@PathVariable("id") Long ${pk.fieldName}) {
         return ${objName}Service.get${className}ById(${pk.fieldName});
     }
 
@@ -53,7 +53,7 @@ public class ${className}Controller extends AbstractController {
 	 */
     @SysLog("新增${comments}")
     @PostMapping("")
-    public R save(@RequestBody ${className}Entity ${objName}) {
+    public Result save(@RequestBody ${className}Entity ${objName}) {
         ${objName}.setCreatorId(getUserId());
         return ${objName}Service.save${className}(${objName});
     }
@@ -66,7 +66,7 @@ public class ${className}Controller extends AbstractController {
 	 */
     @SysLog("修改${comments}")
     @PutMapping("/{id}")
-    public R update(@PathVariable("id") Long ${pk.fieldName}, @RequestBody ${className}Entity ${objName}) {
+    public Result update(@PathVariable("id") Long ${pk.fieldName}, @RequestBody ${className}Entity ${objName}) {
         ${objName}.set${pk.methodName}(${pk.fieldName});
         ${objName}.setModifierId(getUserId());
         return ${objName}Service.update${className}(${objName});
@@ -79,7 +79,7 @@ public class ${className}Controller extends AbstractController {
 	 */
     @SysLog("删除${comments}")
     @DeleteMapping("/{id}")
-    public R remove(@PathVariable("id") Long ${pk.fieldName}) {
+    public Result remove(@PathVariable("id") Long ${pk.fieldName}) {
         return ${objName}Service.remove${className}(${pk.fieldName});
     }
 
@@ -90,7 +90,7 @@ public class ${className}Controller extends AbstractController {
 	 */
     @SysLog("批量删除${comments}")
     @DeleteMapping("")
-    public R batchRemove(@RequestBody Long[] ids) {
+    public Result batchRemove(@RequestBody Long[] ids) {
         return ${objName}Service.batchRemove(ids);
     }
 	

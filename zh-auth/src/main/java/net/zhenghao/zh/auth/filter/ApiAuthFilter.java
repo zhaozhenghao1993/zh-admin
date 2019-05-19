@@ -11,7 +11,6 @@ import net.zhenghao.zh.auth.entity.SysUserEntity;
 import net.zhenghao.zh.common.constant.HttpStatusConstant;
 import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.context.BaseContextHandler;
-import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.jwt.JWTInfo;
 import net.zhenghao.zh.common.utils.JSONUtils;
@@ -29,7 +28,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * 🙃

@@ -91,6 +91,20 @@ public class Result<R> {
                 .setMsg(throwable.getClass().getName() + ", " + throwable.getMessage());
     }
 
+    /**
+     * 只获取异常message
+     * @param code
+     * @param throwable
+     * @param <R>
+     * @return
+     */
+    public static <R> Result<R> ofThrowableMsg(int code, Throwable throwable) {
+        return new Result<R>()
+                .setSuccess(false)
+                .setCode(code)
+                .setMsg(throwable.getMessage());
+    }
+
     @Override
     public String toString() {
         return "Result{" +

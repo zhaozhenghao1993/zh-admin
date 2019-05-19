@@ -1,7 +1,7 @@
 package ${package}.${module}.service;
 
 import net.zhenghao.zh.common.entity.Page;
-import net.zhenghao.zh.common.entity.R;
+import net.zhenghao.zh.common.entity.Result;
 import ${package}.${module}.entity.${className}Entity;
 
 import java.util.Map;
@@ -18,14 +18,14 @@ public interface ${className}Service {
 
 	Page<${className}Entity> list${className}(Map<String, Object> params);
 
-    R get${className}ById(Long ${pk.fieldName});
+    Result<${className}Entity> get${className}ById(Long ${pk.fieldName});
 
-	R save${className}(${className}Entity ${objName});
+    Result save${className}(${className}Entity ${objName});
 
-	R update${className}(${className}Entity ${objName});
+    Result update${className}(${className}Entity ${objName});
 
-    R remove${className}(Long ${pk.fieldName});
-	
-	R batchRemove(Long[] ids);
+    Result remove${className}(Long ${pk.fieldName});
+
+    Result batchRemove(Long[] ids);
 	
 }

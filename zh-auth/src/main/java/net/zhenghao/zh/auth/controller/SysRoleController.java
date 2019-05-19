@@ -4,7 +4,6 @@ import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.Page;
-import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.auth.entity.SysRoleEntity;
 import net.zhenghao.zh.auth.service.SysRoleService;
 import net.zhenghao.zh.common.entity.Result;

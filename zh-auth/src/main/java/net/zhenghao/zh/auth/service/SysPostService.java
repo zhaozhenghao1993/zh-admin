@@ -1,7 +1,6 @@
 package net.zhenghao.zh.auth.service;
 
 import net.zhenghao.zh.common.entity.Page;
-import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.auth.entity.SysPostEntity;
 import net.zhenghao.zh.common.entity.Result;
 

@@ -3,7 +3,6 @@ package net.zhenghao.zh.monitor.controller;
 import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.Page;
-import net.zhenghao.zh.common.entity.R;
 import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.entity.SysLogEntity;
 import net.zhenghao.zh.monitor.service.SysLogService;

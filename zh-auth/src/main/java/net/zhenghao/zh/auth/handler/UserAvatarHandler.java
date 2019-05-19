@@ -3,7 +3,9 @@ package net.zhenghao.zh.auth.handler;
 import net.zhenghao.zh.common.config.UploadConfig;
 import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.constant.UploadConstant;
-import net.zhenghao.zh.common.exception.BaseException;
+import net.zhenghao.zh.common.exception.upload.UploadException;
+import net.zhenghao.zh.common.exception.upload.UploadSizeException;
+import net.zhenghao.zh.common.exception.upload.UploadTypeException;
 import net.zhenghao.zh.common.utils.FileUtils;
 import net.zhenghao.zh.common.utils.UploadUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,10 +44,10 @@ public class UserAvatarHandler {
             return UploadConstant.USER_AVATAR_DEFAULT_PATH;
         }
         if (FileUtils.fileType(file.getOriginalFilename()) != SystemConstant.FileType.IMAGE) {
-            throw new BaseException("Please upload images!");
+            throw new UploadTypeException("Please upload images!");
         }
         if (!FileUtils.checkFileSize(file.getSize(), UploadConstant.USER_AVATAR_FILE_SIZE, UploadConstant.USER_AVATAR_FILE_SIZE_UNIT)) {
-            throw new BaseException("Upload file too large!");
+            throw new UploadSizeException("Upload file too large!");
         }
         String fileName = UploadConstant.USER_AVATAR_FILE_NAME + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
         String folderPath = uploadConfig.getFolder() + UploadConstant.USER_AVATAR_FOLDER + File.separator + userId;
@@ -53,7 +55,7 @@ public class UserAvatarHandler {
         try {
             UploadUtils.uploadFile(file, folderPath, fileName);
         } catch (IOException e) {
-            throw new BaseException("Upload file Error!");
+            throw new UploadException("Upload file Error!");
         }
         return filePath;
     }
