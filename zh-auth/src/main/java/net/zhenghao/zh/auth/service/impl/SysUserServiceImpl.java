@@ -93,10 +93,16 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public Result profileUser(SysUserEntity user, MultipartFile file) {
+	public Result profileUser(SysUserEntity user) {
 		if (StringUtils.isBlank(user.getName())) {
 			return Result.ofFail("The name cannot be empty !");
 		}
+		int count = sysUserMapper.update(user);
+		return CommonUtils.msg(count);
+	}
+
+	@Override
+	public Result profileAvatar(SysUserEntity user, MultipartFile file) {
 		user.setAvatar(userAvatarHandler.avatarHandler(user.getUserId(), file));
 		int count = sysUserMapper.update(user);
 		return CommonUtils.msg(count);

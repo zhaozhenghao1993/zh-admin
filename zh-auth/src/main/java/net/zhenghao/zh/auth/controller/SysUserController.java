@@ -45,12 +45,23 @@ public class SysUserController extends AbstractController {
 	 * 更新当前用户的个人基础信息
 	 * @return
 	 */
-	@PostMapping("/profile")
-	public Result profile(SysUserEntity user, MultipartFile file) {
+	@PutMapping("/profile")
+	public Result profile(SysUserEntity user) {
 		user.setUserId(getUserId());
 		user.setModifierId(getUserId());
 		user.setStatus(null);
-		return sysUserService.profileUser(user, file);
+		return sysUserService.profileUser(user);
+	}
+
+	/**
+	 * 更新当前用户的头像
+	 * @return
+	 */
+	@PostMapping("/profile/avatar")
+	public Result avatar(MultipartFile file) {
+		SysUserEntity user = new SysUserEntity();
+		user.setUserId(getUserId());
+		return sysUserService.profileAvatar(user, file);
 	}
 
 	/**

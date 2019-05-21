@@ -41,7 +41,8 @@ public class FilterChainConfig {
         annoFilterChainList.add(new SysPermissionEntity("/test/exception", "GET"));
 
         authFilterChainList.add(new SysPermissionEntity("/sys/user/info", "GET"));
-        authFilterChainList.add(new SysPermissionEntity("/sys/user/profile", "POST"));
+        authFilterChainList.add(new SysPermissionEntity("/sys/user/profile", "PUT"));
+        authFilterChainList.add(new SysPermissionEntity("/sys/user/profile/avatar", "POST"));
         authFilterChainList.add(new SysPermissionEntity("/sys/user/profile/password", "PUT"));
         authFilterChainList.add(new SysPermissionEntity("/sys/user/profile/theme", "PUT"));
         authFilterChainList.add(new SysPermissionEntity("/sys/user/profile/color", "PUT"));

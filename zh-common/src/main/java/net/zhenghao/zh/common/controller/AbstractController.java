@@ -27,4 +27,12 @@ public abstract class AbstractController {
 	protected String getUserName(){
 		return BaseContextHandler.getUsername();
 	}
+
+	/**
+	 * 获取当前请求token的用户name
+	 * @return
+	 */
+	protected String getName(){
+		return BaseContextHandler.getName();
+	}
 }

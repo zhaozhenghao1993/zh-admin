@@ -32,7 +32,9 @@ public interface SysUserService {
 
 	Result<SysUserEntity> getUserInfo(Long userId);
 
-	Result profileUser(SysUserEntity user, MultipartFile file);
+	Result profileUser(SysUserEntity user);
+
+	Result profileAvatar(SysUserEntity user, MultipartFile file);
 
 	Result saveUser(SysUserEntity user);
 
