@@ -46,7 +46,7 @@ public class SysUserController extends AbstractController {
 	 * @return
 	 */
 	@PutMapping("/profile")
-	public Result profile(SysUserEntity user) {
+	public Result profile(@RequestBody SysUserEntity user) {
 		user.setUserId(getUserId());
 		user.setModifierId(getUserId());
 		user.setStatus(null);

@@ -51,7 +51,7 @@ public class UserAvatarHandler {
         }
         String fileName = UploadConstant.USER_AVATAR_FILE_NAME + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
         String folderPath = uploadConfig.getFolder() + UploadConstant.USER_AVATAR_FOLDER + File.separator + userId;
-        String filePath = uploadConfig.getPath() + UploadConstant.USER_AVATAR_FOLDER + "/" + userId + "/" + fileName;
+        String filePath = uploadConfig.getPath() + "/" + UploadConstant.USER_AVATAR_FOLDER + "/" + userId + "/" + fileName;
         try {
             UploadUtils.uploadFile(file, folderPath, fileName);
         } catch (IOException e) {
