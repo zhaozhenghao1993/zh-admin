@@ -5,10 +5,13 @@ import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.entity.SysLogEntity;
+import net.zhenghao.zh.common.vo.ChartVO;
 import net.zhenghao.zh.monitor.service.SysLogService;
+import net.zhenghao.zh.monitor.vo.VisitCountVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -55,5 +58,15 @@ public class MonitorLogController extends AbstractController {
 	@DeleteMapping("/{type}/clear")
 	public Result batchRemoveAll(@PathVariable("type") Integer type){
 		return sysLogService.batchRemoveAll(type);
+	}
+
+	@GetMapping("/visit")
+	public Result<VisitCountVO> visitCount(){
+		return sysLogService.visitCount();
+	}
+
+	@GetMapping("/visit/week")
+	public Result<List<ChartVO>> lastWeekVisitCount(){
+		return sysLogService.lastWeekVisitCount();
 	}
 }

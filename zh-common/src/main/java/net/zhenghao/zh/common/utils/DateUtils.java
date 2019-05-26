@@ -5,6 +5,7 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import java.lang.management.ManagementFactory;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -243,5 +244,21 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         long beforeTime = before.getTime();
         long afterTime = after.getTime();
         return (afterTime - beforeTime) / (1000 * 60 * 60 * 24);
+    }
+
+    /**
+     * 获取前七天日期数组 从今天开始算
+     * @return
+     */
+    public static String[] getBeforeSevenDay(){
+        String[] arr = new String[7];
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = null;
+        for (int i=0;i<7;i++){
+            c=Calendar.getInstance();
+            c.add(Calendar.DAY_OF_MONTH, - i);
+            arr[6-i] = sdf.format(c.getTime());
+        }
+        return arr;
     }
 }

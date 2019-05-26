@@ -1,8 +1,11 @@
 package net.zhenghao.zh.common.dao;
 
 import net.zhenghao.zh.common.entity.SysLogEntity;
+import net.zhenghao.zh.common.vo.ChartVO;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * 系统日志
@@ -17,4 +20,10 @@ import org.springframework.stereotype.Component;
 public interface SysLogMapper extends BaseMapper<SysLogEntity> {
 	
 	int batchRemoveAll(Integer type);
+
+	int selectTotalVisitCount();
+
+	int selectTodayVisitCount();
+
+	List<ChartVO> selectLastWeekVisitCount();
 }

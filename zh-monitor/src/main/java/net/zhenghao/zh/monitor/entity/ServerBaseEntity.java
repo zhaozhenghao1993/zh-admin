@@ -11,11 +11,9 @@ import net.zhenghao.zh.monitor.entity.server.SysDisk;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import oshi.SystemInfo;
-import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.FileSystem;
 import oshi.software.os.OSFileStore;
 import oshi.software.os.OperatingSystem;
-import oshi.software.os.windows.WindowsOperatingSystem;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -130,6 +128,7 @@ public class ServerBaseEntity {
      * 设置磁盘信息
      */
     private void setSysFiles(OperatingSystem os) {
+        sysDisks.clear();
         FileSystem fileSystem = os.getFileSystem();
         OSFileStore[] fsArray = fileSystem.getFileStores();
         for (OSFileStore fs : fsArray) {

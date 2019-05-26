@@ -104,4 +104,36 @@
 			type = #{type}
 	</delete>
 
+	<select id="selectTotalVisitCount" resultType="java.lang.Integer">
+		SELECT
+			COUNT(1)
+		FROM
+			sys_log
+		WHERE
+			type = 1
+	</select>
+
+	<select id="selectTodayVisitCount" resultType="java.lang.Integer">
+		SELECT
+			COUNT(1)
+		FROM
+			sys_log
+		WHERE
+			type = 1
+		AND DATE_FORMAT(create_time, '%Y-%m-%d') = DATE_FORMAT(NOW(), '%Y-%m-%d');
+	</select>
+
+	<select id="selectLastWeekVisitCount" resultType="ChartVO">
+		SELECT
+			COUNT(1) AS y,
+			DATE_FORMAT(create_time, '%Y-%m-%d') AS x
+		FROM
+			sys_log
+		WHERE
+			type = 1
+			AND DATE_SUB(CURDATE(), INTERVAL 7 DAY) <![CDATA[<= ]]> DATE(`create_time`)
+		GROUP BY
+			DATE_FORMAT(create_time, '%Y-%m-%d')
+	</select>
+
 </mapper>

@@ -46,6 +46,8 @@ public class FilterChainConfig {
         authFilterChainList.add(new SysPermissionEntity("/sys/user/profile/password", "PUT"));
         authFilterChainList.add(new SysPermissionEntity("/sys/user/profile/theme", "PUT"));
         authFilterChainList.add(new SysPermissionEntity("/sys/user/profile/color", "PUT"));
+        authFilterChainList.add(new SysPermissionEntity("/monitor/log/visit", "GET"));
+        authFilterChainList.add(new SysPermissionEntity("/monitor/log/visit/week", "GET"));
         authFilterChainList.add(new SysPermissionEntity("/uploads/-/system/user/avatar/{id}/*", "GET")); // 头像地址
     }
 
