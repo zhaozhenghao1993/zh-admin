@@ -47,13 +47,13 @@ public class SysOrgServiceImpl implements SysOrgService {
 	public Result<List<TreeVO>> listTree(Map<String, Object> params) {
 		List<TreeVO> listRoot = new ArrayList<>();
 		if (params.get("isRoot") != null && "true".equals(params.get("isRoot"))) {
-			List<TreeVO> menuList = sysOrgMapper.listTree();
+			List<TreeVO> orgList = sysOrgMapper.listTree();
 			TreeVO root = new TreeVO();
 			root.setKey(0L);
 			root.setTitle("主目录");
 			root.setValue("0");
 			root.setParentId("-1");
-			root.setChildren(menuList);
+			root.setChildren(orgList);
 			listRoot.add(root);
 		} else {
 			listRoot = sysOrgMapper.listTree();

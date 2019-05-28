@@ -1,5 +1,7 @@
 package net.zhenghao.zh.auth.entity;
 
+import net.zhenghao.zh.common.entity.TreeNode;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -12,14 +14,9 @@ import java.util.List;
  * @date  :2017年12月5日 下午1:09:39
  * SysMenuEntity.java
  */
-public class SysMenuEntity implements Serializable {
+public class SysMenuEntity extends TreeNode implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * 菜单ID
-	 */
-	private Long menuId;
 
 	/**
 	 * 父级ID,一级菜单为0
@@ -81,8 +78,6 @@ public class SysMenuEntity implements Serializable {
 	 */
 	private Long modifierId;
 
-	private List<SysMenuEntity> children;
-
 	/**
 	 * 最后修改时间
 	 */
@@ -90,14 +85,6 @@ public class SysMenuEntity implements Serializable {
 
 	public SysMenuEntity() {
 		super();
-	}
-
-	public Long getMenuId() {
-		return menuId;
-	}
-
-	public void setMenuId(Long menuId) {
-		this.menuId = menuId;
 	}
 
 	public Long getParentId() {
@@ -202,13 +189,5 @@ public class SysMenuEntity implements Serializable {
 
 	public void setModifiedTime(Timestamp modifiedTime) {
 		this.modifiedTime = modifiedTime;
-	}
-
-	public List<SysMenuEntity> getChildren() {
-		return children;
-	}
-
-	public void setChildren(List<SysMenuEntity> children) {
-		this.children = children;
 	}
 }

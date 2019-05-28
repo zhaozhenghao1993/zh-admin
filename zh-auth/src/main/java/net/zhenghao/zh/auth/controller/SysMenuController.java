@@ -40,12 +40,12 @@ public class SysMenuController extends AbstractController {
 
 	/**
 	 * 查询详情
-	 * @param menuId
+	 * @param id
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	public Result<SysMenuEntity> info(@PathVariable("id") Long menuId) {
-		return sysMenuService.getMenuById(menuId);
+	public Result<SysMenuEntity> info(@PathVariable("id") Long id) {
+		return sysMenuService.getMenuById(id);
 	}
 	
 	/**
@@ -76,20 +76,20 @@ public class SysMenuController extends AbstractController {
 	 */
 	@SysLog("修改菜单")
 	@PutMapping("/{id}")
-	public Result update(@PathVariable("id") Long menuId, @RequestBody SysMenuEntity menu) {
-		menu.setMenuId(menuId);
+	public Result update(@PathVariable("id") Long id, @RequestBody SysMenuEntity menu) {
+		menu.setId(id);
 		menu.setModifierId(getUserId());
 		return sysMenuService.updateMenu(menu);
 	}
 	
 	/**
 	 * 删除菜单
-	 * @param menuId
+	 * @param id
 	 * @return
 	 */
 	@SysLog("删除菜单")
 	@DeleteMapping("/{id}")
-	public Result remove(@PathVariable("id") Long menuId) {
-		return sysMenuService.remove(menuId);
+	public Result remove(@PathVariable("id") Long id) {
+		return sysMenuService.remove(id);
 	}
 }

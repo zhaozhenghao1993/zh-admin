@@ -15,9 +15,9 @@ public class SystemConstant {
 	public static final long SUPER_ADMIN = 1;
 	
 	/**
-	 * 数据标识
+	 * 默认树根节点
 	 */
-	public static final String DATA_ROWS = "data";
+	public static final Long TREE_ROOT = 0L;
 
 
 	/**

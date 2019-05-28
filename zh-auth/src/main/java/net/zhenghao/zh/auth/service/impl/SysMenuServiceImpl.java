@@ -2,7 +2,9 @@ package net.zhenghao.zh.auth.service.impl;
 
 import net.zhenghao.zh.auth.dao.SysMenuMapper;
 import net.zhenghao.zh.auth.dao.SysRoleMenuMapper;
+import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.entity.Result;
+import net.zhenghao.zh.common.utils.TreeUtils;
 import net.zhenghao.zh.common.vo.TreeVO;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
@@ -39,7 +41,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 	public Page<SysMenuEntity> listMenu(Map<String, Object> params) {
 		Query query = new Query(params);
 		Page<SysMenuEntity> page = new Page<>(query);
-		page.setData(sysMenuMapper.list(query));
+		page.setData(TreeUtils.build(sysMenuMapper.list(query), SystemConstant.TREE_ROOT));
 		return page;
 	}
 
@@ -47,14 +49,16 @@ public class SysMenuServiceImpl implements SysMenuService {
 	public Result<List<TreeVO>> listTree(Map<String, Object> params) {
 		List<TreeVO> listRoot = new ArrayList<>();
 		if (params.get("isNotButton") != null && "true".equals(params.get("isNotButton"))) {
-			List<TreeVO> menuList = sysMenuMapper.listTreeNotButton();
+			List<TreeVO> treeList = sysMenuMapper.listTreeNotButton();
 			TreeVO root = new TreeVO();
+			root.setId(0L);
 			root.setKey(0L);
 			root.setTitle("主目录");
 			root.setValue("0");
-			root.setParentId("-1");
-			root.setChildren(menuList);
-			listRoot.add(root);
+			root.setParentId(-1L);
+			treeList.add(root);
+			// root.setChildren(menuList);
+			listRoot.add(TreeUtils.build(treeList, -1L));
 		} else {
 			listRoot = sysMenuMapper.listTree();
 		}

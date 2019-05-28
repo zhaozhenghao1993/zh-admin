@@ -1,5 +1,7 @@
 package net.zhenghao.zh.common.vo;
 
+import net.zhenghao.zh.common.entity.TreeNode;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,19 +16,15 @@ import java.util.List;
  * TreeVO.java
  */
 
-public class TreeVO implements Serializable {
+public class TreeVO extends TreeNode implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long key;
 
-    private String parentId;
-
     private String value;
 
     private String title;
-
-    private List<TreeVO> children;
 
     public Long getKey() {
         return key;
@@ -34,14 +32,6 @@ public class TreeVO implements Serializable {
 
     public void setKey(Long key) {
         this.key = key;
-    }
-
-    public String getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
     }
 
     public String getValue() {
@@ -58,13 +48,5 @@ public class TreeVO implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public List<TreeVO> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<TreeVO> children) {
-        this.children = children;
     }
 }

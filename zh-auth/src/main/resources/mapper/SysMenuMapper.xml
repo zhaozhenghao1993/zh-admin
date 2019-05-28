@@ -3,41 +3,27 @@
 
 <mapper namespace="net.zhenghao.zh.auth.dao.SysMenuMapper">
 
-	<resultMap id="MenuListResult" type="SysMenuEntity">
-		<id property="menuId" column="menu_id" />
-		<result property="parentId" column="parent_id" />
-		<result property="name" column="name" />
-		<result property="uri" column="uri" />
-		<result property="method" column="method" />
-		<result property="perms" column="perms" />
-		<result property="type" column="type" />
-		<result property="orderNum" column="order_num" />
-		<result property="description" column="description" />
-		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.auth.entity.SysMenuEntity" column="menu_id"
-					select="listParentId" />
-	</resultMap>
-
 	<resultMap id="MenuVoListNotButtonResult" type="TreeVO">
-		<id property="key" column="menu_id" />
+		<id property="key" column="id" />
 		<result property="parentId" column="parent_id" />
-		<result property="value" column="menu_id" />
+		<result property="value" column="id" />
 		<result property="title" column="name" />
-		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.common.vo.TreeVO" column="menu_id"
+		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.common.vo.TreeVO" column="id"
                     select="listTreeNotButtonParentId" />
 	</resultMap>
 
 	<resultMap id="MenuVoListResult" type="TreeVO">
-		<id property="key" column="menu_id" />
+		<id property="key" column="id" />
 		<result property="parentId" column="parent_id" />
-		<result property="value" column="menu_id" />
+		<result property="value" column="id" />
 		<result property="title" column="name" />
-		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.common.vo.TreeVO" column="menu_id"
+		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.common.vo.TreeVO" column="id"
                     select="listTreeParentId" />
 	</resultMap>
 
-	<select id="list" resultMap="MenuListResult">
+	<select id="list" resultType="SysMenuEntity">
 		SELECT
-			m.menu_id,
+			m.id,
 			m.parent_id,
 			(
 				SELECT
@@ -45,7 +31,7 @@
 				FROM
 					sys_menu p
 				WHERE
-					p.menu_id = m.parent_id
+					p.id = m.parent_id
 			) AS parentName,
 			m.name,
 			m.uri,
@@ -56,55 +42,28 @@
 			m.description
 		FROM
 			sys_menu m
-		WHERE
-			m.parent_id = 0
 		ORDER BY
 			m.order_num ASC
 	</select>
 
-	<select id="listParentId" parameterType="java.lang.Long" resultMap="MenuListResult">
+	<select id="listTreeNotButton" resultType="TreeVO" flushCache="true">
 		SELECT
-			m.menu_id,
+			m.id,
 			m.parent_id,
-			(
-				SELECT
-					p.name
-				FROM
-					sys_menu p
-				WHERE
-					p.menu_id = m.parent_id
-			) AS parentName,
-			m.name,
-			m.uri,
-			m.method,
-			m.perms,
-			m.type,
-			m.order_num,
-			m.description
+			m.id AS key,
+			m.id AS value,
+			m.name AS title
 		FROM
 			sys_menu m
 		WHERE
-			m.parent_id = #{parentId}
-		ORDER BY
-			m.order_num ASC
-	</select>
-
-	<select id="listTreeNotButton" resultMap="MenuVoListNotButtonResult" flushCache="true">
-		SELECT
-			m.menu_id,
-			m.parent_id,
-			m.name
-		FROM
-			sys_menu m
-		WHERE
-			m.parent_id = 0
+			( m.type = 0 OR m.type = 1 )
 		ORDER BY
 			m.order_num ASC
 	</select>
 
 	<select id="listTreeNotButtonParentId" parameterType="java.lang.Long" resultMap="MenuVoListNotButtonResult">
 		SELECT
-			m.menu_id,
+			m.id,
 			m.parent_id,
 			m.name
 		FROM
@@ -119,7 +78,7 @@
 
 	<select id="listTree" resultMap="MenuVoListResult" flushCache="true">
 		SELECT
-			m.menu_id,
+			m.id,
 			m.parent_id,
 			m.name
 		FROM
@@ -132,7 +91,7 @@
 
 	<select id="listTreeParentId" parameterType="java.lang.Long" resultMap="MenuVoListResult">
 		SELECT
-			m.menu_id,
+			m.id,
 			m.parent_id,
 			m.name
 		FROM
@@ -143,7 +102,7 @@
 			m.order_num ASC
 	</select>
 
-	<select id="getChildCountByMenuId" resultType="java.lang.Integer">
+	<select id="getChildCountByid" resultType="java.lang.Integer">
 		SELECT
 			COUNT(1)
 		FROM
@@ -181,7 +140,7 @@
 
 	<select id="getObjectById" resultType="SysMenuEntity">
 		SELECT
-			m.menu_id,
+			m.id,
 			m.parent_id,
 			(
 				SELECT
@@ -189,7 +148,7 @@
 				FROM
 					sys_menu p
 				WHERE
-					p.menu_id = m.parent_id
+					p.id = m.parent_id
 			) AS parentName,
 			m.name,
 			m.uri,
@@ -202,7 +161,7 @@
 		FROM
 			sys_menu m
 		WHERE
-			menu_id = #{value}
+			id = #{value}
 	</select>
 	
 	<update id="update">
@@ -219,7 +178,7 @@
 			<if test="modifierId != null">modifier_id = #{modifierId},</if>
 			modified_time = NOW()
 		</set>
-		where menu_id = #{menuId}
+		where id = #{id}
 	</update>
 
 	<delete id="remove">
@@ -227,7 +186,7 @@
 		FROM
 			sys_menu
 		WHERE
-			menu_id = #{value}
+			id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
@@ -235,7 +194,7 @@
 		FROM
 			sys_menu
 		WHERE
-			menu_id IN
+			id IN
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>
@@ -248,7 +207,7 @@
 		FROM
 			sys_user_role ur
 		LEFT JOIN sys_role_menu rm ON ur.role_id = rm.role_id
-		LEFT JOIN sys_menu m ON rm.menu_id = m.menu_id
+		LEFT JOIN sys_menu m ON rm.menu_id = m.id
 		WHERE
 			ur.user_id = #{userId}
 		AND (m.type = 2 OR m.type = 3)
@@ -256,14 +215,14 @@
 
 	<select id="listUserMenu" parameterType="long" resultType="SysMenuEntity" >
 		SELECT DISTINCT
-			m.menu_id,
+			m.id,
 			m.parent_id,
 			m.name,
 			m.perms,
 			m.type
 		FROM
 			sys_menu m
-		LEFT JOIN sys_role_menu rm ON rm.menu_id = m.menu_id
+		LEFT JOIN sys_role_menu rm ON rm.menu_id = m.id
 		LEFT JOIN sys_user_role ur ON ur.role_id = rm.role_id
 		WHERE
 			ur.user_id = #{userId}
