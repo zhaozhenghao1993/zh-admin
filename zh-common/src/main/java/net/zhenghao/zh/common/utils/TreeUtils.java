@@ -1,9 +1,7 @@
 package net.zhenghao.zh.common.utils;
 
 import net.zhenghao.zh.common.entity.TreeNode;
-import org.springframework.cglib.core.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

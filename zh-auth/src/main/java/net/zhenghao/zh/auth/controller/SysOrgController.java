@@ -40,12 +40,12 @@ public class SysOrgController extends AbstractController {
 
 	/**
 	 * 查询详情
-	 * @param orgId
+	 * @param id
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	public Result<SysOrgEntity> info(@PathVariable("id") Long orgId) {
-		return sysOrgService.getOrgById(orgId);
+	public Result<SysOrgEntity> info(@PathVariable("id") Long id) {
+		return sysOrgService.getOrgById(id);
 	}
 	
 	/**
@@ -76,20 +76,20 @@ public class SysOrgController extends AbstractController {
 	 */
 	@SysLog("修改组织")
 	@PutMapping("/{id}")
-	public Result update(@PathVariable("id") Long orgId, @RequestBody SysOrgEntity org) {
-		org.setOrgId(orgId);
+	public Result update(@PathVariable("id") Long id, @RequestBody SysOrgEntity org) {
+		org.setId(id);
 		org.setModifierId(getUserId());
 		return sysOrgService.updateOrg(org);
 	}
 	
 	/**
 	 * 删除组织
-	 * @param orgId
+	 * @param id
 	 * @return
 	 */
 	@SysLog("删除组织")
 	@DeleteMapping("/{id}")
-	public Result remove(@PathVariable("id") Long orgId) {
-		return sysOrgService.remove(orgId);
+	public Result remove(@PathVariable("id") Long id) {
+		return sysOrgService.remove(id);
 	}
 }

@@ -3,29 +3,9 @@
 
 <mapper namespace="net.zhenghao.zh.auth.dao.SysOrgMapper">
 
-	<resultMap id="OrgListResult" type="SysOrgEntity">
-		<id property="orgId" column="org_id" />
-		<result property="parentId" column="parent_id" />
-		<result property="ancestors" column="ancestors" />
-		<result property="orgName" column="org_name" />
-		<result property="orderNum" column="order_num" />
-		<result property="createTime" column="create_time" />
-		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.auth.entity.SysOrgEntity" column="org_id"
-					select="listParentId" />
-	</resultMap>
-
-	<resultMap id="TreeListResult" type="TreeVO">
-		<id property="key" column="org_id" />
-		<result property="parentId" column="parent_id" />
-		<result property="value" column="org_id" />
-		<result property="title" column="org_name" />
-		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.common.vo.TreeVO" column="org_id"
-                    select="listTreeParentId" />
-	</resultMap>
-
-	<select id="list" resultMap="OrgListResult">
+	<select id="list" resultType="SysOrgEntity">
 		SELECT
-			o.org_id,
+			o.id,
 			o.parent_id,
 			o.ancestors,
 			o.org_name,
@@ -33,55 +13,24 @@
 			o.create_time
 		FROM
 			sys_org o
-		WHERE
-			o.parent_id = 0
 		ORDER BY
 			o.order_num ASC
 	</select>
 
-	<select id="listParentId" parameterType="java.lang.Long" resultMap="OrgListResult">
+	<select id="listTree" resultType="TreeVO" flushCache="true">
 		SELECT
-			o.org_id,
+			o.id,
 			o.parent_id,
-			o.ancestors,
-			o.org_name,
-			o.order_num,
-			o.create_time
+			o.id AS `key`,
+			o.id AS `value`,
+			o.org_name AS title
 		FROM
 			sys_org o
-		WHERE
-			o.parent_id = #{parentId}
 		ORDER BY
 			o.order_num ASC
 	</select>
 
-	<select id="listTree" resultMap="TreeListResult" flushCache="true">
-		SELECT
-			o.org_id,
-			o.parent_id,
-			o.org_name
-		FROM
-			sys_org o
-		WHERE
-			o.parent_id = 0
-		ORDER BY
-			o.order_num ASC
-	</select>
-
-	<select id="listTreeParentId" parameterType="java.lang.Long" resultMap="TreeListResult">
-		SELECT
-			o.org_id,
-			o.parent_id,
-			o.org_name
-		FROM
-			sys_org o
-		WHERE
-			o.parent_id = #{parentId}
-		ORDER BY
-			o.order_num ASC
-	</select>
-
-	<select id="getChildCountByOrgId" resultType="java.lang.Integer">
+	<select id="getChildCountById" resultType="java.lang.Integer">
 		SELECT
 			COUNT(1)
 		FROM
@@ -90,16 +39,16 @@
 			parent_id = #{value}
 	</select>
 
-	<select id="listByOrgIds" resultType="SysOrgEntity">
+	<select id="listByIds" resultType="SysOrgEntity">
 		SELECT
-			org_id,
+			id,
 			org_name
 		FROM
 			sys_org
 		WHERE
-			org_id IN (${value})
+			id IN (${value})
 		ORDER BY
-			FIELD(org_id, ${value})
+			FIELD(id, ${value})
 	</select>
 
 	<insert id="save">
@@ -123,7 +72,7 @@
 
 	<select id="getObjectById" resultType="SysOrgEntity">
 		SELECT
-			org_id,
+			id,
 			parent_id,
 			ancestors,
 			org_name,
@@ -132,7 +81,7 @@
 		FROM
 			sys_org
 		WHERE
-			org_id = #{value}
+			id = #{value}
 	</select>
 	
 	<update id="update">
@@ -145,7 +94,7 @@
 			<if test="modifierId != null">modifier_id = #{modifierId},</if>
 			modified_time = NOW()
 		</set>
-		where org_id = #{orgId}
+		where id = #{id}
 	</update>
 
 	<update id="updateChildAncestorsById">
@@ -153,7 +102,7 @@
 		<set>
 			ancestors = replace (ancestors, #{oldAncestors}, #{newAncestors})
 		</set>
-		where FIND_IN_SET (#{orgId}, ancestors)
+		where FIND_IN_SET (#{id}, ancestors)
 	</update>
 
 	<delete id="remove">
@@ -161,7 +110,7 @@
 		FROM
 			sys_org
 		WHERE
-			org_id = #{value}
+			id = #{value}
 	</delete>
 
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>

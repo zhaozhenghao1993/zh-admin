@@ -87,7 +87,7 @@ public class SysUserServiceImpl implements SysUserService {
 		// 设置组织列表
 		if (user.getOrgId() != null && user.getOrgId() != 0L) {
 			SysOrgEntity org = sysOrgMapper.getObjectById(user.getOrgId());
-			user.setOrgs(sysOrgMapper.listByOrgIds(org.getAncestors() + ',' + user.getOrgId()));
+			user.setOrgs(sysOrgMapper.listByIds(org.getAncestors() + ',' + user.getOrgId()));
 		}
 		return CommonUtils.msg(user);
 	}

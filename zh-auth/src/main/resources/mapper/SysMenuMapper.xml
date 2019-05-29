@@ -3,24 +3,6 @@
 
 <mapper namespace="net.zhenghao.zh.auth.dao.SysMenuMapper">
 
-	<resultMap id="MenuVoListNotButtonResult" type="TreeVO">
-		<id property="key" column="id" />
-		<result property="parentId" column="parent_id" />
-		<result property="value" column="id" />
-		<result property="title" column="name" />
-		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.common.vo.TreeVO" column="id"
-                    select="listTreeNotButtonParentId" />
-	</resultMap>
-
-	<resultMap id="MenuVoListResult" type="TreeVO">
-		<id property="key" column="id" />
-		<result property="parentId" column="parent_id" />
-		<result property="value" column="id" />
-		<result property="title" column="name" />
-		<collection property="children" javaType="ArrayList" ofType="net.zhenghao.zh.common.vo.TreeVO" column="id"
-                    select="listTreeParentId" />
-	</resultMap>
-
 	<select id="list" resultType="SysMenuEntity">
 		SELECT
 			m.id,
@@ -50,8 +32,8 @@
 		SELECT
 			m.id,
 			m.parent_id,
-			m.id AS key,
-			m.id AS value,
+			m.id AS `key`,
+			m.id AS `value`,
 			m.name AS title
 		FROM
 			sys_menu m
@@ -61,48 +43,20 @@
 			m.order_num ASC
 	</select>
 
-	<select id="listTreeNotButtonParentId" parameterType="java.lang.Long" resultMap="MenuVoListNotButtonResult">
+	<select id="listTree" resultType="TreeVO" flushCache="true">
 		SELECT
 			m.id,
 			m.parent_id,
-			m.name
+			m.id AS `key`,
+			m.id AS `value`,
+			m.name AS title
 		FROM
 			sys_menu m
-		WHERE
-			m.parent_id = #{parentId}
-		AND
-			( m.type = 0 OR m.type = 1 )
 		ORDER BY
 			m.order_num ASC
 	</select>
 
-	<select id="listTree" resultMap="MenuVoListResult" flushCache="true">
-		SELECT
-			m.id,
-			m.parent_id,
-			m.name
-		FROM
-			sys_menu m
-		WHERE
-			m.parent_id = 0
-		ORDER BY
-			m.order_num ASC
-	</select>
-
-	<select id="listTreeParentId" parameterType="java.lang.Long" resultMap="MenuVoListResult">
-		SELECT
-			m.id,
-			m.parent_id,
-			m.name
-		FROM
-			sys_menu m
-		WHERE
-			m.parent_id = #{parentId}
-		ORDER BY
-			m.order_num ASC
-	</select>
-
-	<select id="getChildCountByid" resultType="java.lang.Integer">
+	<select id="getChildCountById" resultType="java.lang.Integer">
 		SELECT
 			COUNT(1)
 		FROM

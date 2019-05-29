@@ -19,11 +19,6 @@ public class SysMenuEntity extends TreeNode implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 父级ID,一级菜单为0
-	 */
-	private Long parentId;
-
-	/**
 	 * 父级菜单名称
 	 */
 	private String parentName;
@@ -85,14 +80,6 @@ public class SysMenuEntity extends TreeNode implements Serializable {
 
 	public SysMenuEntity() {
 		super();
-	}
-
-	public Long getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
 	}
 
 	public String getParentName() {

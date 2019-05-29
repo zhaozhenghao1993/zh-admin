@@ -47,7 +47,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 
 	@Override
 	public Result<List<TreeVO>> listTree(Map<String, Object> params) {
-		List<TreeVO> listRoot = new ArrayList<>();
+		List<TreeVO> listRoot;
 		if (params.get("isNotButton") != null && "true".equals(params.get("isNotButton"))) {
 			List<TreeVO> treeList = sysMenuMapper.listTreeNotButton();
 			TreeVO root = new TreeVO();
@@ -57,10 +57,9 @@ public class SysMenuServiceImpl implements SysMenuService {
 			root.setValue("0");
 			root.setParentId(-1L);
 			treeList.add(root);
-			// root.setChildren(menuList);
-			listRoot.add(TreeUtils.build(treeList, -1L));
+			listRoot = TreeUtils.build(treeList, -1L);
 		} else {
-			listRoot = sysMenuMapper.listTree();
+			listRoot = TreeUtils.build(sysMenuMapper.listTree(), SystemConstant.TREE_ROOT);
 		}
 		return CommonUtils.msgNotNull(listRoot);
 	}
@@ -85,7 +84,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 
 	@Override
 	public Result remove(Long id) {
-		int childCount = sysMenuMapper.getChildCountByMenuId(id);
+		int childCount = sysMenuMapper.getChildCountById(id);
 		if (childCount > 0) {
 			return Result.ofFail("该菜单含有子菜单,请先删除子菜单!");
 		}

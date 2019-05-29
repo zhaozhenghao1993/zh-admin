@@ -1,5 +1,7 @@
 package net.zhenghao.zh.auth.entity;
 
+import net.zhenghao.zh.common.entity.TreeNode;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -12,19 +14,9 @@ import java.util.List;
  * @date  :2017年12月5日 下午1:09:39
  * SysMenuEntity.java
  */
-public class SysOrgEntity implements Serializable {
+public class SysOrgEntity extends TreeNode implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * 组织ID
-	 */
-	private Long orgId;
-
-	/**
-	 * 父级ID,一级菜单为0
-	 */
-	private Long parentId;
 
 	/**
 	 * 祖级列表
@@ -56,8 +48,6 @@ public class SysOrgEntity implements Serializable {
 	 */
 	private Long modifierId;
 
-	private List<SysOrgEntity> children;
-
 	/**
 	 * 最后修改时间
 	 */
@@ -65,22 +55,6 @@ public class SysOrgEntity implements Serializable {
 
 	public SysOrgEntity() {
 		super();
-	}
-
-	public Long getOrgId() {
-		return orgId;
-	}
-
-	public void setOrgId(Long orgId) {
-		this.orgId = orgId;
-	}
-
-	public Long getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
 	}
 
 	public String getAncestors() {
@@ -137,13 +111,5 @@ public class SysOrgEntity implements Serializable {
 
 	public void setModifiedTime(Timestamp modifiedTime) {
 		this.modifiedTime = modifiedTime;
-	}
-
-	public List<SysOrgEntity> getChildren() {
-		return children;
-	}
-
-	public void setChildren(List<SysOrgEntity> children) {
-		this.children = children;
 	}
 }

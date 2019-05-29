@@ -29,16 +29,16 @@ public interface SysOrgMapper extends BaseMapper<SysOrgEntity>{
 
 	/**
 	 * 根据 OrgId 的 数组字符串查询列表
-	 * @param orgIds   0,1,2
+	 * @param ids   0,1,2
 	 * @return
 	 */
-	List<SysOrgEntity> listByOrgIds(String orgIds);
+	List<SysOrgEntity> listByIds(String ids);
 
 	/**
 	 * 根据menuId获取子菜单的数量
 	 * @return
 	 */
-	int getChildCountByOrgId(Long orgId);
+	int getChildCountById(Long orgId);
 
 	/**
 	 * 更新组织parentId时，需一同更新所有子组织的祖级列表

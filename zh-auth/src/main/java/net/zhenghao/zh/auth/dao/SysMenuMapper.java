@@ -38,7 +38,7 @@ public interface SysMenuMapper extends BaseMapper<SysMenuEntity>{
 	 * 根据menuId获取子菜单的数量
 	 * @return
 	 */
-	int getChildCountByMenuId(Long menuId);
+	int getChildCountById(Long id);
 	
 	/**
 	 * 得到该用户所有URI权限
