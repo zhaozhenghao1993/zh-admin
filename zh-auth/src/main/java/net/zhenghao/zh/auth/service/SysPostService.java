@@ -19,7 +19,7 @@ public interface SysPostService {
 
 	Page<SysPostEntity> listPost(Map<String, Object> params);
 
-    Result<SysPostEntity> getPostById(Long postId);
+    Result<SysPostEntity> getPostById(Long id);
 
 	Result<List<SysPostEntity>> listPost();
 
@@ -27,7 +27,7 @@ public interface SysPostService {
 
 	Result updatePost(SysPostEntity post);
 
-	Result removePost(Long postId);
+	Result removePost(Long id);
 
 	Result batchRemove(Long[] ids);
 	

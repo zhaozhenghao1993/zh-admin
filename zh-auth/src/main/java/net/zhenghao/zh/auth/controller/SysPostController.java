@@ -39,12 +39,12 @@ public class SysPostController extends AbstractController {
 
     /**
      * 根据id查询详情
-     * @param postId
+     * @param id
      * @return
      */
     @GetMapping("/{id}")
-    public Result<SysPostEntity> info(@PathVariable("id") Long postId) {
-        return sysPostService.getPostById(postId);
+    public Result<SysPostEntity> info(@PathVariable("id") Long id) {
+        return sysPostService.getPostById(id);
     }
 
     /**
@@ -70,27 +70,27 @@ public class SysPostController extends AbstractController {
 
     /**
 	 * 修改
-	 * @param postId
+	 * @param id
 	 * @param post
 	 * @return
 	 */
     @SysLog("修改岗位")
     @PutMapping("/{id}")
-    public Result update(@PathVariable("id") Long postId, @RequestBody SysPostEntity post) {
-        post.setPostId(postId);
+    public Result update(@PathVariable("id") Long id, @RequestBody SysPostEntity post) {
+        post.setId(id);
         post.setModifierId(getUserId());
         return sysPostService.updatePost(post);
     }
 
     /**
 	 * 删除
-	 * @param postId
+	 * @param id
 	 * @return
 	 */
     @SysLog("删除岗位")
     @DeleteMapping("/{id}")
-    public Result remove(@PathVariable("id") Long postId) {
-        return sysPostService.removePost(postId);
+    public Result remove(@PathVariable("id") Long id) {
+        return sysPostService.removePost(id);
     }
 
     /**

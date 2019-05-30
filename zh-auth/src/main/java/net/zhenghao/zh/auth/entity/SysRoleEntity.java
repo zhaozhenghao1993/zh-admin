@@ -19,7 +19,7 @@ public class SysRoleEntity implements Serializable {
 	/**
 	 * 角色id
 	 */
-	private Long roleId;
+	private Long id;
 	
 	/**
 	 * 角色名称
@@ -62,12 +62,12 @@ public class SysRoleEntity implements Serializable {
 		super();
 	}
 
-	public Long getRoleId() {
-		return roleId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getRoleName() {

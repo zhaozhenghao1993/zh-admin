@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import net.zhenghao.zh.auth.dao.SysRoleMapper;
 import net.zhenghao.zh.auth.dao.SysRoleMenuMapper;
 import net.zhenghao.zh.auth.dao.SysUserRoleMapper;
+import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.Result;
@@ -81,7 +82,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 
 	@Override
 	public Result batchRemove(Long[] ids) {
-		if (Arrays.stream(ids).anyMatch(id -> id == 1L)) {
+		if (Arrays.stream(ids).anyMatch(SystemConstant.SUPER_ADMIN_ROLE::equals)) {
 			return Result.ofFail("包含内置admin角色不能删除!");
 		}
 		int count = sysRoleMapper.batchRemove(ids);
@@ -97,11 +98,11 @@ public class SysRoleServiceImpl implements SysRoleService {
 	}
 
 	@Override
-	public Result updateRoleAuthorization(Long roleId, List<Long> menuIdList) {
-		int count = sysRoleMenuMapper.removeByRoleId(roleId);
+	public Result updateRoleAuthorization(Long id, List<Long> menuIdList) {
+		int count = sysRoleMenuMapper.removeByRoleId(id);
 		if (!menuIdList.isEmpty()) {
 			Query query = new Query();
-			query.put("roleId", roleId);
+			query.put("roleId", id);
 			query.put("menuIdList", menuIdList);
 			count = sysRoleMenuMapper.save(query);
 		}

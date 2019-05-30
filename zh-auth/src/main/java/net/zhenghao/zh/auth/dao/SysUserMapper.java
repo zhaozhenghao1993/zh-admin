@@ -40,12 +40,6 @@ public interface SysUserMapper extends BaseMapper<SysUserEntity> {
 	 * @return
 	 */
 	SysUserEntity getByUserName(String username);
-	/**
-	 * 根据用户id得到对应菜单id
-	 * @param userId
-	 * @return
-	 */
-	List<Long> listAllMenuId(Long userId);
 	
 	/**
 	 * 根据用户名密码修改密码
@@ -73,12 +67,12 @@ public interface SysUserMapper extends BaseMapper<SysUserEntity> {
 	 * @param user
 	 * @return
 	 */
-	int updateThemeByUserId(SysUserEntity user);
+	int updateThemeById(SysUserEntity user);
 
 	/**
 	 * 根据用户id修改主题
 	 * @param user
 	 * @return
 	 */
-	int updateColorByUserId(SysUserEntity user);
+	int updateColorById(SysUserEntity user);
 }

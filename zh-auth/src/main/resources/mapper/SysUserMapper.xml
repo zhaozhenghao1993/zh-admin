@@ -5,7 +5,7 @@
 
 	<select id="listForPage" resultType="SysUserEntity" flushCache="true">
 		SELECT
-			user_id,
+			id,
 			org_id,
 			username,
 			`name`,
@@ -38,7 +38,7 @@
 				ORDER BY create_time DESC
 			</when>
 			<otherwise>
-				ORDER BY user_id DESC
+				ORDER BY id DESC
 			</otherwise>
 		</choose>
 	</select>
@@ -63,7 +63,7 @@
 	
 	<select id="getByUserName" resultType="SysUserEntity">
 		SELECT
-			user_id,
+			id,
 			org_id,
 			username,
 			password,
@@ -77,19 +77,8 @@
 		WHERE
 			username = #{username}
 	</select>
-	
-	
-	<select id="listAllMenuId" resultType="long">
-		SELECT DISTINCT
-			rm.menu_id
-		FROM
-			sys_user_role ur
-		LEFT JOIN sys_role_menu rm ON ur.role_id = rm.role_id
-		WHERE
-			ur.user_id = #{userId}
-	</select>
 
-	<insert id="save" parameterType="SysUserEntity" useGeneratedKeys="true" keyProperty="userId">
+	<insert id="save" parameterType="SysUserEntity" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO sys_user (
 			org_id,
 			username,
@@ -118,7 +107,7 @@
 
 	<select id="getObjectById" resultType="SysUserEntity">
 		SELECT
-			user_id,
+			id,
 			org_id,
 			username,
 			`name`,
@@ -131,7 +120,7 @@
 		FROM 
 			sys_user
 		WHERE
-			user_id = #{value}
+			id = #{value}
 	</select>
 	
 	<update id="update">
@@ -146,7 +135,7 @@
 			<if test="modifierId != null">modifier_id = #{modifierId},</if>
 			modified_time = NOW()
 		</set>
-		where user_id = #{userId}
+		where id = #{id}
 	</update>
 
 	<delete id="remove">
@@ -154,7 +143,7 @@
 		FROM
 			sys_user
 		WHERE
-			user_id = #{value}
+			id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
@@ -162,7 +151,7 @@
 		FROM
 			sys_user
 		WHERE
-			user_id IN
+			id IN
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>
@@ -173,7 +162,7 @@
 		SET
 			password = #{newPassword}
 		WHERE
-			user_id = #{userId} AND password = #{password}
+			id = #{id} AND password = #{password}
 	</update>
 	
 	
@@ -182,9 +171,9 @@
 		SET
 			status = #{status}
 		WHERE
-			user_id IN
-		<foreach item="userId" collection="ids" open="(" separator="," close=")">
-			#{userId}
+			id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
 		</foreach> 
 	</update>
 	
@@ -194,23 +183,23 @@
 		SET
 			password = #{password}
 		WHERE
-			user_id = #{userId}
+			id = #{id}
 	</update>
 
-	<update id="updateThemeByUserId">
+	<update id="updateThemeById">
 		UPDATE sys_user
 		SET
 			theme = #{theme}
 		WHERE
-			user_id = #{userId}
+			id = #{id}
 	</update>
 
-	<update id="updateColorByUserId">
+	<update id="updateColorById">
 		UPDATE sys_user
 		SET
 			color = #{color}
 		WHERE
-			user_id = #{userId}
+			id = #{id}
 	</update>
 	
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>

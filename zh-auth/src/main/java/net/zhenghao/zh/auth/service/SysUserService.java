@@ -21,16 +21,16 @@ public interface SysUserService {
 
 	/**
 	 * 获取用户的权限filter chain
-	 * @param userId
+	 * @param id
 	 * @return
 	 */
-	List<SysMenuEntity> listUserPerms(Long userId);
+	List<SysMenuEntity> listUserPerms(Long id);
 
 	SysUserEntity getUserByName(String username);
 
 	Page<SysUserEntity> listUser(Map<String, Object> params);
 
-	Result<SysUserEntity> getUserInfo(Long userId);
+	Result<SysUserEntity> getUserInfo(Long id);
 
 	Result profileUser(SysUserEntity user);
 
@@ -38,7 +38,7 @@ public interface SysUserService {
 
 	Result saveUser(SysUserEntity user);
 
-	Result<SysUserEntity> getUserById(Long userId);
+	Result<SysUserEntity> getUserById(Long id);
 
 	Result updateUser(SysUserEntity user);
 
@@ -54,8 +54,8 @@ public interface SysUserService {
 
 	Result updatePassword(SysUserEntity user);
 
-	Result updateThemeByUserId(SysUserEntity user);
+	Result updateThemeById(SysUserEntity user);
 
-	Result updateColorByUserId(SysUserEntity user);
+	Result updateColorById(SysUserEntity user);
 
 }

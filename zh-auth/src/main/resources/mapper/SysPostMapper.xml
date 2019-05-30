@@ -5,7 +5,7 @@
 
 	<select id="listForPage" resultType="SysPostEntity" flushCache="true">
 		SELECT
-			`post_id`,
+			`id`,
 			`post_name`,
 			`post_code`,
 			`order_num`,
@@ -31,14 +31,14 @@
 				ORDER BY create_time DESC
 			</when>
 			<otherwise>
-				ORDER BY post_id DESC
+				ORDER BY id DESC
 			</otherwise>
 		</choose>
 	</select>
 
 	<select id="list" resultType="SysPostEntity">
 		SELECT
-			post_id,
+			id,
 			post_name
 		FROM
 			sys_post
@@ -65,7 +65,7 @@
 	
 	<select id="getObjectById" resultType="SysPostEntity">
 		SELECT
-			`post_id`,
+			`id`,
 			`post_name`,
 			`post_code`,
 			`order_num`,
@@ -76,7 +76,7 @@
 		FROM
 			sys_post
 		WHERE
-			post_id = #{postId}
+			id = #{id}
 	</select>
 	
 	<update id="update">
@@ -89,7 +89,7 @@
 			modified_time = NOW()
 		</set>
 		WHERE
-			post_id = #{postId}
+			id = #{id}
 	</update>
 
     <delete id="remove">
@@ -97,7 +97,7 @@
         FROM
 			sys_post
         WHERE
-			post_id = #{value}
+			id = #{value}
     </delete>
 	
 	<delete id="batchRemove">
@@ -105,7 +105,7 @@
 		FROM
 			sys_post
 		WHERE
-			post_id IN
+			id IN
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>
@@ -113,15 +113,15 @@
 
 	<select id="listUserPosts" parameterType="long" resultType="SysPostEntity">
 		SELECT DISTINCT
-			p.post_id,
+			p.id,
 			p.post_name,
 			p.post_code
 		FROM
 			sys_user_post up
-		LEFT JOIN sys_post p ON up.post_id = p.post_id
-		LEFT JOIN sys_user u ON up.user_id = u.user_id
+		LEFT JOIN sys_post p ON up.post_id = p.id
+		LEFT JOIN sys_user u ON up.user_id = u.id
 		WHERE
-			u.user_id = #{userId}
+			u.id = #{userId}
 	</select>
 	
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>

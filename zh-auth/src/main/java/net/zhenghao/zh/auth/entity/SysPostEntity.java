@@ -19,7 +19,7 @@ public class SysPostEntity implements Serializable {
 	/**
 	 * 
 	 */
-	private Long postId;
+	private Long id;
 
 	/**
 	 * 岗位名称
@@ -60,13 +60,13 @@ public class SysPostEntity implements Serializable {
 	public SysPostEntity() {
 		super();
 	}
-	
-	public void setPostId(Long postId) {
-		this.postId = postId;
+
+	public Long getId() {
+		return id;
 	}
-	
-	public Long getPostId() {
-		return postId;
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setPostName(String postName) {

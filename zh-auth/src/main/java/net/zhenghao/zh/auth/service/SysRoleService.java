@@ -31,6 +31,6 @@ public interface SysRoleService {
 
 	Result<List<SysRoleEntity>> listRole();
 
-	Result updateRoleAuthorization(Long roleId, List<Long> menuIdList);
+	Result updateRoleAuthorization(Long id, List<Long> menuIdList);
 	
 }

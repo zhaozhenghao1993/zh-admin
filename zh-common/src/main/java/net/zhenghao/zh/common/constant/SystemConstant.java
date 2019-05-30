@@ -12,7 +12,12 @@ public class SystemConstant {
 	/**
 	 * 超级管理员ID
 	 */
-	public static final long SUPER_ADMIN = 1;
+	public static final Long SUPER_ADMIN = 1L;
+
+	/**
+	 * 超级管理员角色ID
+	 */
+	public static final Long SUPER_ADMIN_ROLE = 1L;
 	
 	/**
 	 * 默认树根节点

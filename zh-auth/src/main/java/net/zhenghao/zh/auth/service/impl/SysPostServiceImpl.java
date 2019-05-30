@@ -44,8 +44,8 @@ public class SysPostServiceImpl implements SysPostService {
 	}
 
     @Override
-    public Result<SysPostEntity> getPostById(Long postId) {
-		SysPostEntity sysPost = sysPostMapper.getObjectById(postId);
+    public Result<SysPostEntity> getPostById(Long id) {
+		SysPostEntity sysPost = sysPostMapper.getObjectById(id);
         return CommonUtils.msg(sysPost);
     }
 
@@ -68,9 +68,9 @@ public class SysPostServiceImpl implements SysPostService {
 	}
 
     @Override
-    public Result removePost(Long postId) {
-        int count = sysPostMapper.remove(postId);
-		sysUserPostMapper.removeByPostId(postId);
+    public Result removePost(Long id) {
+        int count = sysPostMapper.remove(id);
+		sysUserPostMapper.removeByPostId(id);
         return CommonUtils.msg(count);
     }
 

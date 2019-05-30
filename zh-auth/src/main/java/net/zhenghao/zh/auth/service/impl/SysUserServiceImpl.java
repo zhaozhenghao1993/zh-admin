@@ -60,8 +60,8 @@ public class SysUserServiceImpl implements SysUserService {
 	private UserAvatarHandler userAvatarHandler;
 
 	@Override
-	public List<SysMenuEntity> listUserPerms(Long userId) {
-		return sysMenuMapper.listUserPerms(userId);
+	public List<SysMenuEntity> listUserPerms(Long id) {
+		return sysMenuMapper.listUserPerms(id);
 	}
 
 	@Override
@@ -79,11 +79,11 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public Result<SysUserEntity> getUserInfo(Long userId) {
-		SysUserEntity user = sysUserMapper.getObjectById(userId);
-		user.setRoles(sysRoleMapper.listUserRoles(userId));
-		user.setPerms(sysMenuMapper.listUserMenu(userId));
-		user.setPosts(sysPostMapper.listUserPosts(userId));
+	public Result<SysUserEntity> getUserInfo(Long id) {
+		SysUserEntity user = sysUserMapper.getObjectById(id);
+		user.setRoles(sysRoleMapper.listUserRoles(id));
+		user.setPerms(sysMenuMapper.listUserMenu(id));
+		user.setPosts(sysPostMapper.listUserPosts(id));
 		// 设置组织列表
 		if (user.getOrgId() != null && user.getOrgId() != 0L) {
 			SysOrgEntity org = sysOrgMapper.getObjectById(user.getOrgId());
@@ -103,7 +103,7 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Override
 	public Result profileAvatar(SysUserEntity user, MultipartFile file) {
-		user.setAvatar(userAvatarHandler.avatarHandler(user.getUserId(), file));
+		user.setAvatar(userAvatarHandler.avatarHandler(user.getId(), file));
 		int count = sysUserMapper.update(user);
 		return CommonUtils.msg(count);
 	}
@@ -123,13 +123,13 @@ public class SysUserServiceImpl implements SysUserService {
 		int count = sysUserMapper.save(user);
 		if (user.getRoleIdList() != null && !user.getRoleIdList().isEmpty()) {
 			Query query = new Query();
-			query.put("userId", user.getUserId());
+			query.put("userId", user.getId());
 			query.put("roleIdList", user.getRoleIdList());
 			sysUserRoleMapper.save(query);
 		}
 		if (user.getPostIdList() != null && !user.getPostIdList().isEmpty()) {
 			Query query = new Query();
-			query.put("userId", user.getUserId());
+			query.put("userId", user.getId());
 			query.put("postIdList", user.getPostIdList());
 			sysUserPostMapper.save(query);
 		}
@@ -137,10 +137,10 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public Result<SysUserEntity> getUserById(Long userId) {
-		SysUserEntity user = sysUserMapper.getObjectById(userId);
-		List<Long> roleId = sysUserRoleMapper.listUserRoleId(userId);
-		List<Long> postId = sysUserPostMapper.listUserPostId(userId);
+	public Result<SysUserEntity> getUserById(Long id) {
+		SysUserEntity user = sysUserMapper.getObjectById(id);
+		List<Long> roleId = sysUserRoleMapper.listUserRoleId(id);
+		List<Long> postId = sysUserPostMapper.listUserPostId(id);
 		user.setRoleIdList(roleId);
 		user.setPostIdList(postId);
 		return CommonUtils.msg(user);
@@ -152,22 +152,22 @@ public class SysUserServiceImpl implements SysUserService {
 			return Result.ofFail("The username cannot be empty !");
 		}
 		SysUserEntity userEntity = sysUserMapper.getByUserName(user.getUsername());
-		if (userEntity != null && userEntity.getUserId() != user.getUserId()) {
+		if (userEntity != null && userEntity.getId() != user.getId()) {
 			return Result.ofFail("The username already exists !");
 		}
 		int count = sysUserMapper.update(user);
-		Long userId = user.getUserId();
-		sysUserRoleMapper.removeByUserId(userId);
+		Long id = user.getId();
+		sysUserRoleMapper.removeByUserId(id);
 		if (user.getRoleIdList() != null && !user.getRoleIdList().isEmpty()) {
 			Query query = new Query();
-			query.put("userId", userId);
+			query.put("userId", id);
 			query.put("roleIdList", user.getRoleIdList());
 			sysUserRoleMapper.save(query);
 		}
-		sysUserPostMapper.removeByUserId(userId);
+		sysUserPostMapper.removeByUserId(id);
 		if (user.getPostIdList() != null && !user.getPostIdList().isEmpty()) {
 			Query query = new Query();
-			query.put("userId", userId);
+			query.put("userId", id);
 			query.put("postIdList", user.getPostIdList());
 			sysUserPostMapper.save(query);
 		}
@@ -187,7 +187,7 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Override
 	public Result batchRemove(Long[] ids) {
-		if (Arrays.stream(ids).anyMatch(id -> id == 1L)) {
+		if (Arrays.stream(ids).anyMatch(SystemConstant.SUPER_ADMIN::equals)) {
 			return Result.ofFail("包含admin不能删除!");
 		}
 		int count = sysUserMapper.batchRemove(ids);
@@ -204,7 +204,7 @@ public class SysUserServiceImpl implements SysUserService {
 		password = MD5Utils.encrypt(username, password);
 		newPassword = MD5Utils.encrypt(username, newPassword);
 		Query query = new Query();
-		query.put("userId", user.getUserId());
+		query.put("id", user.getId());
 		query.put("password", password);
 		query.put("newPassword", newPassword);
 		int count = sysUserMapper.updatePasswordByUser(query);
@@ -234,21 +234,21 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Override
 	public Result updatePassword(SysUserEntity user) {
-		SysUserEntity currUser = sysUserMapper.getObjectById(user.getUserId());
+		SysUserEntity currUser = sysUserMapper.getObjectById(user.getId());
 		user.setPassword(MD5Utils.encrypt(currUser.getUsername(), user.getPassword()));
 		int count = sysUserMapper.updatePassword(user);
 		return CommonUtils.msg(count);
 	}
 
 	@Override
-	public Result updateThemeByUserId(SysUserEntity user) {
-		int count = sysUserMapper.updateThemeByUserId(user);
+	public Result updateThemeById(SysUserEntity user) {
+		int count = sysUserMapper.updateThemeById(user);
 		return CommonUtils.msg(count);
 	}
 
 	@Override
-	public Result updateColorByUserId(SysUserEntity user) {
-		int count = sysUserMapper.updateColorByUserId(user);
+	public Result updateColorById(SysUserEntity user) {
+		int count = sysUserMapper.updateColorById(user);
 		return CommonUtils.msg(count);
 	}
 

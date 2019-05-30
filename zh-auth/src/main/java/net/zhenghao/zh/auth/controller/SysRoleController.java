@@ -38,12 +38,12 @@ public class SysRoleController extends AbstractController {
 
 	/**
 	 * 根据id查询详情
-	 * @param roleId
+	 * @param id
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	public Result<SysRoleEntity> info(@PathVariable("id") Long roleId) {
-		return sysRoleService.getRoleById(roleId);
+	public Result<SysRoleEntity> info(@PathVariable("id") Long id) {
+		return sysRoleService.getRoleById(id);
 	}
 	
 	/**
@@ -74,21 +74,21 @@ public class SysRoleController extends AbstractController {
 	 */
 	@SysLog("修改角色")
 	@PutMapping("/{id}")
-	public Result updateRole(@PathVariable("id") Long roleId, @RequestBody SysRoleEntity role) {
-		role.setRoleId(roleId);
+	public Result updateRole(@PathVariable("id") Long id, @RequestBody SysRoleEntity role) {
+		role.setId(id);
 		role.setModifierId(getUserId());
 		return sysRoleService.updateRole(role);
 	}
 
 	/**
 	 * 删除
-	 * @param roleId
+	 * @param id
 	 * @return
 	 */
 	@SysLog("删除角色")
 	@DeleteMapping("/{id}")
-	public Result remove(@PathVariable("id") Long roleId) {
-		return sysRoleService.removeRole(roleId);
+	public Result remove(@PathVariable("id") Long id) {
+		return sysRoleService.removeRole(id);
 	}
 	
 	/**
@@ -104,13 +104,13 @@ public class SysRoleController extends AbstractController {
 	
 	/**
 	 * 分配权限
-	 * @param roleId
+	 * @param id
 	 * @param menuIdList
 	 * @return
 	 */
 	@SysLog(value = "分配权限", type = SystemConstant.LogType.AUTHORIZATION)
 	@PutMapping("/{id}/authorize")
-	public Result updateRoleAuthorization(@PathVariable("id") Long roleId, @RequestBody List<Long> menuIdList) {
-		return sysRoleService.updateRoleAuthorization(roleId, menuIdList);
+	public Result updateRoleAuthorization(@PathVariable("id") Long id, @RequestBody List<Long> menuIdList) {
+		return sysRoleService.updateRoleAuthorization(id, menuIdList);
 	}
 }

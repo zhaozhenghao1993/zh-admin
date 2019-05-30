@@ -47,7 +47,7 @@ public class SysUserController extends AbstractController {
 	 */
 	@PutMapping("/profile")
 	public Result profile(@RequestBody SysUserEntity user) {
-		user.setUserId(getUserId());
+		user.setId(getUserId());
 		user.setModifierId(getUserId());
 		user.setStatus(null);
 		return sysUserService.profileUser(user);
@@ -60,7 +60,7 @@ public class SysUserController extends AbstractController {
 	@PostMapping("/profile/avatar")
 	public Result avatar(MultipartFile file) {
 		SysUserEntity user = new SysUserEntity();
-		user.setUserId(getUserId());
+		user.setId(getUserId());
 		return sysUserService.profileAvatar(user, file);
 	}
 
@@ -72,7 +72,7 @@ public class SysUserController extends AbstractController {
 	@PutMapping("/profile/password")
 	public Result updatePswdByUser(@RequestBody SysUserPasswordVO password) {
 		SysUserEntity user = new SysUserEntity();
-		user.setUserId(getUserId());
+		user.setId(getUserId());
 		user.setUsername(getUserName());
 		user.setPassword(password.getOldPassword()); // 原密码
 		user.setEmail(password.getPassword()); // 邮箱临时存储新密码
@@ -85,8 +85,8 @@ public class SysUserController extends AbstractController {
 	 */
 	@PutMapping("/profile/theme")
 	public Result theme(@RequestBody SysUserEntity user) {
-		user.setUserId(getUserId());
-		return sysUserService.updateThemeByUserId(user);
+		user.setId(getUserId());
+		return sysUserService.updateThemeById(user);
 	}
 
 	/**
@@ -95,8 +95,8 @@ public class SysUserController extends AbstractController {
 	 */
 	@PutMapping("/profile/color")
 	public Result color(@RequestBody SysUserEntity user) {
-		user.setUserId(getUserId());
-		return sysUserService.updateColorByUserId(user);
+		user.setId(getUserId());
+		return sysUserService.updateColorById(user);
 	}
 
 	/**
@@ -113,12 +113,12 @@ public class SysUserController extends AbstractController {
 
 	/**
 	 * 获取用户信息
-	 * @param userId
+	 * @param id
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	public Result<SysUserEntity> info(@PathVariable("id") Long userId) {
-		return sysUserService.getUserById(userId);
+	public Result<SysUserEntity> info(@PathVariable("id") Long id) {
+		return sysUserService.getUserById(id);
 	}
 
 	/**
@@ -126,8 +126,8 @@ public class SysUserController extends AbstractController {
 	 * @return
 	 */
 	@GetMapping("/{id}/detail")
-	public Result<SysUserEntity> detail(@PathVariable("id") Long userId) {
-		return sysUserService.getUserInfo(userId);
+	public Result<SysUserEntity> detail(@PathVariable("id") Long id) {
+		return sysUserService.getUserInfo(id);
 	}
 
 	/**
@@ -150,21 +150,21 @@ public class SysUserController extends AbstractController {
 	 */
 	@SysLog("修改用户")
 	@PutMapping("/{id}")
-	public Result edit(@PathVariable("id") Long userId, @RequestBody SysUserEntity user) {
-		user.setUserId(userId);
+	public Result edit(@PathVariable("id") Long id, @RequestBody SysUserEntity user) {
+		user.setId(id);
 		user.setModifierId(getUserId());
 		return sysUserService.updateUser(user);
 	}
 
 	/**
 	 * 删除
-	 * @param userId
+	 * @param id
 	 * @return
 	 */
 	@SysLog("删除用户")
 	@DeleteMapping("/{id}")
-	public Result remove(@PathVariable("id") Long userId) {
-		return sysUserService.removeUser(userId);
+	public Result remove(@PathVariable("id") Long id) {
+		return sysUserService.removeUser(id);
 	}
 
 	/**
@@ -207,8 +207,8 @@ public class SysUserController extends AbstractController {
 	 */
 	@SysLog("重置密码")
 	@PutMapping("/{id}/reset")
-	public Result updatePswd(@PathVariable("id") Long userId, @RequestBody SysUserEntity user) {
-		user.setUserId(userId);
+	public Result updatePswd(@PathVariable("id") Long id, @RequestBody SysUserEntity user) {
+		user.setId(id);
 		return sysUserService.updatePassword(user);
 	}
 	

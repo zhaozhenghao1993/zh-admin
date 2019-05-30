@@ -5,17 +5,17 @@
 
 	<select id="list" resultType="SysRoleEntity">
 		SELECT
-			role_id,
+			id,
 			role_name
 		FROM
 			sys_role
 		ORDER BY
-			role_id ASC
+			id ASC
 	</select>
 	
 	<select id="listForPage" resultType="SysRoleEntity" flushCache="true">
 		SELECT
-			role_id,
+			id,
 			role_name,
 			role_sign,
 			remark,
@@ -41,7 +41,7 @@
 				ORDER BY create_time DESC
 			</when>
 			<otherwise>
-				ORDER BY role_id DESC
+				ORDER BY id DESC
 			</otherwise>
 		</choose>
 	</select>
@@ -65,14 +65,14 @@
 	
 	<select id="getObjectById" resultType="SysRoleEntity">
 		SELECT
-			role_id,
+			id,
 			role_name,
 			role_sign,
 			remark
 		FROM
 			sys_role
 		WHERE
-			role_id = #{roleId}
+			id = #{id}
 	</select>
 	
 	<update id="update">
@@ -85,7 +85,7 @@
 			modified_time = NOW()
 		</set>
 		WHERE
-			role_id = #{roleId}
+			id = #{id}
 	</update>
 
 	<delete id="remove">
@@ -93,7 +93,7 @@
 		FROM
 			sys_role
 		WHERE
-			role_id = #{value}
+			id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
@@ -101,7 +101,7 @@
 		FROM
 			sys_role
 		WHERE
-			role_id IN
+			id IN
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>
@@ -109,15 +109,15 @@
 	
 	<select id="listUserRoles" parameterType="long" resultType="SysRoleEntity">
 		SELECT DISTINCT
-			r.role_id,
+			r.id,
 			r.role_name,
 			r.role_sign
 		FROM
 			sys_user_role ur
-		LEFT JOIN sys_role r ON ur.role_id = r.role_id
-		LEFT JOIN sys_user u ON ur.user_id = u.user_id
+		LEFT JOIN sys_role r ON ur.role_id = r.id
+		LEFT JOIN sys_user u ON ur.user_id = u.id
 		WHERE
-			u.user_id = #{userId}
+			u.id = #{userId}
 	</select>
 	
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
