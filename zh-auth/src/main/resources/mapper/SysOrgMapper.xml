@@ -3,7 +3,7 @@
 
 <mapper namespace="net.zhenghao.zh.auth.dao.SysOrgMapper">
 
-	<select id="list" resultType="SysOrgEntity">
+	<select id="list" resultType="SysOrgEntity" flushCache="true">
 		SELECT
 			o.id,
 			o.parent_id,

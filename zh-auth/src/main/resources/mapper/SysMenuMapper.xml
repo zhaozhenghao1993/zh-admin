@@ -3,7 +3,7 @@
 
 <mapper namespace="net.zhenghao.zh.auth.dao.SysMenuMapper">
 
-	<select id="list" resultType="SysMenuEntity">
+	<select id="list" resultType="SysMenuEntity" flushCache="true">
 		SELECT
 			m.id,
 			m.parent_id,

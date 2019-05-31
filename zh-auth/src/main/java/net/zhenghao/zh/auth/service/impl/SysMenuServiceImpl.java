@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,8 +39,10 @@ public class SysMenuServiceImpl implements SysMenuService {
 	@Override
 	public Page<SysMenuEntity> listMenu(Map<String, Object> params) {
 		Query query = new Query(params);
+		List<SysMenuEntity> list = sysMenuMapper.list(query);
+		List<SysMenuEntity> tree = TreeUtils.build(list, SystemConstant.TREE_ROOT);
 		Page<SysMenuEntity> page = new Page<>(query);
-		page.setData(TreeUtils.build(sysMenuMapper.list(query), SystemConstant.TREE_ROOT));
+		page.setData(tree);
 		return page;
 	}
 

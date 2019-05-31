@@ -217,7 +217,7 @@ public class SysUserServiceImpl implements SysUserService {
 	@Override
 	public Result updateUserEnable(Long[] ids) {
 		Query query = new Query();
-		query.put("ids", ids);
+		query.put("array", ids);
 		query.put("status", SystemConstant.StatusType.ENABLE.getValue());
 		int count = sysUserMapper.updateUserStatus(query);
 		return CommonUtils.msg(ids, count);
@@ -226,7 +226,7 @@ public class SysUserServiceImpl implements SysUserService {
 	@Override
 	public Result updateUserDisable(Long[] ids) {
 		Query query = new Query();
-		query.put("ids", ids);
+		query.put("array", ids);
 		query.put("status", SystemConstant.StatusType.DISABLE.getValue());
 		int count = sysUserMapper.updateUserStatus(query);
 		return CommonUtils.msg(ids, count);

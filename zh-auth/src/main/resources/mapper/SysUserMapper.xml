@@ -27,7 +27,7 @@
 				AND status = #{status}
 			</if>
 			<if test="orgId != null and orgId != 0">
-				AND (org_id = #{orgId} OR org_id IN ( SELECT o.org_id FROM sys_org o WHERE FIND_IN_SET (#{orgId}, ancestors) ))
+				AND (org_id = #{orgId} OR org_id IN ( SELECT o.id FROM sys_org o WHERE FIND_IN_SET (#{orgId}, ancestors) ))
 			</if>
 		</where>
 		<choose>

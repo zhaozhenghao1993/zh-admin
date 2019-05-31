@@ -8,9 +8,9 @@ import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.jwt.JWTInfo;
 import net.zhenghao.zh.common.utils.MD5Utils;
 import net.zhenghao.zh.common.utils.UserAuthUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -25,10 +25,10 @@ import java.util.Map;
 @RequestMapping("${zh-admin.api.prefix}/sys")
 public class SysLoginController {
 
-	@Autowired
+	@Resource
 	private SysUserService sysUserService;
 
-	@Autowired
+	@Resource
 	private UserAuthUtils userAuthUtils;
 
 	@PostMapping("/login")
@@ -39,7 +39,7 @@ public class SysLoginController {
 		return validate(username, password);
 	}
 
-	private Result validate(String username, String password) {
+	private Result<SysLoginVO> validate(String username, String password) {
 		// 查询用户信息
 		SysUserEntity user = sysUserService.getUserByName(username);
 
@@ -55,7 +55,7 @@ public class SysLoginController {
 			return Result.ofFail(HttpStatusConstant.USER_LOCKED_ACCOUNT, "Account locked!");
 		}
 		try {
-			return Result.ofSuccess(new SysLoginVO(userAuthUtils.getTokenFromJWTInfo(new JWTInfo(user.getUserId(), user.getUsername(), user.getName()))));
+			return Result.ofSuccess(new SysLoginVO(userAuthUtils.getTokenFromJWTInfo(new JWTInfo(user.getId(), user.getUsername(), user.getName()))));
 		} catch (Exception e) {
 			return Result.ofFail(HttpStatusConstant.USER_AUTHENTICATION_EXCEPTION, "Account login exception!");
 		}
