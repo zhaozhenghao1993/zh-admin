@@ -39,10 +39,9 @@ public class SysMenuServiceImpl implements SysMenuService {
 	@Override
 	public Page<SysMenuEntity> listMenu(Map<String, Object> params) {
 		Query query = new Query(params);
-		List<SysMenuEntity> list = sysMenuMapper.list(query);
-		List<SysMenuEntity> tree = TreeUtils.build(list, SystemConstant.TREE_ROOT);
 		Page<SysMenuEntity> page = new Page<>(query);
-		page.setData(tree);
+		query.removePageParams(); // 不分页，删除分页参数
+		page.setData(TreeUtils.build(sysMenuMapper.list(query), SystemConstant.TREE_ROOT));
 		return page;
 	}
 

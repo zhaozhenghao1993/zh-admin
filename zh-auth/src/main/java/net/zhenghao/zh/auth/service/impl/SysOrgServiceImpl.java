@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +40,7 @@ public class SysOrgServiceImpl implements SysOrgService {
 	public Page<SysOrgEntity> listOrg(Map<String, Object> params) {
 		Query query = new Query(params);
 		Page<SysOrgEntity> page = new Page<>(query);
+		query.removePageParams();
 		page.setData(TreeUtils.build(sysOrgMapper.list(query), SystemConstant.TREE_ROOT));
 		return page;
 	}

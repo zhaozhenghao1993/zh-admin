@@ -2,6 +2,7 @@ package net.zhenghao.zh.common.entity;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -66,5 +67,16 @@ public class Query extends HashMap<String, Object>{
 
     public Object getObj(String name) {
         return this.get(name);
+    }
+
+    public void removePageParams() {
+        Iterator<Entry<String, Object>> iterator = this.entrySet().iterator();
+        while(iterator.hasNext()){
+            Map.Entry<String, Object> entry = iterator.next();
+            String key = entry.getKey();
+            if ("pageSize".equals(key) || "pageNum".equals(key)) {
+                iterator.remove();
+            }
+        }
     }
 }
