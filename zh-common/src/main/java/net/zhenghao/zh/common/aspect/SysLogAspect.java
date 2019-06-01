@@ -67,7 +67,7 @@ public class SysLogAspect {
 		sysLog.setMethod(className + "." + methodName + "()");
 		//请求的参数
 		Object[] args = joinPoint.getArgs();
-		String params = JSONUtils.objToString(args);
+		String params = dealParams(args);
 		sysLog.setParams(params);
 		
 		//设置IP地址 浏览器 操作系统
@@ -118,7 +118,7 @@ public class SysLogAspect {
 		sysLog.setMethod(className + "." + methodName + "()");
 		//请求的参数
 		Object[] args = joinPoint.getArgs();
-		String params = JSONUtils.objToString(args);
+		String params = dealParams(args);
 		sysLog.setParams(params);
 
 		//设置IP地址 浏览器 操作系统
@@ -149,6 +149,24 @@ public class SysLogAspect {
 		}
 		//保存系统日志
 		sysLogMapper.save(sysLog);
+	}
+
+	/**
+	 * 格式化参数 (arg1, arg2, arg3)
+	 * @param args
+	 * @return
+	 */
+	private String dealParams(Object[] args) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("(");
+		for (int i = 0; i < args.length; i++) {
+			sb.append(JSONUtils.objToString(args[i]));
+			if (i < args.length - 1) {
+				sb.append(", ");
+			}
+		}
+		sb.append(")");
+		return sb.toString();
 	}
 	
 }
