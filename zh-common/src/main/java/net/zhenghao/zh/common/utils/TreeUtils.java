@@ -18,6 +18,9 @@ import java.util.stream.Collectors;
 
 public class TreeUtils {
 
+    private TreeUtils() {
+    }
+
     /**
      * 递归循环实现建树
      * @param trees 传入的树节点列表

@@ -27,14 +27,14 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UploadException.class)
     public Result uploadExceptionHandler(HttpServletResponse response, UploadException ex) {
-        response.setStatus(200);
+        response.setStatus(HttpServletResponse.SC_OK);
         logger.error(ex.getMessage(), ex);
         return Result.ofThrowableMsg(HttpStatusConstant.EXCEPTION_OTHER_CODE, ex);
     }
 
     @ExceptionHandler(Exception.class)
     public Result otherExceptionHandler(HttpServletResponse response, Exception ex) {
-        response.setStatus(500);
+        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         logger.error(ex.getMessage(), ex);
         return Result.ofThrowable(HttpStatusConstant.EXCEPTION_OTHER_CODE, ex);
     }
