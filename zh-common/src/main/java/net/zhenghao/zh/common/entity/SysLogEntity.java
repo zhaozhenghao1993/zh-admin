@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * date  :2017年11月20日下午3:22:54
  * SysLogEntity.java
  */
-public class SysLogEntity implements Serializable{
+public class SysLogEntity implements Serializable {
 	
 	/**
 	 * 

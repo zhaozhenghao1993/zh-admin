@@ -58,7 +58,6 @@
                 </executions>
             </plugin>
         </plugins>
-        <finalName>zh-admin</finalName>
     </build>
 
 </project>

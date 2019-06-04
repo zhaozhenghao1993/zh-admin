@@ -13,7 +13,7 @@ import java.util.Map;
  * @date  :2017年11月20日 下午3:56:03
  * Query.java
  */
-public class Query extends HashMap<String, Object>{
+public class Query extends HashMap<String, Object> {
 	
 	private static final long serialVersionUID = 1L;
 	

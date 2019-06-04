@@ -74,8 +74,8 @@ public class ApiAuthFilter implements Filter {
             logger.info("{}::{} ==> check token and user permission....", uri, method);
 
             // 判断当前 uri 路由是否有效
-            if (!routeConfig.getRoutes().stream().anyMatch(route -> uri.startsWith(route))) {
-                logger.error("{},This api is invalid!", uri);
+            if (routeConfig.getRoutes().stream().noneMatch(uri::startsWith)) {
+                logger.warn("{},This api is invalid!", uri);
                 getErrorResponse(httpServletResponse, Result.ofFail(HttpStatusConstant.REQUEST_API_INVALID, "This api is invalid!"));
                 return;
             }
@@ -114,9 +114,8 @@ public class ApiAuthFilter implements Filter {
                 return;
             }
 
-            logger.error("{}::{},User Forbidden!Does not has Permission!", uri, method);
+            logger.warn("{}::{},User Forbidden!Does not has Permission!", uri, method);
             getErrorResponse(httpServletResponse, Result.ofFail(HttpStatusConstant.USER_API_UNAUTHORIZED, "User Forbidden!Does not has Permission!"));
-            return;
         }
     }
 
