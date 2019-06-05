@@ -9,7 +9,7 @@ zh-admin:
   api:
     prefix: /api/v1
   auth:
-    routes: # 有效路由,不能重复且存在交集, 例：/uploads/-/system/user/avatar 不能与 /uploads 共存
+    routes: # 有效路由,不能重复且不能存在交集, 例：/uploads/-/system/user/avatar 不能与 /uploads 共存
       - /api/v1
       - /uploads/-/system/user/avatar
       - /druid
