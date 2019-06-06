@@ -21,7 +21,7 @@
         <dependency>
             <groupId>net.zhenghao.zh</groupId>
             <artifactId>zh-common</artifactId>
-            <version>1.0.0</version>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 </project>
