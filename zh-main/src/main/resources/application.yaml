@@ -20,7 +20,7 @@ zh-admin:
     public-key-path: jwt/rsa_public_key.pem
   file:
     uploads:
-      folder: D:\\zh-admin\\uploads\\ # 文件上传目录,末尾必有/ 或 \\
+      folder: /data/app/zh-admin/uploads/ # 文件上传目录,末尾必有/ 或 \\
       path: /uploads # 文件上传静态资源对外暴露的访问路径
 
 logging:
@@ -48,7 +48,6 @@ mybatis:
     mapUnderscoreToCamelCase: true
   mapper-locations: classpath*:mapper/*.xml
   type-aliases-package: net.zhenghao.zh
-
 
 ##################pagehelper分页插件####################
 pagehelper:
