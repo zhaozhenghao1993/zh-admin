@@ -154,9 +154,11 @@ public class ApiAuthFilter implements Filter {
         }
         if (StringUtils.isBlank(authToken)) {
             Cookie[] cookies = request.getCookies();
-            for (Cookie cookie: cookies) {
-                if (cookie.getName().equals(tokenHeaderConfig.getTokenHeader())) {
-                    authToken = cookie.getValue();
+            if (cookies != null) {
+                for (Cookie cookie: cookies) {
+                    if (cookie.getName().equals(tokenHeaderConfig.getTokenHeader())) {
+                        authToken = cookie.getValue();
+                    }
                 }
             }
         }
