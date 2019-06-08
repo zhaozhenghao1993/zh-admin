@@ -32,7 +32,7 @@ public class DataHandleUtils {
         df.setMaximumFractionDigits(scale);
         //模式 例如四舍五入
         df.setRoundingMode(RoundingMode.HALF_UP);
-        double accuracy_num = num / total * 100;
-        return df.format(accuracy_num);
+        double accuracy = num / total * 100;
+        return df.format(accuracy);
     }
 }

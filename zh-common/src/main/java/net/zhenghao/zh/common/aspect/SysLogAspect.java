@@ -37,9 +37,7 @@ public class SysLogAspect {
 	private SysLogMapper sysLogMapper;
 	
 	@Pointcut("@annotation(net.zhenghao.zh.common.annotation.SysLog)")
-	public void logPointCut() {
-		
-	}
+	public void logPointCut() {}
 	
 	/**
 	 * 操作异常日志

@@ -13,20 +13,11 @@ package net.zhenghao.zh.common.crypto.codec;
 
 public class Base64 {
 
-    static final int CHUNK_SIZE = 76;
     static final byte[] CHUNK_SEPARATOR = "\r\n".getBytes();
-    private static final int BASELENGTH = 255;
-    private static final int LOOKUPLENGTH = 64;
-    private static final int EIGHTBIT = 8;
-    private static final int SIXTEENBIT = 16;
-    private static final int TWENTYFOURBITGROUP = 24;
-    private static final int FOURBYTE = 4;
-    private static final int SIGN = -128;
-    private static final byte PAD = 61;
     private static final byte[] base64Alphabet = new byte[255];
     private static final byte[] lookUpBase64Alphabet = new byte[64];
 
-    public Base64() {
+    private Base64() {
     }
 
     private static boolean isBase64(byte octect) {
@@ -63,13 +54,13 @@ public class Base64 {
         while(var5 < var4) {
             byte aByte = packedData[var5];
             switch(aByte) {
-                default:
-                    groomedData[bytesCopied++] = aByte;
                 case 9:
                 case 10:
                 case 13:
                 case 32:
                     ++var5;
+                default:
+                    groomedData[bytesCopied++] = aByte;
             }
         }
 
@@ -137,8 +128,8 @@ public class Base64 {
                 val2 = (b2 & -128) == 0 ? (byte)(b2 >> 4) : (byte)(b2 >> 4 ^ 240);
                 byte val3 = (b3 & -128) == 0 ? (byte)(b3 >> 6) : (byte)(b3 >> 6 ^ 252);
                 encodedData[encodedIndex] = lookUpBase64Alphabet[val1];
-                encodedData[encodedIndex + 1] = lookUpBase64Alphabet[val2 | k << 4];
-                encodedData[encodedIndex + 2] = lookUpBase64Alphabet[l << 2 | val3];
+                encodedData[encodedIndex + 1] = lookUpBase64Alphabet[val2 & 0xff | k << 4];
+                encodedData[encodedIndex + 2] = lookUpBase64Alphabet[l << 2 | val3 & 0xff];
                 encodedData[encodedIndex + 3] = lookUpBase64Alphabet[b3 & 63];
                 encodedIndex += 4;
                 if (isChunked && encodedIndex == nextSeparatorIndex) {
@@ -166,7 +157,7 @@ public class Base64 {
                 val1 = (b1 & -128) == 0 ? (byte)(b1 >> 2) : (byte)(b1 >> 2 ^ 192);
                 val2 = (b2 & -128) == 0 ? (byte)(b2 >> 4) : (byte)(b2 >> 4 ^ 240);
                 encodedData[encodedIndex] = lookUpBase64Alphabet[val1];
-                encodedData[encodedIndex + 1] = lookUpBase64Alphabet[val2 | k << 4];
+                encodedData[encodedIndex + 1] = lookUpBase64Alphabet[val2 & 0xff | k << 4];
                 encodedData[encodedIndex + 2] = lookUpBase64Alphabet[l << 2];
                 encodedData[encodedIndex + 3] = 61;
             }
@@ -224,7 +215,7 @@ public class Base64 {
                     byte b4 = base64Alphabet[marker1];
                     decodedData[encodedIndex] = (byte)(b1 << 2 | b2 >> 4);
                     decodedData[encodedIndex + 1] = (byte)((b2 & 15) << 4 | b3 >> 2 & 15);
-                    decodedData[encodedIndex + 2] = (byte)(b3 << 6 | b4);
+                    decodedData[encodedIndex + 2] = (byte)(b3 << 6 | b4 & 0xff);
                 } else if (marker0 == 61) {
                     decodedData[encodedIndex] = (byte)(b1 << 2 | b2 >> 4);
                 } else {

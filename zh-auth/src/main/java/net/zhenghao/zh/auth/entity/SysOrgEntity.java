@@ -4,7 +4,6 @@ import net.zhenghao.zh.common.entity.TreeNode;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
 
 /**
  * 组织管理

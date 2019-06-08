@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 🙃
@@ -17,6 +19,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 
 public class JSONUtils {
+
+    private static final Logger logger = LoggerFactory.getLogger(JSONUtils.class);
 
     private JSONUtils() {
     }
@@ -35,7 +39,7 @@ public class JSONUtils {
         try {
             return obj instanceof String ? (String)obj :  objectMapper.writeValueAsString(obj);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("JSONUtils objToString exception", e);
             return null;
         }
     }
@@ -52,7 +56,7 @@ public class JSONUtils {
         try {
             return obj instanceof String ? (String)obj :  objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("JSONUtils objToStringPretty exception", e);
             return null;
         }
     }
@@ -63,14 +67,14 @@ public class JSONUtils {
      * @param clazz
      * @return
      */
-    public static <T> T stringToObj(String str,Class<T> clazz){
+    public static <T> T stringToObj(String str, Class<T> clazz){
         if(StringUtils.isEmpty(str) || clazz == null){
             return null;
         }
         try {
             return clazz.equals(String.class)? (T)str : objectMapper.readValue(str,clazz);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("JSONUtils stringToObj Class<T> exception", e);
             return null;
         }
     }
@@ -88,7 +92,7 @@ public class JSONUtils {
         try {
             return (T)(typeReference.getType().equals(String.class)? str : objectMapper.readValue(str,typeReference));
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("JSONUtils stringToObj TypeReference exception", e);
             return null;
         }
     }
@@ -105,7 +109,7 @@ public class JSONUtils {
         try {
             return objectMapper.readValue(str,javaType);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("JSONUtils stringToObj collectionClass exception", e);
             return null;
         }
     }

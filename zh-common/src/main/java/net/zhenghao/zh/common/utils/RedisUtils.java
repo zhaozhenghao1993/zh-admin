@@ -1,6 +1,8 @@
 package net.zhenghao.zh.common.utils;
 
 import net.zhenghao.zh.common.exception.BaseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -22,6 +24,8 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisUtils {
 
+    private static final Logger logger = LoggerFactory.getLogger(RedisUtils.class);
+
     @Autowired
     private RedisTemplate redisTemplate;
 
@@ -38,7 +42,7 @@ public class RedisUtils {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate expire exception", e);
             return false;
         }
     }
@@ -61,7 +65,7 @@ public class RedisUtils {
         try {
             return redisTemplate.hasKey(key);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate hasKey exception", e);
             return false;
         }
     }
@@ -102,7 +106,7 @@ public class RedisUtils {
             redisTemplate.opsForValue().set(key, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate set exception", e);
             return false;
         }
     }
@@ -123,7 +127,7 @@ public class RedisUtils {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate set time exception", e);
             return false;
         }
     }
@@ -185,7 +189,7 @@ public class RedisUtils {
             redisTemplate.opsForHash().putAll(key, map);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate hmset exception", e);
             return false;
         }
     }
@@ -205,7 +209,7 @@ public class RedisUtils {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate hmset time exception", e);
             return false;
         }
     }
@@ -222,7 +226,7 @@ public class RedisUtils {
             redisTemplate.opsForHash().put(key, item, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate hset exception", e);
             return false;
         }
     }
@@ -243,7 +247,7 @@ public class RedisUtils {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate hset time exception", e);
             return false;
         }
     }
@@ -299,7 +303,7 @@ public class RedisUtils {
         try {
             return redisTemplate.opsForSet().members(key);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate sGet exception", e);
             return new HashSet<>();
         }
     }
@@ -314,7 +318,7 @@ public class RedisUtils {
         try {
             return redisTemplate.opsForSet().isMember(key, value);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate sHasKey exception", e);
             return false;
         }
     }
@@ -329,7 +333,7 @@ public class RedisUtils {
         try {
             return redisTemplate.opsForSet().add(key, values);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate sSet exception", e);
             return 0;
         }
     }
@@ -349,7 +353,7 @@ public class RedisUtils {
             }
             return count;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate sSetAndTime exception", e);
             return 0;
         }
     }
@@ -363,7 +367,7 @@ public class RedisUtils {
         try {
             return redisTemplate.opsForSet().size(key);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate sGetSetSize exception", e);
             return 0;
         }
     }
@@ -378,7 +382,7 @@ public class RedisUtils {
         try {
             return redisTemplate.opsForSet().remove(key, values);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate setRemove exception", e);
             return 0;
         }
     }
@@ -395,7 +399,7 @@ public class RedisUtils {
         try {
             return redisTemplate.opsForList().range(key, start, end);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate lGet exception", e);
             return new ArrayList<>();
         }
     }
@@ -409,7 +413,7 @@ public class RedisUtils {
         try {
             return redisTemplate.opsForList().size(key);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate lGetListSize exception", e);
             return 0;
         }
     }
@@ -424,7 +428,7 @@ public class RedisUtils {
         try {
             return redisTemplate.opsForList().index(key, index);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate lGetIndex exception", e);
             return null;
         }
     }
@@ -440,7 +444,7 @@ public class RedisUtils {
             redisTemplate.opsForList().rightPush(key, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate lSet exception", e);
             return false;
         }
     }
@@ -460,7 +464,7 @@ public class RedisUtils {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate lSet time exception", e);
             return false;
         }
     }
@@ -476,7 +480,7 @@ public class RedisUtils {
             redisTemplate.opsForList().rightPushAll(key, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate lSet list exception", e);
             return false;
         }
     }
@@ -497,7 +501,7 @@ public class RedisUtils {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate lSet list time exception", e);
             return false;
         }
     }
@@ -514,7 +518,7 @@ public class RedisUtils {
             redisTemplate.opsForList().set(key, index, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate lUpdateIndex exception", e);
             return false;
         }
     }
@@ -530,7 +534,7 @@ public class RedisUtils {
         try {
             return redisTemplate.opsForList().remove(key, count, value);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("redisTemplate lRemove exception", e);
             return 0;
         }
     }

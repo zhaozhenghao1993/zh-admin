@@ -8,7 +8,6 @@ import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.entity.SysLogEntity;
 import net.zhenghao.zh.common.utils.IPUtils;
 import net.zhenghao.zh.common.utils.JSONUtils;
-import net.zhenghao.zh.common.utils.JWTTokenUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -17,7 +16,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -35,10 +33,6 @@ public class LoginLogAspect {
 	@Autowired
     private SysLogMapper sysLogMapper;
 
-	@Autowired
-    private JWTTokenUtils jwtTokenUtils;
-	
-	
 	@AfterReturning(pointcut = "execution(* net.zhenghao.zh.auth.controller.SysLoginController.login(..))", returning = "result")
 	public void doAfterReturning(JoinPoint joinPoint, Object result) {
 		SysLogEntity sysLog = new SysLogEntity();
@@ -64,6 +58,9 @@ public class LoginLogAspect {
         //请求的参数
         Object[] args = joinPoint.getArgs();
         Map<String, Object> userMap = (Map<String, Object>) args[0];
+        if (userMap.containsKey("password")) {
+            userMap.put("password", "******");
+        }
         String params = JSONUtils.objToString(userMap);
         sysLog.setParams(params);
         

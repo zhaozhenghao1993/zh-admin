@@ -3,7 +3,6 @@ package net.zhenghao.zh.common.vo;
 import net.zhenghao.zh.common.entity.TreeNode;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 🙃

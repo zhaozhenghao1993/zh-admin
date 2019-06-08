@@ -8,6 +8,8 @@ import net.zhenghao.zh.monitor.entity.server.App;
 import net.zhenghao.zh.monitor.entity.server.Jvm;
 import net.zhenghao.zh.monitor.entity.server.Sys;
 import net.zhenghao.zh.monitor.entity.server.SysDisk;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -32,6 +34,8 @@ import java.util.Properties;
  */
 @Component
 public class ServerBaseEntity {
+
+    private static final Logger logger = LoggerFactory.getLogger(ServerBaseEntity.class);
 
     @Value("${zh-admin.file.log.folder}")
     private String logFolder;
@@ -151,6 +155,7 @@ public class ServerBaseEntity {
             try {
                 percent = Integer.parseInt(DataHandleUtils.accuracy(used, total, 0));
             } catch (NumberFormatException e) {
+                logger.error("percent number format exception", e);
             }
             sysDisk.setUsedPercent(percent + "%");
             sysDisks.add(sysDisk);

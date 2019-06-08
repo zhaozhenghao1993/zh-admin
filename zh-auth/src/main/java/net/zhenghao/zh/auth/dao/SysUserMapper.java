@@ -6,8 +6,6 @@ import net.zhenghao.zh.common.entity.Query;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 /**
  * 系统用户dao
  *

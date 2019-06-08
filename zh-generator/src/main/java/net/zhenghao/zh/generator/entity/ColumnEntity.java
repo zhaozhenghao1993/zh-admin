@@ -57,8 +57,7 @@ public class ColumnEntity implements Serializable {
      */
     private String extra;
 
-    public ColumnEntity() {
-    }
+    public ColumnEntity() {}
 
     public String getColumnName() {
         return columnName;

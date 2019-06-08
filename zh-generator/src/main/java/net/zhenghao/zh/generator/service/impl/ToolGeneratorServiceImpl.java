@@ -10,7 +10,6 @@ import net.zhenghao.zh.generator.entity.ColumnEntity;
 import net.zhenghao.zh.generator.entity.GeneratorParamEntity;
 import net.zhenghao.zh.generator.entity.TableEntity;
 import net.zhenghao.zh.generator.service.ToolGeneratorService;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

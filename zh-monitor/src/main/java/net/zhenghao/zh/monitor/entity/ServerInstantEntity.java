@@ -5,12 +5,13 @@ import net.zhenghao.zh.common.utils.FileUtils;
 import net.zhenghao.zh.monitor.entity.server.Cpu;
 import net.zhenghao.zh.monitor.entity.server.Jvm;
 import net.zhenghao.zh.monitor.entity.server.Mem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
 import oshi.hardware.HardwareAbstractionLayer;
-import oshi.util.Util;
 
 /**
  * 🙃
@@ -24,6 +25,8 @@ import oshi.util.Util;
  */
 @Component
 public class ServerInstantEntity {
+
+    private static final Logger logger = LoggerFactory.getLogger(ServerInstantEntity.class);
 
     private static SystemInfo systemInfo = new SystemInfo();
 
@@ -91,8 +94,9 @@ public class ServerInstantEntity {
         mem.setFree(FileUtils.convertFileSize(memory.getAvailable()));
         int percent = 0;
         try {
-            percent = Integer.parseInt(DataHandleUtils.accuracy(memory.getTotal() - memory.getAvailable(), memory.getTotal(), 0));
+            percent = Integer.parseInt(DataHandleUtils.accuracy((double)(memory.getTotal() - memory.getAvailable()), (double) memory.getTotal(), 0));
         } catch (NumberFormatException e) {
+            logger.error("percent number format exception", e);
         }
         mem.setUsedPercent(percent);
     }
@@ -110,8 +114,9 @@ public class ServerInstantEntity {
         jvm.setMax(FileUtils.convertFileSize(max));
         int percent = 0;
         try {
-            percent = Integer.parseInt(DataHandleUtils.accuracy(total - free, total, 0));
+            percent = Integer.parseInt(DataHandleUtils.accuracy((double)(total - free), (double)total, 0));
         } catch (NumberFormatException e) {
+            logger.error("percent number format exception", e);
         }
         jvm.setUsedPercent(percent);
     }

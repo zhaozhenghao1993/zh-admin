@@ -65,19 +65,20 @@ public class FileUtils {
     public static boolean checkFileSize(Long len, int size, String unit) {
         // long len = file.length();
         double fileSize = 0;
-        if ("B".equals(unit.toUpperCase())) {
+        boolean bool = true;
+        if ("B".equalsIgnoreCase(unit)) {
             fileSize = (double) len;
-        } else if ("K".equals(unit.toUpperCase())) {
+        } else if ("K".equalsIgnoreCase(unit)) {
             fileSize = (double) len / 1024;
-        } else if ("M".equals(unit.toUpperCase())) {
+        } else if ("M".equalsIgnoreCase(unit)) {
             fileSize = (double) len / 1048576;
-        } else if ("G".equals(unit.toUpperCase())) {
+        } else if ("G".equalsIgnoreCase(unit)) {
             fileSize = (double) len / 1073741824;
         }
         if (fileSize > size) {
-            return false;
+            bool = false;
         }
-        return true;
+        return bool;
     }
 
     /**
@@ -91,45 +92,45 @@ public class FileUtils {
             return null;
         } else {
             // 获取文件后缀名并转化为写，用于后续比较
-            String fileType = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()).toLowerCase();
+            String fileType = fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length()).toLowerCase();
             // 创建图片类型数组
-            String img[] = { "bmp", "jpg", "jpeg", "png", "tiff", "gif", "pcx", "tga", "exif", "fpx", "svg", "psd",
+            String[] imgs = { "bmp", "jpg", "jpeg", "png", "tiff", "gif", "pcx", "tga", "exif", "fpx", "svg", "psd",
                     "cdr", "pcd", "dxf", "ufo", "eps", "ai", "raw", "wmf" };
-            for (int i = 0; i < img.length; i++) {
-                if (img[i].equals(fileType)) {
+            for (String img: imgs) {
+                if (img.equals(fileType)) {
                     return SystemConstant.FileType.IMAGE;
                 }
             }
 
             // 创建文档类型数组
-            String document[] = { "txt", "doc", "docx", "xls", "htm", "html", "jsp", "rtf", "wpd", "pdf", "ppt" };
-            for (int i = 0; i < document.length; i++) {
-                if (document[i].equals(fileType)) {
+            String[] documents = { "txt", "doc", "docx", "xls", "htm", "html", "jsp", "rtf", "wpd", "pdf", "ppt" };
+            for (String document: documents) {
+                if (document.equals(fileType)) {
                     return SystemConstant.FileType.DOCUMENT;
                 }
             }
 
             // 创建视频类型数组
-            String video[] = { "mp4", "avi", "mov", "wmv", "asf", "navi", "3gp", "mkv", "f4v", "rmvb", "webm" };
-            for (int i = 0; i < video.length; i++) {
-                if (video[i].equals(fileType)) {
+            String[] videos = { "mp4", "avi", "mov", "wmv", "asf", "navi", "3gp", "mkv", "f4v", "rmvb", "webm" };
+            for (String video: videos) {
+                if (video.equals(fileType)) {
                     return SystemConstant.FileType.VIDEO;
                 }
             }
 
             // 创建音乐类型数组
-            String music[] = { "mp3", "wma", "wav", "mod", "ra", "cd", "md", "asf", "aac", "vqf", "ape", "mid", "ogg",
+            String[] musics = { "mp3", "wma", "wav", "mod", "ra", "cd", "md", "asf", "aac", "vqf", "ape", "mid", "ogg",
                     "m4a", "vqf" };
-            for (int i = 0; i < music.length; i++) {
-                if (music[i].equals(fileType)) {
+            for (String music: musics) {
+                if (music.equals(fileType)) {
                     return SystemConstant.FileType.MUSIC;
                 }
             }
 
             // 创建种子类型数组
-            String seed[] = { "torrent" };
-            for (int i = 0; i < seed.length; i++) {
-                if (seed[i].equals(fileType)) {
+            String[] seeds = { "torrent" };
+            for (String seed: seeds) {
+                if (seed.equals(fileType)) {
                     return SystemConstant.FileType.SEED;
                 }
             }

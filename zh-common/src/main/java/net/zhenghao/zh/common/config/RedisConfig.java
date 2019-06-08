@@ -36,12 +36,8 @@ public class RedisConfig {
     public CacheManager cacheManager(LettuceConnectionFactory lettuceConnectionFactory) {
         RedisCacheManager.RedisCacheManagerBuilder builder = RedisCacheManager.RedisCacheManagerBuilder
                 .fromConnectionFactory(lettuceConnectionFactory);
-        @SuppressWarnings("serial")
-        Set<String> cacheNames = new HashSet<String>() {
-            {
-                add("codeNameCache");
-            }
-        };
+        Set<String> cacheNames = new HashSet<>();
+        cacheNames.add("codeNameCache");
         builder.initialCacheNames(cacheNames);
         return builder.build();
     }
@@ -59,7 +55,7 @@ public class RedisConfig {
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(om);
         // 配置redisTemplate
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(lettuceConnectionFactory);
         RedisSerializer<?> stringSerializer = new StringRedisSerializer();
         redisTemplate.setKeySerializer(stringSerializer);// key序列化

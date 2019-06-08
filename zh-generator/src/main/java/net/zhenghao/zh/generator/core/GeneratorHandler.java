@@ -72,7 +72,7 @@ public class GeneratorHandler {
         Velocity.init(prop);
 
         //封装模板数据
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("tableName", table.getTableName());
         map.put("comments", table.getTableComment());
         map.put("pk", table.getPk());
@@ -113,7 +113,7 @@ public class GeneratorHandler {
     }
 
     private static List<String> getTemplates() {
-        List<String> templates = new ArrayList<String>();
+        List<String> templates = new ArrayList<>();
         templates.add("template/Entity.java.vm");
         templates.add("template/Mapper.java.vm");
         templates.add("template/Mapper.xml.vm");

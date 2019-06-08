@@ -23,7 +23,9 @@ public class IPUtils {
 	}
 
 	private static final Logger logger = LoggerFactory.getLogger(IPUtils.class);
-	
+
+	public static final String LOCAL_IP_ADDRESS = "127.0.0.1";
+
 	/**
 	 * 获取IP地址
 	 * @param request
@@ -57,7 +59,7 @@ public class IPUtils {
 				ip = request.getRemoteAddr();
 			}
 		} catch (Exception e) {
-			logger.error("IPUtils ERROR ", e);
+			logger.error("IPUtils exception ", e);
 		}
 		
 		//使用代理,则获取第一个IP地址
@@ -67,7 +69,7 @@ public class IPUtils {
 				ip = ip.substring(0, idx);
 			}
 		}
-		return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;
+		return "0:0:0:0:0:0:0:1".equals(ip) ? LOCAL_IP_ADDRESS : ip;
 	}
 	
 	
@@ -102,8 +104,9 @@ public class IPUtils {
 			return InetAddress.getLocalHost().getHostAddress();
 		}
 		catch (UnknownHostException e) {
+			logger.error("IPUtils get server host IP exception", e);
 		}
-		return "127.0.0.1";
+		return LOCAL_IP_ADDRESS;
 	}
 
 	/**
@@ -115,6 +118,7 @@ public class IPUtils {
 			return InetAddress.getLocalHost().getHostName();
 		}
 		catch (UnknownHostException e) {
+			logger.error("IPUtils get server host name exception", e);
 		}
 		return "未知";
 	}

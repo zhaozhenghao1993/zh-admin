@@ -56,7 +56,7 @@ public class TestController {
     @SysLog("注解日志异常测试")
     public String exception() {
         SysUserEntity user = null;
-        System.out.println(user.getUsername());
+        user.getUsername();
         return "exception => success";
     }
 }

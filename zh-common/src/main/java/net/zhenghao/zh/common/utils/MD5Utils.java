@@ -22,30 +22,24 @@ public class MD5Utils {
 	
 	/**
 	 * 使用md5生成加密后的密码
-	 * @param pswd
+	 * @param password
 	 * @return
 	 */
-	public static String encrypt(String pswd) {
-		return new SimpleHash(ALGORITH_NAME, pswd, ByteSource.Util.bytes(SALT), HASH_ITERATIONS).toHex();
+	public static String encrypt(String password) {
+		return new SimpleHash(ALGORITH_NAME, password, ByteSource.Util.bytes(SALT), HASH_ITERATIONS).toHex();
 	}
 	
 	/**
 	 * 使用md5生成加密后的密码
 	 * @param username
-	 * @param pswd
+	 * @param password
 	 * @return
 	 */
-	public static String encrypt(String username, String pswd) {
-		if (StringUtils.isNotEmpty(username) && StringUtils.isNotEmpty(pswd)) {
-			return new SimpleHash(ALGORITH_NAME, pswd, ByteSource.Util.bytes(username + SALT), HASH_ITERATIONS).toHex();
+	public static String encrypt(String username, String password) {
+		if (StringUtils.isNotEmpty(username) && StringUtils.isNotEmpty(password)) {
+			return new SimpleHash(ALGORITH_NAME, password, ByteSource.Util.bytes(username + SALT), HASH_ITERATIONS).toHex();
 		}
 		return null;
-	}
-	
-	public static void main(String[] args) {
-		String password = "123";
-		String username = "admin";
-		System.out.println(encrypt(username, password));
 	}
 
 }

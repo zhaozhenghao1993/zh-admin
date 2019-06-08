@@ -13,6 +13,9 @@ package net.zhenghao.zh.common.constant;
 
 public class UploadConstant {
 
+    private UploadConstant() {
+    }
+
     /**
      * 用户头像上传路径
      */

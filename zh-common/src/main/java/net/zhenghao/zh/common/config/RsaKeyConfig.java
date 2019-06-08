@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
 /**
  * 🙃
  * 🙃 RSA 公钥密钥配置
@@ -27,7 +31,7 @@ public class RsaKeyConfig {
     private String publicKeyPath;
 
     @Bean
-    public RsaKeyManager getRsaKeyManager() throws Exception {
+    public RsaKeyManager getRsaKeyManager() throws NoSuchAlgorithmException, IOException, InvalidKeySpecException {
         RsaKeyHelper rsaKeyHelper = new RsaKeyHelper();
         RsaKeyManager rsaKeyManager = new RsaKeyManager();
         rsaKeyManager.setPublicKey(rsaKeyHelper.loadPublicKey(publicKeyPath));

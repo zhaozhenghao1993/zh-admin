@@ -49,7 +49,7 @@ public class UserAvatarHandler {
         if (!FileUtils.checkFileSize(file.getSize(), UploadConstant.USER_AVATAR_FILE_SIZE, UploadConstant.USER_AVATAR_FILE_SIZE_UNIT)) {
             throw new UploadSizeException("Upload file too large!");
         }
-        String fileName = UploadConstant.USER_AVATAR_FILE_NAME + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+        String fileName = UploadConstant.USER_AVATAR_FILE_NAME + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf('.'));
         String folderPath = uploadConfig.getFolder() + UploadConstant.USER_AVATAR_FOLDER + File.separator + userId;
         String filePath = uploadConfig.getPath() + "/" + UploadConstant.USER_AVATAR_FOLDER + "/" + userId + "/" + fileName;
         try {
