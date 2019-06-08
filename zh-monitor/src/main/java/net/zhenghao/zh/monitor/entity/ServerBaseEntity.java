@@ -9,6 +9,7 @@ import net.zhenghao.zh.monitor.entity.server.Jvm;
 import net.zhenghao.zh.monitor.entity.server.Sys;
 import net.zhenghao.zh.monitor.entity.server.SysDisk;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import oshi.SystemInfo;
 import oshi.software.os.FileSystem;
@@ -31,6 +32,9 @@ import java.util.Properties;
  */
 @Component
 public class ServerBaseEntity {
+
+    @Value("${zh-admin.file.log.folder}")
+    private String logFolder;
 
     @Autowired
     private UploadConfig uploadConfig;
@@ -122,6 +126,7 @@ public class ServerBaseEntity {
     private void setAppInfo(Properties props) {
         app.setAppDir(props.getProperty("user.dir"));
         app.setUploadDir(uploadConfig.getFolder());
+        app.setLogDir(logFolder);
     }
 
     /**

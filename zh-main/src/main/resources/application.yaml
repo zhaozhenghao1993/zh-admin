@@ -19,12 +19,14 @@ zh-admin:
     private-key-path: jwt/pkcs8_rsa_private_key.pem
     public-key-path: jwt/rsa_public_key.pem
   file:
+    log:
+      folder: /data/app/zh-admin/log
     uploads:
       folder: /data/app/zh-admin/uploads/ # 文件上传目录,末尾必有/ 或 \\
       path: /uploads # 文件上传静态资源对外暴露的访问路径
 
 logging:
-  config: classpath:logback.xml
+  config: classpath:logback-spring.xml
 
 spring:
   profiles:
