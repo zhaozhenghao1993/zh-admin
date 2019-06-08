@@ -33,7 +33,7 @@ public class FilterChainConfig {
     @PostConstruct
     public void init() {
         annoFilterChainList.add(new SysPermissionEntity("/sys/login", "POST"));
-        annoFilterChainList.add(new SysPermissionEntity("/test/demo", "GET"));
+        annoFilterChainList.add(new SysPermissionEntity("/test/heart", "GET"));
         annoFilterChainList.add(new SysPermissionEntity("/test/getToken", "GET"));
         annoFilterChainList.add(new SysPermissionEntity("/test/getUserInfo", "GET"));
         annoFilterChainList.add(new SysPermissionEntity("/test/set", "GET"));
