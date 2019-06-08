@@ -21,8 +21,8 @@ public class TestController {
     @Autowired
     private RedisUtils redisUtils;
 
-    @GetMapping("/demo")
-    public String demo() {
+    @GetMapping("/heart")
+    public String heart() {
         return "success";
     }
 
