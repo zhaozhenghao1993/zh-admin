@@ -8,6 +8,7 @@ import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.jwt.JWTInfo;
 import net.zhenghao.zh.common.utils.MD5Utils;
 import net.zhenghao.zh.common.utils.UserAuthUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -40,6 +41,9 @@ public class SysLoginController {
 	}
 
 	private Result<SysLoginVO> validate(String username, String password) {
+		if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+			return Result.ofFail(HttpStatusConstant.EXCEPTION_OTHER_CODE, "Invalid username or password!");
+		}
 		// 查询用户信息
 		SysUserEntity user = sysUserService.getUserByName(username);
 
