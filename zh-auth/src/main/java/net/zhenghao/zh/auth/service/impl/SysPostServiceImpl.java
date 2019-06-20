@@ -6,7 +6,7 @@ import net.zhenghao.zh.auth.dao.SysUserPostMapper;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.Result;
-import net.zhenghao.zh.common.utils.CommonUtils;
+import net.zhenghao.zh.common.util.CommonUtils;
 import net.zhenghao.zh.auth.entity.SysPostEntity;
 import net.zhenghao.zh.auth.service.SysPostService;
 import org.springframework.beans.factory.annotation.Autowired;

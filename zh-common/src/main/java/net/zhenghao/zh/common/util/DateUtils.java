@@ -1,4 +1,4 @@
-package net.zhenghao.zh.common.utils;
+package net.zhenghao.zh.common.util;
 
 import net.zhenghao.zh.common.exception.BaseException;
 import org.apache.commons.lang3.time.DateFormatUtils;

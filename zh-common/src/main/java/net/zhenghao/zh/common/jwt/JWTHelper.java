@@ -5,7 +5,7 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import net.zhenghao.zh.common.constant.SystemConstant;
-import net.zhenghao.zh.common.utils.StringCommonUtils;
+import net.zhenghao.zh.common.util.StringCommonUtils;
 import org.joda.time.DateTime;
 
 import java.security.PrivateKey;

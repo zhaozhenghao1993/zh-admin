@@ -6,8 +6,8 @@ import net.zhenghao.zh.auth.vo.SysLoginVO;
 import net.zhenghao.zh.common.constant.HttpStatusConstant;
 import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.jwt.JWTInfo;
-import net.zhenghao.zh.common.utils.MD5Utils;
-import net.zhenghao.zh.common.utils.UserAuthUtils;
+import net.zhenghao.zh.common.util.MD5Utils;
+import net.zhenghao.zh.common.util.UserAuthUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 

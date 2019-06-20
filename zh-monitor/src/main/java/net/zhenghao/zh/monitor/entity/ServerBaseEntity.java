@@ -1,9 +1,9 @@
 package net.zhenghao.zh.monitor.entity;
 
 import net.zhenghao.zh.common.config.UploadConfig;
-import net.zhenghao.zh.common.utils.DataHandleUtils;
-import net.zhenghao.zh.common.utils.FileUtils;
-import net.zhenghao.zh.common.utils.IPUtils;
+import net.zhenghao.zh.common.util.DataHandleUtils;
+import net.zhenghao.zh.common.util.FileUtils;
+import net.zhenghao.zh.common.util.IPUtils;
 import net.zhenghao.zh.monitor.entity.server.App;
 import net.zhenghao.zh.monitor.entity.server.Jvm;
 import net.zhenghao.zh.monitor.entity.server.Sys;

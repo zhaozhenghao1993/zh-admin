@@ -1,4 +1,4 @@
-package net.zhenghao.zh.common.utils;
+package net.zhenghao.zh.common.util;
 
 import net.zhenghao.zh.common.crypto.hash.SimpleHash;
 import net.zhenghao.zh.common.crypto.util.ByteSource;

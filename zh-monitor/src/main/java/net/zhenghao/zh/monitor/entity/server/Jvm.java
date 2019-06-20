@@ -1,6 +1,6 @@
 package net.zhenghao.zh.monitor.entity.server;
 
-import net.zhenghao.zh.common.utils.DateUtils;
+import net.zhenghao.zh.common.util.DateUtils;
 
 /**
  * 🙃

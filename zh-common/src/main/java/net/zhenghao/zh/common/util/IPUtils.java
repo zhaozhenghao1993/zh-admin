@@ -1,4 +1,4 @@
-package net.zhenghao.zh.common.utils;
+package net.zhenghao.zh.common.util;
 
 import eu.bitwalker.useragentutils.UserAgent;
 import org.apache.commons.lang3.StringUtils;

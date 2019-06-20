@@ -1,4 +1,4 @@
-package net.zhenghao.zh.common.utils;
+package net.zhenghao.zh.common.util;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;

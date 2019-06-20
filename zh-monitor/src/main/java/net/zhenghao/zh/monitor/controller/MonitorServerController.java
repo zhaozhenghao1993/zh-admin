@@ -1,7 +1,7 @@
 package net.zhenghao.zh.monitor.controller;
 
 import net.zhenghao.zh.common.entity.Result;
-import net.zhenghao.zh.common.utils.CommonUtils;
+import net.zhenghao.zh.common.util.CommonUtils;
 import net.zhenghao.zh.monitor.entity.ServerBaseEntity;
 import net.zhenghao.zh.monitor.entity.ServerInstantEntity;
 import org.springframework.beans.factory.annotation.Autowired;

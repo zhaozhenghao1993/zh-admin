@@ -1,7 +1,7 @@
 package net.zhenghao.zh.monitor.entity;
 
-import net.zhenghao.zh.common.utils.DataHandleUtils;
-import net.zhenghao.zh.common.utils.FileUtils;
+import net.zhenghao.zh.common.util.DataHandleUtils;
+import net.zhenghao.zh.common.util.FileUtils;
 import net.zhenghao.zh.monitor.entity.server.Cpu;
 import net.zhenghao.zh.monitor.entity.server.Jvm;
 import net.zhenghao.zh.monitor.entity.server.Mem;

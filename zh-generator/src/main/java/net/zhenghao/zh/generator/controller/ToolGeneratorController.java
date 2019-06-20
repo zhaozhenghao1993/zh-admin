@@ -4,7 +4,7 @@ import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Result;
-import net.zhenghao.zh.common.utils.JSONUtils;
+import net.zhenghao.zh.common.util.JSONUtils;
 import net.zhenghao.zh.generator.entity.GeneratorParamEntity;
 import net.zhenghao.zh.generator.entity.TableEntity;
 import net.zhenghao.zh.generator.service.ToolGeneratorService;

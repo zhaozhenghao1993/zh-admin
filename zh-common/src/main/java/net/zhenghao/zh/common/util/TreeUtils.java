@@ -1,4 +1,4 @@
-package net.zhenghao.zh.common.utils;
+package net.zhenghao.zh.common.util;
 
 import net.zhenghao.zh.common.entity.TreeNode;
 
@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 /**
  * 🙃
- * 🙃
+ * 🙃 将 List<TreeNode> 转成 tree 格式
  * 🙃
  *
  * @author:zhaozhenghao

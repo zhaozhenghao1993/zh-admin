@@ -1,7 +1,7 @@
 package net.zhenghao.zh.generator.core;
 
 import net.zhenghao.zh.common.exception.BaseException;
-import net.zhenghao.zh.common.utils.DateUtils;
+import net.zhenghao.zh.common.util.DateUtils;
 import net.zhenghao.zh.generator.entity.ColumnEntity;
 import net.zhenghao.zh.generator.entity.GeneratorParamEntity;
 import net.zhenghao.zh.generator.entity.TableEntity;

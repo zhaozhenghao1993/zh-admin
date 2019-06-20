@@ -1,4 +1,4 @@
-package net.zhenghao.zh.common.utils;
+package net.zhenghao.zh.common.util;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;

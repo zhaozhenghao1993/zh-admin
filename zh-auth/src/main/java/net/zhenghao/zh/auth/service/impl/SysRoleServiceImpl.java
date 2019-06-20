@@ -8,7 +8,7 @@ import net.zhenghao.zh.common.constant.SystemConstant;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.entity.Result;
-import net.zhenghao.zh.common.utils.CommonUtils;
+import net.zhenghao.zh.common.util.CommonUtils;
 import net.zhenghao.zh.auth.entity.SysRoleEntity;
 import net.zhenghao.zh.auth.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;

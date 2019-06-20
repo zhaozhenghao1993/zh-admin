@@ -1,4 +1,4 @@
-package net.zhenghao.zh.common.utils;
+package net.zhenghao.zh.common.util;
 
 import net.zhenghao.zh.common.constant.MsgConstant;
 import net.zhenghao.zh.common.entity.Result;
