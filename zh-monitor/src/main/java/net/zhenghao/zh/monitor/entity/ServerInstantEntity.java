@@ -82,7 +82,7 @@ public class ServerInstantEntity {
     private void setCpuInfo(CentralProcessor processor) {
         // CPU信息
         cpu.setCpuNum(processor.getLogicalProcessorCount());
-        cpu.setUsedPercent((int)(processor.getSystemCpuLoad() * 100));
+        cpu.setUsedPercent((int) (processor.getSystemCpuLoad() * 100));
     }
 
     /**
@@ -94,7 +94,7 @@ public class ServerInstantEntity {
         mem.setFree(FileUtils.convertFileSize(memory.getAvailable()));
         int percent = 0;
         try {
-            percent = Integer.parseInt(DataHandleUtils.accuracy((double)(memory.getTotal() - memory.getAvailable()), (double) memory.getTotal(), 0));
+            percent = Integer.parseInt(DataHandleUtils.accuracy((double) (memory.getTotal() - memory.getAvailable()), (double) memory.getTotal(), 0));
         } catch (NumberFormatException e) {
             logger.error("percent number format exception", e);
         }
@@ -114,7 +114,7 @@ public class ServerInstantEntity {
         jvm.setMax(FileUtils.convertFileSize(max));
         int percent = 0;
         try {
-            percent = Integer.parseInt(DataHandleUtils.accuracy((double)(total - free), (double)total, 0));
+            percent = Integer.parseInt(DataHandleUtils.accuracy((double) (total - free), (double) total, 0));
         } catch (NumberFormatException e) {
             logger.error("percent number format exception", e);
         }

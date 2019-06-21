@@ -23,8 +23,9 @@ public class UploadUtils {
 
     /**
      * 上传文件
+     *
      * @param file
-     * @param folderPath    上传文件的路径
+     * @param folderPath 上传文件的路径
      * @return
      * @throws IOException
      */
@@ -34,9 +35,10 @@ public class UploadUtils {
 
     /**
      * 上传文件
+     *
      * @param file
-     * @param folderPath    上传文件的路径
-     * @param fileName    上传文件名
+     * @param folderPath 上传文件的路径
+     * @param fileName   上传文件名
      * @return
      * @throws IOException
      */

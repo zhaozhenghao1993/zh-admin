@@ -5,204 +5,204 @@ import java.sql.Timestamp;
 
 /**
  * 系统日志
- *
+ * <p>
  * author:zhaozhenghao
  * Email :736720794@qq.com
  * date  :2017年11月20日下午3:22:54
  * SysLogEntity.java
  */
 public class SysLogEntity implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
 
-	/**
-	 * 日志id
-	 */
-	private Long id;
-	
-	
-	/**
-	 * 操作用户id
-	 */
-	private Long userId;
-	
-	/**
-	 * 操作用户
-	 */
-	private String username;
-	
-	/**
-	 * 操作
-	 */
-	private String operation;
-	
-	/**
-	 * 方法
-	 */
-	private String method;
-	
-	/**
-	 * 参数
-	 */
-	private String params;
-	
-	/**
-	 * 耗时
-	 */
-	private Long time;
-	
-	/**
-	 * 操作方ip地址
-	 */
-	private String ip;
+    /**
+     * 日志id
+     */
+    private Long id;
 
-	/**
-	 * 操作方浏览器
-	 */
-	private String browser;
 
-	/**
-	 * 操作方系统
-	 */
-	private String os;
-	
-	/**
-	 * 操作状态 0-成功 1-失败
-	 */
-	private Integer status;
-	
-	/**
-	 * 操作描述
-	 */
-	private String remark;
-	
-	/**
-	 * 日志类型 1-登录 2-访问 3-操作 4-异常 5-授权
-	 */
-	private Integer type;
-	
-	/**
-	 * 创建时间
-	 */
-	private Timestamp createTime;
+    /**
+     * 操作用户id
+     */
+    private Long userId;
 
-	public SysLogEntity() {
-		super();
-	}
+    /**
+     * 操作用户
+     */
+    private String username;
 
-	public Long getId() {
-		return id;
-	}
+    /**
+     * 操作
+     */
+    private String operation;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * 方法
+     */
+    private String method;
 
-	public Long getUserId() {
-		return userId;
-	}
+    /**
+     * 参数
+     */
+    private String params;
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+    /**
+     * 耗时
+     */
+    private Long time;
 
-	public String getUsername() {
-		return username;
-	}
+    /**
+     * 操作方ip地址
+     */
+    private String ip;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    /**
+     * 操作方浏览器
+     */
+    private String browser;
 
-	public String getOperation() {
-		return operation;
-	}
+    /**
+     * 操作方系统
+     */
+    private String os;
 
-	public void setOperation(String operation) {
-		this.operation = operation;
-	}
+    /**
+     * 操作状态 0-成功 1-失败
+     */
+    private Integer status;
 
-	public String getMethod() {
-		return method;
-	}
+    /**
+     * 操作描述
+     */
+    private String remark;
 
-	public void setMethod(String method) {
-		this.method = method;
-	}
+    /**
+     * 日志类型 1-登录 2-访问 3-操作 4-异常 5-授权
+     */
+    private Integer type;
 
-	public String getParams() {
-		return params;
-	}
+    /**
+     * 创建时间
+     */
+    private Timestamp createTime;
 
-	public void setParams(String params) {
-		this.params = params;
-	}
+    public SysLogEntity() {
+        super();
+    }
 
-	public Long getTime() {
-		return time;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setTime(Long time) {
-		this.time = time;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getIp() {
-		return ip;
-	}
+    public Long getUserId() {
+        return userId;
+    }
 
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-	public String getBrowser() {
-		return browser;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setBrowser(String browser) {
-		this.browser = browser;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getOs() {
-		return os;
-	}
+    public String getOperation() {
+        return operation;
+    }
 
-	public void setOs(String os) {
-		this.os = os;
-	}
+    public void setOperation(String operation) {
+        this.operation = operation;
+    }
 
-	public Integer getStatus() {
-		return status;
-	}
+    public String getMethod() {
+        return method;
+    }
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
+    public void setMethod(String method) {
+        this.method = method;
+    }
 
-	public String getRemark() {
-		return remark;
-	}
+    public String getParams() {
+        return params;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    public void setParams(String params) {
+        this.params = params;
+    }
 
-	public Integer getType() {
-		return type;
-	}
+    public Long getTime() {
+        return time;
+    }
 
-	public void setType(Integer type) {
-		this.type = type;
-	}
+    public void setTime(Long time) {
+        this.time = time;
+    }
 
-	public Timestamp getCreateTime() {
-		return createTime;
-	}
+    public String getIp() {
+        return ip;
+    }
 
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
-	}
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getBrowser() {
+        return browser;
+    }
+
+    public void setBrowser(String browser) {
+        this.browser = browser;
+    }
+
+    public String getOs() {
+        return os;
+    }
+
+    public void setOs(String os) {
+        this.os = os;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
 }

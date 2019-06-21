@@ -1,10 +1,10 @@
-package net.zhenghao.zh.auth.vo;
+package net.zhenghao.zh.auth.dto;
 
 import java.io.Serializable;
 
 /**
  * 🙃
- * 🙃 修改当前password封装vo类
+ * 🙃 修改当前password封装dto类
  * 🙃
  *
  * @author:zhaozhenghao
@@ -13,7 +13,7 @@ import java.io.Serializable;
  * SysUserPasswordVO.java
  */
 
-public class SysUserPasswordVO implements Serializable {
+public class SysUserPasswordDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

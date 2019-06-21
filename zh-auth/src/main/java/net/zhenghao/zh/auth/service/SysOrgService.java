@@ -13,21 +13,21 @@ import java.util.Map;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2019年1月29日 上午10:43:52
+ * @date :2019年1月29日 上午10:43:52
  * SysMenuService.java
  */
 public interface SysOrgService {
-	
-	Page<SysOrgEntity> listOrg(Map<String, Object> params);
-	
-	Result<List<TreeVO>> listTree(Map<String, Object> params);
-	
-	Result saveOrg(SysOrgEntity org);
 
-	Result<SysOrgEntity> getOrgById(Long id);
+    Page<SysOrgEntity> listOrg(Map<String, Object> params);
 
-	Result updateOrg(SysOrgEntity org);
+    Result<List<TreeVO>> listTree(Map<String, Object> params);
 
-	Result remove(Long id);
-	
+    Result saveOrg(SysOrgEntity org);
+
+    Result<SysOrgEntity> getOrgById(Long id);
+
+    Result updateOrg(SysOrgEntity org);
+
+    Result remove(Long id);
+
 }

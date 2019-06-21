@@ -34,6 +34,7 @@ public class UserAvatarHandler {
 
     /**
      * 头像上传处理
+     *
      * @param userId 用户id
      * @param file
      * @return

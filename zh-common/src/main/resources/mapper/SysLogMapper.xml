@@ -104,7 +104,7 @@
 			type = #{type}
 	</delete>
 
-	<select id="selectTotalVisitCount" resultType="java.lang.Integer">
+	<select id="countTotalVisit" resultType="java.lang.Integer">
 		SELECT
 			COUNT(1)
 		FROM
@@ -113,7 +113,7 @@
 			type = 1
 	</select>
 
-	<select id="selectTodayVisitCount" resultType="java.lang.Integer">
+	<select id="countTodayVisit" resultType="java.lang.Integer">
 		SELECT
 			COUNT(1)
 		FROM
@@ -123,7 +123,7 @@
 		AND DATE_FORMAT(create_time, '%Y-%m-%d') = DATE_FORMAT(NOW(), '%Y-%m-%d');
 	</select>
 
-	<select id="selectLastWeekVisitCount" resultType="ChartVO">
+	<select id="listCountLastWeekVisit" resultType="ChartVO">
 		SELECT
 			COUNT(1) AS y,
 			DATE_FORMAT(create_time, '%Y-%m-%d') AS x

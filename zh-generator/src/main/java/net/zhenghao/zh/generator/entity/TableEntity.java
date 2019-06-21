@@ -59,7 +59,8 @@ public class TableEntity implements Serializable {
      */
     private Timestamp createTime;
 
-    public TableEntity() {}
+    public TableEntity() {
+    }
 
     public String getTableName() {
         return tableName;

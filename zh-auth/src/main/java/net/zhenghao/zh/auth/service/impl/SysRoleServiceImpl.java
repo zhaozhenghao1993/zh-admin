@@ -24,89 +24,89 @@ import java.util.Map;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2017年12月7日 上午10:39:00
+ * @date :2017年12月7日 上午10:39:00
  * SysRoleServiceImpl.java
  */
 @Service("sysRoleService")
 @Transactional
 public class SysRoleServiceImpl implements SysRoleService {
-	
-	@Autowired
-	private SysRoleMapper sysRoleMapper;
 
-	@Autowired
-	private SysUserRoleMapper sysUserRoleMapper;
+    @Autowired
+    private SysRoleMapper sysRoleMapper;
 
-	@Autowired
-	private SysRoleMenuMapper sysRoleMenuMapper;
+    @Autowired
+    private SysUserRoleMapper sysUserRoleMapper;
 
-	@Override
-	public Page<SysRoleEntity> listRole(Map<String, Object> params) {
-		Query query = new Query(params);
-		Page<SysRoleEntity> page = new Page<>(query);
-		PageHelper.startPage(page.getPageNum(), page.getPageSize());
-		page.setData(sysRoleMapper.listForPage(query));
-		return page;
-	}
+    @Autowired
+    private SysRoleMenuMapper sysRoleMenuMapper;
 
-	@Override
-	public Result saveRole(SysRoleEntity role) {
-		int count = sysRoleMapper.save(role);
-		return CommonUtils.msg(count);
-	}
+    @Override
+    public Page<SysRoleEntity> listRole(Map<String, Object> params) {
+        Query query = new Query(params);
+        Page<SysRoleEntity> page = new Page<>(query);
+        PageHelper.startPage(page.getPageNum(), page.getPageSize());
+        page.setData(sysRoleMapper.listForPage(query));
+        return page;
+    }
 
-	@Override
-	public Result getRoleById(Long id) {
-		SysRoleEntity role = sysRoleMapper.getObjectById(id);
-		List<Long> menuId = sysRoleMenuMapper.listMenuId(id);
-		role.setMenuIdList(menuId);
-		return CommonUtils.msg(role);
-	}
+    @Override
+    public Result saveRole(SysRoleEntity role) {
+        int count = sysRoleMapper.save(role);
+        return CommonUtils.msg(count);
+    }
 
-	@Override
-	public Result updateRole(SysRoleEntity role) {
-		int count = sysRoleMapper.update(role);
-		return CommonUtils.msg(count);
-	}
+    @Override
+    public Result getRoleById(Long id) {
+        SysRoleEntity role = sysRoleMapper.getObjectById(id);
+        List<Long> menuId = sysRoleMenuMapper.listMenuId(id);
+        role.setMenuIdList(menuId);
+        return CommonUtils.msg(role);
+    }
 
-	@Override
-	public Result removeRole(Long id) {
-		if (id == 1L) {
-			return Result.ofFail("内置admin角色不能删除!");
-		}
-		int count = sysRoleMapper.remove(id);
-		sysUserRoleMapper.removeByRoleId(id);
-		sysRoleMenuMapper.removeByRoleId(id);
-		return CommonUtils.msg(count);
-	}
+    @Override
+    public Result updateRole(SysRoleEntity role) {
+        int count = sysRoleMapper.update(role);
+        return CommonUtils.msg(count);
+    }
 
-	@Override
-	public Result batchRemove(Long[] ids) {
-		if (Arrays.stream(ids).anyMatch(SystemConstant.SUPER_ADMIN_ROLE::equals)) {
-			return Result.ofFail("包含内置admin角色不能删除!");
-		}
-		int count = sysRoleMapper.batchRemove(ids);
-		sysUserRoleMapper.batchRemoveByRoleId(ids);
-		sysRoleMenuMapper.batchRemoveByRoleId(ids);
-		return CommonUtils.msg(ids, count);
-	}
+    @Override
+    public Result removeRole(Long id) {
+        if (id == 1L) {
+            return Result.ofFail("内置admin角色不能删除!");
+        }
+        int count = sysRoleMapper.remove(id);
+        sysUserRoleMapper.removeByRoleId(id);
+        sysRoleMenuMapper.removeByRoleId(id);
+        return CommonUtils.msg(count);
+    }
 
-	@Override
-	public Result<List<SysRoleEntity>> listRole() {
-		List<SysRoleEntity> roleList = sysRoleMapper.list();
-		return CommonUtils.msgNotNull(roleList);
-	}
+    @Override
+    public Result batchRemove(Long[] ids) {
+        if (Arrays.stream(ids).anyMatch(SystemConstant.SUPER_ADMIN_ROLE::equals)) {
+            return Result.ofFail("包含内置admin角色不能删除!");
+        }
+        int count = sysRoleMapper.batchRemove(ids);
+        sysUserRoleMapper.batchRemoveByRoleId(ids);
+        sysRoleMenuMapper.batchRemoveByRoleId(ids);
+        return CommonUtils.msg(ids, count);
+    }
 
-	@Override
-	public Result updateRoleAuthorization(Long id, List<Long> menuIdList) {
-		int count = sysRoleMenuMapper.removeByRoleId(id);
-		if (!menuIdList.isEmpty()) {
-			Query query = new Query();
-			query.put("roleId", id);
-			query.put("menuIdList", menuIdList);
-			count = sysRoleMenuMapper.save(query);
-		}
-		return CommonUtils.msg(count);
-	}
+    @Override
+    public Result<List<SysRoleEntity>> listRole() {
+        List<SysRoleEntity> roleList = sysRoleMapper.list();
+        return CommonUtils.msgNotNull(roleList);
+    }
+
+    @Override
+    public Result updateRoleAuthorization(Long id, List<Long> menuIdList) {
+        int count = sysRoleMenuMapper.removeByRoleId(id);
+        if (!menuIdList.isEmpty()) {
+            Query query = new Query();
+            query.put("roleId", id);
+            query.put("menuIdList", menuIdList);
+            count = sysRoleMenuMapper.save(query);
+        }
+        return CommonUtils.msg(count);
+    }
 
 }

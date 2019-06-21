@@ -18,99 +18,106 @@ import java.util.Map;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2019年2月17日 下午2:48:50
+ * @date :2019年2月17日 下午2:48:50
  * SysRoleController.java
  */
 @RestController
 @RequestMapping("${zh-admin.api.prefix}/sys/role")
 public class SysRoleController extends AbstractController {
 
-	@Autowired
-	private SysRoleService sysRoleService;
-	
-	@GetMapping("")
-	public Page<SysRoleEntity> list(@RequestParam Map<String, Object> params) {
-		if (getUserId() != SystemConstant.SUPER_ADMIN) {
-			params.put("creatorId", getUserId());
-		}
-		return sysRoleService.listRole(params);
-	}
+    @Autowired
+    private SysRoleService sysRoleService;
 
-	/**
-	 * 根据id查询详情
-	 * @param id
-	 * @return
-	 */
-	@GetMapping("/{id}")
-	public Result<SysRoleEntity> info(@PathVariable("id") Long id) {
-		return sysRoleService.getRoleById(id);
-	}
-	
-	/**
-	 * 角色list
-	 * @return
-	 */
-	@GetMapping("/select")
-	public Result<List<SysRoleEntity>> listRole() {
-		return sysRoleService.listRole();
-	}
-	
-	/**
-	 * 新增角色
-	 * @param role
-	 * @return
-	 */
-	@SysLog("新增角色")
-	@PostMapping("")
-	public Result saveRole(@RequestBody SysRoleEntity role) {
-		role.setCreatorId(getUserId());
-		return sysRoleService.saveRole(role);
-	}
-	
-	/**
-	 * 修改角色
-	 * @param role
-	 * @return
-	 */
-	@SysLog("修改角色")
-	@PutMapping("/{id}")
-	public Result updateRole(@PathVariable("id") Long id, @RequestBody SysRoleEntity role) {
-		role.setId(id);
-		role.setModifierId(getUserId());
-		return sysRoleService.updateRole(role);
-	}
+    @GetMapping("")
+    public Page<SysRoleEntity> list(@RequestParam Map<String, Object> params) {
+        if (getUserId() != SystemConstant.SUPER_ADMIN) {
+            params.put("creatorId", getUserId());
+        }
+        return sysRoleService.listRole(params);
+    }
 
-	/**
-	 * 删除
-	 * @param id
-	 * @return
-	 */
-	@SysLog("删除角色")
-	@DeleteMapping("/{id}")
-	public Result remove(@PathVariable("id") Long id) {
-		return sysRoleService.removeRole(id);
-	}
-	
-	/**
-	 * 批量删除
-	 * @param ids
-	 * @return
-	 */
-	@SysLog("批量删除角色")
-	@DeleteMapping("")
-	public Result batchRemove(@RequestBody Long[] ids) {
-		return sysRoleService.batchRemove(ids);
-	}
-	
-	/**
-	 * 分配权限
-	 * @param id
-	 * @param menuIdList
-	 * @return
-	 */
-	@SysLog(value = "分配权限", type = SystemConstant.LogType.AUTHORIZATION)
-	@PutMapping("/{id}/authorize")
-	public Result updateRoleAuthorization(@PathVariable("id") Long id, @RequestBody List<Long> menuIdList) {
-		return sysRoleService.updateRoleAuthorization(id, menuIdList);
-	}
+    /**
+     * 根据id查询详情
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public Result<SysRoleEntity> info(@PathVariable("id") Long id) {
+        return sysRoleService.getRoleById(id);
+    }
+
+    /**
+     * 角色list
+     *
+     * @return
+     */
+    @GetMapping("/select")
+    public Result<List<SysRoleEntity>> listRole() {
+        return sysRoleService.listRole();
+    }
+
+    /**
+     * 新增角色
+     *
+     * @param role
+     * @return
+     */
+    @SysLog("新增角色")
+    @PostMapping("")
+    public Result saveRole(@RequestBody SysRoleEntity role) {
+        role.setCreatorId(getUserId());
+        return sysRoleService.saveRole(role);
+    }
+
+    /**
+     * 修改角色
+     *
+     * @param role
+     * @return
+     */
+    @SysLog("修改角色")
+    @PutMapping("/{id}")
+    public Result updateRole(@PathVariable("id") Long id, @RequestBody SysRoleEntity role) {
+        role.setId(id);
+        role.setModifierId(getUserId());
+        return sysRoleService.updateRole(role);
+    }
+
+    /**
+     * 删除
+     *
+     * @param id
+     * @return
+     */
+    @SysLog("删除角色")
+    @DeleteMapping("/{id}")
+    public Result remove(@PathVariable("id") Long id) {
+        return sysRoleService.removeRole(id);
+    }
+
+    /**
+     * 批量删除
+     *
+     * @param ids
+     * @return
+     */
+    @SysLog("批量删除角色")
+    @DeleteMapping("")
+    public Result batchRemove(@RequestBody Long[] ids) {
+        return sysRoleService.batchRemove(ids);
+    }
+
+    /**
+     * 分配权限
+     *
+     * @param id
+     * @param menuIdList
+     * @return
+     */
+    @SysLog(value = "分配权限", type = SystemConstant.LogType.AUTHORIZATION)
+    @PutMapping("/{id}/authorize")
+    public Result updateRoleAuthorization(@PathVariable("id") Long id, @RequestBody List<Long> menuIdList) {
+        return sysRoleService.updateRoleAuthorization(id, menuIdList);
+    }
 }

@@ -11,7 +11,7 @@ import java.util.Map;
  *
  * @author:${author}
  * @Email :${email}
- * @date  :${datetime}
+ * @date :${datetime}
  * ${className}Service.java
  */
 public interface ${className}Service {

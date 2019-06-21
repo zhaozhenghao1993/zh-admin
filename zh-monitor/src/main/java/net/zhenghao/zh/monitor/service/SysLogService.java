@@ -14,18 +14,18 @@ import java.util.Map;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2017年11月22日 下午2:05:02
+ * @date :2017年11月22日 下午2:05:02
  * SysLogService.java
  */
 public interface SysLogService {
 
-	Page<SysLogEntity> listLog(Map<String, Object> params);
-	
-	Result batchRemove(Long[] ids);
+    Page<SysLogEntity> listLog(Map<String, Object> params);
 
-	Result batchRemoveAll(Integer type);
+    Result batchRemove(Long[] ids);
 
-	Result<VisitCountVO> visitCount();
+    Result batchRemoveAll(Integer type);
 
-	Result<List<ChartVO>> lastWeekVisitCount();
+    Result<VisitCountVO> countVisit();
+
+    Result<List<ChartVO>> countLastWeekVisit();
 }

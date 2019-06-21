@@ -21,68 +21,68 @@ import java.util.Map;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2017年11月22日 下午2:08:50
+ * @date :2017年11月22日 下午2:08:50
  * SysLogServiceImpl.java
  */
 @Service("sysLogService")
 @Transactional
 public class SysLogServiceImpl implements SysLogService {
 
-	@Autowired
-	private SysLogMapper sysLogMapper;
-	
-	@Override
-	public Page<SysLogEntity> listLog(Map<String, Object> params) {
-		Query query = new Query(params);
-		Page<SysLogEntity> page = new Page<>(query);
-		PageHelper.startPage(page.getPageNum(), page.getPageSize());
-		page.setData(sysLogMapper.listForPage(query));
-		return page;
-	}
+    @Autowired
+    private SysLogMapper sysLogMapper;
 
-	@Override
-	public Result batchRemove(Long[] ids) {
-		int count = sysLogMapper.batchRemove(ids);
-		return CommonUtils.msg(ids, count);
-	}
+    @Override
+    public Page<SysLogEntity> listLog(Map<String, Object> params) {
+        Query query = new Query(params);
+        Page<SysLogEntity> page = new Page<>(query);
+        PageHelper.startPage(page.getPageNum(), page.getPageSize());
+        page.setData(sysLogMapper.listForPage(query));
+        return page;
+    }
 
-	@Override
-	public Result batchRemoveAll(Integer type) {
-		int count = sysLogMapper.batchRemoveAll(type);
-		return CommonUtils.msg(count);
-	}
+    @Override
+    public Result batchRemove(Long[] ids) {
+        int count = sysLogMapper.batchRemove(ids);
+        return CommonUtils.msg(ids, count);
+    }
 
-	@Override
-	public Result<VisitCountVO> visitCount() {
-		VisitCountVO visit = new VisitCountVO();
-		visit.setTotalVisitCount(sysLogMapper.selectTotalVisitCount());
-		visit.setTodayVisitCount(sysLogMapper.selectTodayVisitCount());
-		return CommonUtils.msg(visit);
-	}
+    @Override
+    public Result batchRemoveAll(Integer type) {
+        int count = sysLogMapper.batchRemoveAll(type);
+        return CommonUtils.msg(count);
+    }
 
-	@Override
-	public Result<List<ChartVO>> lastWeekVisitCount() {
-		List<ChartVO> chartVOs = new ArrayList<>();
-		String[] lastWeek = DateUtils.getBeforeSevenDay();
-		List<ChartVO> charts = sysLogMapper.selectLastWeekVisitCount();
-		ChartVO chart;
-		for (int i = 0; i < lastWeek.length; i++) {
-			boolean bool = true;
-			for (int j = 0; j < charts.size(); j++) {
-				if (charts.get(j).getX().equals(lastWeek[i])) {
-					bool = false;
-					chartVOs.add(charts.get(j));
-					break;
-				}
-			}
-			if (bool) {
-				chart = new ChartVO();
-				chart.setX(lastWeek[i]);
-				chart.setY(0);
-				chartVOs.add(chart);
-			}
-		}
-		return CommonUtils.msg(chartVOs);
-	}
+    @Override
+    public Result<VisitCountVO> countVisit() {
+        VisitCountVO visit = new VisitCountVO();
+        visit.setTotalVisitCount(sysLogMapper.countTotalVisit());
+        visit.setTodayVisitCount(sysLogMapper.countTodayVisit());
+        return CommonUtils.msg(visit);
+    }
+
+    @Override
+    public Result<List<ChartVO>> countLastWeekVisit() {
+        List<ChartVO> chartVOs = new ArrayList<>();
+        String[] lastWeek = DateUtils.getBeforeSevenDay();
+        List<ChartVO> charts = sysLogMapper.listCountLastWeekVisit();
+        ChartVO chart;
+        for (int i = 0; i < lastWeek.length; i++) {
+            boolean bool = true;
+            for (int j = 0; j < charts.size(); j++) {
+                if (charts.get(j).getX().equals(lastWeek[i])) {
+                    bool = false;
+                    chartVOs.add(charts.get(j));
+                    break;
+                }
+            }
+            if (bool) {
+                chart = new ChartVO();
+                chart.setX(lastWeek[i]);
+                chart.setY(0);
+                chartVOs.add(chart);
+            }
+        }
+        return CommonUtils.msg(chartVOs);
+    }
 
 }

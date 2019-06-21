@@ -23,8 +23,9 @@ public class TreeUtils {
 
     /**
      * 递归循环实现建树
-     * @param trees 传入的树节点列表
-     * @param parentId  根节点的parentId
+     *
+     * @param trees    传入的树节点列表
+     * @param parentId 根节点的parentId
      * @return
      */
     public static <T extends TreeNode> List<T> build(List<T> trees, Long parentId) {
@@ -36,8 +37,8 @@ public class TreeUtils {
     /**
      * 递归获取无限级子节点
      *
-     * @param trees         传入的树节点列表
-     * @param parentTree    当前父节点
+     * @param trees      传入的树节点列表
+     * @param parentTree 当前父节点
      * @return
      */
     private static <T extends TreeNode> T getTree(List<T> trees, T parentTree) {

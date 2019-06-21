@@ -16,7 +16,7 @@ import java.util.Map;
  *
  * @author:${author}
  * @Email :${email}
- * @date  :${datetime}
+ * @date :${datetime}
  * ${className}Controller.java
  */
 @RestController
@@ -28,6 +28,7 @@ public class ${className}Controller extends AbstractController {
 	
 	/**
 	 * 列表
+	 *
 	 * @param params
 	 * @return
 	 */
@@ -38,6 +39,7 @@ public class ${className}Controller extends AbstractController {
 
     /**
      * 根据id查询详情
+     *
      * @param ${pk.fieldName}
      * @return
      */
@@ -48,6 +50,7 @@ public class ${className}Controller extends AbstractController {
 
     /**
 	 * 新增
+     *
 	 * @param ${objName}
 	 * @return
 	 */
@@ -60,6 +63,7 @@ public class ${className}Controller extends AbstractController {
 
     /**
 	 * 修改
+     *
 	 * @param ${pk.fieldName}
 	 * @param ${objName}
 	 * @return
@@ -74,6 +78,7 @@ public class ${className}Controller extends AbstractController {
 
     /**
 	 * 删除
+     *
 	 * @param ${pk.fieldName}
 	 * @return
 	 */
@@ -85,6 +90,7 @@ public class ${className}Controller extends AbstractController {
 
     /**
 	 * 批量删除
+	 *
 	 * @param ids
 	 * @return
 	 */

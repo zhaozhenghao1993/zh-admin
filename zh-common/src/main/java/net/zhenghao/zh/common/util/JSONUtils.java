@@ -28,16 +28,15 @@ public class JSONUtils {
     private static ObjectMapper objectMapper = new ObjectMapper();
 
     /**
-     *
      * @param obj
      * @return
      */
-    public static <T> String objToString(T obj){
-        if(obj == null){
+    public static <T> String objToString(T obj) {
+        if (obj == null) {
             return null;
         }
         try {
-            return obj instanceof String ? (String)obj :  objectMapper.writeValueAsString(obj);
+            return obj instanceof String ? (String) obj : objectMapper.writeValueAsString(obj);
         } catch (Exception e) {
             logger.error("JSONUtils objToString exception", e);
             return null;
@@ -46,15 +45,16 @@ public class JSONUtils {
 
     /**
      * 有格式的
+     *
      * @param obj
      * @return
      */
-    public static <T> String objToStringPretty(T obj){
-        if(obj == null){
+    public static <T> String objToStringPretty(T obj) {
+        if (obj == null) {
             return null;
         }
         try {
-            return obj instanceof String ? (String)obj :  objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+            return obj instanceof String ? (String) obj : objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
         } catch (Exception e) {
             logger.error("JSONUtils objToStringPretty exception", e);
             return null;
@@ -63,16 +63,17 @@ public class JSONUtils {
 
     /**
      * 字符串转对象
+     *
      * @param str
      * @param clazz
      * @return
      */
-    public static <T> T stringToObj(String str, Class<T> clazz){
-        if(StringUtils.isEmpty(str) || clazz == null){
+    public static <T> T stringToObj(String str, Class<T> clazz) {
+        if (StringUtils.isEmpty(str) || clazz == null) {
             return null;
         }
         try {
-            return clazz.equals(String.class)? (T)str : objectMapper.readValue(str,clazz);
+            return clazz.equals(String.class) ? (T) str : objectMapper.readValue(str, clazz);
         } catch (Exception e) {
             logger.error("JSONUtils stringToObj Class<T> exception", e);
             return null;
@@ -81,16 +82,17 @@ public class JSONUtils {
 
     /**
      * 字段符转List之类的集合
+     *
      * @param str
      * @param typeReference
      * @return
      */
-    public static <T> T stringToObj(String str, TypeReference typeReference){
-        if(StringUtils.isEmpty(str) || typeReference == null){
+    public static <T> T stringToObj(String str, TypeReference typeReference) {
+        if (StringUtils.isEmpty(str) || typeReference == null) {
             return null;
         }
         try {
-            return (T)(typeReference.getType().equals(String.class)? str : objectMapper.readValue(str,typeReference));
+            return (T) (typeReference.getType().equals(String.class) ? str : objectMapper.readValue(str, typeReference));
         } catch (Exception e) {
             logger.error("JSONUtils stringToObj TypeReference exception", e);
             return null;
@@ -99,15 +101,16 @@ public class JSONUtils {
 
     /**
      * 差不多同上
+     *
      * @param str
      * @param collectionClass
      * @param elementClasses
      * @return
      */
-    public static <T> T stringToObj(String str,Class<?> collectionClass,Class<?>... elementClasses){
-        JavaType javaType = objectMapper.getTypeFactory().constructParametricType(collectionClass,elementClasses);
+    public static <T> T stringToObj(String str, Class<?> collectionClass, Class<?>... elementClasses) {
+        JavaType javaType = objectMapper.getTypeFactory().constructParametricType(collectionClass, elementClasses);
         try {
-            return objectMapper.readValue(str,javaType);
+            return objectMapper.readValue(str, javaType);
         } catch (Exception e) {
             logger.error("JSONUtils stringToObj collectionClass exception", e);
             return null;

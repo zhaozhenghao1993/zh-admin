@@ -129,8 +129,7 @@ public class Jvm {
     /**
      * JDK运行时间
      */
-    public String getRunTime()
-    {
+    public String getRunTime() {
         return DateUtils.getDatePoor(DateUtils.getNowDate(), DateUtils.getServerStartDate());
     }
 }

@@ -17,17 +17,19 @@ import java.text.NumberFormat;
 
 public class DataHandleUtils {
 
-    private DataHandleUtils() {}
+    private DataHandleUtils() {
+    }
 
     /**
      * 计算正确率或百分比
+     *
      * @param num
      * @param total 总数
      * @param scale 保留小数点后几位
      * @return
      */
-    public static String accuracy(double num, double total, int scale){
-        DecimalFormat df = (DecimalFormat)NumberFormat.getInstance();
+    public static String accuracy(double num, double total, int scale) {
+        DecimalFormat df = (DecimalFormat) NumberFormat.getInstance();
         //可以设置精确几位小数
         df.setMaximumFractionDigits(scale);
         //模式 例如四舍五入

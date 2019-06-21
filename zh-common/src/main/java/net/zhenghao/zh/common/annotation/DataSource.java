@@ -7,7 +7,7 @@ import java.lang.annotation.*;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2018年3月1日 下午3:10:33
+ * @date :2018年3月1日 下午3:10:33
  * DataSource.java
  */
 @Target(ElementType.METHOD)
@@ -15,6 +15,6 @@ import java.lang.annotation.*;
 @Documented
 public @interface DataSource {
 
-	String value() default "";
-	
+    String value() default "";
+
 }

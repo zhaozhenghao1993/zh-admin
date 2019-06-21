@@ -8,7 +8,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages={"net.zhenghao.zh.**"})
+@ComponentScan(basePackages = {"net.zhenghao.zh.**"})
 @ServletComponentScan(basePackages = {"net.zhenghao.zh.**"})
 @MapperScan("net.zhenghao.zh.**.dao")
 @EnableCaching

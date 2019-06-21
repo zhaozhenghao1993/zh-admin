@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  *
  * @author:${author}
  * @Email :${email}
- * @date  :${datetime}
+ * @date :${datetime}
  * ${className}Mapper.java
  */
 @MapperScan

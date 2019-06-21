@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2019/04/27 22:16
+ * @date :2019/04/27 22:16
  * SysPostMapper.java
  */
 @MapperScan
@@ -21,6 +21,7 @@ public interface SysPostMapper extends BaseMapper<SysPostEntity> {
 
     /**
      * 根据用户id查询该用户的岗位
+     *
      * @param userId
      * @return
      */

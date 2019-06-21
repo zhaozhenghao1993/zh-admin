@@ -35,7 +35,8 @@ import java.util.zip.ZipOutputStream;
 
 public class GeneratorHandler {
 
-    private GeneratorHandler() {}
+    private GeneratorHandler() {
+    }
 
     public static void generatorCode(TableEntity table, List<ColumnEntity> columns, GeneratorParamEntity params, ZipOutputStream zip) {
         //配置信息
@@ -94,7 +95,7 @@ public class GeneratorHandler {
         //获取模板列表
         List<String> templates = getTemplates();
         for (String template : templates) {
-            try(StringWriter sw = new StringWriter()) {
+            try (StringWriter sw = new StringWriter()) {
                 Template tpl = Velocity.getTemplate(template, "UTF-8");
                 tpl.merge(context, sw);
                 //添加zip
@@ -139,6 +140,7 @@ public class GeneratorHandler {
 
     /**
      * 表名转换成Java类名
+     *
      * @param tableName
      * @param tablePrefix
      * @return
@@ -152,15 +154,17 @@ public class GeneratorHandler {
 
     /**
      * 列名转换成Java属性名
+     *
      * @param columnName
      * @return
      */
     public static String columnToJava(String columnName) {
-        return WordUtils.capitalizeFully(columnName, new char[] { '_' }).replace("_", "");
+        return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "");
     }
 
     /**
      * 权限标识
+     *
      * @param url
      * @return
      */
@@ -172,9 +176,9 @@ public class GeneratorHandler {
      * 获取文件名，不带包名
      *
      * @param template
-     * @param className         SysUser
-     * @param functionCode      user
-     * @param functionMethod    User
+     * @param className      SysUser
+     * @param functionCode   user
+     * @param functionMethod User
      * @return
      */
     public static String getFileName(String template, String className, String functionCode, String functionMethod) {

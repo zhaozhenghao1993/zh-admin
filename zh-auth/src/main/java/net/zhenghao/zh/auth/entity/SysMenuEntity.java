@@ -10,170 +10,170 @@ import java.sql.Timestamp;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2017年12月5日 下午1:09:39
+ * @date :2017年12月5日 下午1:09:39
  * SysMenuEntity.java
  */
 public class SysMenuEntity extends TreeNode implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 父级菜单名称
-	 */
-	private String parentName;
+    /**
+     * 父级菜单名称
+     */
+    private String parentName;
 
-	/**
-	 * 菜单名称
-	 */
-	private String name;
+    /**
+     * 菜单名称
+     */
+    private String name;
 
-	/**
-	 * 菜单uri
-	 */
-	private String uri;
+    /**
+     * 菜单uri
+     */
+    private String uri;
 
-	/**
-	 * 请求method
-	 */
-	private String method;
+    /**
+     * 请求method
+     */
+    private String method;
 
-	/**
-	 * 授权标识(多个用逗号分隔,如:user:list,user:create)
-	 */
-	private String perms;
+    /**
+     * 授权标识(多个用逗号分隔,如:user:list,user:create)
+     */
+    private String perms;
 
-	/**
-	 * 类型(0:目录  1:菜单   2:按钮	3:uri)
-	 */
-	private Integer type;
+    /**
+     * 类型(0:目录  1:菜单   2:按钮	3:uri)
+     */
+    private Integer type;
 
-	/**
-	 * 排序
-	 */
-	private Integer orderNum;
+    /**
+     * 排序
+     */
+    private Integer orderNum;
 
-	/**
-	 * 描述
-	 */
-	private String description;
+    /**
+     * 描述
+     */
+    private String description;
 
-	/**
-	 * 创建人id
-	 */
-	private Long creatorId;
+    /**
+     * 创建人id
+     */
+    private Long creatorId;
 
-	/**
-	 * 创建时间
-	 */
-	private Timestamp createTime;
+    /**
+     * 创建时间
+     */
+    private Timestamp createTime;
 
-	/**
-	 * 最后修改人id
-	 */
-	private Long modifierId;
+    /**
+     * 最后修改人id
+     */
+    private Long modifierId;
 
-	/**
-	 * 最后修改时间
-	 */
-	private Timestamp modifiedTime;
+    /**
+     * 最后修改时间
+     */
+    private Timestamp modifiedTime;
 
-	public SysMenuEntity() {
-		super();
-	}
+    public SysMenuEntity() {
+        super();
+    }
 
-	public String getParentName() {
-		return parentName;
-	}
+    public String getParentName() {
+        return parentName;
+    }
 
-	public void setParentName(String parentName) {
-		this.parentName = parentName;
-	}
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getUri() {
-		return uri;
-	}
+    public String getUri() {
+        return uri;
+    }
 
-	public void setUri(String uri) {
-		this.uri = uri;
-	}
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
 
-	public String getMethod() {
-		return method;
-	}
+    public String getMethod() {
+        return method;
+    }
 
-	public void setMethod(String method) {
-		this.method = method;
-	}
+    public void setMethod(String method) {
+        this.method = method;
+    }
 
-	public String getPerms() {
-		return perms;
-	}
+    public String getPerms() {
+        return perms;
+    }
 
-	public void setPerms(String perms) {
-		this.perms = perms;
-	}
+    public void setPerms(String perms) {
+        this.perms = perms;
+    }
 
-	public Integer getType() {
-		return type;
-	}
+    public Integer getType() {
+        return type;
+    }
 
-	public void setType(Integer type) {
-		this.type = type;
-	}
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
-	public Integer getOrderNum() {
-		return orderNum;
-	}
+    public Integer getOrderNum() {
+        return orderNum;
+    }
 
-	public void setOrderNum(Integer orderNum) {
-		this.orderNum = orderNum;
-	}
+    public void setOrderNum(Integer orderNum) {
+        this.orderNum = orderNum;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public Long getCreatorId() {
-		return creatorId;
-	}
+    public Long getCreatorId() {
+        return creatorId;
+    }
 
-	public void setCreatorId(Long creatorId) {
-		this.creatorId = creatorId;
-	}
+    public void setCreatorId(Long creatorId) {
+        this.creatorId = creatorId;
+    }
 
-	public Timestamp getCreateTime() {
-		return createTime;
-	}
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
 
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
-	}
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
 
-	public Long getModifierId() {
-		return modifierId;
-	}
+    public Long getModifierId() {
+        return modifierId;
+    }
 
-	public void setModifierId(Long modifierId) {
-		this.modifierId = modifierId;
-	}
+    public void setModifierId(Long modifierId) {
+        this.modifierId = modifierId;
+    }
 
-	public Timestamp getModifiedTime() {
-		return modifiedTime;
-	}
+    public Timestamp getModifiedTime() {
+        return modifiedTime;
+    }
 
-	public void setModifiedTime(Timestamp modifiedTime) {
-		this.modifiedTime = modifiedTime;
-	}
+    public void setModifiedTime(Timestamp modifiedTime) {
+        this.modifiedTime = modifiedTime;
+    }
 }

@@ -9,129 +9,129 @@ import java.util.List;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2017年12月5日 下午1:19:28
+ * @date :2017年12月5日 下午1:19:28
  * SysRoleEntity.java
  */
 public class SysRoleEntity implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * 角色id
-	 */
-	private Long id;
-	
-	/**
-	 * 角色名称
-	 */
-	private String roleName;
-	
-	/**
-	 * 角色标识
-	 */
-	private String roleSign;
-	
-	/**
-	 * 备注
-	 */
-	private String remark;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 创建人id
-	 */
-	private Long creatorId;
+    /**
+     * 角色id
+     */
+    private Long id;
 
-	/**
-	 * 创建时间
-	 */
-	private Timestamp createTime;
+    /**
+     * 角色名称
+     */
+    private String roleName;
 
-	/**
-	 * 最后修改人id
-	 */
-	private Long modifierId;
+    /**
+     * 角色标识
+     */
+    private String roleSign;
 
-	/**
-	 * 最后修改时间
-	 */
-	private Timestamp modifiedTime;
-	
-	private List<Long> menuIdList;
+    /**
+     * 备注
+     */
+    private String remark;
 
-	public SysRoleEntity() {
-		super();
-	}
+    /**
+     * 创建人id
+     */
+    private Long creatorId;
 
-	public Long getId() {
-		return id;
-	}
+    /**
+     * 创建时间
+     */
+    private Timestamp createTime;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * 最后修改人id
+     */
+    private Long modifierId;
 
-	public String getRoleName() {
-		return roleName;
-	}
+    /**
+     * 最后修改时间
+     */
+    private Timestamp modifiedTime;
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
+    private List<Long> menuIdList;
 
-	public String getRoleSign() {
-		return roleSign;
-	}
+    public SysRoleEntity() {
+        super();
+    }
 
-	public void setRoleSign(String roleSign) {
-		this.roleSign = roleSign;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getRemark() {
-		return remark;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    public String getRoleName() {
+        return roleName;
+    }
 
-	public Long getCreatorId() {
-		return creatorId;
-	}
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
-	public void setCreatorId(Long creatorId) {
-		this.creatorId = creatorId;
-	}
+    public String getRoleSign() {
+        return roleSign;
+    }
 
-	public Timestamp getCreateTime() {
-		return createTime;
-	}
+    public void setRoleSign(String roleSign) {
+        this.roleSign = roleSign;
+    }
 
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
-	}
+    public String getRemark() {
+        return remark;
+    }
 
-	public Long getModifierId() {
-		return modifierId;
-	}
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
-	public void setModifierId(Long modifierId) {
-		this.modifierId = modifierId;
-	}
+    public Long getCreatorId() {
+        return creatorId;
+    }
 
-	public Timestamp getModifiedTime() {
-		return modifiedTime;
-	}
+    public void setCreatorId(Long creatorId) {
+        this.creatorId = creatorId;
+    }
 
-	public void setModifiedTime(Timestamp modifiedTime) {
-		this.modifiedTime = modifiedTime;
-	}
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
 
-	public List<Long> getMenuIdList() {
-		return menuIdList;
-	}
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
 
-	public void setMenuIdList(List<Long> menuIdList) {
-		this.menuIdList = menuIdList;
-	}
-	
+    public Long getModifierId() {
+        return modifierId;
+    }
+
+    public void setModifierId(Long modifierId) {
+        this.modifierId = modifierId;
+    }
+
+    public Timestamp getModifiedTime() {
+        return modifiedTime;
+    }
+
+    public void setModifiedTime(Timestamp modifiedTime) {
+        this.modifiedTime = modifiedTime;
+    }
+
+    public List<Long> getMenuIdList() {
+        return menuIdList;
+    }
+
+    public void setMenuIdList(List<Long> menuIdList) {
+        this.menuIdList = menuIdList;
+    }
+
 }

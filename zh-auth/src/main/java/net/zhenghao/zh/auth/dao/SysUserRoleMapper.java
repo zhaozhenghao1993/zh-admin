@@ -12,26 +12,27 @@ import java.util.List;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2017年12月6日 上午11:13:36
+ * @date :2017年12月6日 上午11:13:36
  * SysUserRoleMapper.java
  */
 @MapperScan
 @Component
 public interface SysUserRoleMapper extends BaseMapper<SysUserRoleEntity> {
 
-	/**
-	 * 用户id下所有角色id
-	 * @param userId
-	 * @return
-	 */
-	List<Long> listUserRoleId(Long userId);
+    /**
+     * 用户id下所有角色id
+     *
+     * @param userId
+     * @return
+     */
+    List<Long> listUserRoleId(Long userId);
 
-	int removeByUserId(Long id);
+    int removeByUserId(Long id);
 
-	int removeByRoleId(Long id);
-	
-	int batchRemoveByUserId(Long[] ids);
-	
-	int batchRemoveByRoleId(Long[] ids);
-	
+    int removeByRoleId(Long id);
+
+    int batchRemoveByUserId(Long[] ids);
+
+    int batchRemoveByRoleId(Long[] ids);
+
 }

@@ -8,55 +8,55 @@ import java.io.Serializable;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2019/05/01 12:38
+ * @date :2019/05/01 12:38
  * SysUserPostEntity.java
  */
 public class SysUserPostEntity implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * 
-	 */
-	private Long id;
-	
-	/**
-	 * 
-	 */
-	private Long userId;
-	
-	/**
-	 * 
-	 */
-	private Long postId;
-	
-	
-	public SysUserPostEntity() {
-		super();
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-	
-	public Long getUserId() {
-		return userId;
-	}
-	
-	public void setPostId(Long postId) {
-		this.postId = postId;
-	}
-	
-	public Long getPostId() {
-		return postId;
-	}
-	
+    private static final long serialVersionUID = 1L;
+
+    /**
+     *
+     */
+    private Long id;
+
+    /**
+     *
+     */
+    private Long userId;
+
+    /**
+     *
+     */
+    private Long postId;
+
+
+    public SysUserPostEntity() {
+        super();
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setPostId(Long postId) {
+        this.postId = postId;
+    }
+
+    public Long getPostId() {
+        return postId;
+    }
+
 }

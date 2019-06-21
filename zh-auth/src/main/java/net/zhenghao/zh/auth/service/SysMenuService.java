@@ -13,23 +13,23 @@ import java.util.Map;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2019年1月29日 上午10:43:52
+ * @date :2019年1月29日 上午10:43:52
  * SysMenuService.java
  */
 public interface SysMenuService {
-	
-	Page<SysMenuEntity> listMenu(Map<String, Object> params);
-	
-	Result<List<TreeVO>> listTree(Map<String, Object> params);
 
-	Result saveMenu(SysMenuEntity menu);
+    Page<SysMenuEntity> listMenu(Map<String, Object> params);
 
-	Result<SysMenuEntity> getMenuById(Long id);
+    Result<List<TreeVO>> listTree(Map<String, Object> params);
 
-	Result updateMenu(SysMenuEntity menu);
+    Result saveMenu(SysMenuEntity menu);
 
-	Result remove(Long id);
+    Result<SysMenuEntity> getMenuById(Long id);
 
-	Result batchRemove(Long[] ids);
-	
+    Result updateMenu(SysMenuEntity menu);
+
+    Result remove(Long id);
+
+    Result batchRemove(Long[] ids);
+
 }

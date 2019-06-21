@@ -20,7 +20,8 @@ zh-admin:
     public-key-path: jwt/rsa_public_key.pem
   file:
     log:
-      folder: /data/app/zh-admin/log
+      # folder: /data/app/zh-admin/log
+      folder: log
     uploads:
       folder: /data/app/zh-admin/uploads/ # 文件上传目录,末尾必有/ 或 \\
       path: /uploads # 文件上传静态资源对外暴露的访问路径

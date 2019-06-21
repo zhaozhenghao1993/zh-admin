@@ -14,48 +14,49 @@ import java.util.Map;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2017年12月7日 上午9:07:06
+ * @date :2017年12月7日 上午9:07:06
  * SysUserService.java
  */
 public interface SysUserService {
 
-	/**
-	 * 获取用户的权限filter chain
-	 * @param id
-	 * @return
-	 */
-	List<SysMenuEntity> listUserPerms(Long id);
+    /**
+     * 获取用户的权限filter chain
+     *
+     * @param id
+     * @return
+     */
+    List<SysMenuEntity> listUserPerms(Long id);
 
-	SysUserEntity getUserByName(String username);
+    SysUserEntity getUserByName(String username);
 
-	Page<SysUserEntity> listUser(Map<String, Object> params);
+    Page<SysUserEntity> listUser(Map<String, Object> params);
 
-	Result<SysUserEntity> getUserInfo(Long id);
+    Result<SysUserEntity> getUserInfo(Long id);
 
-	Result profileUser(SysUserEntity user);
+    Result profileUser(SysUserEntity user);
 
-	Result profileAvatar(SysUserEntity user, MultipartFile file);
+    Result profileAvatar(SysUserEntity user, MultipartFile file);
 
-	Result saveUser(SysUserEntity user);
+    Result saveUser(SysUserEntity user);
 
-	Result<SysUserEntity> getUserById(Long id);
+    Result<SysUserEntity> getUserById(Long id);
 
-	Result updateUser(SysUserEntity user);
+    Result updateUser(SysUserEntity user);
 
-	Result removeUser(Long id);
+    Result removeUser(Long id);
 
-	Result batchRemove(Long[] ids);
+    Result batchRemove(Long[] ids);
 
-	Result updatePasswordByUser(SysUserEntity user);
+    Result updatePasswordByUser(SysUserEntity user);
 
-	Result updateUserEnable(Long[] ids);
+    Result updateUserEnable(Long[] ids);
 
-	Result updateUserDisable(Long[] ids);
+    Result updateUserDisable(Long[] ids);
 
-	Result updatePassword(SysUserEntity user);
+    Result updatePassword(SysUserEntity user);
 
-	Result updateThemeById(SysUserEntity user);
+    Result updateThemeById(SysUserEntity user);
 
-	Result updateColorById(SysUserEntity user);
+    Result updateColorById(SysUserEntity user);
 
 }

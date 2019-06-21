@@ -43,7 +43,7 @@
 		</choose>
 	</select>
 
-	<select id="getCountByUserName" resultType="java.lang.Integer">
+	<select id="countByUserName" resultType="java.lang.Integer">
 		SELECT
 			COUNT(1)
 		FROM
@@ -52,7 +52,7 @@
 			username = #{username}
 	</select>
 
-	<select id="getCountByOrgId" resultType="java.lang.Integer">
+	<select id="countByOrgId" resultType="java.lang.Integer">
 		SELECT
 			COUNT(1)
 		FROM

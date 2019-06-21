@@ -93,6 +93,7 @@ public class Result<R> {
 
     /**
      * 只获取异常message
+     *
      * @param code
      * @param throwable
      * @param <R>

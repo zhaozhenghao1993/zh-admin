@@ -28,6 +28,7 @@ public class JWTTokenUtils {
 
     /**
      * 私钥生成jwt token
+     *
      * @param jwtInfo
      * @return
      * @throws Exception
@@ -38,6 +39,7 @@ public class JWTTokenUtils {
 
     /**
      * 公钥解析jwt token
+     *
      * @param token
      * @return
      * @throws Exception

@@ -39,7 +39,7 @@ public class RsaKeyHelper {
         int total = resourceAsStream.read(bytes);
         logger.info("PublicKey File read successfully, the total number of bytes read for {}", total);
         Base64.Decoder decoder = Base64.getDecoder();
-        byte[] buffer= decoder.decode(new String(bytes));
+        byte[] buffer = decoder.decode(new String(bytes));
         X509EncodedKeySpec spec = new X509EncodedKeySpec(buffer);
         KeyFactory kf = KeyFactory.getInstance("RSA");
         return kf.generatePublic(spec);
@@ -58,7 +58,7 @@ public class RsaKeyHelper {
         int total = resourceAsStream.read(bytes);
         logger.info("PrivateKey File read successfully, the total number of bytes read for {}", total);
         Base64.Decoder decoder = Base64.getDecoder();
-        byte[] buffer= decoder.decode(new String(bytes));
+        byte[] buffer = decoder.decode(new String(bytes));
         PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(buffer);
         KeyFactory kf = KeyFactory.getInstance("RSA");
         return kf.generatePrivate(spec);

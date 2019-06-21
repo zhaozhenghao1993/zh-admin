@@ -19,54 +19,57 @@ import java.util.Map;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2019年04月11日 下午2:01:26
+ * @date :2019年04月11日 下午2:01:26
  * SysLogController.java
  */
 @RestController
 @RequestMapping("${zh-admin.api.prefix}/monitor/log")
 public class MonitorLogController extends AbstractController {
 
-	@Autowired
-	private SysLogService sysLogService;
-	
-	/**
-	 * 日志列表
-	 * @param params
-	 * @return
-	 */
-	@GetMapping("")
-	public Page<SysLogEntity> listLog(@RequestParam Map<String, Object> params){
-		return sysLogService.listLog(params);
-	}
-	
-	/**
-	 * 删除日志
-	 * @param ids
-	 * @return
-	 */
-	@SysLog("批量删除日志")
-	@DeleteMapping("")
-	public Result batchRemove(@RequestBody Long[] ids){
-		return sysLogService.batchRemove(ids);
-	}
-	
-	/**
-	 * 清空日志
-	 * @return
-	 */
-	@SysLog("清空日志")
-	@DeleteMapping("/{type}/clear")
-	public Result batchRemoveAll(@PathVariable("type") Integer type){
-		return sysLogService.batchRemoveAll(type);
-	}
+    @Autowired
+    private SysLogService sysLogService;
 
-	@GetMapping("/visit")
-	public Result<VisitCountVO> visitCount(){
-		return sysLogService.visitCount();
-	}
+    /**
+     * 日志列表
+     *
+     * @param params
+     * @return
+     */
+    @GetMapping("")
+    public Page<SysLogEntity> listLog(@RequestParam Map<String, Object> params) {
+        return sysLogService.listLog(params);
+    }
 
-	@GetMapping("/visit/week")
-	public Result<List<ChartVO>> lastWeekVisitCount(){
-		return sysLogService.lastWeekVisitCount();
-	}
+    /**
+     * 删除日志
+     *
+     * @param ids
+     * @return
+     */
+    @SysLog("批量删除日志")
+    @DeleteMapping("")
+    public Result batchRemove(@RequestBody Long[] ids) {
+        return sysLogService.batchRemove(ids);
+    }
+
+    /**
+     * 清空日志
+     *
+     * @return
+     */
+    @SysLog("清空日志")
+    @DeleteMapping("/{type}/clear")
+    public Result batchRemoveAll(@PathVariable("type") Integer type) {
+        return sysLogService.batchRemoveAll(type);
+    }
+
+    @GetMapping("/visit")
+    public Result<VisitCountVO> visitCount() {
+        return sysLogService.countVisit();
+    }
+
+    @GetMapping("/visit/week")
+    public Result<List<ChartVO>> lastWeekVisitCount() {
+        return sysLogService.countLastWeekVisit();
+    }
 }

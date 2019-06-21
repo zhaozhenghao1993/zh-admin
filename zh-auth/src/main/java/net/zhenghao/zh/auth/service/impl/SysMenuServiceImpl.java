@@ -23,81 +23,81 @@ import java.util.Map;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2017年12月7日 下午2:51:12
+ * @date :2017年12月7日 下午2:51:12
  * SysMenuServiceImpl.java
  */
 @Service("sysMenuService")
 @Transactional
 public class SysMenuServiceImpl implements SysMenuService {
-	
-	@Autowired
-	private SysMenuMapper sysMenuMapper;
 
-	@Autowired
-	private SysRoleMenuMapper sysRoleMenuMapper;
+    @Autowired
+    private SysMenuMapper sysMenuMapper;
 
-	@Override
-	public Page<SysMenuEntity> listMenu(Map<String, Object> params) {
-		Query query = new Query(params);
-		Page<SysMenuEntity> page = new Page<>(query);
-		query.removePageParams(); // 不分页，删除分页参数
-		page.setData(TreeUtils.build(sysMenuMapper.list(query), SystemConstant.TREE_ROOT));
-		return page;
-	}
+    @Autowired
+    private SysRoleMenuMapper sysRoleMenuMapper;
 
-	@Override
-	public Result<List<TreeVO>> listTree(Map<String, Object> params) {
-		List<TreeVO> listRoot;
-		if (params.get("isNotButton") != null && "true".equals(params.get("isNotButton"))) {
-			List<TreeVO> treeList = sysMenuMapper.listTreeNotButton();
-			TreeVO root = new TreeVO();
-			root.setId(0L);
-			root.setKey(0L);
-			root.setTitle("主目录");
-			root.setValue("0");
-			root.setParentId(-1L);
-			treeList.add(root);
-			listRoot = TreeUtils.build(treeList, -1L);
-		} else {
-			listRoot = TreeUtils.build(sysMenuMapper.listTree(), SystemConstant.TREE_ROOT);
-		}
-		return CommonUtils.msgNotNull(listRoot);
-	}
+    @Override
+    public Page<SysMenuEntity> listMenu(Map<String, Object> params) {
+        Query query = new Query(params);
+        Page<SysMenuEntity> page = new Page<>(query);
+        query.removePageParams(); // 不分页，删除分页参数
+        page.setData(TreeUtils.build(sysMenuMapper.list(query), SystemConstant.TREE_ROOT));
+        return page;
+    }
 
-	@Override
-	public Result saveMenu(SysMenuEntity menu) {
-		int count = sysMenuMapper.save(menu);
-		return CommonUtils.msg(count);
-	}
+    @Override
+    public Result<List<TreeVO>> listTree(Map<String, Object> params) {
+        List<TreeVO> listRoot;
+        if (params.get("isNotButton") != null && "true".equals(params.get("isNotButton"))) {
+            List<TreeVO> treeList = sysMenuMapper.listTreeNotButton();
+            TreeVO root = new TreeVO();
+            root.setId(0L);
+            root.setKey(0L);
+            root.setTitle("主目录");
+            root.setValue("0");
+            root.setParentId(-1L);
+            treeList.add(root);
+            listRoot = TreeUtils.build(treeList, -1L);
+        } else {
+            listRoot = TreeUtils.build(sysMenuMapper.listTree(), SystemConstant.TREE_ROOT);
+        }
+        return CommonUtils.msgNotNull(listRoot);
+    }
 
-	@Override
-	public Result<SysMenuEntity> getMenuById(Long id) {
-		SysMenuEntity menu = sysMenuMapper.getObjectById(id);
-		return CommonUtils.msg(menu);
-	}
+    @Override
+    public Result saveMenu(SysMenuEntity menu) {
+        int count = sysMenuMapper.save(menu);
+        return CommonUtils.msg(count);
+    }
 
-	@Override
-	public Result updateMenu(SysMenuEntity menu) {
-		int count = sysMenuMapper.update(menu);
-		return CommonUtils.msg(count);
-	}
+    @Override
+    public Result<SysMenuEntity> getMenuById(Long id) {
+        SysMenuEntity menu = sysMenuMapper.getObjectById(id);
+        return CommonUtils.msg(menu);
+    }
 
-	@Override
-	public Result remove(Long id) {
-		int childCount = sysMenuMapper.getChildCountById(id);
-		if (childCount > 0) {
-			return Result.ofFail("该菜单含有子菜单,请先删除子菜单!");
-		}
-		int count = sysMenuMapper.remove(id);
-		sysRoleMenuMapper.removeByMenuId(id);
-		return CommonUtils.msg(count);
-	}
+    @Override
+    public Result updateMenu(SysMenuEntity menu) {
+        int count = sysMenuMapper.update(menu);
+        return CommonUtils.msg(count);
+    }
 
-	@Override
-	public Result batchRemove(Long[] ids) {
-		int count = sysMenuMapper.batchRemove(ids);
-		sysRoleMenuMapper.batchRemoveByMenuId(ids);
-		return CommonUtils.msg(ids, count);
-	}
+    @Override
+    public Result remove(Long id) {
+        int childCount = sysMenuMapper.countChildById(id);
+        if (childCount > 0) {
+            return Result.ofFail("该菜单含有子菜单,请先删除子菜单!");
+        }
+        int count = sysMenuMapper.remove(id);
+        sysRoleMenuMapper.removeByMenuId(id);
+        return CommonUtils.msg(count);
+    }
+
+    @Override
+    public Result batchRemove(Long[] ids) {
+        int count = sysMenuMapper.batchRemove(ids);
+        sysRoleMenuMapper.batchRemoveByMenuId(ids);
+        return CommonUtils.msg(ids, count);
+    }
 
 }

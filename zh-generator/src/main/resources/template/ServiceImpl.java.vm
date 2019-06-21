@@ -19,7 +19,7 @@ import java.util.Map;
  *
  * @author:${author}
  * @Email :${email}
- * @date  :${datetime}
+ * @date :${datetime}
  * ${className}ServiceImpl.java
  */
 @Service("${objName}Service")

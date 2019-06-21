@@ -30,7 +30,7 @@
 			o.order_num ASC
 	</select>
 
-	<select id="getChildCountById" resultType="java.lang.Integer">
+	<select id="countChildById" resultType="java.lang.Integer">
 		SELECT
 			COUNT(1)
 		FROM

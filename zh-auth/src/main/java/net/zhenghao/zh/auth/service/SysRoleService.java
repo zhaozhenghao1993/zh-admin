@@ -12,25 +12,25 @@ import java.util.Map;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2017年12月7日 上午10:38:08
+ * @date :2017年12月7日 上午10:38:08
  * SysRoleService.java
  */
 public interface SysRoleService {
 
-	Page<SysRoleEntity> listRole(Map<String, Object> params);
+    Page<SysRoleEntity> listRole(Map<String, Object> params);
 
-	Result saveRole(SysRoleEntity role);
+    Result saveRole(SysRoleEntity role);
 
-	Result<SysRoleEntity> getRoleById(Long id);
+    Result<SysRoleEntity> getRoleById(Long id);
 
-	Result updateRole(SysRoleEntity role);
+    Result updateRole(SysRoleEntity role);
 
-	Result removeRole(Long id);
+    Result removeRole(Long id);
 
-	Result batchRemove(Long[] ids);
+    Result batchRemove(Long[] ids);
 
-	Result<List<SysRoleEntity>> listRole();
+    Result<List<SysRoleEntity>> listRole();
 
-	Result updateRoleAuthorization(Long id, List<Long> menuIdList);
-	
+    Result updateRoleAuthorization(Long id, List<Long> menuIdList);
+
 }

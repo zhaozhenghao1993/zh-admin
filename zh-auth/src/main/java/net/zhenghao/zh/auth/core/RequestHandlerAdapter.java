@@ -28,6 +28,7 @@ public class RequestHandlerAdapter {
 
     /**
      * 验证当前uri是否为直接匿名访问uri
+     *
      * @param uri
      * @param method
      * @return
@@ -42,6 +43,7 @@ public class RequestHandlerAdapter {
 
     /**
      * 验证当前uri是否为 需要登陆token 且不权限拦截 即可访问
+     *
      * @param uri
      * @param method
      * @return
@@ -56,6 +58,7 @@ public class RequestHandlerAdapter {
 
     /**
      * 验证当前uri是否为当前用户所拥有的权限
+     *
      * @param uri
      * @param method
      * @param userId
@@ -74,12 +77,13 @@ public class RequestHandlerAdapter {
      * 注：2019-03-24 21:39 ==> 正则规则由 [a-zA-Z\\\\d] 改为 [\\d]
      * 为避免 /sys/user/enable :: PUT 匹配 /sys/user/{id} :: PUT 成功，造成权限混乱
      * 将正则改为 restful 只能匹配 {id} 数字
-     *
+     * <p>
      * 注：2019-04-05 17:39 ==> 支持通配符 /sys/user/*
-     * @param requestUri        请求uri
-     * @param requestMethod     请求method
-     * @param uri               规则uri       例: /test/demo/{id}
-     * @param method            规则method
+     *
+     * @param requestUri    请求uri
+     * @param requestMethod 请求method
+     * @param uri           规则uri       例: /test/demo/{id}
+     * @param method        规则method
      * @return
      */
     public static boolean validate(String requestUri, String requestMethod, String uri, String method) {

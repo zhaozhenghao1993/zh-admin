@@ -33,7 +33,8 @@ import java.io.IOException;
  * 🙃
  * 🙃 api地址过滤器
  * 🙃 注：@order值越小越先执行
- * 将/api/v1/sys/user/info 转发至 /sys/user/info，禁止直接访问/user/info
+ * /api/v1/sys/user/info 判断路由 /api/v1，禁止直接访问/sys/user/info
+ *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
  * @date :2019/01/13 19:55
@@ -143,10 +144,11 @@ public class ApiAuthFilter implements Filter {
 
     /**
      * 从 request 中获取 token ，顺序为 header -> parameter -> cookie
+     *
      * @param request
      * @return
      */
-    private String getAuthToken (HttpServletRequest request) {
+    private String getAuthToken(HttpServletRequest request) {
         String authToken;
         authToken = request.getHeader(tokenHeaderConfig.getTokenHeader());
         if (StringUtils.isBlank(authToken)) {
@@ -155,7 +157,7 @@ public class ApiAuthFilter implements Filter {
         if (StringUtils.isBlank(authToken)) {
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
-                for (Cookie cookie: cookies) {
+                for (Cookie cookie : cookies) {
                     if (cookie.getName().equals(tokenHeaderConfig.getTokenHeader())) {
                         authToken = cookie.getValue();
                     }
@@ -167,6 +169,7 @@ public class ApiAuthFilter implements Filter {
 
     /**
      * 检测当前token用户信息
+     *
      * @param jwtInfo
      * @param response
      * @return
@@ -189,6 +192,7 @@ public class ApiAuthFilter implements Filter {
 
     /**
      * 响应抛异常封装
+     *
      * @param response
      * @param result
      * @throws IOException
@@ -202,6 +206,7 @@ public class ApiAuthFilter implements Filter {
 
     /**
      * 记录当前请求token用户信息
+     *
      * @param jwtInfo
      */
     private void setCurrentUserInfo(JWTInfo jwtInfo) {

@@ -22,7 +22,8 @@ public class TreeNode {
 
     private List<TreeNode> children = new ArrayList<>();
 
-    public TreeNode() {}
+    public TreeNode() {
+    }
 
     public TreeNode(Long id, Long parentId) {
         this.id = id;

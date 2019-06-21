@@ -38,17 +38,19 @@ public class ToolGeneratorController extends AbstractController {
 
     /**
      * 数据库列表
+     *
      * @param params
      * @return
      */
     @GetMapping("")
     @ResponseBody
-    public Page<TableEntity> listTable(@RequestParam Map<String, Object> params){
+    public Page<TableEntity> listTable(@RequestParam Map<String, Object> params) {
         return toolGeneratorService.listTable(params);
     }
 
     /**
      * 生成代码
+     *
      * @param params
      * @param response
      * @throws IOException

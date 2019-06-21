@@ -32,7 +32,7 @@ public class BaseContextHandler {
         map.put(key, value);
     }
 
-    public static Object get(String key){
+    public static Object get(String key) {
         Map<String, Object> map = threadLocal.get();
         if (map == null) {
             map = new HashMap<>();
@@ -41,41 +41,43 @@ public class BaseContextHandler {
         return map.get(key);
     }
 
-    public static void remove(){
+    public static void remove() {
         threadLocal.remove();
     }
 
-    public static Long getUserId(){
+    public static Long getUserId() {
         Object value = get(SystemConstant.CONTEXT_KEY_USER_ID);
         return (Long) value;
     }
 
-    public static String getUsername(){
+    public static String getUsername() {
         Object value = get(SystemConstant.CONTEXT_KEY_USERNAME);
         return returnObjectValue(value);
     }
 
-    public static String getName(){
+    public static String getName() {
         Object value = get(SystemConstant.CONTEXT_KEY_NAME);
         return returnObjectValue(value);
     }
 
-    public static String getToken(){
+    public static String getToken() {
         Object value = get(SystemConstant.CONTEXT_KEY_USER_TOKEN);
         return returnObjectValue(value);
     }
 
-    public static void setToken(String token){set(SystemConstant.CONTEXT_KEY_USER_TOKEN, token);}
+    public static void setToken(String token) {
+        set(SystemConstant.CONTEXT_KEY_USER_TOKEN, token);
+    }
 
-    public static void setUserId(Long userId){
+    public static void setUserId(Long userId) {
         set(SystemConstant.CONTEXT_KEY_USER_ID, userId);
     }
 
-    public static void setUsername(String username){
+    public static void setUsername(String username) {
         set(SystemConstant.CONTEXT_KEY_USERNAME, username);
     }
 
-    public static void setName(String name){
+    public static void setName(String name) {
         set(SystemConstant.CONTEXT_KEY_NAME, name);
     }
 

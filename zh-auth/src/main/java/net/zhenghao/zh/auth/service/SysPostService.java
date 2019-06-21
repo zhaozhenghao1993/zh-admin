@@ -12,23 +12,23 @@ import java.util.Map;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2019/04/27 22:16
+ * @date :2019/04/27 22:16
  * SysPostService.java
  */
 public interface SysPostService {
 
-	Page<SysPostEntity> listPost(Map<String, Object> params);
+    Page<SysPostEntity> listPost(Map<String, Object> params);
 
     Result<SysPostEntity> getPostById(Long id);
 
-	Result<List<SysPostEntity>> listPost();
+    Result<List<SysPostEntity>> listPost();
 
-	Result savePost(SysPostEntity post);
+    Result savePost(SysPostEntity post);
 
-	Result updatePost(SysPostEntity post);
+    Result updatePost(SysPostEntity post);
 
-	Result removePost(Long id);
+    Result removePost(Long id);
 
-	Result batchRemove(Long[] ids);
-	
+    Result batchRemove(Long[] ids);
+
 }

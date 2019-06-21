@@ -14,12 +14,13 @@ import java.util.Date;
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
- * @date  :2017年11月22日 下午2:43:47
+ * @date :2017年11月22日 下午2:43:47
  * DateUtils.java
  */
 public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
-    private DateUtils() {}
+    private DateUtils() {
+    }
 
     public static final String YYYY = "yyyy";
 
@@ -32,47 +33,41 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 
     private static String[] parsePatterns = {
-            "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM", 
+            "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM",
             "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM",
             "yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss", "yyyy.MM.dd HH:mm", "yyyy.MM"};
 
     /**
      * 获取当前Date型日期
-     * 
+     *
      * @return Date() 当前日期
      */
-    public static Date getNowDate()
-    {
+    public static Date getNowDate() {
         return new Date();
     }
 
     /**
      * 获取当前日期, 默认格式为yyyy-MM-dd
-     * 
+     *
      * @return String
      */
-    public static String getDate()
-    {
+    public static String getDate() {
         return dateTimeNow(YYYY_MM_DD);
     }
 
-    public static String getTime()
-    {
+    public static String getTime() {
         return dateTimeNow(YYYY_MM_DD_HH_MM_SS);
     }
 
-    public static String dateTimeNow()
-    {
+    public static String dateTimeNow() {
         return dateTimeNow(YYYYMMDDHHMMSS);
     }
 
-    public static String dateTimeNow(final String format)
-    {
+    public static String dateTimeNow(final String format) {
         return parseDateToStr(format, new Date());
     }
 
-    public static String dateTime(final Date date)
-    {
+    public static String dateTime(final Date date) {
         return parseDateToStr(YYYY_MM_DD, date);
     }
 
@@ -111,8 +106,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     public static Date dateTime(final String format, final String ts) {
         try {
             return new SimpleDateFormat(format).parse(ts);
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             throw new BaseException("日期转换格式异常", e);
         }
     }
@@ -155,12 +149,11 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         }
         try {
             return parseDate(str.toString(), parsePatterns);
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             return null;
         }
     }
-    
+
     /**
      * 获取服务器启动时间
      */
@@ -173,9 +166,9 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
      * 计算两个时间差
      */
     public static String getDatePoor(Date endDate, Date nowDate) {
-        long nd = (long)1000 * 24 * 60 * 60;
-        long nh = (long)1000 * 60 * 60;
-        long nm = (long)1000 * 60;
+        long nd = (long) 1000 * 24 * 60 * 60;
+        long nh = (long) 1000 * 60 * 60;
+        long nm = (long) 1000 * 60;
         // long ns = 1000;
         // 获得两个时间的毫秒时间差异
         long diff = endDate.getTime() - nowDate.getTime();
@@ -192,6 +185,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     /**
      * 获取过去的天数
+     *
      * @param date
      * @return
      */
@@ -202,6 +196,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     /**
      * 获取过去的小时
+     *
      * @param date
      * @return
      */
@@ -212,6 +207,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     /**
      * 获取过去的分钟
+     *
      * @param date
      * @return
      */
@@ -222,13 +218,14 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     /**
      * 转换为时间（天,时:分:秒.毫秒）
+     *
      * @param timeMillis
      * @return
      */
     public static String formatDateTime(long timeMillis) {
         long day = timeMillis / (24 * 60 * 60 * 1000);
         long hour = (timeMillis / (60 * 60 * 1000) - day * 24);
-        long min = ((timeMillis / (60 * 1000))-day * 24 * 60 - hour * 60);
+        long min = ((timeMillis / (60 * 1000)) - day * 24 * 60 - hour * 60);
         long s = (timeMillis / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
         long sss = (timeMillis - day * 24 * 60 * 60 * 1000 - hour * 60 * 60 * 1000 - min * 60 * 1000 - s * 1000);
         return (day > 0 ? day + "," : "") + hour + ":" + min + ":" + s + "." + sss;
@@ -244,20 +241,21 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     public static double getDistanceOfTwoDate(Date before, Date after) {
         long beforeTime = before.getTime();
         long afterTime = after.getTime();
-        return (double)(afterTime - beforeTime) / (1000 * 60 * 60 * 24);
+        return (double) (afterTime - beforeTime) / (1000 * 60 * 60 * 24);
     }
 
     /**
      * 获取前七天日期数组 从今天开始算
+     *
      * @return
      */
-    public static String[] getBeforeSevenDay(){
+    public static String[] getBeforeSevenDay() {
         String[] arr = new String[7];
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = null;
-        for (int i=0; i<7; i++){
-            c=Calendar.getInstance();
-            c.add(Calendar.DAY_OF_MONTH, - i);
+        for (int i = 0; i < 7; i++) {
+            c = Calendar.getInstance();
+            c.add(Calendar.DAY_OF_MONTH, -i);
             arr[6 - i] = sdf.format(c.getTime());
         }
         return arr;
