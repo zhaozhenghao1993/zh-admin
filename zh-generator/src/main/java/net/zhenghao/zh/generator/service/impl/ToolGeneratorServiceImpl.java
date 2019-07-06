@@ -29,7 +29,7 @@ import java.util.zip.ZipOutputStream;
  * @date :2019/04/17 22:08
  * ToolGeneratorServiceImpl.java
  */
-@Service("toolGeneratorService")
+@Service
 public class ToolGeneratorServiceImpl implements ToolGeneratorService {
 
     @Autowired

@@ -26,7 +26,7 @@ import java.util.Map;
  * @date :2017年12月7日 下午2:51:12
  * SysMenuServiceImpl.java
  */
-@Service("sysMenuService")
+@Service
 @Transactional
 public class SysMenuServiceImpl implements SysMenuService {
 

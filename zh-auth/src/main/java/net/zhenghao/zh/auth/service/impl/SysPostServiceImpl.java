@@ -24,7 +24,7 @@ import java.util.Map;
  * @date :2019/04/27 22:16
  * SysPostServiceImpl.java
  */
-@Service("sysPostService")
+@Service
 @Transactional
 public class SysPostServiceImpl implements SysPostService {
 

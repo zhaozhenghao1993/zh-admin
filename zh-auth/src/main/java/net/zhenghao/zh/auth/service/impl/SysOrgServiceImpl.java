@@ -26,7 +26,7 @@ import java.util.Map;
  * @date :2017年12月7日 下午2:51:12
  * SysOrgServiceImpl.java
  */
-@Service("sysOrgService")
+@Service
 @Transactional
 public class SysOrgServiceImpl implements SysOrgService {
 

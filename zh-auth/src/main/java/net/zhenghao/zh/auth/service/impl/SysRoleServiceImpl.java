@@ -27,7 +27,7 @@ import java.util.Map;
  * @date :2017年12月7日 上午10:39:00
  * SysRoleServiceImpl.java
  */
-@Service("sysRoleService")
+@Service
 @Transactional
 public class SysRoleServiceImpl implements SysRoleService {
 

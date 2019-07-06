@@ -18,7 +18,9 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.BindingResult;
 
+import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
 /**
@@ -67,8 +69,7 @@ public class SysLogAspect {
         sysLog.setMethod(className + "." + methodName + "()");
         //请求的参数
         Object[] args = joinPoint.getArgs();
-        String params = dealParams(args);
-        sysLog.setParams(params);
+        dealParams(args, sysLog);
 
         //设置IP地址 浏览器 操作系统
         UserAgent userAgent = IPUtils.getUserAgent();
@@ -118,8 +119,7 @@ public class SysLogAspect {
         sysLog.setMethod(className + "." + methodName + "()");
         //请求的参数
         Object[] args = joinPoint.getArgs();
-        String params = dealParams(args);
-        sysLog.setParams(params);
+        dealParams(args, sysLog);
 
         //设置IP地址 浏览器 操作系统
         UserAgent userAgent = IPUtils.getUserAgent();
@@ -146,6 +146,15 @@ public class SysLogAspect {
                 sysLog.setStatus(SystemConstant.StatusType.DISABLE.getValue());
                 sysLog.setRemark(String.valueOf(r.getMsg()));
             }
+        } else {
+            // 如果响应结果返回值 Result 为 null, 则说不定 响应结果在 BindingResult 中
+            BindingResult results = sysLog.getResult();
+            if (results != null) {
+                if (results.hasErrors()) {
+                    sysLog.setStatus(SystemConstant.StatusType.DISABLE.getValue());
+                    sysLog.setRemark(String.valueOf(results.getFieldError().getDefaultMessage()));
+                }
+            }
         }
         //保存系统日志
         sysLogMapper.save(sysLog);
@@ -155,19 +164,27 @@ public class SysLogAspect {
      * 格式化参数 (arg1, arg2, arg3)
      *
      * @param args
+     * @param sysLog
      * @return
      */
-    private String dealParams(Object[] args) {
+    private void dealParams(Object[] args, SysLogEntity sysLog) {
         StringBuilder sb = new StringBuilder();
         sb.append("(");
         for (int i = 0; i < args.length; i++) {
-            sb.append(JSONUtils.objToString(args[i]));
+            if (args[i] instanceof BindingResult) {
+                sysLog.setResult((BindingResult) args[i]);
+                sb.append("BindingResult");
+            } else if (args[i] instanceof HttpServletResponse) {
+                sb.append("HttpServletResponse");
+            } else {
+                sb.append(JSONUtils.objToString(args[i]));
+            }
             if (i < args.length - 1) {
                 sb.append(", ");
             }
         }
         sb.append(")");
-        return sb.toString();
+        sysLog.setParams(sb.toString());
     }
 
 }

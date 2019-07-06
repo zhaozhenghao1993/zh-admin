@@ -24,7 +24,7 @@ import java.util.Map;
  * @date :2017年11月22日 下午2:08:50
  * SysLogServiceImpl.java
  */
-@Service("sysLogService")
+@Service
 @Transactional
 public class SysLogServiceImpl implements SysLogService {
 

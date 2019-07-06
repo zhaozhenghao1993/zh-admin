@@ -1,5 +1,7 @@
 package net.zhenghao.zh.common.entity;
 
+import org.springframework.validation.BindingResult;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -84,6 +86,11 @@ public class SysLogEntity implements Serializable {
      * 日志类型 1-登录 2-访问 3-操作 4-异常 5-授权
      */
     private Integer type;
+
+    /**
+     * 用来放 BindingResult
+     */
+    private BindingResult result;
 
     /**
      * 创建时间
@@ -204,5 +211,13 @@ public class SysLogEntity implements Serializable {
 
     public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
+    }
+
+    public BindingResult getResult() {
+        return result;
+    }
+
+    public void setResult(BindingResult result) {
+        this.result = result;
     }
 }

@@ -1,4 +1,4 @@
-package net.zhenghao.zh.auth.core;
+package net.zhenghao.zh.auth.handler;
 
 import net.zhenghao.zh.auth.config.FilterChainConfig;
 import net.zhenghao.zh.auth.service.SysUserService;
@@ -9,16 +9,16 @@ import java.util.regex.Pattern;
 
 /**
  * 🙃
- * 🙃 请求处理适配器
+ * 🙃 请求权限处理
  * 🙃
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
  * @date :2019/01/19 16:10
- * RequestHandlerAdapter.java
+ * RequestAuthHandler.java
  */
 @Component
-public class RequestHandlerAdapter {
+public class RequestAuthHandler {
 
     @Autowired
     private FilterChainConfig filterChainConfig;

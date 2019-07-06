@@ -29,7 +29,7 @@ import java.util.Map;
  * @date :2019年2月17日 上午9:10:21
  * SysUserServiceImpl.java
  */
-@Service("sysUserService")
+@Service
 @Transactional
 public class SysUserServiceImpl implements SysUserService {
 

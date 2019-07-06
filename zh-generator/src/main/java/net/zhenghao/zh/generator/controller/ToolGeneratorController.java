@@ -4,7 +4,7 @@ import net.zhenghao.zh.common.annotation.SysLog;
 import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Result;
-import net.zhenghao.zh.common.util.JSONUtils;
+import net.zhenghao.zh.common.util.ResponseUtils;
 import net.zhenghao.zh.generator.entity.GeneratorParamEntity;
 import net.zhenghao.zh.generator.entity.TableEntity;
 import net.zhenghao.zh.generator.service.ToolGeneratorService;
@@ -59,9 +59,7 @@ public class ToolGeneratorController extends AbstractController {
     @SysLog("生成代码")
     public void generator(@Valid GeneratorParamEntity params, BindingResult results, HttpServletResponse response) throws IOException {
         if (results.hasErrors()) {
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("application/json");
-            response.getWriter().write(JSONUtils.objToString(Result.ofFail(results.getFieldError().getDefaultMessage())));
+            ResponseUtils.setResultResponse(response, Result.ofFail(results.getFieldError().getDefaultMessage()));
             return;
         }
         byte[] code = toolGeneratorService.generator(params);
