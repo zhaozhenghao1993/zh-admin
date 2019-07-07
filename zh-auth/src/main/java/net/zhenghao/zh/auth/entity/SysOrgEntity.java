@@ -1,6 +1,7 @@
 package net.zhenghao.zh.auth.entity;
 
 import net.zhenghao.zh.common.entity.TreeNode;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -23,8 +24,9 @@ public class SysOrgEntity extends TreeNode implements Serializable {
     private String ancestors;
 
     /**
-     * 菜单名称
+     * 组织名称
      */
+    @Length(min = 1, max = 30, message = "组织名称的长度应该在1和30之间")
     private String orgName;
 
     /**

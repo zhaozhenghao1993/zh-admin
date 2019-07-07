@@ -1,5 +1,7 @@
 package net.zhenghao.zh.auth.entity;
 
+import org.hibernate.validator.constraints.Length;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -24,16 +26,19 @@ public class SysRoleEntity implements Serializable {
     /**
      * 角色名称
      */
+    @Length(min = 1, max = 30, message = "角色名称的长度应该在1和30之间")
     private String roleName;
 
     /**
      * 角色标识
      */
+    @Length(min = 1, max = 30, message = "角色标识的长度应该在1和30之间")
     private String roleSign;
 
     /**
      * 备注
      */
+    @Length(max = 100, message = "备注的长度应该在100以内")
     private String remark;
 
     /**

@@ -1,5 +1,10 @@
 package net.zhenghao.zh.auth.entity;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -29,6 +34,7 @@ public class SysUserEntity implements Serializable {
     /**
      * 用户名
      */
+    @Length(min = 5, max = 20, message = "username的长度应该在5和20之间")
     private String username;
 
     /**
@@ -39,16 +45,19 @@ public class SysUserEntity implements Serializable {
     /**
      * 姓名
      */
+    @Length(min = 5, max = 20, message = "name的长度应该在5和20之间")
     private String name;
 
     /**
      * 邮箱
      */
+    @Email(message = "邮箱格式不正确")
     private String email;
 
     /**
      * 手机号
      */
+    @Pattern(regexp = "^1(3|4|5|7|8)\\d{9}$", message = "手机号格式不正确")
     private String mobile;
 
     /**
@@ -64,11 +73,13 @@ public class SysUserEntity implements Serializable {
     /**
      * 个人主题，dark（默认）,light
      */
+    @Pattern(regexp = "^(dark|light)$", message = "个人主题格式不正确")
     private String theme;
 
     /**
      * 主题色: 1  薄暮  ,2  火山  ,3  日暮  ,4  明青  ,5  极光绿  ,6  拂晓蓝（默认）,7  极客蓝 ,8 酱紫
      */
+    @Range(min=1, max=8, message = "主题色值不正确")
     private Integer color;
     /**
      * 创建人id

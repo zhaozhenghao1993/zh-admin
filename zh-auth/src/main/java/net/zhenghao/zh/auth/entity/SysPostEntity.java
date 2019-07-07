@@ -1,5 +1,7 @@
 package net.zhenghao.zh.auth.entity;
 
+import org.hibernate.validator.constraints.Length;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -24,11 +26,13 @@ public class SysPostEntity implements Serializable {
     /**
      * 岗位名称
      */
+    @Length(min = 1, max = 30, message = "岗位名称的长度应该在1和30之间")
     private String postName;
 
     /**
      * 岗位编码
      */
+    @Length(min = 1, max = 30, message = "岗位编码的长度应该在1和30之间")
     private String postCode;
 
     /**

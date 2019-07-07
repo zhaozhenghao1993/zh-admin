@@ -7,9 +7,11 @@ import net.zhenghao.zh.auth.entity.SysMenuEntity;
 import net.zhenghao.zh.auth.service.SysMenuService;
 import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.vo.TreeVO;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -68,7 +70,10 @@ public class SysMenuController extends AbstractController {
      */
     @SysLog("新增菜单")
     @PostMapping("")
-    public Result save(@RequestBody SysMenuEntity menu) {
+    public Result save(@RequestBody @Valid SysMenuEntity menu, BindingResult results) {
+        if (results.hasErrors()) {
+            return Result.ofFail(results.getFieldError().getDefaultMessage());
+        }
         menu.setCreatorId(getUserId());
         return sysMenuService.saveMenu(menu);
     }
@@ -81,7 +86,10 @@ public class SysMenuController extends AbstractController {
      */
     @SysLog("修改菜单")
     @PutMapping("/{id}")
-    public Result update(@PathVariable("id") Long id, @RequestBody SysMenuEntity menu) {
+    public Result update(@PathVariable("id") Long id, @RequestBody @Valid SysMenuEntity menu, BindingResult results) {
+        if (results.hasErrors()) {
+            return Result.ofFail(results.getFieldError().getDefaultMessage());
+        }
         menu.setId(id);
         menu.setModifierId(getUserId());
         return sysMenuService.updateMenu(menu);

@@ -1,5 +1,6 @@
 package net.zhenghao.zh.auth.dto;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -20,11 +21,13 @@ public class SysUserPasswordDTO implements Serializable {
     /**
      * 老密码
      */
+    @NotBlank(message = "原密码不能为空 !")
     private String oldPassword;
 
     /**
      * 新密码
      */
+    @NotBlank(message = "新密码不能为空 !")
     private String password;
 
     public String getOldPassword() {

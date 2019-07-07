@@ -7,8 +7,10 @@ import net.zhenghao.zh.auth.entity.SysPostEntity;
 import net.zhenghao.zh.auth.service.SysPostService;
 import net.zhenghao.zh.common.entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -67,7 +69,10 @@ public class SysPostController extends AbstractController {
      */
     @SysLog("新增岗位")
     @PostMapping("")
-    public Result save(@RequestBody SysPostEntity post) {
+    public Result save(@RequestBody @Valid SysPostEntity post, BindingResult results) {
+        if (results.hasErrors()) {
+            return Result.ofFail(results.getFieldError().getDefaultMessage());
+        }
         post.setCreatorId(getUserId());
         return sysPostService.savePost(post);
     }
@@ -81,7 +86,10 @@ public class SysPostController extends AbstractController {
      */
     @SysLog("修改岗位")
     @PutMapping("/{id}")
-    public Result update(@PathVariable("id") Long id, @RequestBody SysPostEntity post) {
+    public Result update(@PathVariable("id") Long id, @RequestBody @Valid SysPostEntity post, BindingResult results) {
+        if (results.hasErrors()) {
+            return Result.ofFail(results.getFieldError().getDefaultMessage());
+        }
         post.setId(id);
         post.setModifierId(getUserId());
         return sysPostService.updatePost(post);

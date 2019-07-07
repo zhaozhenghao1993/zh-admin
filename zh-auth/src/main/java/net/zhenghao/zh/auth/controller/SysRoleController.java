@@ -8,8 +8,10 @@ import net.zhenghao.zh.auth.entity.SysRoleEntity;
 import net.zhenghao.zh.auth.service.SysRoleService;
 import net.zhenghao.zh.common.entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -65,7 +67,10 @@ public class SysRoleController extends AbstractController {
      */
     @SysLog("新增角色")
     @PostMapping("")
-    public Result saveRole(@RequestBody SysRoleEntity role) {
+    public Result saveRole(@RequestBody @Valid SysRoleEntity role, BindingResult results) {
+        if (results.hasErrors()) {
+            return Result.ofFail(results.getFieldError().getDefaultMessage());
+        }
         role.setCreatorId(getUserId());
         return sysRoleService.saveRole(role);
     }
@@ -78,7 +83,10 @@ public class SysRoleController extends AbstractController {
      */
     @SysLog("修改角色")
     @PutMapping("/{id}")
-    public Result updateRole(@PathVariable("id") Long id, @RequestBody SysRoleEntity role) {
+    public Result updateRole(@PathVariable("id") Long id, @RequestBody @Valid SysRoleEntity role, BindingResult results) {
+        if (results.hasErrors()) {
+            return Result.ofFail(results.getFieldError().getDefaultMessage());
+        }
         role.setId(id);
         role.setModifierId(getUserId());
         return sysRoleService.updateRole(role);

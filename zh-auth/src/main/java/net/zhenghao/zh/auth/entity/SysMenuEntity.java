@@ -1,7 +1,12 @@
 package net.zhenghao.zh.auth.entity;
 
 import net.zhenghao.zh.common.entity.TreeNode;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -25,26 +30,33 @@ public class SysMenuEntity extends TreeNode implements Serializable {
     /**
      * 菜单名称
      */
+    @Length(min = 1, max = 30, message = "菜单名称的长度应该在1和30之间")
+    @NotBlank(message = "菜单名称不能为空")
     private String name;
 
     /**
      * 菜单uri
      */
+    @Length(min = 1, max = 200, message = "菜单uri的长度应该在1和200之间")
     private String uri;
 
     /**
      * 请求method
      */
+    @Pattern(regexp = "^(GET|POST|PUT|DELETE)$", message = "请求method应为GET|POST|PUT|DELETE中的一个")
     private String method;
 
     /**
      * 授权标识(多个用逗号分隔,如:user:list,user:create)
      */
+    @Length(min = 1, max = 200, message = "授权标识的长度应该在1和200之间")
     private String perms;
 
     /**
      * 类型(0:目录  1:菜单   2:按钮	3:uri)
      */
+    @Range(min=0, max=3, message = "菜单类型值不正确")
+    @NotNull(message = "菜单类型不能为空")
     private Integer type;
 
     /**
@@ -55,6 +67,7 @@ public class SysMenuEntity extends TreeNode implements Serializable {
     /**
      * 描述
      */
+    @Length(max = 300, message = "备注的长度应该在300以内")
     private String description;
 
     /**

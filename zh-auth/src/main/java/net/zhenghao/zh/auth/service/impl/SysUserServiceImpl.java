@@ -232,6 +232,9 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public Result updatePassword(SysUserEntity user) {
+        if (StringUtils.isBlank(user.getPassword())) {
+            return Result.ofFail("The password cannot be empty !");
+        }
         SysUserEntity currUser = sysUserMapper.getObjectById(user.getId());
         user.setPassword(MD5Utils.encrypt(currUser.getUsername(), user.getPassword()));
         int count = sysUserMapper.updatePassword(user);

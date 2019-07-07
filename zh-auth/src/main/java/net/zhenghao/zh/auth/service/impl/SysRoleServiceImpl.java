@@ -11,6 +11,7 @@ import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.util.CommonUtils;
 import net.zhenghao.zh.auth.entity.SysRoleEntity;
 import net.zhenghao.zh.auth.service.SysRoleService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,6 +52,12 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     public Result saveRole(SysRoleEntity role) {
+        if (StringUtils.isBlank(role.getRoleName())) {
+            return Result.ofFail("The role name cannot be empty !");
+        }
+        if (StringUtils.isBlank(role.getRoleSign())) {
+            return Result.ofFail("The role sign cannot be empty !");
+        }
         int count = sysRoleMapper.save(role);
         return CommonUtils.msg(count);
     }
@@ -65,6 +72,12 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     public Result updateRole(SysRoleEntity role) {
+        if (StringUtils.isBlank(role.getRoleName())) {
+            return Result.ofFail("The role name cannot be empty !");
+        }
+        if (StringUtils.isBlank(role.getRoleSign())) {
+            return Result.ofFail("The role sign cannot be empty !");
+        }
         int count = sysRoleMapper.update(role);
         return CommonUtils.msg(count);
     }

@@ -11,6 +11,7 @@ import net.zhenghao.zh.common.vo.TreeVO;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.common.entity.Query;
 import net.zhenghao.zh.common.util.CommonUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,6 +67,9 @@ public class SysOrgServiceImpl implements SysOrgService {
 
     @Override
     public Result saveOrg(SysOrgEntity org) {
+        if (StringUtils.isBlank(org.getOrgName())) {
+            return Result.ofFail("The org name cannot be empty !");
+        }
         SysOrgEntity orgParent = sysOrgMapper.getObjectById(org.getParentId());
         String ancestors;
         if (orgParent != null) {
@@ -86,6 +90,9 @@ public class SysOrgServiceImpl implements SysOrgService {
 
     @Override
     public Result updateOrg(SysOrgEntity org) {
+        if (StringUtils.isBlank(org.getOrgName())) {
+            return Result.ofFail("The org name cannot be empty !");
+        }
         SysOrgEntity oldOrg = sysOrgMapper.getObjectById(org.getId());
         // 更新前先对比和之前的parentId是否有不同，如果不同则开始处理
         if (!org.getParentId().equals(oldOrg.getParentId())) {

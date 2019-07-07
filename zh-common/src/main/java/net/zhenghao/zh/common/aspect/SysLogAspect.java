@@ -136,28 +136,36 @@ public class SysLogAspect {
         //操作执行状态
         if (result instanceof Result) {
             Result r = (Result) result;
-            if (r.isSuccess()) {
-                //操作成功
-                sysLog.setStatus(SystemConstant.StatusType.ENABLE.getValue());
-
-                //响应时间：ms
-                sysLog.setRemark("响应时间：" + time + "ms");
-            } else {
-                sysLog.setStatus(SystemConstant.StatusType.DISABLE.getValue());
-                sysLog.setRemark(String.valueOf(r.getMsg()));
-            }
+            setStatusRemark(sysLog, r.isSuccess(), time, String.valueOf(r.getMsg()));
         } else {
             // 如果响应结果返回值 Result 为 null, 则说不定 响应结果在 BindingResult 中
             BindingResult results = sysLog.getResult();
             if (results != null) {
-                if (results.hasErrors()) {
-                    sysLog.setStatus(SystemConstant.StatusType.DISABLE.getValue());
-                    sysLog.setRemark(String.valueOf(results.getFieldError().getDefaultMessage()));
-                }
+                String message = results.getFieldError() == null ? "" : results.getFieldError().getDefaultMessage();
+                setStatusRemark(sysLog, !results.hasErrors(), time, message);
             }
         }
         //保存系统日志
         sysLogMapper.save(sysLog);
+    }
+
+    /**
+     * 设置 操作日志状态和描述
+     *
+     * @param sysLog    SysLogEntity
+     * @param isSuccess 操作是否成功
+     * @param time      响应时间
+     * @param message   如果失败的失败信息
+     */
+    private void setStatusRemark(SysLogEntity sysLog, boolean isSuccess, long time, String message) {
+        if (isSuccess) {
+            sysLog.setStatus(SystemConstant.StatusType.ENABLE.getValue());
+            //响应时间：ms
+            sysLog.setRemark("响应时间：" + time + "ms");
+        } else {
+            sysLog.setStatus(SystemConstant.StatusType.DISABLE.getValue());
+            sysLog.setRemark(message);
+        }
     }
 
     /**

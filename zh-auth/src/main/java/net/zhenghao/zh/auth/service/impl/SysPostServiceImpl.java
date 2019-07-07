@@ -9,6 +9,7 @@ import net.zhenghao.zh.common.entity.Result;
 import net.zhenghao.zh.common.util.CommonUtils;
 import net.zhenghao.zh.auth.entity.SysPostEntity;
 import net.zhenghao.zh.auth.service.SysPostService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,12 +58,24 @@ public class SysPostServiceImpl implements SysPostService {
 
     @Override
     public Result savePost(SysPostEntity post) {
+        if (StringUtils.isBlank(post.getPostName())) {
+            return Result.ofFail("The post name cannot be empty !");
+        }
+        if (StringUtils.isBlank(post.getPostCode())) {
+            return Result.ofFail("The post code cannot be empty !");
+        }
         int count = sysPostMapper.save(post);
         return CommonUtils.msg(count);
     }
 
     @Override
     public Result updatePost(SysPostEntity post) {
+        if (StringUtils.isBlank(post.getPostName())) {
+            return Result.ofFail("The post name cannot be empty !");
+        }
+        if (StringUtils.isBlank(post.getPostCode())) {
+            return Result.ofFail("The post code cannot be empty !");
+        }
         int count = sysPostMapper.update(post);
         return CommonUtils.msg(count);
     }

@@ -9,10 +9,12 @@ import net.zhenghao.zh.common.controller.AbstractController;
 import net.zhenghao.zh.common.entity.Page;
 import net.zhenghao.zh.auth.service.SysUserService;
 import net.zhenghao.zh.common.entity.Result;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
@@ -48,7 +50,10 @@ public class SysUserController extends AbstractController {
      * @return
      */
     @PutMapping("/profile")
-    public Result profile(@RequestBody SysUserEntity user) {
+    public Result profile(@RequestBody @Valid SysUserEntity user, BindingResult results) {
+        if (results.hasErrors()) {
+            return Result.ofFail(results.getFieldError().getDefaultMessage());
+        }
         user.setId(getUserId());
         user.setModifierId(getUserId());
         user.setStatus(null);
@@ -74,7 +79,10 @@ public class SysUserController extends AbstractController {
      * @return
      */
     @PutMapping("/profile/password")
-    public Result updatePswdByUser(@RequestBody SysUserPasswordDTO password) {
+    public Result updatePswdByUser(@RequestBody @Valid SysUserPasswordDTO password, BindingResult results) {
+        if (results.hasErrors()) {
+            return Result.ofFail(results.getFieldError().getDefaultMessage());
+        }
         SysUserEntity user = new SysUserEntity();
         user.setId(getUserId());
         user.setUsername(getUserName());
@@ -89,7 +97,10 @@ public class SysUserController extends AbstractController {
      * @return
      */
     @PutMapping("/profile/theme")
-    public Result theme(@RequestBody SysUserEntity user) {
+    public Result theme(@RequestBody @Valid SysUserEntity user, BindingResult results) {
+        if (results.hasErrors()) {
+            return Result.ofFail(results.getFieldError().getDefaultMessage());
+        }
         user.setId(getUserId());
         return sysUserService.updateThemeById(user);
     }
@@ -100,7 +111,10 @@ public class SysUserController extends AbstractController {
      * @return
      */
     @PutMapping("/profile/color")
-    public Result color(@RequestBody SysUserEntity user) {
+    public Result color(@RequestBody @Valid SysUserEntity user, BindingResult results) {
+        if (results.hasErrors()) {
+            return Result.ofFail(results.getFieldError().getDefaultMessage());
+        }
         user.setId(getUserId());
         return sysUserService.updateColorById(user);
     }
@@ -147,7 +161,10 @@ public class SysUserController extends AbstractController {
      */
     @SysLog("新增用户")
     @PostMapping("")
-    public Result save(@RequestBody SysUserEntity user) {
+    public Result save(@RequestBody @Valid SysUserEntity user, BindingResult results) {
+        if (results.hasErrors()) {
+            return Result.ofFail(results.getFieldError().getDefaultMessage());
+        }
         user.setAvatar(UploadConstant.USER_AVATAR_DEFAULT_PATH); // 给个默认头像
         user.setCreatorId(getUserId());
         return sysUserService.saveUser(user);
@@ -161,7 +178,10 @@ public class SysUserController extends AbstractController {
      */
     @SysLog("修改用户")
     @PutMapping("/{id}")
-    public Result edit(@PathVariable("id") Long id, @RequestBody SysUserEntity user) {
+    public Result edit(@PathVariable("id") Long id, @RequestBody @Valid SysUserEntity user, BindingResult results) {
+        if (results.hasErrors()) {
+            return Result.ofFail(results.getFieldError().getDefaultMessage());
+        }
         user.setId(id);
         user.setModifierId(getUserId());
         return sysUserService.updateUser(user);
