@@ -14,6 +14,9 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class MD5Utils {
 
+    private MD5Utils() {
+    }
+
     private static final String SALT = "ia1peP7z";//盐值需要唯一: 一般使用随机字符串或 user id
 
     private static final String ALGORITH_NAME = "md5";//加密方式

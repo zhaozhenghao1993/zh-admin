@@ -55,7 +55,7 @@ public class SysMenuEntity extends TreeNode implements Serializable {
     /**
      * 类型(0:目录  1:菜单   2:按钮	3:uri)
      */
-    @Range(min=0, max=3, message = "菜单类型值不正确")
+    @Range(min = 0, max = 3, message = "菜单类型值不正确")
     @NotNull(message = "菜单类型不能为空")
     private Integer type;
 

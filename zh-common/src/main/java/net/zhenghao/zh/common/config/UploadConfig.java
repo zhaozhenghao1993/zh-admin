@@ -27,7 +27,7 @@ public class UploadConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler(path + "/**").addResourceLocations("file:" + folder);
+        registry.addResourceHandler(path + "**").addResourceLocations("file:" + folder);
     }
 
     public String getFolder() {

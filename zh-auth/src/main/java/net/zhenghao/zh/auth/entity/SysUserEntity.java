@@ -79,7 +79,7 @@ public class SysUserEntity implements Serializable {
     /**
      * 主题色: 1  薄暮  ,2  火山  ,3  日暮  ,4  明青  ,5  极光绿  ,6  拂晓蓝（默认）,7  极客蓝 ,8 酱紫
      */
-    @Range(min=1, max=8, message = "主题色值不正确")
+    @Range(min = 1, max = 8, message = "主题色值不正确")
     private Integer color;
     /**
      * 创建人id

@@ -19,9 +19,12 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 系统日志,切面处理类
@@ -119,7 +122,7 @@ public class SysLogAspect {
         sysLog.setMethod(className + "." + methodName + "()");
         //请求的参数
         Object[] args = joinPoint.getArgs();
-        dealParams(args, sysLog);
+        List<BindingResult> bindingResultList = dealParams(args, sysLog);
 
         //设置IP地址 浏览器 操作系统
         UserAgent userAgent = IPUtils.getUserAgent();
@@ -139,10 +142,11 @@ public class SysLogAspect {
             setStatusRemark(sysLog, r.isSuccess(), time, String.valueOf(r.getMsg()));
         } else {
             // 如果响应结果返回值 Result 为 null, 则说不定 响应结果在 BindingResult 中
-            BindingResult results = sysLog.getResult();
-            if (results != null) {
-                String message = results.getFieldError() == null ? "" : results.getFieldError().getDefaultMessage();
-                setStatusRemark(sysLog, !results.hasErrors(), time, message);
+            BindingResult bindingResult = bindingResultList.stream().filter(Errors::hasErrors).findAny().orElse(null);
+            if (bindingResult == null) {
+                setStatusRemark(sysLog, true, time, "");
+            } else {
+                setStatusRemark(sysLog, false, time, bindingResult.getFieldError().getDefaultMessage());
             }
         }
         //保存系统日志
@@ -175,12 +179,13 @@ public class SysLogAspect {
      * @param sysLog
      * @return
      */
-    private void dealParams(Object[] args, SysLogEntity sysLog) {
+    private List<BindingResult> dealParams(Object[] args, SysLogEntity sysLog) {
+        List<BindingResult> bindingResultList = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
         sb.append("(");
         for (int i = 0; i < args.length; i++) {
             if (args[i] instanceof BindingResult) {
-                sysLog.setResult((BindingResult) args[i]);
+                bindingResultList.add((BindingResult) args[i]);
                 sb.append("BindingResult");
             } else if (args[i] instanceof HttpServletResponse) {
                 sb.append("HttpServletResponse");
@@ -193,6 +198,7 @@ public class SysLogAspect {
         }
         sb.append(")");
         sysLog.setParams(sb.toString());
+        return bindingResultList;
     }
 
 }

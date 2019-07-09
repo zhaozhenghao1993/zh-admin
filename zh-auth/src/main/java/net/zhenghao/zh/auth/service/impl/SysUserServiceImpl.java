@@ -33,6 +33,8 @@ import java.util.Map;
 @Transactional
 public class SysUserServiceImpl implements SysUserService {
 
+    private static final String USER_ID = "userId";
+
     @Autowired
     private SysUserMapper sysUserMapper;
 
@@ -121,13 +123,13 @@ public class SysUserServiceImpl implements SysUserService {
         int count = sysUserMapper.save(user);
         if (user.getRoleIdList() != null && !user.getRoleIdList().isEmpty()) {
             Query query = new Query();
-            query.put("userId", user.getId());
+            query.put(USER_ID, user.getId());
             query.put("roleIdList", user.getRoleIdList());
             sysUserRoleMapper.save(query);
         }
         if (user.getPostIdList() != null && !user.getPostIdList().isEmpty()) {
             Query query = new Query();
-            query.put("userId", user.getId());
+            query.put(USER_ID, user.getId());
             query.put("postIdList", user.getPostIdList());
             sysUserPostMapper.save(query);
         }
@@ -158,14 +160,14 @@ public class SysUserServiceImpl implements SysUserService {
         sysUserRoleMapper.removeByUserId(id);
         if (user.getRoleIdList() != null && !user.getRoleIdList().isEmpty()) {
             Query query = new Query();
-            query.put("userId", id);
+            query.put(USER_ID, id);
             query.put("roleIdList", user.getRoleIdList());
             sysUserRoleMapper.save(query);
         }
         sysUserPostMapper.removeByUserId(id);
         if (user.getPostIdList() != null && !user.getPostIdList().isEmpty()) {
             Query query = new Query();
-            query.put("userId", id);
+            query.put(USER_ID, id);
             query.put("postIdList", user.getPostIdList());
             sysUserPostMapper.save(query);
         }
