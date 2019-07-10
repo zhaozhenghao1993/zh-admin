@@ -74,6 +74,7 @@
         <oshi.version>3.9.1</oshi.version>
         <bitwalker.version>1.19</bitwalker.version>
         <velocity.version>1.7</velocity.version>
+        <jsoup.version>1.11.3</jsoup.version>
     </properties>
 
     <dependencies>
@@ -219,6 +220,13 @@
                 <groupId>commons-fileupload</groupId>
                 <artifactId>commons-fileupload</artifactId>
                 <version>${commons-fileupload.version}</version>
+            </dependency>
+
+            <!-- 自定义XSS过滤拦截工具类jsoup -->
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -116,6 +116,9 @@ public class SysUserServiceImpl implements SysUserService {
         if (StringUtils.isBlank(user.getName())) {
             return Result.ofFail("The name cannot be empty !");
         }
+        if (StringUtils.isBlank(user.getPassword())) {
+            return Result.ofFail("The password cannot be empty !");
+        }
         if (sysUserMapper.countByUserName(user.getUsername()) > 0) {
             return Result.ofFail("The username already exists !");
         }

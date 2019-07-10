@@ -34,7 +34,7 @@ public class SysUserEntity implements Serializable {
     /**
      * 用户名
      */
-    @Length(min = 5, max = 20, message = "username的长度应该在5和20之间")
+    @Length(min = 5, max = 30, message = "username的长度应该在5和20之间")
     private String username;
 
     /**
@@ -57,7 +57,7 @@ public class SysUserEntity implements Serializable {
     /**
      * 手机号
      */
-    @Pattern(regexp = "^1(3|4|5|7|8)\\d{9}$", message = "手机号格式不正确")
+    @Pattern(regexp = "^1([34578])\\d{9}$", message = "手机号格式不正确")
     private String mobile;
 
     /**
