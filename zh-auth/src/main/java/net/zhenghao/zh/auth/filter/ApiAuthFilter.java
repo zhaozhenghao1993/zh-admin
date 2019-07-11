@@ -156,7 +156,7 @@ public class ApiAuthFilter implements Filter {
         if (StringUtils.isBlank(authToken)) {
             authToken = request.getParameter(tokenHeaderConfig.getTokenHeader());
         }
-        /*if (StringUtils.isBlank(authToken)) {
+        if (StringUtils.isBlank(authToken)) {
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
@@ -165,7 +165,7 @@ public class ApiAuthFilter implements Filter {
                     }
                 }
             }
-        }*/
+        }
         return authToken;
     }
 
