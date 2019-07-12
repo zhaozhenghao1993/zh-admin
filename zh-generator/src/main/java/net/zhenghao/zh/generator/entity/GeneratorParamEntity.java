@@ -105,4 +105,16 @@ public class GeneratorParamEntity implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "GeneratorParamEntity{" +
+                "tableName='" + tableName + '\'' +
+                ", module='" + module + '\'' +
+                ", functionCode='" + functionCode + '\'' +
+                ", requestMapping='" + requestMapping + '\'' +
+                ", viewPath='" + viewPath + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

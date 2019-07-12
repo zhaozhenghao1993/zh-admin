@@ -85,4 +85,15 @@ public class SysPermissionEntity {
     public void setPerms(String perms) {
         this.perms = perms;
     }
+
+    @Override
+    public String toString() {
+        return "SysPermissionEntity{" +
+                "name='" + name + '\'' +
+                ", type=" + type +
+                ", uri='" + uri + '\'' +
+                ", method='" + method + '\'' +
+                ", perms='" + perms + '\'' +
+                '}';
+    }
 }

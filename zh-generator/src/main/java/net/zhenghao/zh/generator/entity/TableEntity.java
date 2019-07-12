@@ -125,4 +125,18 @@ public class TableEntity implements Serializable {
     public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
     }
+
+    @Override
+    public String toString() {
+        return "TableEntity{" +
+                "tableName='" + tableName + '\'' +
+                ", engine='" + engine + '\'' +
+                ", tableComment='" + tableComment + '\'' +
+                ", pk=" + pk +
+                ", columns=" + columns +
+                ", objName='" + objName + '\'' +
+                ", className='" + className + '\'' +
+                ", createTime=" + createTime +
+                '}';
+    }
 }

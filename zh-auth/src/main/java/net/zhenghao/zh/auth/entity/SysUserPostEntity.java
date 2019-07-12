@@ -59,4 +59,12 @@ public class SysUserPostEntity implements Serializable {
         return postId;
     }
 
+    @Override
+    public String toString() {
+        return "SysUserPostEntity{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", postId=" + postId +
+                '}';
+    }
 }

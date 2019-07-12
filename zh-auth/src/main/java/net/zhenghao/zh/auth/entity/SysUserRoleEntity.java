@@ -57,5 +57,12 @@ public class SysUserRoleEntity implements Serializable {
         this.roleId = roleId;
     }
 
-
+    @Override
+    public String toString() {
+        return "SysUserRoleEntity{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", roleId=" + roleId +
+                '}';
+    }
 }

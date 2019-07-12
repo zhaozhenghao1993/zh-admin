@@ -189,4 +189,23 @@ public class SysMenuEntity extends TreeNode implements Serializable {
     public void setModifiedTime(Timestamp modifiedTime) {
         this.modifiedTime = modifiedTime;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "SysMenuEntity{" +
+                "parentName='" + parentName + '\'' +
+                ", name='" + name + '\'' +
+                ", uri='" + uri + '\'' +
+                ", method='" + method + '\'' +
+                ", perms='" + perms + '\'' +
+                ", type=" + type +
+                ", orderNum=" + orderNum +
+                ", description='" + description + '\'' +
+                ", creatorId=" + creatorId +
+                ", createTime=" + createTime +
+                ", modifierId=" + modifierId +
+                ", modifiedTime=" + modifiedTime +
+                '}';
+    }
 }

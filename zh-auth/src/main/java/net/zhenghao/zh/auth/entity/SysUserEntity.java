@@ -302,4 +302,31 @@ public class SysUserEntity implements Serializable {
     public void setOrgs(List<SysOrgEntity> orgs) {
         this.orgs = orgs;
     }
+
+    @Override
+    public String toString() {
+        return "SysUserEntity{" +
+                "id=" + id +
+                ", orgId=" + orgId +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", status=" + status +
+                ", theme='" + theme + '\'' +
+                ", color=" + color +
+                ", creatorId=" + creatorId +
+                ", createTime=" + createTime +
+                ", modifierId=" + modifierId +
+                ", modifiedTime=" + modifiedTime +
+                ", roleIdList=" + roleIdList +
+                ", roles=" + roles +
+                ", perms=" + perms +
+                ", postIdList=" + postIdList +
+                ", posts=" + posts +
+                ", orgs=" + orgs +
+                '}';
+    }
 }

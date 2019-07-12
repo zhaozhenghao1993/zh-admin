@@ -129,4 +129,17 @@ public class SysPostEntity implements Serializable {
         return modifiedTime;
     }
 
+    @Override
+    public String toString() {
+        return "SysPostEntity{" +
+                "id=" + id +
+                ", postName='" + postName + '\'' +
+                ", postCode='" + postCode + '\'' +
+                ", orderNum=" + orderNum +
+                ", creatorId=" + creatorId +
+                ", createTime=" + createTime +
+                ", modifierId=" + modifierId +
+                ", modifiedTime=" + modifiedTime +
+                '}';
+    }
 }

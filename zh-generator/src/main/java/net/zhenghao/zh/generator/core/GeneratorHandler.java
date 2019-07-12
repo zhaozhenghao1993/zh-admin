@@ -100,10 +100,17 @@ public class GeneratorHandler {
                 tpl.merge(context, sw);
                 //添加zip
                 if ("0".equals(params.getType())) {
-                    zip.putNextEntry(new ZipEntry(getFileName(template, table.getClassName(), params.getModule(),
-                            WordUtils.capitalizeFully(params.getFunctionCode()), config.getString("package"), params.getViewPath())));
+                    zip.putNextEntry(new ZipEntry(Objects.requireNonNull(getFileName(template,
+                            table.getClassName(),
+                            params.getModule(),
+                            WordUtils.capitalizeFully(params.getFunctionCode()),
+                            config.getString("package"),
+                            params.getViewPath()))));
                 } else {
-                    zip.putNextEntry(new ZipEntry(getFileName(template, table.getClassName(), params.getFunctionCode(), WordUtils.capitalizeFully(params.getFunctionCode()))));
+                    zip.putNextEntry(new ZipEntry(Objects.requireNonNull(getFileName(template,
+                            table.getClassName(),
+                            params.getFunctionCode(),
+                            WordUtils.capitalizeFully(params.getFunctionCode())))));
                 }
                 IOUtils.write(sw.toString(), zip, "UTF-8");
                 zip.closeEntry();
@@ -127,7 +134,7 @@ public class GeneratorHandler {
         return templates;
     }
 
-    public static Configuration getConfig() {
+    private static Configuration getConfig() {
         Configurations configs = new Configurations();
         Configuration config = null;
         try {
@@ -145,7 +152,7 @@ public class GeneratorHandler {
      * @param tablePrefix
      * @return
      */
-    public static String tableToJava(String tableName, String tablePrefix) {
+    private static String tableToJava(String tableName, String tablePrefix) {
         if (StringUtils.isNotBlank(tablePrefix)) {
             tableName = tableName.replace(tablePrefix, "");
         }
@@ -158,7 +165,7 @@ public class GeneratorHandler {
      * @param columnName
      * @return
      */
-    public static String columnToJava(String columnName) {
+    private static String columnToJava(String columnName) {
         return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "");
     }
 
@@ -168,7 +175,7 @@ public class GeneratorHandler {
      * @param url
      * @return
      */
-    public static String urlToAuthKey(String url) {
+    private static String urlToAuthKey(String url) {
         return url.replace("/", ":");
     }
 
@@ -181,7 +188,7 @@ public class GeneratorHandler {
      * @param functionMethod User
      * @return
      */
-    public static String getFileName(String template, String className, String functionCode, String functionMethod) {
+    private static String getFileName(String template, String className, String functionCode, String functionMethod) {
         String packagePath = "java" + File.separator;
         if (template.contains("Entity.java.vm")) {
             return packagePath + className + "Entity.java";
@@ -225,8 +232,8 @@ public class GeneratorHandler {
     /**
      * 获取文件名，带包名
      */
-    public static String getFileName(String template, String className, String module,
-                                     String functionMethod, String packageName, String viewPath) {
+    private static String getFileName(String template, String className, String module,
+                                      String functionMethod, String packageName, String viewPath) {
         String packagePath = "java" + File.separator;
         String webPath = "vue" + File.separator;
         if (StringUtils.isNotBlank(packageName)) {

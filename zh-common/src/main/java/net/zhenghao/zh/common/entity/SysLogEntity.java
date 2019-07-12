@@ -205,4 +205,24 @@ public class SysLogEntity implements Serializable {
     public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
     }
+
+    @Override
+    public String toString() {
+        return "SysLogEntity{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", username='" + username + '\'' +
+                ", operation='" + operation + '\'' +
+                ", method='" + method + '\'' +
+                ", params='" + params + '\'' +
+                ", time=" + time +
+                ", ip='" + ip + '\'' +
+                ", browser='" + browser + '\'' +
+                ", os='" + os + '\'' +
+                ", status=" + status +
+                ", remark='" + remark + '\'' +
+                ", type=" + type +
+                ", createTime=" + createTime +
+                '}';
+    }
 }

@@ -139,4 +139,18 @@ public class SysRoleEntity implements Serializable {
         this.menuIdList = menuIdList;
     }
 
+    @Override
+    public String toString() {
+        return "SysRoleEntity{" +
+                "id=" + id +
+                ", roleName='" + roleName + '\'' +
+                ", roleSign='" + roleSign + '\'' +
+                ", remark='" + remark + '\'' +
+                ", creatorId=" + creatorId +
+                ", createTime=" + createTime +
+                ", modifierId=" + modifierId +
+                ", modifiedTime=" + modifiedTime +
+                ", menuIdList=" + menuIdList +
+                '}';
+    }
 }

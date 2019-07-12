@@ -113,4 +113,18 @@ public class SysOrgEntity extends TreeNode implements Serializable {
     public void setModifiedTime(Timestamp modifiedTime) {
         this.modifiedTime = modifiedTime;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "SysOrgEntity{" +
+                "ancestors='" + ancestors + '\'' +
+                ", orgName='" + orgName + '\'' +
+                ", orderNum=" + orderNum +
+                ", creatorId=" + creatorId +
+                ", createTime=" + createTime +
+                ", modifierId=" + modifierId +
+                ", modifiedTime=" + modifiedTime +
+                '}';
+    }
 }

@@ -57,4 +57,13 @@ public class TreeNode {
     public void setChildren(List<TreeNode> children) {
         this.children = children;
     }
+
+    @Override
+    public String toString() {
+        return "TreeNode{" +
+                "id=" + id +
+                ", parentId=" + parentId +
+                ", children=" + children +
+                '}';
+    }
 }
