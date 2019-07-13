@@ -2,10 +2,10 @@ package ${package}.${module}.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import ${package}.${module}.dao.${className}Mapper;
-import net.zhenghao.zh.common.entity.Page;
-import net.zhenghao.zh.common.entity.Query;
-import net.zhenghao.zh.common.entity.Result;
-import net.zhenghao.zh.common.util.CommonUtils;
+import com.zhenghao.admin.common.entity.Page;
+import com.zhenghao.admin.common.entity.Query;
+import com.zhenghao.admin.common.entity.Result;
+import com.zhenghao.admin.common.util.CommonUtils;
 import ${package}.${module}.entity.${className}Entity;
 import ${package}.${module}.service.${className}Service;
 import org.springframework.beans.factory.annotation.Autowired;

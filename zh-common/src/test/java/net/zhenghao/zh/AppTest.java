@@ -1,4 +1,4 @@
-package net.zhenghao.zh;
+package com.zhenghao.admin;
 
 import static org.junit.Assert.assertTrue;
 

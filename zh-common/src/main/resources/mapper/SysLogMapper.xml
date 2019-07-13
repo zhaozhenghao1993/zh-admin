@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="net.zhenghao.zh.common.dao.SysLogMapper">
+<mapper namespace="com.zhenghao.admin.common.dao.SysLogMapper">
 
 	<select id="listForPage" resultType="SysLogEntity" flushCache="true">
 		SELECT
@@ -106,7 +106,7 @@
 
 	<select id="countTotalVisit" resultType="java.lang.Integer">
 		SELECT
-			COUNT(1)
+			COUNT(*)
 		FROM
 			sys_log
 		WHERE
@@ -115,7 +115,7 @@
 
 	<select id="countTodayVisit" resultType="java.lang.Integer">
 		SELECT
-			COUNT(1)
+			COUNT(*)
 		FROM
 			sys_log
 		WHERE
@@ -125,7 +125,7 @@
 
 	<select id="listCountLastWeekVisit" resultType="ChartVO">
 		SELECT
-			COUNT(1) AS y,
+			COUNT(*) AS y,
 			DATE_FORMAT(create_time, '%Y-%m-%d') AS x
 		FROM
 			sys_log

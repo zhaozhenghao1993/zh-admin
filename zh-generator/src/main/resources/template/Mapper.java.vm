@@ -1,6 +1,6 @@
 package ${package}.${module}.dao;
 
-import net.zhenghao.zh.common.dao.BaseMapper;
+import com.zhenghao.admin.common.dao.BaseMapper;
 import ${package}.${module}.entity.${className}Entity;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.stereotype.Component;

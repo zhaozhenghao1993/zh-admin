@@ -50,7 +50,7 @@ mybatis:
   configuration:
     mapUnderscoreToCamelCase: true
   mapper-locations: classpath*:mapper/*.xml
-  type-aliases-package: net.zhenghao.zh
+  type-aliases-package: com.zhenghao.admin
 
 ##################pagehelper分页插件####################
 pagehelper:
