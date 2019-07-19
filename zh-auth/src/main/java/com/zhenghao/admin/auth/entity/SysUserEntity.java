@@ -34,7 +34,7 @@ public class SysUserEntity implements Serializable {
     /**
      * 用户名
      */
-    @Length(min = 5, max = 30, message = "username的长度应该在5和20之间")
+    @Length(min = 4, max = 30, message = "username的长度应该在4和20之间")
     private String username;
 
     /**
@@ -45,7 +45,7 @@ public class SysUserEntity implements Serializable {
     /**
      * 姓名
      */
-    @Length(min = 5, max = 20, message = "name的长度应该在5和20之间")
+    @Length(min = 3, max = 20, message = "name的长度应该在5和20之间")
     private String name;
 
     /**
