@@ -138,6 +138,6 @@ public class ServerInstantEntity {
             logger.error("percent number format exception", e);
         }
         jvm.setUsedPercent(percent);
-        logger.info("ServerInstantEntity  20");
+        logger.info("ServerInstantEntity  10");
     }
 }

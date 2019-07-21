@@ -98,67 +98,48 @@ public class ServerBaseEntity {
     }
 
     public void init() {
-        logger.info("ServerBaseEntity 1 ");
         Properties props = System.getProperties();
-        logger.info("ServerBaseEntity 2 ");
         setJvmInfo(props);
         setSysInfo(props);
         setAppInfo(props);
-        logger.info("ServerBaseEntity 3 ");
         setSysFiles(systemInfo.getOperatingSystem());
-        logger.info("ServerBaseEntity 4 ");
     }
 
     /**
      * 设置Java虚拟机
      */
     private void setJvmInfo(Properties props) {
-        logger.info("ServerBaseEntity 5 ");
         jvm.setName(props.getProperty("java.vm.name"));
-        logger.info("ServerBaseEntity 6 ");
         jvm.setVersion(props.getProperty("java.version"));
-        logger.info("ServerBaseEntity 7 ");
         jvm.setHome(props.getProperty("java.home"));
-        logger.info("ServerBaseEntity 8 ");
     }
 
     /**
      * 设置服务器信息
      */
     private void setSysInfo(Properties props) {
-        logger.info("ServerBaseEntity 9 ");
         sys.setServerName(IPUtils.getHostName());
-        logger.info("ServerBaseEntity 10 ");
         sys.setServerIp(IPUtils.getHostIp());
-        logger.info("ServerBaseEntity 11 ");
         sys.setOsName(props.getProperty("os.name"));
-        logger.info("ServerBaseEntity 12 ");
         sys.setOsArch(props.getProperty("os.arch"));
-        logger.info("ServerBaseEntity 13 ");
     }
 
     /**
      * 设置App应用信息
      */
     private void setAppInfo(Properties props) {
-        logger.info("ServerBaseEntity 14 ");
         app.setAppDir(props.getProperty("user.dir"));
-        logger.info("ServerBaseEntity 15 ");
         app.setUploadDir(uploadConfig.getFolder());
         app.setLogDir(logFolder);
-        logger.info("ServerBaseEntity 16 ");
     }
 
     /**
      * 设置磁盘信息
      */
     private void setSysFiles(OperatingSystem os) {
-        logger.info("ServerBaseEntity 17 ");
         sysDisks.clear();
         FileSystem fileSystem = os.getFileSystem();
-        logger.info("ServerBaseEntity 18 ");
         OSFileStore[] fsArray = fileSystem.getFileStores();
-        logger.info("ServerBaseEntity 19 ");
         for (OSFileStore fs : fsArray) {
             long free = fs.getUsableSpace();
             long total = fs.getTotalSpace();
@@ -171,7 +152,6 @@ public class ServerBaseEntity {
             sysDisk.setFree(FileUtils.convertFileSize(free));
             sysDisk.setUsed(FileUtils.convertFileSize(used));
             int percent = 0;
-            logger.info("ServerBaseEntity 20 ");
             try {
                 percent = Integer.parseInt(DataHandleUtils.accuracy(used, total, 0));
             } catch (NumberFormatException e) {
@@ -179,7 +159,6 @@ public class ServerBaseEntity {
             }
             sysDisk.setUsedPercent(percent + "%");
             sysDisks.add(sysDisk);
-            logger.info("ServerBaseEntity 21 ");
         }
     }
 }
