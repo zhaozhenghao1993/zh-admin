@@ -1,9 +1,9 @@
 package com.zhenghao.admin.auth.dao;
 
 import com.zhenghao.admin.auth.entity.SysOrgEntity;
-import com.zhenghao.admin.common.vo.TreeVO;
 import com.zhenghao.admin.common.dao.BaseMapper;
 import com.zhenghao.admin.common.entity.Query;
+import com.zhenghao.admin.common.vo.TreeVO;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.stereotype.Component;
 

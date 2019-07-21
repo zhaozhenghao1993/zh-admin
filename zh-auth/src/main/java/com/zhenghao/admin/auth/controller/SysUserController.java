@@ -2,12 +2,12 @@ package com.zhenghao.admin.auth.controller;
 
 import com.zhenghao.admin.auth.dto.SysUserPasswordDTO;
 import com.zhenghao.admin.auth.entity.SysUserEntity;
+import com.zhenghao.admin.auth.service.SysUserService;
 import com.zhenghao.admin.common.annotation.SysLog;
 import com.zhenghao.admin.common.constant.SystemConstant;
 import com.zhenghao.admin.common.constant.UploadConstant;
 import com.zhenghao.admin.common.controller.AbstractController;
 import com.zhenghao.admin.common.entity.Page;
-import com.zhenghao.admin.auth.service.SysUserService;
 import com.zhenghao.admin.common.entity.Result;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;

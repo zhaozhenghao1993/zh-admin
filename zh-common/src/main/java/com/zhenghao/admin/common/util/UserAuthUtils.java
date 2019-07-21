@@ -1,7 +1,6 @@
 package com.zhenghao.admin.common.util;
 
 import com.zhenghao.admin.common.jwt.JWTInfo;
-import com.zhenghao.admin.common.jwt.JWTInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

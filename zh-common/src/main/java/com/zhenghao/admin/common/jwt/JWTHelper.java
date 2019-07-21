@@ -1,12 +1,11 @@
 package com.zhenghao.admin.common.jwt;
 
+import com.zhenghao.admin.common.constant.SystemConstant;
 import com.zhenghao.admin.common.util.StringCommonUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import com.zhenghao.admin.common.constant.SystemConstant;
-import com.zhenghao.admin.common.util.StringCommonUtils;
 import org.joda.time.DateTime;
 
 import java.security.PrivateKey;

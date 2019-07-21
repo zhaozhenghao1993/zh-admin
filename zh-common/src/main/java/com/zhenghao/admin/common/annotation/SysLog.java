@@ -6,9 +6,8 @@ import java.lang.annotation.*;
 
 /**
  * 系统日志注解
- * @SysLog("里面写内容，必须赋值到value属性中")
  *
- * author:zhaozhenghao
+ * @SysLog("里面写内容，必须赋值到value属性中") author:zhaozhenghao
  * Email :736720794@qq.com
  * date  :2017年11月20日
  * SysLog.java

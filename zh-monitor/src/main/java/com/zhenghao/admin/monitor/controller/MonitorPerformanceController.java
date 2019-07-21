@@ -1,10 +1,6 @@
 package com.zhenghao.admin.monitor.controller;
 
 import com.zhenghao.admin.common.entity.Result;
-import com.zhenghao.admin.common.util.CommonUtils;
-import com.zhenghao.admin.monitor.entity.ServerBaseEntity;
-import com.zhenghao.admin.monitor.entity.ServerInstantEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -110,7 +106,7 @@ public class MonitorPerformanceController {
         return Result.ofFail("当前监控请求参数无授权");
     }
 
-    private boolean validateChain (List<String> paramsList, String actuator) {
+    private boolean validateChain(List<String> paramsList, String actuator) {
         return paramsList.stream().anyMatch(actuator::equals);
     }
 }

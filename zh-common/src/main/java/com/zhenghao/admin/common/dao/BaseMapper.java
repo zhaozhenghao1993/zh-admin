@@ -1,7 +1,6 @@
 package com.zhenghao.admin.common.dao;
 
 import com.zhenghao.admin.common.entity.Query;
-import com.zhenghao.admin.common.entity.Query;
 
 import java.util.List;
 

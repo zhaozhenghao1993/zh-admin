@@ -1,16 +1,16 @@
 package com.zhenghao.admin.auth.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.zhenghao.admin.auth.entity.SysRoleEntity;
 import com.zhenghao.admin.auth.dao.SysRoleMapper;
 import com.zhenghao.admin.auth.dao.SysRoleMenuMapper;
 import com.zhenghao.admin.auth.dao.SysUserRoleMapper;
+import com.zhenghao.admin.auth.entity.SysRoleEntity;
+import com.zhenghao.admin.auth.service.SysRoleService;
 import com.zhenghao.admin.common.constant.SystemConstant;
 import com.zhenghao.admin.common.entity.Page;
 import com.zhenghao.admin.common.entity.Query;
 import com.zhenghao.admin.common.entity.Result;
 import com.zhenghao.admin.common.util.CommonUtils;
-import com.zhenghao.admin.auth.service.SysRoleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,5 @@
 package com.zhenghao.admin.common.handler;
 
-import com.zhenghao.admin.common.exception.upload.UploadException;
 import com.zhenghao.admin.common.constant.HttpStatusConstant;
 import com.zhenghao.admin.common.entity.Result;
 import com.zhenghao.admin.common.exception.upload.UploadException;
@@ -36,6 +35,7 @@ public class GlobalExceptionHandler {
 
     /**
      * 当请求被 xss 拦截后 json 串可能被破坏，将其异常捕获
+     *
      * @param response
      * @param ex
      * @return

@@ -25,7 +25,7 @@ public class ResponseUtils {
      * 设置响应封装
      *
      * @param response HttpServletResponse
-     * @param result result 公共响应类
+     * @param result   result 公共响应类
      * @throws IOException
      */
     public static void setResultResponse(HttpServletResponse response, Result result) throws IOException {

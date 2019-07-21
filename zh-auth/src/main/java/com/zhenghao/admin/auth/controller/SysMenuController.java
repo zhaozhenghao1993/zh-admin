@@ -1,10 +1,10 @@
 package com.zhenghao.admin.auth.controller;
 
+import com.zhenghao.admin.auth.entity.SysMenuEntity;
+import com.zhenghao.admin.auth.service.SysMenuService;
 import com.zhenghao.admin.common.annotation.SysLog;
 import com.zhenghao.admin.common.controller.AbstractController;
 import com.zhenghao.admin.common.entity.Page;
-import com.zhenghao.admin.auth.entity.SysMenuEntity;
-import com.zhenghao.admin.auth.service.SysMenuService;
 import com.zhenghao.admin.common.entity.Result;
 import com.zhenghao.admin.common.vo.TreeVO;
 import org.springframework.validation.BindingResult;

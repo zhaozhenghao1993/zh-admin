@@ -1,6 +1,5 @@
 package com.zhenghao.admin.generator.controller;
 
-import com.zhenghao.admin.generator.service.ToolGeneratorService;
 import com.zhenghao.admin.common.annotation.SysLog;
 import com.zhenghao.admin.common.controller.AbstractController;
 import com.zhenghao.admin.common.entity.Page;
@@ -8,11 +7,15 @@ import com.zhenghao.admin.common.entity.Result;
 import com.zhenghao.admin.common.util.ResponseUtils;
 import com.zhenghao.admin.generator.entity.GeneratorParamEntity;
 import com.zhenghao.admin.generator.entity.TableEntity;
+import com.zhenghao.admin.generator.service.ToolGeneratorService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;

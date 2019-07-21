@@ -1,11 +1,11 @@
 package com.zhenghao.admin.auth.controller;
 
 import com.zhenghao.admin.auth.entity.SysRoleEntity;
+import com.zhenghao.admin.auth.service.SysRoleService;
 import com.zhenghao.admin.common.annotation.SysLog;
 import com.zhenghao.admin.common.constant.SystemConstant;
 import com.zhenghao.admin.common.controller.AbstractController;
 import com.zhenghao.admin.common.entity.Page;
-import com.zhenghao.admin.auth.service.SysRoleService;
 import com.zhenghao.admin.common.entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;

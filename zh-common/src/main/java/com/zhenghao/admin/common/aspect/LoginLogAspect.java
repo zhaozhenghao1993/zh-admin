@@ -1,7 +1,5 @@
 package com.zhenghao.admin.common.aspect;
 
-import com.zhenghao.admin.common.context.BaseContextHandler;
-import eu.bitwalker.useragentutils.UserAgent;
 import com.zhenghao.admin.common.constant.SystemConstant;
 import com.zhenghao.admin.common.context.BaseContextHandler;
 import com.zhenghao.admin.common.dao.SysLogMapper;
@@ -9,6 +7,7 @@ import com.zhenghao.admin.common.entity.Result;
 import com.zhenghao.admin.common.entity.SysLogEntity;
 import com.zhenghao.admin.common.util.IPUtils;
 import com.zhenghao.admin.common.util.JSONUtils;
+import eu.bitwalker.useragentutils.UserAgent;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;

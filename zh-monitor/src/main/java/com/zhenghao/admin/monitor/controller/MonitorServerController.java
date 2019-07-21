@@ -1,9 +1,9 @@
 package com.zhenghao.admin.monitor.controller;
 
-import com.zhenghao.admin.monitor.entity.ServerBaseEntity;
-import com.zhenghao.admin.monitor.entity.ServerInstantEntity;
 import com.zhenghao.admin.common.entity.Result;
 import com.zhenghao.admin.common.util.CommonUtils;
+import com.zhenghao.admin.monitor.entity.ServerBaseEntity;
+import com.zhenghao.admin.monitor.entity.ServerInstantEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
