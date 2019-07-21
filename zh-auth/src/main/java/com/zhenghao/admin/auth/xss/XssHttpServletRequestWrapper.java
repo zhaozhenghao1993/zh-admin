@@ -43,18 +43,18 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
     @Override
     public ServletInputStream getInputStream() throws IOException {
-        //非json类型,直接返回   equalsIgnoreCase忽略大小写
-        if (!(super.getHeader(HttpHeaders.CONTENT_TYPE).equalsIgnoreCase(MediaType.APPLICATION_JSON_UTF8_VALUE) || super.getHeader(HttpHeaders.CONTENT_TYPE).equalsIgnoreCase(MediaType.APPLICATION_JSON_VALUE))) {
+        // 非json类型,直接返回
+        if (!(MediaType.APPLICATION_JSON_UTF8_VALUE.equalsIgnoreCase(super.getHeader(HttpHeaders.CONTENT_TYPE)) || MediaType.APPLICATION_JSON_VALUE.equalsIgnoreCase(super.getHeader(HttpHeaders.CONTENT_TYPE)))) {
             return super.getInputStream();
         }
 
-        //为空,直接返回
+        // 为空,直接返回
         String json = IOUtils.toString(super.getInputStream(), "utf-8");
         if (StringUtils.isBlank(json)) {
             return super.getInputStream();
         }
 
-        //xss过滤
+        // xss过滤
         json = xssEncode(json);
         final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(json.getBytes("utf-8"));
         return new ServletInputStream() {

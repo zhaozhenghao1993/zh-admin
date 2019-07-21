@@ -60,7 +60,7 @@ CREATE TABLE `sys_menu` (
   `modifier_id` bigint(20) DEFAULT NULL COMMENT '最后修改人name',
   `modified_time` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='系统菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='系统菜单';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -116,14 +116,21 @@ INSERT INTO `sys_menu` VALUES ('48', '45', '清空', '/monitor/log/{type}/clear'
 INSERT INTO `sys_menu` VALUES ('49', '44', '服务器监控', null, null, 'monitor:server', '1', '1', null, '1', '2019-06-01 20:16:05', null, null);
 INSERT INTO `sys_menu` VALUES ('50', '49', '基础信息', '/monitor/server/base', 'GET', 'monitor:server:base', '3', '0', '服务器监控基础数据', '1', '2019-06-01 20:16:08', null, null);
 INSERT INTO `sys_menu` VALUES ('51', '49', '实时信息', '/monitor/server/instant', 'GET', 'monitor:server:instant', '3', '1', '服务器监控实时数据', '1', '2019-06-01 20:16:10', null, null);
-INSERT INTO `sys_menu` VALUES ('52', '44', '数据库监控', null, null, 'monitor:druid', '1', '2', 'druid数据库监控', '1', '2019-06-01 20:16:13', null, null);
-INSERT INTO `sys_menu` VALUES ('53', '52', 'druid静态资源', '/druid/*', 'GET', 'monitor:druid:static', '3', '0', 'druid静态资源', '1', '2019-06-01 20:16:15', null, null);
-INSERT INTO `sys_menu` VALUES ('54', '52', 'druid动态数据', '/druid/*', 'POST', 'monitor:druid:data', '3', '1', 'druid动态数据', '1', '2019-06-01 20:16:17', null, null);
-INSERT INTO `sys_menu` VALUES ('55', '0', '开发工具', null, null, 'tool', '0', '2', null, '1', '2019-06-01 20:16:19', null, null);
-INSERT INTO `sys_menu` VALUES ('56', '55', 'IconSelector', null, null, 'tool:icon', '1', '0', null, '1', '2019-06-01 20:16:21', null, null);
-INSERT INTO `sys_menu` VALUES ('57', '55', '代码生成器', null, null, 'tool:generator', '1', '1', null, '1', '2019-06-01 20:16:23', null, null);
-INSERT INTO `sys_menu` VALUES ('58', '57', '列表', '/tool/generator', 'GET', 'tool:generator:view', '3', '0', '代码生成器列表，展示所有数据库表信息', '1', '2019-06-01 20:16:25', null, null);
-INSERT INTO `sys_menu` VALUES ('59', '57', '生成代码', '/tool/generator/code', 'GET', 'tool:generator:code', '2', '1', '生成代码', '1', '2019-06-01 20:16:28', null, null);
+INSERT INTO `sys_menu` VALUES ('52', '44', '性能监控', '', '', 'monitor:performance', '1', '2', null, '1', '2019-07-21 15:58:53', null, null);
+INSERT INTO `sys_menu` VALUES ('53', '52', '系统信息', '', '', 'monitor:performance:system', '1', '0', null, '1', '2019-07-21 15:59:28', null, null);
+INSERT INTO `sys_menu` VALUES ('54', '52', 'JVM信息', '', '', 'monitor:performance:jvm', '1', '1', null, '1', '2019-07-21 16:00:06', null, null);
+INSERT INTO `sys_menu` VALUES ('55', '52', 'Tomcat信息', '', '', 'monitor:performance:tomcat', '1', '2', null, '1', '2019-07-21 16:00:23', '1', '2019-07-21 16:00:29');
+INSERT INTO `sys_menu` VALUES ('56', '53', '系统信息资源', '/monitor/performance/system/*', 'GET', 'monitor:performance:system:resource', '3', '0', null, '1', '2019-07-21 16:02:49', '1', '2019-07-21 19:04:39');
+INSERT INTO `sys_menu` VALUES ('57', '54', 'JVM信息资源', '/monitor/performance/jvm/*', 'GET', 'monitor:performance:jvm:resource', '3', '0', null, '1', '2019-07-21 16:03:37', '1', '2019-07-21 19:04:47');
+INSERT INTO `sys_menu` VALUES ('58', '55', 'Tomcat信息资源', '/monitor/performance/tomcat/*', 'GET', 'monitor:performance:tomcat:resource', '3', '0', null, '1', '2019-07-21 16:04:07', '1', '2019-07-21 19:04:53');
+INSERT INTO `sys_menu` VALUES ('59', '44', '数据库监控', null, null, 'monitor:druid', '1', '2', 'druid数据库监控', '1', '2019-06-01 20:16:13', null, null);
+INSERT INTO `sys_menu` VALUES ('60', '59', 'druid静态资源', '/druid/*', 'GET', 'monitor:druid:static', '3', '0', 'druid静态资源', '1', '2019-06-01 20:16:15', null, null);
+INSERT INTO `sys_menu` VALUES ('61', '59', 'druid动态数据', '/druid/*', 'POST', 'monitor:druid:data', '3', '1', 'druid动态数据', '1', '2019-06-01 20:16:17', null, null);
+INSERT INTO `sys_menu` VALUES ('62', '0', '开发工具', null, null, 'tool', '0', '2', null, '1', '2019-06-01 20:16:19', null, null);
+INSERT INTO `sys_menu` VALUES ('63', '62', 'IconSelector', null, null, 'tool:icon', '1', '0', null, '1', '2019-06-01 20:16:21', null, null);
+INSERT INTO `sys_menu` VALUES ('64', '62', '代码生成器', null, null, 'tool:generator', '1', '1', null, '1', '2019-06-01 20:16:23', null, null);
+INSERT INTO `sys_menu` VALUES ('65', '64', '列表', '/tool/generator', 'GET', 'tool:generator:view', '3', '0', '代码生成器列表，展示所有数据库表信息', '1', '2019-06-01 20:16:25', null, null);
+INSERT INTO `sys_menu` VALUES ('66', '64', '生成代码', '/tool/generator/code', 'GET', 'tool:generator:code', '2', '1', '生成代码', '1', '2019-06-01 20:16:28', null, null);
 
 -- ----------------------------
 -- Table structure for sys_org
@@ -222,7 +229,7 @@ CREATE TABLE `sys_role_menu` (
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色菜单关系';
+) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色菜单关系';
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -286,41 +293,55 @@ INSERT INTO `sys_role_menu` VALUES ('56', '1', '56');
 INSERT INTO `sys_role_menu` VALUES ('57', '1', '57');
 INSERT INTO `sys_role_menu` VALUES ('58', '1', '58');
 INSERT INTO `sys_role_menu` VALUES ('59', '1', '59');
-INSERT INTO `sys_role_menu` VALUES ('60', '2', '1');
-INSERT INTO `sys_role_menu` VALUES ('61', '2', '2');
-INSERT INTO `sys_role_menu` VALUES ('62', '2', '3');
-INSERT INTO `sys_role_menu` VALUES ('63', '2', '4');
-INSERT INTO `sys_role_menu` VALUES ('64', '2', '5');
-INSERT INTO `sys_role_menu` VALUES ('65', '2', '13');
-INSERT INTO `sys_role_menu` VALUES ('66', '2', '14');
-INSERT INTO `sys_role_menu` VALUES ('67', '2', '15');
-INSERT INTO `sys_role_menu` VALUES ('68', '2', '16');
-INSERT INTO `sys_role_menu` VALUES ('69', '2', '22');
-INSERT INTO `sys_role_menu` VALUES ('70', '2', '23');
-INSERT INTO `sys_role_menu` VALUES ('71', '2', '24');
-INSERT INTO `sys_role_menu` VALUES ('72', '2', '25');
-INSERT INTO `sys_role_menu` VALUES ('73', '2', '29');
-INSERT INTO `sys_role_menu` VALUES ('74', '2', '30');
-INSERT INTO `sys_role_menu` VALUES ('75', '2', '31');
-INSERT INTO `sys_role_menu` VALUES ('76', '2', '32');
-INSERT INTO `sys_role_menu` VALUES ('77', '2', '36');
-INSERT INTO `sys_role_menu` VALUES ('78', '2', '37');
-INSERT INTO `sys_role_menu` VALUES ('79', '2', '38');
-INSERT INTO `sys_role_menu` VALUES ('80', '2', '39');
-INSERT INTO `sys_role_menu` VALUES ('81', '2', '44');
-INSERT INTO `sys_role_menu` VALUES ('82', '2', '45');
-INSERT INTO `sys_role_menu` VALUES ('83', '2', '46');
-INSERT INTO `sys_role_menu` VALUES ('84', '2', '49');
-INSERT INTO `sys_role_menu` VALUES ('85', '2', '50');
-INSERT INTO `sys_role_menu` VALUES ('86', '2', '51');
-INSERT INTO `sys_role_menu` VALUES ('87', '2', '52');
-INSERT INTO `sys_role_menu` VALUES ('88', '2', '53');
-INSERT INTO `sys_role_menu` VALUES ('89', '2', '54');
-INSERT INTO `sys_role_menu` VALUES ('90', '2', '55');
-INSERT INTO `sys_role_menu` VALUES ('91', '2', '56');
-INSERT INTO `sys_role_menu` VALUES ('92', '2', '57');
-INSERT INTO `sys_role_menu` VALUES ('93', '2', '58');
-INSERT INTO `sys_role_menu` VALUES ('94', '2', '59');
+INSERT INTO `sys_role_menu` VALUES ('60', '1', '60');
+INSERT INTO `sys_role_menu` VALUES ('61', '1', '61');
+INSERT INTO `sys_role_menu` VALUES ('62', '1', '62');
+INSERT INTO `sys_role_menu` VALUES ('63', '1', '63');
+INSERT INTO `sys_role_menu` VALUES ('64', '1', '64');
+INSERT INTO `sys_role_menu` VALUES ('65', '1', '65');
+INSERT INTO `sys_role_menu` VALUES ('66', '1', '66');
+INSERT INTO `sys_role_menu` VALUES ('67', '2', '1');
+INSERT INTO `sys_role_menu` VALUES ('68', '2', '2');
+INSERT INTO `sys_role_menu` VALUES ('69', '2', '3');
+INSERT INTO `sys_role_menu` VALUES ('70', '2', '4');
+INSERT INTO `sys_role_menu` VALUES ('71', '2', '5');
+INSERT INTO `sys_role_menu` VALUES ('72', '2', '13');
+INSERT INTO `sys_role_menu` VALUES ('73', '2', '14');
+INSERT INTO `sys_role_menu` VALUES ('74', '2', '15');
+INSERT INTO `sys_role_menu` VALUES ('75', '2', '16');
+INSERT INTO `sys_role_menu` VALUES ('76', '2', '22');
+INSERT INTO `sys_role_menu` VALUES ('77', '2', '23');
+INSERT INTO `sys_role_menu` VALUES ('78', '2', '24');
+INSERT INTO `sys_role_menu` VALUES ('79', '2', '25');
+INSERT INTO `sys_role_menu` VALUES ('80', '2', '29');
+INSERT INTO `sys_role_menu` VALUES ('81', '2', '30');
+INSERT INTO `sys_role_menu` VALUES ('82', '2', '31');
+INSERT INTO `sys_role_menu` VALUES ('83', '2', '32');
+INSERT INTO `sys_role_menu` VALUES ('84', '2', '36');
+INSERT INTO `sys_role_menu` VALUES ('85', '2', '37');
+INSERT INTO `sys_role_menu` VALUES ('86', '2', '38');
+INSERT INTO `sys_role_menu` VALUES ('87', '2', '39');
+INSERT INTO `sys_role_menu` VALUES ('88', '2', '44');
+INSERT INTO `sys_role_menu` VALUES ('89', '2', '45');
+INSERT INTO `sys_role_menu` VALUES ('90', '2', '46');
+INSERT INTO `sys_role_menu` VALUES ('91', '2', '49');
+INSERT INTO `sys_role_menu` VALUES ('92', '2', '50');
+INSERT INTO `sys_role_menu` VALUES ('93', '2', '51');
+INSERT INTO `sys_role_menu` VALUES ('94', '2', '52');
+INSERT INTO `sys_role_menu` VALUES ('95', '2', '53');
+INSERT INTO `sys_role_menu` VALUES ('96', '2', '54');
+INSERT INTO `sys_role_menu` VALUES ('97', '2', '55');
+INSERT INTO `sys_role_menu` VALUES ('98', '2', '56');
+INSERT INTO `sys_role_menu` VALUES ('99', '2', '57');
+INSERT INTO `sys_role_menu` VALUES ('100', '2', '58');
+INSERT INTO `sys_role_menu` VALUES ('101', '2', '59');
+INSERT INTO `sys_role_menu` VALUES ('102', '2', '60');
+INSERT INTO `sys_role_menu` VALUES ('103', '2', '61');
+INSERT INTO `sys_role_menu` VALUES ('104', '2', '62');
+INSERT INTO `sys_role_menu` VALUES ('105', '2', '63');
+INSERT INTO `sys_role_menu` VALUES ('106', '2', '64');
+INSERT INTO `sys_role_menu` VALUES ('107', '2', '65');
+INSERT INTO `sys_role_menu` VALUES ('108', '2', '66');
 
 -- ----------------------------
 -- Table structure for sys_user

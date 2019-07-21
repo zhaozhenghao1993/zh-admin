@@ -6,7 +6,6 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -37,13 +36,12 @@ public class SysMenuEntity extends TreeNode implements Serializable {
     /**
      * 菜单uri
      */
-    @Length(min = 1, max = 200, message = "菜单uri的长度应该在1和200之间")
+    @Length(max = 200, message = "菜单uri的长度应该小于200")
     private String uri;
 
     /**
      * 请求method
      */
-    @Pattern(regexp = "^(GET|POST|PUT|DELETE)$", message = "请求method应为GET|POST|PUT|DELETE中的一个")
     private String method;
 
     /**

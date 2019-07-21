@@ -1,22 +1,24 @@
 package com.zhenghao.admin.auth.service.impl;
 
-import com.zhenghao.admin.auth.entity.SysMenuEntity;
 import com.zhenghao.admin.auth.dao.SysMenuMapper;
 import com.zhenghao.admin.auth.dao.SysRoleMenuMapper;
+import com.zhenghao.admin.auth.entity.SysMenuEntity;
+import com.zhenghao.admin.auth.enums.MenuTypeEnum;
+import com.zhenghao.admin.auth.service.SysMenuService;
 import com.zhenghao.admin.common.constant.SystemConstant;
-import com.zhenghao.admin.common.entity.Result;
-import com.zhenghao.admin.common.util.TreeUtils;
-import com.zhenghao.admin.common.vo.TreeVO;
 import com.zhenghao.admin.common.entity.Page;
 import com.zhenghao.admin.common.entity.Query;
+import com.zhenghao.admin.common.entity.Result;
 import com.zhenghao.admin.common.util.CommonUtils;
-import com.zhenghao.admin.auth.service.SysMenuService;
+import com.zhenghao.admin.common.util.TreeUtils;
+import com.zhenghao.admin.common.vo.TreeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * 系统菜单
@@ -66,6 +68,12 @@ public class SysMenuServiceImpl implements SysMenuService {
 
     @Override
     public Result saveMenu(SysMenuEntity menu) {
+        if (menu.getType() == MenuTypeEnum.BUTTON.getValue() ||
+                menu.getType() == MenuTypeEnum.LINK.getValue()) {
+            if (!Pattern.compile("^(GET|POST|PUT|DELETE)$").matcher(menu.getMethod()).find()) {
+                return Result.ofFail("请求method应为GET|POST|PUT|DELETE中的一个");
+            }
+        }
         int count = sysMenuMapper.save(menu);
         return CommonUtils.msg(count);
     }
