@@ -2,6 +2,16 @@ language: java
 jdk:
   - openjdk8
 
+service:
+  - mysql
+
+before_install:
+  - mysql -u root -e 'CREATE DATABASE test-admin;'
+  - mysql -u root test-admin < sql/test-admin.sql
+
+before_script:
+  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
+
 script: mvn clean package
 
 after_success:
