@@ -1,5 +1,6 @@
-package com.zhenghao.admin.auth.handler;
+package com.zhenghao.admin.main.auth.handle;
 
+import com.zhenghao.admin.auth.handler.RequestAuthHandler;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = RequestAuthHandler.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class RequestAuthHandlerTest {
 
     @Autowired
@@ -17,7 +18,7 @@ public class RequestAuthHandlerTest {
     @Test
     public void validateAnnoFilterChain() {
         Assert.assertTrue("可以直接匿名访问uri",
-                requestAuthHandler.validateAnnoFilterChain("/sys/login", "GET"));
+                requestAuthHandler.validateAnnoFilterChain("/sys/login", "POST"));
     }
 
     @Test
@@ -29,7 +30,7 @@ public class RequestAuthHandlerTest {
     @Test
     public void validatePermsFilterChain() {
         Assert.assertTrue("需要授权才能访问uri",
-                requestAuthHandler.validateAuthFilterChain("/sys/user", "POST"));
+                requestAuthHandler.validatePermsFilterChain("/sys/user", "POST", 1L));
     }
 
     @Test

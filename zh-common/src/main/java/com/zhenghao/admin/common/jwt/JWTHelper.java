@@ -52,7 +52,7 @@ public class JWTHelper {
      * @return
      * @throws Exception
      */
-    public static Jws<Claims> parserToken(String token, PublicKey publicKey) {
+    private static Jws<Claims> parserToken(String token, PublicKey publicKey) {
         return Jwts.parser().setSigningKey(publicKey).parseClaimsJws(token);
     }
 
