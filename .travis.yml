@@ -6,8 +6,8 @@ services:
   - mysql
 
 before_install:
-  - sudo mysql -u root -e 'CREATE DATABASE test-admin;'
-  - sudo mysql -u root test-admin < sql/test-admin.sql
+  - sudo mysql -u root -e 'CREATE DATABASE `test-admin`;'
+  - sudo mysql -u root `test-admin` < sql/test-admin.sql
   - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('root') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
   - sudo mysql_upgrade -u root -p root
   - sudo service mysql restart
