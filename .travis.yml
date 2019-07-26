@@ -2,15 +2,15 @@ language: java
 jdk:
   - openjdk8
 
-service:
+services:
   - mysql
 
 before_install:
-  - mysql -u root -e 'CREATE DATABASE test-admin;'
-  - mysql -u root test-admin < sql/test-admin.sql
-
-before_script:
-  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
+  - sudo mysql -u root -e 'CREATE DATABASE test-admin;'
+  - sudo mysql -u root test-admin < sql/test-admin.sql
+  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('root') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
+  - sudo mysql_upgrade -u root -p root
+  - sudo service mysql restart
 
 script: mvn clean package
 
