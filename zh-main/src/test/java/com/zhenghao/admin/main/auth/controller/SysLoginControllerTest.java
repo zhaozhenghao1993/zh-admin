@@ -1,5 +1,11 @@
 package com.zhenghao.admin.main.auth.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zhenghao.admin.auth.vo.SysLoginVO;
+import com.zhenghao.admin.common.entity.Result;
+import com.zhenghao.admin.common.util.JSONUtils;
+import com.zhenghao.admin.common.util.UserAuthUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
@@ -28,6 +36,9 @@ public class SysLoginControllerTest {
     @Autowired
     private WebApplicationContext wac;
 
+    @Autowired
+    private UserAuthUtils userAuthUtils;
+
     @Value("${zh-admin.api.prefix}")
     private String apiPrefix;
 
@@ -38,13 +49,21 @@ public class SysLoginControllerTest {
 
     @Test
     public void login() throws Exception {
+        Map<String, String> params = new HashMap<>();
+        params.put("username", "admin");
+        params.put("password", "123");
         // 登陆
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(apiPrefix + "/sys/login")
-                .content("{\"username\":\"admin\",\"password\":\"123\"}")
+                .content(JSONUtils.objToString(params))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON)).andReturn();
         Assert.assertEquals(mvcResult.getResponse().getStatus(), HttpServletResponse.SC_OK);
         String content = mvcResult.getResponse().getContentAsString();
-        System.out.println("content ===> " + content);
+
+        Result<SysLoginVO> result = JSONUtils.stringToObj(content, new TypeReference<Result<SysLoginVO>>() {
+        });
+        assert result != null;
+        SysLoginVO login = result.getData();
+        Assert.assertEquals(params.get("username"), userAuthUtils.getInfoFromToken(login.getToken()).getUsername());
     }
 }

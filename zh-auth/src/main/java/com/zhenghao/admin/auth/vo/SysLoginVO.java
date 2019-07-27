@@ -19,6 +19,9 @@ public class SysLoginVO implements Serializable {
 
     private String token;
 
+    public SysLoginVO() {
+    }
+
     public SysLoginVO(String token) {
         this.token = token;
     }

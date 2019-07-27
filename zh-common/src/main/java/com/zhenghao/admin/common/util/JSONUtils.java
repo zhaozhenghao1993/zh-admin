@@ -103,8 +103,8 @@ public class JSONUtils {
      * 差不多同上
      *
      * @param str
-     * @param collectionClass
-     * @param elementClasses
+     * @param collectionClass 泛型的Collection
+     * @param elementClasses 元素类
      * @return
      */
     public static <T> T stringToObj(String str, Class<?> collectionClass, Class<?>... elementClasses) {

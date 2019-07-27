@@ -4,12 +4,6 @@ spring:
     name: zh-admin
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      stat-view-servlet:
-        enabled: true
-        loginUsername: admin
-        loginPassword: 123456
-      web-stat-filter:
-        enabled: true
       filters: stat #监控统计拦截的filters
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://127.0.0.1:3306/test-admin?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=GMT%2B8 #基本属性
