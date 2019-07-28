@@ -10,6 +10,7 @@
 
 一个简单的 springboot 权限管理 api 脚手架.
 
+[![Release](https://img.shields.io/github/release/zhaozhenghao1993/zh-admin)](https://github.com/zhaozhenghao1993/zh-admin/releases)
 [![Build Status](https://www.travis-ci.org/zhaozhenghao1993/zh-admin.svg?branch=master)](https://www.travis-ci.org/zhaozhenghao1993/zh-admin)
 [![codecov](https://codecov.io/gh/zhaozhenghao1993/zh-admin/branch/master/graph/badge.svg)](https://codecov.io/gh/zhaozhenghao1993/zh-admin)
 
@@ -28,6 +29,10 @@ zh-admin 是一个简单的 springboot 权限管理 api 框架。采用前后端
 ## 前端地址
 
 [zh-web-vue](https://github.com/zhaozhenghao1993/zh-web-vue)
+
+## 演示环境
+
+[http://106.12.21.222](http://106.12.21.222)
 
 ## 技术选型
 
