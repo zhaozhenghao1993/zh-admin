@@ -92,6 +92,13 @@ public class ApiAuthFilter implements Filter {
                 return;
             }
 
+            // 演示环境，过滤除GET请求外的所有请求
+            if (!"GET".equals(method)) {
+                logger.warn("{}::{},演示环境只放行GET请求!", uri, method);
+                ResponseUtils.setResultResponse(httpServletResponse, Result.ofFail(HttpStatusConstant.EXCEPTION_OTHER_CODE, "抱歉,当前为演示环境!"));
+                return;
+            }
+
             // 获取用户信息
             JWTInfo jwtInfo = getJWTUser(httpServletRequest, httpServletResponse);
             if (jwtInfo == null) {
