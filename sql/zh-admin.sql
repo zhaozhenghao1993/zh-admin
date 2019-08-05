@@ -68,7 +68,7 @@ CREATE TABLE `sys_menu` (
 INSERT INTO `sys_menu` VALUES ('1', '0', '系统管理', null, null, 'sys', '0', '0', null, '1', '2019-06-01 18:34:08', null, null);
 INSERT INTO `sys_menu` VALUES ('2', '1', '用户管理', null, null, 'sys:user', '1', '0', null, '1', '2019-06-01 18:35:30', null, null);
 INSERT INTO `sys_menu` VALUES ('3', '2', '列表', '/sys/user', 'GET', 'sys:user:view', '3', '0', '系统用户列表', '1', '2019-06-01 20:14:04', null, null);
-INSERT INTO `sys_menu` VALUES ('4', '2', '展示', '	/sys/user/{id}', 'GET', 'sys:user:info', '3', '1', '系统用户展示', '1', '2019-06-01 20:14:06', null, null);
+INSERT INTO `sys_menu` VALUES ('4', '2', '展示', '/sys/user/{id}', 'GET', 'sys:user:info', '3', '1', '系统用户展示', '1', '2019-06-01 20:14:06', null, null);
 INSERT INTO `sys_menu` VALUES ('5', '2', '详情', '/sys/user/{id}/detail', 'GET', 'sys:user:detail', '3', '2', '系统用户详情', '1', '2019-06-01 20:14:08', null, null);
 INSERT INTO `sys_menu` VALUES ('6', '2', '新增', '/sys/user', 'POST', 'sys:user:save', '2', '3', '系统用户新增', '1', '2019-06-01 20:14:10', null, null);
 INSERT INTO `sys_menu` VALUES ('7', '2', '修改', '/sys/user/{id}', 'PUT', 'sys:user:edit', '2', '4', '系统用户修改', '1', '2019-06-01 20:14:12', null, null);
