@@ -11,6 +11,7 @@ import com.zhenghao.admin.common.constant.SystemConstant;
 import com.zhenghao.admin.common.context.BaseContextHandler;
 import com.zhenghao.admin.common.entity.Result;
 import com.zhenghao.admin.common.jwt.JWTInfo;
+import com.zhenghao.admin.common.util.IPUtils;
 import com.zhenghao.admin.common.util.ResponseUtils;
 import com.zhenghao.admin.common.util.UserAuthUtils;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -74,7 +75,7 @@ public class ApiAuthFilter implements Filter {
 
             String uri = httpServletRequest.getRequestURI();
             String method = httpServletRequest.getMethod();
-            logger.info("{}::{} ==> check token and user permission....", uri, method);
+            logger.info("{}::{} ==> check token and user permission, request from ==> {}", uri, method, IPUtils.getIpAddr());
 
             // 判断当前 uri 路由是否有效
             if (routeConfig.getRoutes().stream().noneMatch(uri::startsWith)) {
