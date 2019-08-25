@@ -7,5 +7,5 @@ mvn package -DskipTests=true -Dmaven.javadoc.skip=true
 echo "mvn package finished ..."
 
 cd zh-main
-docker build -t zhaozhenghao1993/zh-admin:1.0.0 .
+docker build -t zhaozhenghao1993/zh-admin-develop:1.0.0 .
 echo "build finished ..."
