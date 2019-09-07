@@ -1,5 +1,6 @@
 package com.zhenghao.admin.auth.controller;
 
+import com.zhenghao.admin.auth.entity.SysUserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.commons.util.InetUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,5 +25,10 @@ public class TestController {
         return ip;
     }
 
+    @GetMapping("/exception")
+    public String exception() {
+        SysUserEntity user = null;
+        return user.getName();
+    }
 
 }
