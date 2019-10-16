@@ -1,7 +1,6 @@
 package com.zhenghao.admin.main.auth.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhenghao.admin.auth.vo.SysLoginVO;
 import com.zhenghao.admin.common.entity.Result;
 import com.zhenghao.admin.common.util.JSONUtils;
@@ -27,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@SpringBootTest
 @Transactional
 public class SysLoginControllerTest {
 
@@ -43,7 +42,7 @@ public class SysLoginControllerTest {
     private String apiPrefix;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
