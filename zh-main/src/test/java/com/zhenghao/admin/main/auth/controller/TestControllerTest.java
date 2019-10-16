@@ -26,6 +26,28 @@ import static org.mockito.Mockito.when;
  * DEFINED_PORT：创建ApplicationContext上下文，启动一个真实的Web容器，监听SpringBoot配置配置文件中指定的端口，默认是8080端口。
  * NONE：只是启动ApplicationContext，不会启动任何(Mock或者非Mock)web容器。
  * 如果是使用Junit来进行单元测试，再增加一个@RunWith(SpringRunner.class)或者@RunWith(SpringJUnit4ClassRunner.class)注解。
+ *
+ *
+ * MOCK ： 加载一个WebApplicationContext并提供一个模拟servlet环境。嵌入式servlet容器在使用此注释时不会启动。
+ * 如果servlet API不在你的类路径上，这个模式将透明地回退到创建一个常规的非web应用程序上下文。
+ * 可以与@AutoConfigureMockMvc结合使用，用于基于MockMvc的应用程序测试。
+ *
+ * RANDOM_PORT ： 加载一个EmbeddedWebApplicationContext并提供一个真正的servlet环境。嵌入式servlet容器启动并在随机端口上侦听。
+ *
+ * DEFINED_PORT ： 加载一个EmbeddedWebApplicationContext并提供一个真正的servlet环境。
+ * 嵌入式servlet容器启动并监听定义的端口（即从application.properties或默认端口8080）。
+ *
+ * NONE ： 使用SpringApplication加载ApplicationContext，但不提供任何servlet环境（模拟或其他）。
+ *
+ * 注意：
+ *
+ * 1、如果你的测试是@Transactional，默认情况下它会在每个测试方法结束时回滚事务。
+ * 但是，由于使用RANDOM_PORT或DEFINED_PORT这种安排隐式地提供了一个真正的servlet环境，
+ * 所以HTTP客户端和服务器将在不同的线程中运行，从而分离事务。 在这种情况下，在服务器上启动的任何事务都不会回滚。
+ *
+ * 2、除了@SpringBootTest之外，还提供了许多其他注释来测试应用程序的更具体的切片。 详情请参阅下文。
+ *
+ * 3、不要忘记还要在测试中添加@RunWith（SpringRunner.class），否则注释将被忽略。
  * 🙃
  *
  * //在所有测试方法前执行一次，一般在其中写上整体初始化的代码
