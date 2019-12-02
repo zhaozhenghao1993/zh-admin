@@ -29,7 +29,7 @@ public interface SysUserService {
 
     SysUserEntity getUserByName(String username);
 
-    Page<SysUserEntity> listUser(Map<String, Object> params);
+    Result<Page<SysUserEntity>> listUser(Map<String, Object> params);
 
     Result<SysUserEntity> getUserInfo(Long id);
 

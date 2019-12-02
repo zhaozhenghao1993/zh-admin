@@ -1,6 +1,7 @@
 package com.zhenghao.admin.generator.service;
 
 import com.zhenghao.admin.common.entity.Page;
+import com.zhenghao.admin.common.entity.Result;
 import com.zhenghao.admin.generator.entity.GeneratorParamEntity;
 import com.zhenghao.admin.generator.entity.TableEntity;
 
@@ -19,7 +20,7 @@ import java.util.Map;
 
 public interface ToolGeneratorService {
 
-    Page<TableEntity> listTable(Map<String, Object> params);
+    Result<Page<TableEntity>> listTable(Map<String, Object> params);
 
     byte[] generator(GeneratorParamEntity params);
 }

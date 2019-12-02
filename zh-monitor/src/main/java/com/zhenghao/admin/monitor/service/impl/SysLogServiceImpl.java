@@ -35,12 +35,12 @@ public class SysLogServiceImpl implements SysLogService {
     private SysLogMapper sysLogMapper;
 
     @Override
-    public Page<SysLogEntity> listLog(Map<String, Object> params) {
+    public Result<Page<SysLogEntity>> listLog(Map<String, Object> params) {
         Query query = new Query(params);
         Page<SysLogEntity> page = new Page<>(query);
         PageHelper.startPage(page.getPageNum(), page.getPageSize());
         page.setData(sysLogMapper.listForPage(query));
-        return page;
+        return CommonUtils.msg(page);
     }
 
     @Override

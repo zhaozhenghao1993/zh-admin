@@ -30,12 +30,12 @@ public class ${className}ServiceImpl implements ${className}Service {
 	private ${className}Mapper ${objName}Mapper;
 	
 	@Override
-	public Page<${className}Entity> list${className}(Map<String, Object> params) {
+	public Result<Page<${className}Entity>> list${className}(Map<String, Object> params) {
 		Query query = new Query(params);
 		Page<${className}Entity> page = new Page<>(query);
         PageHelper.startPage(page.getPageNum(), page.getPageSize());
         page.setData(${objName}Mapper.listForPage(query));
-		return page;
+		return CommonUtils.msg(page);
 	}
 
     @Override

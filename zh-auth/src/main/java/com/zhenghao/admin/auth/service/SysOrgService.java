@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public interface SysOrgService {
 
-    Page<SysOrgEntity> listOrg(Map<String, Object> params);
+    Result<Page<SysOrgEntity>> listOrg(Map<String, Object> params);
 
     Result<List<TreeVO>> listTree(Map<String, Object> params);
 

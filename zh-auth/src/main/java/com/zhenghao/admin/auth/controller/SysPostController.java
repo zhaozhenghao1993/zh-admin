@@ -36,7 +36,7 @@ public class SysPostController extends AbstractController {
      * @return
      */
     @GetMapping("")
-    public Page<SysPostEntity> list(@RequestParam Map<String, Object> params) {
+    public Result<Page<SysPostEntity>> list(@RequestParam Map<String, Object> params) {
         return sysPostService.listPost(params);
     }
 

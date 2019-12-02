@@ -42,12 +42,12 @@ public class SysRoleServiceImpl implements SysRoleService {
     private SysRoleMenuMapper sysRoleMenuMapper;
 
     @Override
-    public Page<SysRoleEntity> listRole(Map<String, Object> params) {
+    public Result<Page<SysRoleEntity>> listRole(Map<String, Object> params) {
         Query query = new Query(params);
         Page<SysRoleEntity> page = new Page<>(query);
         PageHelper.startPage(page.getPageNum(), page.getPageSize());
         page.setData(sysRoleMapper.listForPage(query));
-        return page;
+        return CommonUtils.msg(page);
     }
 
     @Override

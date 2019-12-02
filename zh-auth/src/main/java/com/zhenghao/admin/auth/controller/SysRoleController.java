@@ -31,7 +31,7 @@ public class SysRoleController extends AbstractController {
     private SysRoleService sysRoleService;
 
     @GetMapping("")
-    public Page<SysRoleEntity> list(@RequestParam Map<String, Object> params) {
+    public Result<Page<SysRoleEntity>> list(@RequestParam Map<String, Object> params) {
         if (getUserId() != SystemConstant.SUPER_ADMIN) {
             params.put("creatorId", getUserId());
         }

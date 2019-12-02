@@ -75,7 +75,7 @@ public class ApiAuthFilter implements Filter {
 
             String uri = httpServletRequest.getRequestURI();
             String method = httpServletRequest.getMethod();
-            logger.info("{}::{} ==> check token and user permission, request from ==> {}", uri, method, IPUtils.getIpAddr());
+            logger.info("request uri:[{}], method:[{}], from:[{}], check token and user permission", uri, method, IPUtils.getIpAddr());
 
             // 判断当前 uri 路由是否有效
             if (routeConfig.getRoutes().stream().noneMatch(uri::startsWith)) {

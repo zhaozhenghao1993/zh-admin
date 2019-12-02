@@ -37,7 +37,7 @@ public class SysOrgController extends AbstractController {
      * @return
      */
     @GetMapping("")
-    public Page<SysOrgEntity> listOrg(@RequestParam Map<String, Object> params) {
+    public Result<Page<SysOrgEntity>> listOrg(@RequestParam Map<String, Object> params) {
         return sysOrgService.listOrg(params);
     }
 
