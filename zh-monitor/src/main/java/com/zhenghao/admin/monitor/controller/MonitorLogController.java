@@ -36,7 +36,7 @@ public class MonitorLogController extends AbstractController {
      * @return
      */
     @GetMapping("")
-    public Page<SysLogEntity> listLog(@RequestParam Map<String, Object> params) {
+    public Result<Page<SysLogEntity>> listLog(@RequestParam Map<String, Object> params) {
         return sysLogService.listLog(params);
     }
 

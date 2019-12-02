@@ -36,12 +36,12 @@ public class SysPostServiceImpl implements SysPostService {
     private SysUserPostMapper sysUserPostMapper;
 
     @Override
-    public Page<SysPostEntity> listPost(Map<String, Object> params) {
+    public Result<Page<SysPostEntity>> listPost(Map<String, Object> params) {
         Query query = new Query(params);
         Page<SysPostEntity> page = new Page<>(query);
         PageHelper.startPage(page.getPageNum(), page.getPageSize());
         page.setData(sysPostMapper.listForPage(query));
-        return page;
+        return CommonUtils.msg(page);
     }
 
     @Override

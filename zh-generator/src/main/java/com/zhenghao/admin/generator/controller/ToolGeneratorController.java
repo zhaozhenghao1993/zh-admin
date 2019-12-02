@@ -47,7 +47,7 @@ public class ToolGeneratorController extends AbstractController {
      */
     @GetMapping("")
     @ResponseBody
-    public Page<TableEntity> listTable(@RequestParam Map<String, Object> params) {
+    public Result<Page<TableEntity>> listTable(@RequestParam Map<String, Object> params) {
         return toolGeneratorService.listTable(params);
     }
 

@@ -3,7 +3,9 @@ package com.zhenghao.admin.generator.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.zhenghao.admin.common.entity.Page;
 import com.zhenghao.admin.common.entity.Query;
+import com.zhenghao.admin.common.entity.Result;
 import com.zhenghao.admin.common.exception.BaseException;
+import com.zhenghao.admin.common.util.CommonUtils;
 import com.zhenghao.admin.generator.core.GeneratorHandler;
 import com.zhenghao.admin.generator.dao.ToolGeneratorMapper;
 import com.zhenghao.admin.generator.entity.ColumnEntity;
@@ -36,12 +38,12 @@ public class ToolGeneratorServiceImpl implements ToolGeneratorService {
     private ToolGeneratorMapper toolGeneratorMapper;
 
     @Override
-    public Page<TableEntity> listTable(Map<String, Object> params) {
+    public Result<Page<TableEntity>> listTable(Map<String, Object> params) {
         Query query = new Query(params);
         Page<TableEntity> page = new Page<>(query);
         PageHelper.startPage(page.getPageNum(), page.getPageSize());
         page.setData(toolGeneratorMapper.listTable(query));
-        return page;
+        return CommonUtils.msg(page);
     }
 
     @Override

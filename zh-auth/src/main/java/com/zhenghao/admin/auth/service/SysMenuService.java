@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public interface SysMenuService {
 
-    Page<SysMenuEntity> listMenu(Map<String, Object> params);
+    Result<Page<SysMenuEntity>> listMenu(Map<String, Object> params);
 
     Result<List<TreeVO>> listTree(Map<String, Object> params);
 

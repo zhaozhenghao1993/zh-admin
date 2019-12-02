@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public interface SysLogService {
 
-    Page<SysLogEntity> listLog(Map<String, Object> params);
+    Result<Page<SysLogEntity>> listLog(Map<String, Object> params);
 
     Result batchRemove(Long[] ids);
 
