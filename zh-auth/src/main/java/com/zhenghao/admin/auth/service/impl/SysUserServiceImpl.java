@@ -70,12 +70,12 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public Page<SysUserEntity> listUser(Map<String, Object> params) {
+    public Result<Page<SysUserEntity>> listUser(Map<String, Object> params) {
         Query query = new Query(params);
         Page<SysUserEntity> page = new Page<>(query);
         PageHelper.startPage(page.getPageNum(), page.getPageSize());
         page.setData(sysUserMapper.listForPage(query));
-        return page;
+        return CommonUtils.msg(page);
     }
 
     @Override
