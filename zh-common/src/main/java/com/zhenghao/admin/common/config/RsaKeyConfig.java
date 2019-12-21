@@ -31,7 +31,7 @@ public class RsaKeyConfig {
     private String publicKeyPath;
 
     @Bean
-    public RsaKeyManager getRsaKeyManager() throws NoSuchAlgorithmException, IOException, InvalidKeySpecException {
+    public RsaKeyManager rsaKeyManager() throws NoSuchAlgorithmException, IOException, InvalidKeySpecException {
         RsaKeyHelper rsaKeyHelper = new RsaKeyHelper();
         RsaKeyManager rsaKeyManager = new RsaKeyManager();
         rsaKeyManager.setPublicKey(rsaKeyHelper.loadPublicKey(publicKeyPath));
