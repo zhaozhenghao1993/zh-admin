@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("${zh-admin.api.prefix}/test")
 public class TestController {
 
+    private final InetUtils inetUtils;
+
     @Autowired
-    private InetUtils inetUtils;
+    public TestController(InetUtils inetUtils) {
+        this.inetUtils = inetUtils;
+    }
 
     @GetMapping("/heart")
     public String heart() {

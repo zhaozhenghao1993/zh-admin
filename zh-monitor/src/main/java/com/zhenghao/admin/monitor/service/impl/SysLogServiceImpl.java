@@ -31,8 +31,12 @@ import java.util.Map;
 @Transactional
 public class SysLogServiceImpl implements SysLogService {
 
+    private final SysLogMapper sysLogMapper;
+
     @Autowired
-    private SysLogMapper sysLogMapper;
+    public SysLogServiceImpl(SysLogMapper sysLogMapper) {
+        this.sysLogMapper = sysLogMapper;
+    }
 
     @Override
     public Result<Page<SysLogEntity>> listLog(Map<String, Object> params) {

@@ -40,7 +40,7 @@ public class RsaKeyHelper {
         InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filename);
         byte[] bytes = new byte[resourceAsStream.available()];
         int total = resourceAsStream.read(bytes);
-        logger.info("PublicKey File read successfully, the total number of bytes read for {}", total);
+        logger.info("PublicKey File read successfully, the total number of bytes read for [{}]", total);
         Base64.Decoder decoder = Base64.getDecoder();
         byte[] buffer = decoder.decode(new String(bytes));
         X509EncodedKeySpec spec = new X509EncodedKeySpec(buffer);
@@ -59,7 +59,7 @@ public class RsaKeyHelper {
         InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filename);
         byte[] bytes = new byte[resourceAsStream.available()];
         int total = resourceAsStream.read(bytes);
-        logger.info("PrivateKey File read successfully, the total number of bytes read for {}", total);
+        logger.info("PrivateKey File read successfully, the total number of bytes read for [{}]", total);
         Base64.Decoder decoder = Base64.getDecoder();
         byte[] buffer = decoder.decode(new String(bytes));
         PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(buffer);
