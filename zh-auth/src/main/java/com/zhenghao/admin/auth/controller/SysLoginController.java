@@ -4,17 +4,18 @@ import com.zhenghao.admin.auth.entity.SysUserEntity;
 import com.zhenghao.admin.auth.service.SysUserService;
 import com.zhenghao.admin.auth.vo.SysLoginVO;
 import com.zhenghao.admin.common.constant.HttpStatusConstant;
+import com.zhenghao.admin.common.constant.SystemConstant;
 import com.zhenghao.admin.common.entity.Result;
 import com.zhenghao.admin.common.jwt.JWTInfo;
 import com.zhenghao.admin.common.util.MD5Utils;
 import com.zhenghao.admin.common.util.UserAuthUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -29,11 +30,15 @@ import java.util.Map;
 @RequestMapping("${zh-admin.api.prefix}/sys")
 public class SysLoginController {
 
-    @Resource
-    private SysUserService sysUserService;
+    private final SysUserService sysUserService;
 
-    @Resource
-    private UserAuthUtils userAuthUtils;
+    private final UserAuthUtils userAuthUtils;
+
+    @Autowired
+    public SysLoginController(SysUserService sysUserService, UserAuthUtils userAuthUtils) {
+        this.sysUserService = sysUserService;
+        this.userAuthUtils = userAuthUtils;
+    }
 
     @PostMapping("/login")
     public Result<SysLoginVO> login(@RequestBody Map<String, Object> params) {
@@ -58,7 +63,7 @@ public class SysLoginController {
             return Result.ofFail(HttpStatusConstant.USER_INCORRECT_CREDENTIALS, "Account credentials incorrect!");
         }
         //账号锁定
-        if (user.getStatus() == 1) {
+        if (user.getStatus() == SystemConstant.StatusType.DISABLE.getValue()) {
             return Result.ofFail(HttpStatusConstant.USER_LOCKED_ACCOUNT, "Account locked!");
         }
         try {

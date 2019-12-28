@@ -3,9 +3,9 @@ package com.zhenghao.admin.auth.filter;
 
 import com.zhenghao.admin.auth.config.RouteConfig;
 import com.zhenghao.admin.auth.config.TokenHeaderConfig;
-import com.zhenghao.admin.auth.dao.SysUserMapper;
 import com.zhenghao.admin.auth.entity.SysUserEntity;
 import com.zhenghao.admin.auth.handler.RequestAuthHandler;
+import com.zhenghao.admin.auth.service.SysUserService;
 import com.zhenghao.admin.common.constant.HttpStatusConstant;
 import com.zhenghao.admin.common.constant.SystemConstant;
 import com.zhenghao.admin.common.context.BaseContextHandler;
@@ -52,20 +52,28 @@ public class ApiAuthFilter implements Filter {
     @Value("${zh-admin.api.prefix}")
     private String apiPrefix;
 
-    @Autowired
-    private RouteConfig routeConfig;
+    private final RouteConfig routeConfig;
+
+    private final TokenHeaderConfig tokenHeaderConfig;
+
+    private final SysUserService sysUserService;
+
+    private final UserAuthUtils userAuthUtils;
+
+    private final RequestAuthHandler requestAuthHandler;
 
     @Autowired
-    private TokenHeaderConfig tokenHeaderConfig;
-
-    @Autowired
-    private SysUserMapper sysUserMapper;
-
-    @Autowired
-    private UserAuthUtils userAuthUtils;
-
-    @Autowired
-    private RequestAuthHandler requestAuthHandler;
+    public ApiAuthFilter(RouteConfig routeConfig,
+                         TokenHeaderConfig tokenHeaderConfig,
+                         SysUserService sysUserService,
+                         UserAuthUtils userAuthUtils,
+                         RequestAuthHandler requestAuthHandler) {
+        this.routeConfig = routeConfig;
+        this.tokenHeaderConfig = tokenHeaderConfig;
+        this.sysUserService = sysUserService;
+        this.userAuthUtils = userAuthUtils;
+        this.requestAuthHandler = requestAuthHandler;
+    }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -179,7 +187,7 @@ public class ApiAuthFilter implements Filter {
      * @throws IOException
      */
     private boolean validateUserInfo(JWTInfo jwtInfo, HttpServletResponse response) throws IOException {
-        SysUserEntity user = sysUserMapper.getObjectById(jwtInfo.getUserId());
+        SysUserEntity user = sysUserService.getUserEntityById(jwtInfo.getUserId());
         if (user == null) {
             logger.error("Token exception! Account does not exist!");
             ResponseUtils.setResultResponse(response, Result.ofFail(HttpStatusConstant.USER_UNKNOWN_ACCOUNT, "Token exception! Account does not exist!"));

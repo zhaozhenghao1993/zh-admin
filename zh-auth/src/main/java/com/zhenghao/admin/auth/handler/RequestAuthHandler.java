@@ -20,11 +20,15 @@ import java.util.regex.Pattern;
 @Component
 public class RequestAuthHandler {
 
-    @Autowired
-    private FilterChainConfig filterChainConfig;
+    private final FilterChainConfig filterChainConfig;
+
+    private final SysUserService sysUserService;
 
     @Autowired
-    private SysUserService sysUserService;
+    public RequestAuthHandler(FilterChainConfig filterChainConfig, SysUserService sysUserService) {
+        this.filterChainConfig = filterChainConfig;
+        this.sysUserService = sysUserService;
+    }
 
     /**
      * 验证当前uri是否为直接匿名访问uri

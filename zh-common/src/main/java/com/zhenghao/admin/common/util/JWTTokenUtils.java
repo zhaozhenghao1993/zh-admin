@@ -23,8 +23,12 @@ public class JWTTokenUtils {
     @Value("${zh-admin.jwt.expire}")
     private int expire;
 
+    private final RsaKeyManager rsaKeyManager;
+
     @Autowired
-    private RsaKeyManager rsaKeyManager;
+    public JWTTokenUtils(RsaKeyManager rsaKeyManager) {
+        this.rsaKeyManager = rsaKeyManager;
+    }
 
     /**
      * 私钥生成jwt token
