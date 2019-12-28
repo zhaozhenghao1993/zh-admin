@@ -26,8 +26,12 @@ public class RedisUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(RedisUtils.class);
 
+    private final RedisTemplate redisTemplate;
+
     @Autowired
-    private RedisTemplate redisTemplate;
+    public RedisUtils(RedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     /**
      * 指定缓存失效时间

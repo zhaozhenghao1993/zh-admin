@@ -29,8 +29,12 @@ import java.io.IOException;
 @Component
 public class UserAvatarHandler {
 
+    private final UploadConfig uploadConfig;
+
     @Autowired
-    private UploadConfig uploadConfig;
+    public UserAvatarHandler(UploadConfig uploadConfig) {
+        this.uploadConfig = uploadConfig;
+    }
 
     /**
      * 头像上传处理

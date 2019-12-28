@@ -2,7 +2,7 @@ package com.zhenghao.admin.common.util;
 
 /**
  * 🙃
- * 🙃 ZH String工具类，换个名字和lang3StringUtils区分开
+ * 🙃 String工具类，换个名字和lang3StringUtils区分开
  * 🙃
  *
  * @author:zhaozhenghao

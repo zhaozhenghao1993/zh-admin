@@ -38,8 +38,12 @@ import java.util.List;
 @Component
 public class SysLogAspect {
 
+    private final SysLogMapper sysLogMapper;
+
     @Autowired
-    private SysLogMapper sysLogMapper;
+    public SysLogAspect(SysLogMapper sysLogMapper) {
+        this.sysLogMapper = sysLogMapper;
+    }
 
     @Pointcut("@annotation(com.zhenghao.admin.common.annotation.SysLog)")
     public void logPointCut() {

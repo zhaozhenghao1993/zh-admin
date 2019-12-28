@@ -27,8 +27,12 @@ import java.util.Map;
 @RequestMapping("${zh-admin.api.prefix}/sys/role")
 public class SysRoleController extends AbstractController {
 
+    private final SysRoleService sysRoleService;
+
     @Autowired
-    private SysRoleService sysRoleService;
+    public SysRoleController(SysRoleService sysRoleService) {
+        this.sysRoleService = sysRoleService;
+    }
 
     @GetMapping("")
     public Result<Page<SysRoleEntity>> list(@RequestParam Map<String, Object> params) {

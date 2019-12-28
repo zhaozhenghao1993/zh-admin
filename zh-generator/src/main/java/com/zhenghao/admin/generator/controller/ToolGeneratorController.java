@@ -36,8 +36,12 @@ import java.util.Map;
 @RequestMapping("${zh-admin.api.prefix}/tool/generator")
 public class ToolGeneratorController extends AbstractController {
 
+    private final ToolGeneratorService toolGeneratorService;
+
     @Autowired
-    private ToolGeneratorService toolGeneratorService;
+    public ToolGeneratorController(ToolGeneratorService toolGeneratorService) {
+        this.toolGeneratorService = toolGeneratorService;
+    }
 
     /**
      * 数据库列表

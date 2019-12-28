@@ -34,8 +34,12 @@ import java.util.zip.ZipOutputStream;
 @Service
 public class ToolGeneratorServiceImpl implements ToolGeneratorService {
 
+    private final ToolGeneratorMapper toolGeneratorMapper;
+
     @Autowired
-    private ToolGeneratorMapper toolGeneratorMapper;
+    public ToolGeneratorServiceImpl(ToolGeneratorMapper toolGeneratorMapper) {
+        this.toolGeneratorMapper = toolGeneratorMapper;
+    }
 
     @Override
     public Result<Page<TableEntity>> listTable(Map<String, Object> params) {

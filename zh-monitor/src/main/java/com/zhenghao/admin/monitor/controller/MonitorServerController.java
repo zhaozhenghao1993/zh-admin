@@ -23,11 +23,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("${zh-admin.api.prefix}/monitor/server")
 public class MonitorServerController {
 
-    @Autowired
-    private ServerBaseEntity base;
+    private final ServerBaseEntity base;
+
+    private final ServerInstantEntity instant;
 
     @Autowired
-    private ServerInstantEntity instant;
+    public MonitorServerController(ServerBaseEntity base, ServerInstantEntity instant) {
+        this.base = base;
+        this.instant = instant;
+    }
 
     @GetMapping("/base")
     public Result<ServerBaseEntity> baseInfo() {

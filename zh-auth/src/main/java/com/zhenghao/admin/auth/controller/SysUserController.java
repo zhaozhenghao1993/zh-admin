@@ -9,11 +9,11 @@ import com.zhenghao.admin.common.constant.UploadConstant;
 import com.zhenghao.admin.common.controller.AbstractController;
 import com.zhenghao.admin.common.entity.Page;
 import com.zhenghao.admin.common.entity.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.Map;
 
@@ -31,8 +31,12 @@ import java.util.Map;
 @RequestMapping("${zh-admin.api.prefix}/sys/user")
 public class SysUserController extends AbstractController {
 
-    @Resource
-    private SysUserService sysUserService;
+    private final SysUserService sysUserService;
+
+    @Autowired
+    public SysUserController(SysUserService sysUserService) {
+        this.sysUserService = sysUserService;
+    }
 
     /**
      * 获取登录用户信息

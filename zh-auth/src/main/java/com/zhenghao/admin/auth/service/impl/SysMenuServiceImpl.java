@@ -32,11 +32,15 @@ import java.util.regex.Pattern;
 @Transactional
 public class SysMenuServiceImpl implements SysMenuService {
 
-    @Autowired
-    private SysMenuMapper sysMenuMapper;
+    private final SysMenuMapper sysMenuMapper;
+
+    private final SysRoleMenuMapper sysRoleMenuMapper;
 
     @Autowired
-    private SysRoleMenuMapper sysRoleMenuMapper;
+    public SysMenuServiceImpl(SysMenuMapper sysMenuMapper, SysRoleMenuMapper sysRoleMenuMapper) {
+        this.sysMenuMapper = sysMenuMapper;
+        this.sysRoleMenuMapper = sysRoleMenuMapper;
+    }
 
     @Override
     public Result<Page<SysMenuEntity>> listMenu(Map<String, Object> params) {
