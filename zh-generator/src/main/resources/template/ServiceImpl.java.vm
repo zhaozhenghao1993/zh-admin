@@ -26,8 +26,12 @@ import java.util.Map;
 @Transactional
 public class ${className}ServiceImpl implements ${className}Service {
 
-	@Autowired
-	private ${className}Mapper ${objName}Mapper;
+    private final ${className}Mapper ${objName}Mapper;
+
+    @Autowired
+    public ${className}ServiceImpl(${className}Mapper ${objName}Mapper) {
+        this.${objName}Mapper = ${objName}Mapper;
+    }
 	
 	@Override
 	public Result<Page<${className}Entity>> list${className}(Map<String, Object> params) {
