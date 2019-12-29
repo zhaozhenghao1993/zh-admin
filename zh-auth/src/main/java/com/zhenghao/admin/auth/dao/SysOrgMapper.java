@@ -4,8 +4,6 @@ import com.zhenghao.admin.auth.entity.SysOrgEntity;
 import com.zhenghao.admin.common.dao.BaseMapper;
 import com.zhenghao.admin.common.entity.Query;
 import com.zhenghao.admin.common.vo.TreeVO;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -17,8 +15,6 @@ import java.util.List;
  * @date :2017年12月6日 下午1:28:55
  * SysMenuMapper.java
  */
-@MapperScan
-@Component
 public interface SysOrgMapper extends BaseMapper<SysOrgEntity> {
 
     /**

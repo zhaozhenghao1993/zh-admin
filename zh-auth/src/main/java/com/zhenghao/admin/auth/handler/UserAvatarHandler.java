@@ -29,8 +29,12 @@ import java.io.IOException;
 @Component
 public class UserAvatarHandler {
 
+    private final UploadConfig uploadConfig;
+
     @Autowired
-    private UploadConfig uploadConfig;
+    public UserAvatarHandler(UploadConfig uploadConfig) {
+        this.uploadConfig = uploadConfig;
+    }
 
     /**
      * 头像上传处理
@@ -50,9 +54,9 @@ public class UserAvatarHandler {
         if (!FileUtils.checkFileSize(file.getSize(), UploadConstant.USER_AVATAR_FILE_SIZE, UploadConstant.USER_AVATAR_FILE_SIZE_UNIT)) {
             throw new UploadSizeException("Upload file too large!");
         }
-        String fileName = UploadConstant.USER_AVATAR_FILE_NAME + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf('.'));
-        String folderPath = uploadConfig.getFolder() + UploadConstant.USER_AVATAR_FOLDER + File.separator + userId;
-        String filePath = uploadConfig.getPath() + UploadConstant.USER_AVATAR_FOLDER + userId + fileName;
+        String fileName = UploadConstant.USER_AVATAR_FILE_NAME.concat(file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf('.')));
+        String folderPath = uploadConfig.getFolder().concat(UploadConstant.USER_AVATAR_FOLDER).concat(userId.toString());
+        String filePath = uploadConfig.getPath().concat(UploadConstant.USER_AVATAR_FOLDER).concat(userId.toString()).concat(UploadConstant.PATH_SEPARATOR).concat(fileName);
         try {
             UploadUtils.uploadFile(file, folderPath, fileName);
         } catch (IOException e) {

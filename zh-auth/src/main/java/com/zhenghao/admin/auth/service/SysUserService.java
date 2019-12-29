@@ -29,7 +29,14 @@ public interface SysUserService {
 
     SysUserEntity getUserByName(String username);
 
-    Page<SysUserEntity> listUser(Map<String, Object> params);
+    /**
+     * 根据用户 id 查询简要user表的UserEntity信息
+     * @param id
+     * @return
+     */
+    SysUserEntity getUserEntityById(Long id);
+
+    Result<Page<SysUserEntity>> listUser(Map<String, Object> params);
 
     Result<SysUserEntity> getUserInfo(Long id);
 

@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public interface SysRoleService {
 
-    Page<SysRoleEntity> listRole(Map<String, Object> params);
+    Result<Page<SysRoleEntity>> listRole(Map<String, Object> params);
 
     Result saveRole(SysRoleEntity role);
 

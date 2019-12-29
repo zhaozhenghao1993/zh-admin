@@ -13,19 +13,15 @@ import java.util.List;
  */
 public class Page<T> {
 
-    private int code = 0;
-
-    private boolean success = true;
-
     /**
      * 页编号:第几页
      */
-    protected int pageNum = 1;
+    private int pageNum = 1;
 
     /**
      * 页大小:每页的数量
      */
-    protected int pageSize = 10;
+    private int pageSize = 10;
 
     /**
      * 验证 page size 过大导致内存溢出
@@ -36,17 +32,17 @@ public class Page<T> {
     /**
      * 查询结果
      */
-    protected List<T> data = new ArrayList<>();
+    private List<T> data = new ArrayList<>();
 
     /**
      * 总条数
      */
-    protected int totalCount;
+    private int totalCount;
 
     /**
      * 总页数
      */
-    protected int totalPages;
+    private int totalPages;
 
     public Page(int pageNum, int pageSize) {
         this.pageNum = pageNum;
@@ -62,22 +58,6 @@ public class Page<T> {
         if (this.pageSize > MAX_PAGE_SIZE) {
             this.pageSize = MAX_PAGE_SIZE;
         }
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
     }
 
     /**

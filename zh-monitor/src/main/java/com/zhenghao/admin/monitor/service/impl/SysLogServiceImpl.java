@@ -31,16 +31,20 @@ import java.util.Map;
 @Transactional
 public class SysLogServiceImpl implements SysLogService {
 
+    private final SysLogMapper sysLogMapper;
+
     @Autowired
-    private SysLogMapper sysLogMapper;
+    public SysLogServiceImpl(SysLogMapper sysLogMapper) {
+        this.sysLogMapper = sysLogMapper;
+    }
 
     @Override
-    public Page<SysLogEntity> listLog(Map<String, Object> params) {
+    public Result<Page<SysLogEntity>> listLog(Map<String, Object> params) {
         Query query = new Query(params);
         Page<SysLogEntity> page = new Page<>(query);
         PageHelper.startPage(page.getPageNum(), page.getPageSize());
         page.setData(sysLogMapper.listForPage(query));
-        return page;
+        return CommonUtils.msg(page);
     }
 
     @Override

@@ -31,19 +31,23 @@ import java.util.Map;
 @Transactional
 public class SysOrgServiceImpl implements SysOrgService {
 
-    @Autowired
-    private SysOrgMapper sysOrgMapper;
+    private final SysOrgMapper sysOrgMapper;
+
+    private final SysUserMapper sysUserMapper;
 
     @Autowired
-    private SysUserMapper sysUserMapper;
+    public SysOrgServiceImpl(SysOrgMapper sysOrgMapper, SysUserMapper sysUserMapper) {
+        this.sysOrgMapper = sysOrgMapper;
+        this.sysUserMapper = sysUserMapper;
+    }
 
     @Override
-    public Page<SysOrgEntity> listOrg(Map<String, Object> params) {
+    public Result<Page<SysOrgEntity>> listOrg(Map<String, Object> params) {
         Query query = new Query(params);
         Page<SysOrgEntity> page = new Page<>(query);
         query.removePageParams();
         page.setData(TreeUtils.build(sysOrgMapper.list(query), SystemConstant.TREE_ROOT));
-        return page;
+        return CommonUtils.msg(page);
     }
 
     @Override

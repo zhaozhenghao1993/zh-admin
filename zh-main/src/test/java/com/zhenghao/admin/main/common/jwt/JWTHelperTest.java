@@ -1,6 +1,5 @@
 package com.zhenghao.admin.main.common.jwt;
 
-import com.zhenghao.admin.auth.handler.RequestAuthHandler;
 import com.zhenghao.admin.common.jwt.JWTHelper;
 import com.zhenghao.admin.common.jwt.JWTInfo;
 import com.zhenghao.admin.common.jwt.RsaKeyManager;
@@ -13,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@SpringBootTest
 public class JWTHelperTest {
 
     @Value("${zh-admin.jwt.expire}")

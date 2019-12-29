@@ -23,8 +23,12 @@ import java.util.Map;
 @RequestMapping("${zh-admin.api.prefix}/${requestMapping}")
 public class ${className}Controller extends AbstractController {
 
-	@Autowired
-	private ${className}Service ${objName}Service;
+    private final ${className}Service ${objName}Service;
+
+    @Autowired
+    public ${className}Controller(${className}Service ${objName}Service) {
+        this.${objName}Service = ${objName}Service;
+    }
 	
 	/**
 	 * 列表
@@ -33,7 +37,7 @@ public class ${className}Controller extends AbstractController {
 	 * @return
 	 */
 	@GetMapping("")
-	public Page<${className}Entity> list(@RequestParam Map<String, Object> params) {
+	public Result<Page<${className}Entity>> list(@RequestParam Map<String, Object> params) {
 		return ${objName}Service.list${className}(params);
 	}
 

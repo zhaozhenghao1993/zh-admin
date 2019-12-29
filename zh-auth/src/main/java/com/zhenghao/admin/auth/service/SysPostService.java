@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public interface SysPostService {
 
-    Page<SysPostEntity> listPost(Map<String, Object> params);
+    Result<Page<SysPostEntity>> listPost(Map<String, Object> params);
 
     Result<SysPostEntity> getPostById(Long id);
 

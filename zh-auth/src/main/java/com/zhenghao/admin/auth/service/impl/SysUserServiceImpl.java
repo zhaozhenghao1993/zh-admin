@@ -35,29 +35,40 @@ public class SysUserServiceImpl implements SysUserService {
 
     private static final String USER_ID = "userId";
 
-    @Autowired
-    private SysUserMapper sysUserMapper;
+    private final SysUserMapper sysUserMapper;
+
+    private final SysRoleMapper sysRoleMapper;
+
+    private final SysMenuMapper sysMenuMapper;
+
+    private final SysPostMapper sysPostMapper;
+
+    private final SysOrgMapper sysOrgMapper;
+
+    private final SysUserRoleMapper sysUserRoleMapper;
+
+    private final SysUserPostMapper sysUserPostMapper;
+
+    private final UserAvatarHandler userAvatarHandler;
 
     @Autowired
-    private SysRoleMapper sysRoleMapper;
-
-    @Autowired
-    private SysMenuMapper sysMenuMapper;
-
-    @Autowired
-    private SysPostMapper sysPostMapper;
-
-    @Autowired
-    private SysOrgMapper sysOrgMapper;
-
-    @Autowired
-    private SysUserRoleMapper sysUserRoleMapper;
-
-    @Autowired
-    private SysUserPostMapper sysUserPostMapper;
-
-    @Autowired
-    private UserAvatarHandler userAvatarHandler;
+    public SysUserServiceImpl(SysUserMapper sysUserMapper,
+                              SysRoleMapper sysRoleMapper,
+                              SysMenuMapper sysMenuMapper,
+                              SysPostMapper sysPostMapper,
+                              SysOrgMapper sysOrgMapper,
+                              SysUserRoleMapper sysUserRoleMapper,
+                              SysUserPostMapper sysUserPostMapper,
+                              UserAvatarHandler userAvatarHandler) {
+        this.sysUserMapper = sysUserMapper;
+        this.sysRoleMapper = sysRoleMapper;
+        this.sysMenuMapper = sysMenuMapper;
+        this.sysPostMapper = sysPostMapper;
+        this.sysOrgMapper = sysOrgMapper;
+        this.sysUserRoleMapper = sysUserRoleMapper;
+        this.sysUserPostMapper = sysUserPostMapper;
+        this.userAvatarHandler = userAvatarHandler;
+    }
 
     @Override
     public List<SysMenuEntity> listUserPerms(Long id) {
@@ -70,12 +81,17 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public Page<SysUserEntity> listUser(Map<String, Object> params) {
+    public SysUserEntity getUserEntityById(Long id) {
+        return sysUserMapper.getObjectById(id);
+    }
+
+    @Override
+    public Result<Page<SysUserEntity>> listUser(Map<String, Object> params) {
         Query query = new Query(params);
         Page<SysUserEntity> page = new Page<>(query);
         PageHelper.startPage(page.getPageNum(), page.getPageSize());
         page.setData(sysUserMapper.listForPage(query));
-        return page;
+        return CommonUtils.msg(page);
     }
 
     @Override
@@ -155,7 +171,7 @@ public class SysUserServiceImpl implements SysUserService {
             return Result.ofFail("The username cannot be empty !");
         }
         SysUserEntity userEntity = sysUserMapper.getByUserName(user.getUsername());
-        if (userEntity != null && userEntity.getId() != user.getId()) {
+        if (userEntity != null && !userEntity.getId().equals(user.getId())) {
             return Result.ofFail("The username already exists !");
         }
         int count = sysUserMapper.update(user);
@@ -179,7 +195,7 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public Result removeUser(Long id) {
-        if (id == 1L) {
+        if (SystemConstant.SUPER_ADMIN.equals(id)) {
             return Result.ofFail("admin不能删除!");
         }
         int count = sysUserMapper.remove(id);

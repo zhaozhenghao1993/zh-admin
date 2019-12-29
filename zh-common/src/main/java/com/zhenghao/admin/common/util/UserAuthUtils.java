@@ -17,8 +17,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserAuthUtils {
 
+    private final JWTTokenUtils jwtTokenUtils;
+
     @Autowired
-    private JWTTokenUtils jwtTokenUtils;
+    public UserAuthUtils(JWTTokenUtils jwtTokenUtils) {
+        this.jwtTokenUtils = jwtTokenUtils;
+    }
 
     public JWTInfo getInfoFromToken(String token) {
         return jwtTokenUtils.getInfoFromToken(token);

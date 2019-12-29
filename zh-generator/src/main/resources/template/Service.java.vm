@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public interface ${className}Service {
 
-	Page<${className}Entity> list${className}(Map<String, Object> params);
+    Result<Page<${className}Entity>> list${className}(Map<String, Object> params);
 
     Result<${className}Entity> get${className}ById(Long ${pk.fieldName});
 

@@ -7,10 +7,10 @@ import com.zhenghao.admin.common.controller.AbstractController;
 import com.zhenghao.admin.common.entity.Page;
 import com.zhenghao.admin.common.entity.Result;
 import com.zhenghao.admin.common.vo.TreeVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +27,12 @@ import java.util.Map;
 @RequestMapping("${zh-admin.api.prefix}/sys/menu")
 public class SysMenuController extends AbstractController {
 
-    @Resource
-    private SysMenuService sysMenuService;
+    private final SysMenuService sysMenuService;
+
+    @Autowired
+    public SysMenuController(SysMenuService sysMenuService) {
+        this.sysMenuService = sysMenuService;
+    }
 
     /**
      * 菜单列表
@@ -37,7 +41,7 @@ public class SysMenuController extends AbstractController {
      * @return
      */
     @GetMapping("")
-    public Page<SysMenuEntity> listMenu(@RequestParam Map<String, Object> params) {
+    public Result<Page<SysMenuEntity>> listMenu(@RequestParam Map<String, Object> params) {
         return sysMenuService.listMenu(params);
     }
 

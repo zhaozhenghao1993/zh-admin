@@ -7,10 +7,10 @@ import com.zhenghao.admin.common.controller.AbstractController;
 import com.zhenghao.admin.common.entity.Page;
 import com.zhenghao.admin.common.entity.Result;
 import com.zhenghao.admin.common.vo.TreeVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +27,12 @@ import java.util.Map;
 @RequestMapping("${zh-admin.api.prefix}/sys/org")
 public class SysOrgController extends AbstractController {
 
-    @Resource
-    private SysOrgService sysOrgService;
+    private final SysOrgService sysOrgService;
+
+    @Autowired
+    public SysOrgController(SysOrgService sysOrgService) {
+        this.sysOrgService = sysOrgService;
+    }
 
     /**
      * 组织列表
@@ -37,7 +41,7 @@ public class SysOrgController extends AbstractController {
      * @return
      */
     @GetMapping("")
-    public Page<SysOrgEntity> listOrg(@RequestParam Map<String, Object> params) {
+    public Result<Page<SysOrgEntity>> listOrg(@RequestParam Map<String, Object> params) {
         return sysOrgService.listOrg(params);
     }
 

@@ -32,22 +32,28 @@ import java.util.Map;
 @Transactional
 public class SysRoleServiceImpl implements SysRoleService {
 
-    @Autowired
-    private SysRoleMapper sysRoleMapper;
+    private final SysRoleMapper sysRoleMapper;
+
+    private final SysUserRoleMapper sysUserRoleMapper;
+
+    private final SysRoleMenuMapper sysRoleMenuMapper;
 
     @Autowired
-    private SysUserRoleMapper sysUserRoleMapper;
-
-    @Autowired
-    private SysRoleMenuMapper sysRoleMenuMapper;
+    public SysRoleServiceImpl(SysRoleMapper sysRoleMapper,
+                              SysUserRoleMapper sysUserRoleMapper,
+                              SysRoleMenuMapper sysRoleMenuMapper) {
+        this.sysRoleMapper = sysRoleMapper;
+        this.sysUserRoleMapper = sysUserRoleMapper;
+        this.sysRoleMenuMapper = sysRoleMenuMapper;
+    }
 
     @Override
-    public Page<SysRoleEntity> listRole(Map<String, Object> params) {
+    public Result<Page<SysRoleEntity>> listRole(Map<String, Object> params) {
         Query query = new Query(params);
         Page<SysRoleEntity> page = new Page<>(query);
         PageHelper.startPage(page.getPageNum(), page.getPageSize());
         page.setData(sysRoleMapper.listForPage(query));
-        return page;
+        return CommonUtils.msg(page);
     }
 
     @Override

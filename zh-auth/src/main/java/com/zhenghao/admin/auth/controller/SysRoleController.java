@@ -27,11 +27,15 @@ import java.util.Map;
 @RequestMapping("${zh-admin.api.prefix}/sys/role")
 public class SysRoleController extends AbstractController {
 
+    private final SysRoleService sysRoleService;
+
     @Autowired
-    private SysRoleService sysRoleService;
+    public SysRoleController(SysRoleService sysRoleService) {
+        this.sysRoleService = sysRoleService;
+    }
 
     @GetMapping("")
-    public Page<SysRoleEntity> list(@RequestParam Map<String, Object> params) {
+    public Result<Page<SysRoleEntity>> list(@RequestParam Map<String, Object> params) {
         if (getUserId() != SystemConstant.SUPER_ADMIN) {
             params.put("creatorId", getUserId());
         }

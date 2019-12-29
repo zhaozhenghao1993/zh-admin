@@ -3,8 +3,6 @@ package com.zhenghao.admin.auth.dao;
 import com.zhenghao.admin.auth.entity.SysUserEntity;
 import com.zhenghao.admin.common.dao.BaseMapper;
 import com.zhenghao.admin.common.entity.Query;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.stereotype.Component;
 
 /**
  * 系统用户dao
@@ -14,8 +12,7 @@ import org.springframework.stereotype.Component;
  * @date :2017年12月6日 上午10:42:58
  * SysUserMapper.java
  */
-@MapperScan
-@Component
+
 public interface SysUserMapper extends BaseMapper<SysUserEntity> {
 
     /**

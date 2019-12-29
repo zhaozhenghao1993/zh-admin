@@ -2,8 +2,6 @@ package com.zhenghao.admin.common.dao;
 
 import com.zhenghao.admin.common.entity.SysLogEntity;
 import com.zhenghao.admin.common.vo.ChartVO;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -15,8 +13,6 @@ import java.util.List;
  * @date :2017年11月22日 下午1:29:17
  * SysLogMapper.java
  */
-@MapperScan
-@Component
 public interface SysLogMapper extends BaseMapper<SysLogEntity> {
 
     int batchRemoveAll(Integer type);

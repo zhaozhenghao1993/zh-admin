@@ -26,8 +26,12 @@ import java.util.Map;
 @RequestMapping("${zh-admin.api.prefix}/monitor/log")
 public class MonitorLogController extends AbstractController {
 
+    private final SysLogService sysLogService;
+
     @Autowired
-    private SysLogService sysLogService;
+    public MonitorLogController(SysLogService sysLogService) {
+        this.sysLogService = sysLogService;
+    }
 
     /**
      * 日志列表
@@ -36,7 +40,7 @@ public class MonitorLogController extends AbstractController {
      * @return
      */
     @GetMapping("")
-    public Page<SysLogEntity> listLog(@RequestParam Map<String, Object> params) {
+    public Result<Page<SysLogEntity>> listLog(@RequestParam Map<String, Object> params) {
         return sysLogService.listLog(params);
     }
 

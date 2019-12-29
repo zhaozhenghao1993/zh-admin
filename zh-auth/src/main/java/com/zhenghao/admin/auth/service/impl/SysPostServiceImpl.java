@@ -29,19 +29,23 @@ import java.util.Map;
 @Transactional
 public class SysPostServiceImpl implements SysPostService {
 
-    @Autowired
-    private SysPostMapper sysPostMapper;
+    private final SysPostMapper sysPostMapper;
+
+    private final SysUserPostMapper sysUserPostMapper;
 
     @Autowired
-    private SysUserPostMapper sysUserPostMapper;
+    public SysPostServiceImpl(SysPostMapper sysPostMapper, SysUserPostMapper sysUserPostMapper) {
+        this.sysPostMapper = sysPostMapper;
+        this.sysUserPostMapper = sysUserPostMapper;
+    }
 
     @Override
-    public Page<SysPostEntity> listPost(Map<String, Object> params) {
+    public Result<Page<SysPostEntity>> listPost(Map<String, Object> params) {
         Query query = new Query(params);
         Page<SysPostEntity> page = new Page<>(query);
         PageHelper.startPage(page.getPageNum(), page.getPageSize());
         page.setData(sysPostMapper.listForPage(query));
-        return page;
+        return CommonUtils.msg(page);
     }
 
     @Override

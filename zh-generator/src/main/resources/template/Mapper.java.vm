@@ -2,8 +2,6 @@ package ${package}.${module}.dao;
 
 import com.zhenghao.admin.common.dao.BaseMapper;
 import ${package}.${module}.entity.${className}Entity;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.stereotype.Component;
 
 /**
  * ${comments}
@@ -13,8 +11,5 @@ import org.springframework.stereotype.Component;
  * @date :${datetime}
  * ${className}Mapper.java
  */
-@MapperScan
-@Component
 public interface ${className}Mapper extends BaseMapper<${className}Entity> {
-	
 }

@@ -26,8 +26,12 @@ import java.util.Map;
 @RequestMapping("${zh-admin.api.prefix}/sys/post")
 public class SysPostController extends AbstractController {
 
+    private final SysPostService sysPostService;
+
     @Autowired
-    private SysPostService sysPostService;
+    public SysPostController(SysPostService sysPostService) {
+        this.sysPostService = sysPostService;
+    }
 
     /**
      * 列表
@@ -36,7 +40,7 @@ public class SysPostController extends AbstractController {
      * @return
      */
     @GetMapping("")
-    public Page<SysPostEntity> list(@RequestParam Map<String, Object> params) {
+    public Result<Page<SysPostEntity>> list(@RequestParam Map<String, Object> params) {
         return sysPostService.listPost(params);
     }
 

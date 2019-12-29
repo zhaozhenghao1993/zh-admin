@@ -2,8 +2,6 @@ package com.zhenghao.admin.auth.dao;
 
 import com.zhenghao.admin.auth.entity.SysUserPostEntity;
 import com.zhenghao.admin.common.dao.BaseMapper;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -15,8 +13,6 @@ import java.util.List;
  * @date :2019/05/01 12:38
  * SysUserPostMapper.java
  */
-@MapperScan
-@Component
 public interface SysUserPostMapper extends BaseMapper<SysUserPostEntity> {
 
     /**

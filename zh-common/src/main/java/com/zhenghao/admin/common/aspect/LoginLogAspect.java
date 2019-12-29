@@ -30,8 +30,12 @@ import java.util.Map;
 @Component
 public class LoginLogAspect {
 
+    private final SysLogMapper sysLogMapper;
+
     @Autowired
-    private SysLogMapper sysLogMapper;
+    public LoginLogAspect(SysLogMapper sysLogMapper) {
+        this.sysLogMapper = sysLogMapper;
+    }
 
     @AfterReturning(pointcut = "execution(* com.zhenghao.admin.auth.controller.SysLoginController.login(..))", returning = "result")
     public void doAfterReturning(JoinPoint joinPoint, Object result) {
