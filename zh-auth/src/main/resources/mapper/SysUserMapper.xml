@@ -92,7 +92,7 @@
 			create_time
 		)
 		VALUES (
-			#{orgId,},
+			#{orgId},
 			#{username},
 			#{password},
 			#{name},
