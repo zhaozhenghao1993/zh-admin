@@ -5,7 +5,7 @@
     <parent>
         <artifactId>zh-admin</artifactId>
         <groupId>com.zhenghao.admin</groupId>
-        <version>1.0.1</version>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -31,7 +31,7 @@
         <dependency>
             <groupId>com.zhenghao.admin</groupId>
             <artifactId>zh-common</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 </project>

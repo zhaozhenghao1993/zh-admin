@@ -7,7 +7,7 @@
     <groupId>com.zhenghao.admin</groupId>
     <artifactId>zh-admin</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.1</version>
+    <version>${revision}</version>
     <modules>
         <module>zh-main</module>
         <module>zh-common</module>
@@ -57,6 +57,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <java.version>1.8</java.version>
+
+        <revision>1.0.1</revision>
 
         <mybatis-spring-boot.version>2.1.1</mybatis-spring-boot.version>
         <druid.version>1.1.9</druid.version>

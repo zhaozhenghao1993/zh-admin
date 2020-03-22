@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.zhenghao.admin</groupId>
         <artifactId>zh-admin</artifactId>
-        <version>1.0.1</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>zh-main</artifactId>
@@ -24,17 +24,17 @@
         <dependency>
             <groupId>com.zhenghao.admin</groupId>
             <artifactId>zh-auth</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>com.zhenghao.admin</groupId>
             <artifactId>zh-monitor</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>com.zhenghao.admin</groupId>
             <artifactId>zh-generator</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 
