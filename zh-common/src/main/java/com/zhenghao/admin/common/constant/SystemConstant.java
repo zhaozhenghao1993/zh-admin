@@ -25,6 +25,11 @@ public class SystemConstant {
      */
     public static final Long TREE_ROOT = 0L;
 
+    /**
+     * api 接口统一前缀
+     */
+    public static final String API_PREFIX = "/api";
+
 
     /**
      * 当前用户ID key

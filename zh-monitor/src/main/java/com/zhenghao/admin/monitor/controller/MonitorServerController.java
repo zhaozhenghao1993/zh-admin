@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.zhenghao.admin.common.constant.SystemConstant.API_PREFIX;
+
 /**
  * 🙃
  * 🙃 服务器监控controller
@@ -20,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * ServerMonitorController.java
  */
 @RestController
-@RequestMapping("${zh-admin.api.prefix}/monitor/server")
+@RequestMapping(API_PREFIX + "/monitor/server")
 public class MonitorServerController {
 
     private final ServerBaseEntity base;

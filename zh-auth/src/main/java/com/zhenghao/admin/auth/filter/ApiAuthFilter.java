@@ -31,6 +31,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.zhenghao.admin.common.constant.SystemConstant.API_PREFIX;
+
 /**
  * 🙃
  * 🙃 api地址过滤器
@@ -48,9 +50,6 @@ import java.io.IOException;
 public class ApiAuthFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(ApiAuthFilter.class);
-
-    @Value("${zh-admin.api.prefix}")
-    private String apiPrefix;
 
     private final RouteConfig routeConfig;
 
@@ -93,7 +92,7 @@ public class ApiAuthFilter implements Filter {
             }
 
             // 将 uri 替换为 权限uri
-            String authPath = uri.replace(apiPrefix, "");
+            String authPath = uri.replace(API_PREFIX, "");
 
             // 匿名访问过滤
             if (requestAuthHandler.validateAnnoFilterChain(authPath, method)) {

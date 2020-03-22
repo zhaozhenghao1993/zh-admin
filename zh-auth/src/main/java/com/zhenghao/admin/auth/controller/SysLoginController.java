@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
+import static com.zhenghao.admin.common.constant.SystemConstant.API_PREFIX;
+
 /**
  * 用户controller
  *
@@ -27,7 +29,7 @@ import java.util.Map;
  * SysLoginController.java
  */
 @RestController
-@RequestMapping("${zh-admin.api.prefix}/sys")
+@RequestMapping(API_PREFIX + "/sys")
 public class SysLoginController {
 
     private final SysUserService sysUserService;

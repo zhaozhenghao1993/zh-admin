@@ -22,6 +22,8 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Map;
 
+import static com.zhenghao.admin.common.constant.SystemConstant.API_PREFIX;
+
 /**
  * 🙃
  * 🙃 代码生成器
@@ -33,7 +35,7 @@ import java.util.Map;
  * ToolGeneratorController.java
  */
 @Controller
-@RequestMapping("${zh-admin.api.prefix}/tool/generator")
+@RequestMapping(API_PREFIX + "/tool/generator")
 public class ToolGeneratorController extends AbstractController {
 
     private final ToolGeneratorService toolGeneratorService;

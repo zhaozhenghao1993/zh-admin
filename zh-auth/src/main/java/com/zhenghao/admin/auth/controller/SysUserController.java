@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.util.Map;
 
+import static com.zhenghao.admin.common.constant.SystemConstant.API_PREFIX;
+
 /**
  * 系统用户controller
  *
@@ -28,7 +30,7 @@ import java.util.Map;
  * SysMenuController.java
  */
 @RestController
-@RequestMapping("${zh-admin.api.prefix}/sys/user")
+@RequestMapping(API_PREFIX + "/sys/user")
 public class SysUserController extends AbstractController {
 
     private final SysUserService sysUserService;
