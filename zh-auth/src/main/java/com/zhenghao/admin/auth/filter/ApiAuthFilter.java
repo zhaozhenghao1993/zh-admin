@@ -97,10 +97,8 @@ public class ApiAuthFilter implements Filter {
             // 匿名访问过滤
             if (requestAuthHandler.validateAnnoFilterChain(authPath, method)) {
                 chain.doFilter(request, response);
-                // return;
+                return;
             }
-
-            System.out.println(111);
 
             // 获取用户信息
             JWTInfo jwtInfo = getJWTUser(httpServletRequest, httpServletResponse);
