@@ -10,5 +10,5 @@ docker run \
 -p 8081:8081 \
 -v /tmp:/data/app \
 --name zh-admin \
--d zhaozhenghao1993/zh-admin:1.0.1
+-d zhaozhenghao1993/zh-admin-develop:1.0.1
 echo "finished ..."
