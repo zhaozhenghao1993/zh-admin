@@ -2,7 +2,6 @@ package com.zhenghao.admin.auth.filter;
 
 import com.zhenghao.admin.auth.xss.XssHttpServletRequestWrapper;
 import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -21,7 +20,6 @@ import java.io.IOException;
  */
 @Order(0)
 @WebFilter(filterName = "XssFilter", urlPatterns = "/*")
-@Component
 public class XssFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

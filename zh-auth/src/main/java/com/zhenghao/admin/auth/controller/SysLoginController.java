@@ -7,8 +7,8 @@ import com.zhenghao.admin.common.constant.HttpStatusConstant;
 import com.zhenghao.admin.common.constant.SystemConstant;
 import com.zhenghao.admin.common.entity.Result;
 import com.zhenghao.admin.common.jwt.JWTInfo;
+import com.zhenghao.admin.common.jwt.JWTTokenProcessor;
 import com.zhenghao.admin.common.util.MD5Utils;
-import com.zhenghao.admin.common.util.UserAuthUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,12 +34,12 @@ public class SysLoginController {
 
     private final SysUserService sysUserService;
 
-    private final UserAuthUtils userAuthUtils;
+    private final JWTTokenProcessor jwtTokenProcessor;
 
     @Autowired
-    public SysLoginController(SysUserService sysUserService, UserAuthUtils userAuthUtils) {
+    public SysLoginController(SysUserService sysUserService, JWTTokenProcessor jwtTokenProcessor) {
         this.sysUserService = sysUserService;
-        this.userAuthUtils = userAuthUtils;
+        this.jwtTokenProcessor = jwtTokenProcessor;
     }
 
     @PostMapping("/login")
@@ -69,7 +69,7 @@ public class SysLoginController {
             return Result.ofFail(HttpStatusConstant.USER_LOCKED_ACCOUNT, "Account locked!");
         }
         try {
-            return Result.ofSuccess(new SysLoginVO(userAuthUtils.getTokenFromJWTInfo(new JWTInfo(user.getId(), user.getUsername(), user.getName()))));
+            return Result.ofSuccess(new SysLoginVO(jwtTokenProcessor.generateToken(new JWTInfo(user.getId(), user.getUsername(), user.getName()))));
         } catch (Exception e) {
             return Result.ofFail(HttpStatusConstant.USER_AUTHENTICATION_EXCEPTION, "Account login exception!");
         }

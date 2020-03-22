@@ -1,8 +1,6 @@
 package com.zhenghao.admin.auth.filter;
 
 
-import com.zhenghao.admin.auth.config.RouteConfig;
-import com.zhenghao.admin.auth.config.TokenHeaderConfig;
 import com.zhenghao.admin.auth.entity.SysUserEntity;
 import com.zhenghao.admin.auth.handler.RequestAuthHandler;
 import com.zhenghao.admin.auth.service.SysUserService;
@@ -11,18 +9,15 @@ import com.zhenghao.admin.common.constant.SystemConstant;
 import com.zhenghao.admin.common.context.BaseContextHandler;
 import com.zhenghao.admin.common.entity.Result;
 import com.zhenghao.admin.common.jwt.JWTInfo;
+import com.zhenghao.admin.common.jwt.JWTTokenProcessor;
 import com.zhenghao.admin.common.util.IPUtils;
 import com.zhenghao.admin.common.util.ResponseUtils;
-import com.zhenghao.admin.common.util.UserAuthUtils;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -30,14 +25,14 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 import static com.zhenghao.admin.common.constant.SystemConstant.API_PREFIX;
 
 /**
  * 🙃
- * 🙃 api地址过滤器
+ * 🙃 api权限过滤器
  * 🙃 注：@order值越小越先执行
- * /api/v1/sys/user/info 判断路由 /api/v1，禁止直接访问/sys/user/info
  *
  * @author:zhaozhenghao
  * @Email :736720794@qq.com
@@ -45,32 +40,37 @@ import static com.zhenghao.admin.common.constant.SystemConstant.API_PREFIX;
  * GlobalFilter.java
  */
 @Order(1)
-@WebFilter(filterName = "ApiAuthFilter", urlPatterns = "/*")
-@Component
-public class ApiAuthFilter implements Filter {
+@WebFilter(filterName = "AuthApiFilter", urlPatterns = "/*")
+public class AuthApiFilter implements Filter {
 
-    private static final Logger logger = LoggerFactory.getLogger(ApiAuthFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(AuthApiFilter.class);
 
-    private final RouteConfig routeConfig;
+    /**
+     * 匹配api规则,不能重复且不能存在交集, 例：/uploads/-/system/user/avatar 不能与 /uploads 共存
+     * 不符合规则的api均为无效api
+     */
+    private final List<String> matches;
 
-    private final TokenHeaderConfig tokenHeaderConfig;
+    /**
+     * JWT token header
+     */
+    private final String tokenHeader;
 
     private final SysUserService sysUserService;
 
-    private final UserAuthUtils userAuthUtils;
+    private final JWTTokenProcessor jwtTokenProcessor;
 
     private final RequestAuthHandler requestAuthHandler;
 
-    @Autowired
-    public ApiAuthFilter(RouteConfig routeConfig,
-                         TokenHeaderConfig tokenHeaderConfig,
+    public AuthApiFilter(List<String> matches,
+                         String tokenHeader,
                          SysUserService sysUserService,
-                         UserAuthUtils userAuthUtils,
+                         JWTTokenProcessor jwtTokenProcessor,
                          RequestAuthHandler requestAuthHandler) {
-        this.routeConfig = routeConfig;
-        this.tokenHeaderConfig = tokenHeaderConfig;
+        this.matches = matches;
+        this.tokenHeader = tokenHeader;
         this.sysUserService = sysUserService;
-        this.userAuthUtils = userAuthUtils;
+        this.jwtTokenProcessor = jwtTokenProcessor;
         this.requestAuthHandler = requestAuthHandler;
     }
 
@@ -85,7 +85,7 @@ public class ApiAuthFilter implements Filter {
             logger.info("request uri:[{}], method:[{}], from:[{}], check token and user permission", uri, method, IPUtils.getIpAddr());
 
             // 判断当前 uri 路由是否有效
-            if (routeConfig.getRoutes().stream().noneMatch(uri::startsWith)) {
+            if (matches.stream().noneMatch(uri::startsWith)) {
                 logger.warn("request uri:[{}], method:[{}], this api is invalid!", uri, method);
                 ResponseUtils.setResultResponse(httpServletResponse, Result.ofFail(HttpStatusConstant.REQUEST_API_INVALID, "This api is invalid!"));
                 return;
@@ -135,7 +135,7 @@ public class ApiAuthFilter implements Filter {
         JWTInfo jwtInfo = null;
         authToken = getAuthToken(request);
         try {
-            jwtInfo = userAuthUtils.getInfoFromToken(authToken);
+            jwtInfo = jwtTokenProcessor.getInfoFromToken(authToken);
         } catch (ExpiredJwtException ex) {
             logger.error("User token expired!");
             ResponseUtils.setResultResponse(response, Result.ofFail(HttpStatusConstant.TOKEN_EXPIRED_FORBIDDEN, "User token expired!"));
@@ -160,15 +160,15 @@ public class ApiAuthFilter implements Filter {
      */
     private String getAuthToken(HttpServletRequest request) {
         String authToken;
-        authToken = request.getHeader(tokenHeaderConfig.getTokenHeader());
+        authToken = request.getHeader(tokenHeader);
         if (StringUtils.isBlank(authToken)) {
-            authToken = request.getParameter(tokenHeaderConfig.getTokenHeader());
+            authToken = request.getParameter(tokenHeader);
         }
         if (StringUtils.isBlank(authToken)) {
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals(tokenHeaderConfig.getTokenHeader())) {
+                    if (cookie.getName().equals(tokenHeader)) {
                         authToken = cookie.getValue();
                     }
                 }

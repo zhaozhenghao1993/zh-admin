@@ -1,15 +1,8 @@
-package com.zhenghao.admin.common.util;
-
-import com.zhenghao.admin.common.jwt.JWTHelper;
-import com.zhenghao.admin.common.jwt.JWTInfo;
-import com.zhenghao.admin.common.jwt.RsaKeyManager;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+package com.zhenghao.admin.common.jwt;
 
 /**
  * 🙃
- * 🙃 JWT TOKEN 工具类
+ * 🙃 JWT TOKEN 处理器
  * 🙃
  *
  * @author:zhaozhenghao
@@ -17,16 +10,14 @@ import org.springframework.stereotype.Component;
  * @date :2019/01/18 23:23
  * JWTTokenUtils.java
  */
-@Component
-public class JWTTokenUtils {
+public class JWTTokenProcessor {
 
-    @Value("${zh-admin.jwt.expire}")
-    private int expire;
+    private final int expire;
 
     private final RsaKeyManager rsaKeyManager;
 
-    @Autowired
-    public JWTTokenUtils(RsaKeyManager rsaKeyManager) {
+    public JWTTokenProcessor(int expire, RsaKeyManager rsaKeyManager) {
+        this.expire = expire;
         this.rsaKeyManager = rsaKeyManager;
     }
 

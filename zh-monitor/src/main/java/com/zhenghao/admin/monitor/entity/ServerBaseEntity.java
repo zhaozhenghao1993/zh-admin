@@ -37,7 +37,7 @@ public class ServerBaseEntity {
 
     private static final Logger logger = LoggerFactory.getLogger(ServerBaseEntity.class);
 
-    @Value("${zh-admin.file.log.folder}")
+    @Value("${zh-admin.log.folder}")
     private String logFolder;
 
     @Autowired
