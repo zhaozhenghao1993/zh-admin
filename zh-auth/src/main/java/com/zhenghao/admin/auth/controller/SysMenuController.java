@@ -15,6 +15,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
+import static com.zhenghao.admin.common.constant.SystemConstant.API_PREFIX;
+
 /**
  * 系统菜单controller
  *
@@ -24,7 +26,7 @@ import java.util.Map;
  * SysMenuController.java
  */
 @RestController
-@RequestMapping("${zh-admin.api.prefix}/sys/menu")
+@RequestMapping(API_PREFIX + "/sys/menu")
 public class SysMenuController extends AbstractController {
 
     private final SysMenuService sysMenuService;

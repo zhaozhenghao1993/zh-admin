@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.zhenghao.admin.common.constant.SystemConstant.API_PREFIX;
+
 @RestController
-@RequestMapping("${zh-admin.api.prefix}/test")
+@RequestMapping(API_PREFIX + "/test")
 public class TestController {
 
     private final InetUtils inetUtils;

@@ -15,6 +15,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
+import static com.zhenghao.admin.common.constant.SystemConstant.API_PREFIX;
+
 /**
  * 系统组织controller
  *
@@ -24,7 +26,7 @@ import java.util.Map;
  * SysMenuController.java
  */
 @RestController
-@RequestMapping("${zh-admin.api.prefix}/sys/org")
+@RequestMapping(API_PREFIX + "/sys/org")
 public class SysOrgController extends AbstractController {
 
     private final SysOrgService sysOrgService;

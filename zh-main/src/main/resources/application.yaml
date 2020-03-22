@@ -6,11 +6,9 @@ server:
     min-spare-threads: 30
 
 zh-admin:
-  api:
-    prefix: /api/v1
   auth:
     routes: # 有效路由,不能重复且不能存在交集, 例：/uploads/-/system/user/avatar 不能与 /uploads 共存
-      - /api/v1
+      - /api
       - /uploads/-/system/user/avatar
       - /druid
   jwt:

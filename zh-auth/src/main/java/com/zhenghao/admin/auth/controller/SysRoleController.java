@@ -15,6 +15,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
+import static com.zhenghao.admin.common.constant.SystemConstant.API_PREFIX;
+
 /**
  * 系统角色controller
  *
@@ -24,7 +26,7 @@ import java.util.Map;
  * SysRoleController.java
  */
 @RestController
-@RequestMapping("${zh-admin.api.prefix}/sys/role")
+@RequestMapping(API_PREFIX + "/sys/role")
 public class SysRoleController extends AbstractController {
 
     private final SysRoleService sysRoleService;

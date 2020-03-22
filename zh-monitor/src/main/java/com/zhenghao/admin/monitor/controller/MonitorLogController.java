@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+import static com.zhenghao.admin.common.constant.SystemConstant.API_PREFIX;
+
 /**
  * 系统日志监控
  *
@@ -23,7 +25,7 @@ import java.util.Map;
  * SysLogController.java
  */
 @RestController
-@RequestMapping("${zh-admin.api.prefix}/monitor/log")
+@RequestMapping(API_PREFIX + "/monitor/log")
 public class MonitorLogController extends AbstractController {
 
     private final SysLogService sysLogService;

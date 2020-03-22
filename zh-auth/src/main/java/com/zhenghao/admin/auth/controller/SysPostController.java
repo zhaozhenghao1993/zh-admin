@@ -14,6 +14,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
+import static com.zhenghao.admin.common.constant.SystemConstant.API_PREFIX;
+
 /**
  * 岗位管理
  *
@@ -23,7 +25,7 @@ import java.util.Map;
  * SysPostController.java
  */
 @RestController
-@RequestMapping("${zh-admin.api.prefix}/sys/post")
+@RequestMapping(API_PREFIX + "/sys/post")
 public class SysPostController extends AbstractController {
 
     private final SysPostService sysPostService;

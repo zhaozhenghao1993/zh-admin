@@ -25,6 +25,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.zhenghao.admin.common.constant.SystemConstant.API_PREFIX;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
@@ -38,9 +40,6 @@ public class SysLoginControllerTest {
     @Autowired
     private UserAuthUtils userAuthUtils;
 
-    @Value("${zh-admin.api.prefix}")
-    private String apiPrefix;
-
     @Before
     public void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
@@ -52,7 +51,7 @@ public class SysLoginControllerTest {
         params.put("username", "admin");
         params.put("password", "123");
         // 登陆
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(apiPrefix + "/sys/login")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(API_PREFIX + "/sys/login")
                 .content(JSONUtils.objToString(params))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON)).andReturn();

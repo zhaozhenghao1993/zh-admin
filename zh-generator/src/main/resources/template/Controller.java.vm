@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+import static com.zhenghao.admin.common.constant.SystemConstant.API_PREFIX;
+
 /**
  * ${comments}
  *
@@ -20,7 +22,7 @@ import java.util.Map;
  * ${className}Controller.java
  */
 @RestController
-@RequestMapping("${zh-admin.api.prefix}/${requestMapping}")
+@RequestMapping(API_PREFIX + "/${requestMapping}")
 public class ${className}Controller extends AbstractController {
 
     private final ${className}Service ${objName}Service;

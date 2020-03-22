@@ -1,5 +1,6 @@
 package com.zhenghao.admin.monitor.controller;
 
+import com.zhenghao.admin.common.constant.SystemConstant;
 import com.zhenghao.admin.common.entity.Result;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.zhenghao.admin.common.constant.SystemConstant.API_PREFIX;
 
 /**
  * 🙃
@@ -22,11 +25,8 @@ import java.util.List;
  * ServerMonitorController.java
  */
 @Controller
-@RequestMapping("${zh-admin.api.prefix}/monitor/performance")
+@RequestMapping(API_PREFIX + "/monitor/performance")
 public class MonitorPerformanceController {
-
-    @Value("${zh-admin.api.prefix}")
-    private String apiPrefix;
 
     private static final String forwardPath = "forward:/actuator/metrics/";
 
@@ -75,7 +75,7 @@ public class MonitorPerformanceController {
 
     @GetMapping("/system/{actuator}")
     public String system(@PathVariable String actuator) {
-        String forwardApi = "forward:" + apiPrefix + "/monitor/performance/error";
+        String forwardApi = "forward:" + API_PREFIX + "/monitor/performance/error";
         if (validateChain(systemParamsList, actuator)) {
             forwardApi = forwardPath + actuator;
         }
@@ -84,7 +84,7 @@ public class MonitorPerformanceController {
 
     @GetMapping("/jvm/{actuator}")
     public String jvm(@PathVariable String actuator) {
-        String forwardApi = "forward:" + apiPrefix + "/monitor/performance/error";
+        String forwardApi = "forward:" + API_PREFIX + "/monitor/performance/error";
         if (validateChain(jvmParamsList, actuator)) {
             forwardApi = forwardPath + actuator;
         }
@@ -93,7 +93,7 @@ public class MonitorPerformanceController {
 
     @GetMapping("/tomcat/{actuator}")
     public String tomcat(@PathVariable String actuator) {
-        String forwardApi = "forward:" + apiPrefix + "/monitor/performance/error";
+        String forwardApi = "forward:" + API_PREFIX + "/monitor/performance/error";
         if (validateChain(tomcatParamsList, actuator)) {
             forwardApi = forwardPath + actuator;
         }
