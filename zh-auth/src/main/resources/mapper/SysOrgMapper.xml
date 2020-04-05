@@ -102,8 +102,18 @@
 		<set>
 			ancestors = replace (ancestors, #{oldAncestors}, #{newAncestors})
 		</set>
-		where FIND_IN_SET (#{id}, ancestors)
+		WHERE FIND_IN_SET (#{id}, ancestors)
 	</update>
+
+	<select id="listChildAncestorsById" resultType="SysOrgEntity">
+		SELECT
+			id,
+			ancestors
+		FROM
+			sys_org
+		WHERE
+			FIND_IN_SET (#{id}, ancestors)
+	</select>
 
 	<delete id="remove">
 		DELETE

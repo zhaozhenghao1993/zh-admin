@@ -40,6 +40,13 @@ public interface SysOrgMapper extends BaseMapper<SysOrgEntity> {
     int countChildById(Long orgId);
 
     /**
+     * 根据组织 id 查询所有该组织下的所有子组织列表 的 祖籍字段
+     * @param id
+     * @return
+     */
+    List<SysOrgEntity> listChildAncestorsById(Long id);
+
+    /**
      * 更新组织parentId时，需一同更新所有子组织的祖级列表
      *
      * @param query
