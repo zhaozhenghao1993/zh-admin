@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -74,13 +75,12 @@ public class SysOrgServiceImpl implements SysOrgService {
         if (StringUtils.isBlank(org.getOrgName())) {
             return Result.ofFail("The org name cannot be empty !");
         }
+        if (org.getParentId() == null) {
+            return Result.ofFail("The org parent id cannot be empty !");
+        }
         SysOrgEntity orgParent = sysOrgMapper.getObjectById(org.getParentId());
         String ancestors;
-        if (orgParent != null) {
-            ancestors = orgParent.getAncestors() + "," + orgParent.getId();
-        } else {
-            ancestors = org.getParentId() + "";
-        }
+        ancestors = TreeUtils.buildAncestors(orgParent, org);
         org.setAncestors(ancestors);
         int count = sysOrgMapper.save(org);
         return CommonUtils.msg(count);
@@ -97,23 +97,29 @@ public class SysOrgServiceImpl implements SysOrgService {
         if (StringUtils.isBlank(org.getOrgName())) {
             return Result.ofFail("The org name cannot be empty !");
         }
+        if (org.getParentId() == null) {
+            return Result.ofFail("The org parent id cannot be empty !");
+        }
         SysOrgEntity oldOrg = sysOrgMapper.getObjectById(org.getId());
         // 更新前先对比和之前的parentId是否有不同，如果不同则开始处理
         if (!org.getParentId().equals(oldOrg.getParentId())) {
             String ancestors;
             SysOrgEntity orgParent = sysOrgMapper.getObjectById(org.getParentId());
-            if (orgParent != null) {
-                ancestors = orgParent.getAncestors() + "," + orgParent.getId();
-            } else {
-                ancestors = org.getParentId() + "";
+            // 先处理循环嵌套的问题
+            if (TreeUtils.isTreeCircularReference(orgParent, org)) {
+                return Result.ofFail("新选择的父组织存在循环引用，请重新选择!");
             }
+            ancestors = TreeUtils.buildAncestors(orgParent, org);
             org.setAncestors(ancestors);
             // 更新所有子列表的 ancestors 字段
-            Query query = new Query();
-            query.put("oldAncestors", oldOrg.getAncestors());
-            query.put("newAncestors", ancestors);
-            query.put("id", org.getId());
-            sysOrgMapper.updateChildAncestorsById(query);
+            // 查出该组织下的所有子组织
+            List<SysOrgEntity> childOrgList = sysOrgMapper.listChildAncestorsById(org.getId());
+            childOrgList.forEach(childOrg -> {
+                // 替换第一次出现的老 ancestors
+                // 将第一个 0 替换为 1， 0,30 ≠ 1,31
+                childOrg.setAncestors(childOrg.getAncestors().replaceFirst(oldOrg.getAncestors(), ancestors));
+                sysOrgMapper.update(childOrg);
+            });
         }
         int count = sysOrgMapper.update(org);
         return CommonUtils.msg(count);
