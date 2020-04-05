@@ -26,6 +26,11 @@ public class SystemConstant {
     public static final Long TREE_ROOT = 0L;
 
     /**
+     * 默认树祖籍 id 分隔符
+     */
+    public static final String TREE_ANCESTORS_SPLIT = ",";
+
+    /**
      * api 接口统一前缀
      */
     public static final String API_PREFIX = "/api";
@@ -65,6 +70,11 @@ public class SystemConstant {
      * JWT name标识
      */
     public static final String JWT_KEY_NAME = "name";
+
+    /**
+     * 默认备注最大长度，超出就截取
+     */
+    public static final int DEFAULT_REMARK_STRING_MAX_LENGTH = 450;
 
     /**
      * 日志类型

@@ -9,6 +9,7 @@ import com.zhenghao.admin.common.entity.SysLogEntity;
 import com.zhenghao.admin.common.util.IPUtils;
 import com.zhenghao.admin.common.util.JSONUtils;
 import eu.bitwalker.useragentutils.UserAgent;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -89,8 +90,7 @@ public class SysLogAspect {
         sysLog.setUsername(BaseContextHandler.getUsername());
 
         //操作状态和结果
-        sysLog.setStatus(SystemConstant.StatusType.DISABLE.getValue());
-        sysLog.setRemark("异常信息：" + ex);
+        setStatusRemark(sysLog, false, 0, "异常信息：" + ex.getMessage());
 
         sysLogMapper.save(sysLog);
     }
@@ -166,6 +166,9 @@ public class SysLogAspect {
      * @param message   如果失败的失败信息
      */
     private void setStatusRemark(SysLogEntity sysLog, boolean isSuccess, long time, String message) {
+        if (StringUtils.isNotBlank(message) && message.length() > SystemConstant.DEFAULT_REMARK_STRING_MAX_LENGTH) {
+            message = message.substring(0, SystemConstant.DEFAULT_REMARK_STRING_MAX_LENGTH) + "...";
+        }
         if (isSuccess) {
             sysLog.setStatus(SystemConstant.StatusType.ENABLE.getValue());
             //响应时间：ms

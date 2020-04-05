@@ -19,11 +19,6 @@ public class SysOrgEntity extends TreeNode implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 祖级列表
-     */
-    private String ancestors;
-
-    /**
      * 组织名称
      */
     @Length(min = 1, max = 30, message = "组织名称的长度应该在1和30之间")
@@ -56,14 +51,6 @@ public class SysOrgEntity extends TreeNode implements Serializable {
 
     public SysOrgEntity() {
         super();
-    }
-
-    public String getAncestors() {
-        return ancestors;
-    }
-
-    public void setAncestors(String ancestors) {
-        this.ancestors = ancestors;
     }
 
     public String getOrgName() {
@@ -118,7 +105,6 @@ public class SysOrgEntity extends TreeNode implements Serializable {
     public String toString() {
         return super.toString() +
                 "SysOrgEntity{" +
-                "ancestors='" + ancestors + '\'' +
                 ", orgName='" + orgName + '\'' +
                 ", orderNum=" + orderNum +
                 ", creatorId=" + creatorId +

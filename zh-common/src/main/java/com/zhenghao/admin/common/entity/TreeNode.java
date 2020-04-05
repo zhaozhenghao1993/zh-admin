@@ -20,6 +20,11 @@ public class TreeNode {
 
     private Long parentId;
 
+    /**
+     * 祖级列表
+     */
+    private String ancestors;
+
     private List<TreeNode> children = new ArrayList<>();
 
     public TreeNode() {
@@ -48,6 +53,14 @@ public class TreeNode {
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
+    }
+
+    public String getAncestors() {
+        return ancestors;
+    }
+
+    public void setAncestors(String ancestors) {
+        this.ancestors = ancestors;
     }
 
     public List<TreeNode> getChildren() {
