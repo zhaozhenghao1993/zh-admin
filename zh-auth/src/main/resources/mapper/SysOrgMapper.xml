@@ -3,7 +3,7 @@
 
 <mapper namespace="com.zhenghao.admin.auth.dao.SysOrgMapper">
 
-	<select id="list" resultType="SysOrgEntity" flushCache="true">
+	<select id="list" resultType="com.zhenghao.admin.auth.entity.SysOrgEntity" flushCache="true">
 		SELECT
 			o.id,
 			o.parent_id,
@@ -17,7 +17,7 @@
 			o.order_num ASC
 	</select>
 
-	<select id="listTree" resultType="TreeVO" flushCache="true">
+	<select id="listTree" resultType="com.zhenghao.admin.common.vo.TreeVO" flushCache="true">
 		SELECT
 			o.id,
 			o.parent_id,
@@ -39,7 +39,7 @@
 			parent_id = #{value}
 	</select>
 
-	<select id="listByIds" resultType="SysOrgEntity">
+	<select id="listByIds" resultType="com.zhenghao.admin.auth.entity.SysOrgEntity">
 		SELECT
 			id,
 			org_name
@@ -70,7 +70,7 @@
 		)
 	</insert>
 
-	<select id="getObjectById" resultType="SysOrgEntity">
+	<select id="getObjectById" resultType="com.zhenghao.admin.auth.entity.SysOrgEntity">
 		SELECT
 			id,
 			parent_id,
@@ -105,7 +105,7 @@
 		WHERE FIND_IN_SET (#{id}, ancestors)
 	</update>
 
-	<select id="listChildAncestorsById" resultType="SysOrgEntity">
+	<select id="listChildAncestorsById" resultType="com.zhenghao.admin.auth.entity.SysOrgEntity">
 		SELECT
 			id,
 			ancestors

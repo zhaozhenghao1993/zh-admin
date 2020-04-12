@@ -3,7 +3,7 @@
 
 <mapper namespace="com.zhenghao.admin.auth.dao.SysPostMapper">
 
-	<select id="listForPage" resultType="SysPostEntity" flushCache="true">
+	<select id="listForPage" resultType="com.zhenghao.admin.auth.entity.SysPostEntity" flushCache="true">
 		SELECT
 			`id`,
 			`post_name`,
@@ -36,7 +36,7 @@
 		</choose>
 	</select>
 
-	<select id="list" resultType="SysPostEntity">
+	<select id="list" resultType="com.zhenghao.admin.auth.entity.SysPostEntity">
 		SELECT
 			id,
 			post_name
@@ -63,7 +63,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="SysPostEntity">
+	<select id="getObjectById" resultType="com.zhenghao.admin.auth.entity.SysPostEntity">
 		SELECT
 			`id`,
 			`post_name`,
@@ -111,7 +111,7 @@
 		</foreach>
 	</delete>
 
-	<select id="listUserPosts" parameterType="long" resultType="SysPostEntity">
+	<select id="listUserPosts" parameterType="long" resultType="com.zhenghao.admin.auth.entity.SysPostEntity">
 		SELECT DISTINCT
 			p.id,
 			p.post_name,

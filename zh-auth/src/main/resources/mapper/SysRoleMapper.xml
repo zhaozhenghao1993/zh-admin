@@ -3,7 +3,7 @@
 
 <mapper namespace="com.zhenghao.admin.auth.dao.SysRoleMapper">
 
-	<select id="list" resultType="SysRoleEntity">
+	<select id="list" resultType="com.zhenghao.admin.auth.entity.SysRoleEntity">
 		SELECT
 			id,
 			role_name
@@ -13,7 +13,7 @@
 			id ASC
 	</select>
 	
-	<select id="listForPage" resultType="SysRoleEntity" flushCache="true">
+	<select id="listForPage" resultType="com.zhenghao.admin.auth.entity.SysRoleEntity" flushCache="true">
 		SELECT
 			id,
 			role_name,
@@ -63,7 +63,7 @@
 		)
 	</insert>
 	
-	<select id="getObjectById" resultType="SysRoleEntity">
+	<select id="getObjectById" resultType="com.zhenghao.admin.auth.entity.SysRoleEntity">
 		SELECT
 			id,
 			role_name,
@@ -107,7 +107,7 @@
 		</foreach>
 	</delete>
 	
-	<select id="listUserRoles" parameterType="long" resultType="SysRoleEntity">
+	<select id="listUserRoles" parameterType="long" resultType="com.zhenghao.admin.auth.entity.SysRoleEntity">
 		SELECT DISTINCT
 			r.id,
 			r.role_name,
