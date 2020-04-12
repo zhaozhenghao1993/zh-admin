@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
   tomcat:
     uri-encoding: UTF-8
     max-threads: 1000
@@ -18,8 +18,8 @@ zh-admin:
       # folder: D:/data/app/zh-admin/uploads/ # 文件上传目录,末尾必有/ 或 \\
       path: /uploads/ # 文件上传静态资源对外暴露的访问路径,末尾必有/
   log:
-    # folder: /data/app/zh-admin/log
-    folder: log
+    # directory: /data/app/zh-admin/log
+    directory: log
 
 logging:
   config: classpath:logback-spring.xml

@@ -2,6 +2,7 @@ package com.zhenghao.admin.auth.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public class AuthApiProperties {
      * api matching rules, There can be no overlap and no intersection
      * eg: '/uploads/-/system/user/avatar' and '/uploads' cannot coexist
      */
-    private List<String> matches;
+    private List<String> matches = new ArrayList<>();
 
     /**
      * request token header
