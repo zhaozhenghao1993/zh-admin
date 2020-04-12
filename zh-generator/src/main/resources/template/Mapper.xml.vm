@@ -3,7 +3,7 @@
 
 <mapper namespace="${package}.${module}.dao.${className}Mapper">
 
-	<select id="listForPage" resultType="${className}Entity" flushCache="true">
+	<select id="listForPage" resultType="${package}.${module}.entity.${className}Entity" flushCache="true">
 		SELECT
 #foreach($column in $columns)
 			`$column.columnName`#if($velocityCount != $columns.size()),
@@ -16,7 +16,7 @@
 	</select>
 
 
-    <select id="getObjectById" resultType="${className}Entity">
+    <select id="getObjectById" resultType="${package}.${module}.entity.${className}Entity">
 		SELECT
 #foreach($column in $columns)
 			`$column.columnName`#if($velocityCount != $columns.size()),

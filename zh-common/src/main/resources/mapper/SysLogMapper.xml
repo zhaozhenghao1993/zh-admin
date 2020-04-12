@@ -4,7 +4,7 @@
 
 <mapper namespace="com.zhenghao.admin.common.dao.SysLogMapper">
 
-	<select id="listForPage" resultType="SysLogEntity" flushCache="true">
+	<select id="listForPage" resultType="com.zhenghao.admin.common.entity.SysLogEntity" flushCache="true">
 		SELECT
 			id,
 			user_id,
@@ -123,7 +123,7 @@
 		AND DATE_FORMAT(create_time, '%Y-%m-%d') = DATE_FORMAT(NOW(), '%Y-%m-%d');
 	</select>
 
-	<select id="listCountLastWeekVisit" resultType="ChartVO">
+	<select id="listCountLastWeekVisit" resultType="com.zhenghao.admin.common.vo.ChartVO">
 		SELECT
 			COUNT(*) AS y,
 			DATE_FORMAT(create_time, '%Y-%m-%d') AS x

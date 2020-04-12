@@ -3,7 +3,7 @@
 
 <mapper namespace="com.zhenghao.admin.auth.dao.SysMenuMapper">
 
-	<select id="list" resultType="SysMenuEntity" flushCache="true">
+	<select id="list" resultType="com.zhenghao.admin.auth.entity.SysMenuEntity" flushCache="true">
 		SELECT
 			m.id,
 			m.parent_id,
@@ -28,7 +28,7 @@
 			m.order_num ASC
 	</select>
 
-	<select id="listTreeNotButton" resultType="TreeVO" flushCache="true">
+	<select id="listTreeNotButton" resultType="com.zhenghao.admin.common.vo.TreeVO" flushCache="true">
 		SELECT
 			m.id,
 			m.parent_id,
@@ -43,7 +43,7 @@
 			m.order_num ASC
 	</select>
 
-	<select id="listTree" resultType="TreeVO" flushCache="true">
+	<select id="listTree" resultType="com.zhenghao.admin.common.vo.TreeVO" flushCache="true">
 		SELECT
 			m.id,
 			m.parent_id,
@@ -92,7 +92,7 @@
 		)
 	</insert>
 
-	<select id="getObjectById" resultType="SysMenuEntity">
+	<select id="getObjectById" resultType="com.zhenghao.admin.auth.entity.SysMenuEntity">
 		SELECT
 			m.id,
 			m.parent_id,
@@ -154,7 +154,7 @@
 		</foreach>
 	</delete>
 	
-	<select id="listUserPerms" parameterType="long" resultType="SysMenuEntity">
+	<select id="listUserPerms" parameterType="long" resultType="com.zhenghao.admin.auth.entity.SysMenuEntity">
 		SELECT DISTINCT
 			m.uri,
 			m.method
@@ -167,7 +167,7 @@
 		AND (m.type = 2 OR m.type = 3)
 	</select>
 
-	<select id="listUserMenu" parameterType="long" resultType="SysMenuEntity" >
+	<select id="listUserMenu" parameterType="long" resultType="com.zhenghao.admin.auth.entity.SysMenuEntity" >
 		SELECT DISTINCT
 			m.id,
 			m.parent_id,

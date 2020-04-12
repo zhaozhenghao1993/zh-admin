@@ -3,7 +3,7 @@
 
 <mapper namespace="com.zhenghao.admin.auth.dao.SysUserMapper">
 
-	<select id="listForPage" resultType="SysUserEntity" flushCache="true">
+	<select id="listForPage" resultType="com.zhenghao.admin.auth.entity.SysUserEntity" flushCache="true">
 		SELECT
 			id,
 			org_id,
@@ -61,7 +61,7 @@
 			org_id = #{orgId}
 	</select>
 	
-	<select id="getByUserName" resultType="SysUserEntity">
+	<select id="getByUserName" resultType="com.zhenghao.admin.auth.entity.SysUserEntity">
 		SELECT
 			id,
 			org_id,
@@ -78,7 +78,7 @@
 			username = #{username}
 	</select>
 
-	<insert id="save" parameterType="SysUserEntity" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="com.zhenghao.admin.auth.entity.SysUserEntity" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO sys_user (
 			org_id,
 			username,
@@ -105,7 +105,7 @@
 		)
 	</insert>
 
-	<select id="getObjectById" resultType="SysUserEntity">
+	<select id="getObjectById" resultType="com.zhenghao.admin.auth.entity.SysUserEntity">
 		SELECT
 			id,
 			org_id,

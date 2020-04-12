@@ -1,10 +1,3 @@
-server:
-  port: 8080
-  tomcat:
-    uri-encoding: UTF-8
-    max-threads: 1000
-    min-spare-threads: 30
-
 zh-admin:
   auth:
     api:
@@ -45,7 +38,6 @@ mybatis:
   configuration:
     mapUnderscoreToCamelCase: true
   mapper-locations: classpath*:mapper/*.xml
-  type-aliases-package: com.zhenghao.admin
 
 ##################pagehelper分页插件####################
 pagehelper:

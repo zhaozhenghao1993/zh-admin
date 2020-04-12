@@ -3,7 +3,7 @@
 
 <mapper namespace="com.zhenghao.admin.generator.dao.ToolGeneratorMapper">
 
-    <select id="listTable" resultType="TableEntity" flushCache="true">
+    <select id="listTable" resultType="com.zhenghao.admin.generator.entity.TableEntity" flushCache="true">
         SELECT
             table_name,
             engine,
@@ -29,7 +29,7 @@
         </choose>
     </select>
 
-    <select id="getTableByName" resultType="TableEntity">
+    <select id="getTableByName" resultType="com.zhenghao.admin.generator.entity.TableEntity">
 		SELECT
 			table_name,
 			engine obj_name,
@@ -42,7 +42,7 @@
 		AND table_name = #{value}
 	</select>
 
-    <select id="listColumn" resultType="ColumnEntity">
+    <select id="listColumn" resultType="com.zhenghao.admin.generator.entity.ColumnEntity">
 		SELECT
 			column_name,
 			data_type,
