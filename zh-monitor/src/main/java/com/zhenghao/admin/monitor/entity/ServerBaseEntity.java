@@ -37,8 +37,8 @@ public class ServerBaseEntity {
 
     private static final Logger logger = LoggerFactory.getLogger(ServerBaseEntity.class);
 
-    @Value("${zh-admin.file.log.folder}")
-    private String logFolder;
+    @Value("${zh-admin.log.directory:log}")
+    private String logDirectory;
 
     @Autowired
     private UploadConfig uploadConfig;
@@ -130,7 +130,7 @@ public class ServerBaseEntity {
     private void setAppInfo(Properties props) {
         app.setAppDir(props.getProperty("user.dir"));
         app.setUploadDir(uploadConfig.getFolder());
-        app.setLogDir(logFolder);
+        app.setLogDir(logDirectory);
     }
 
     /**

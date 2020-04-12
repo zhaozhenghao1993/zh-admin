@@ -3,14 +3,13 @@ package com.zhenghao.admin.main.auth.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.zhenghao.admin.auth.vo.SysLoginVO;
 import com.zhenghao.admin.common.entity.Result;
+import com.zhenghao.admin.common.jwt.JWTTokenProcessor;
 import com.zhenghao.admin.common.util.JSONUtils;
-import com.zhenghao.admin.common.util.UserAuthUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -38,7 +37,7 @@ public class SysLoginControllerTest {
     private WebApplicationContext wac;
 
     @Autowired
-    private UserAuthUtils userAuthUtils;
+    private JWTTokenProcessor jwtTokenProcessor;
 
     @Before
     public void setUp() {
@@ -62,6 +61,6 @@ public class SysLoginControllerTest {
         });
         assert result != null;
         SysLoginVO login = result.getData();
-        Assert.assertEquals(params.get("username"), userAuthUtils.getInfoFromToken(login.getToken()).getUsername());
+        Assert.assertEquals(params.get("username"), jwtTokenProcessor.getInfoFromToken(login.getToken()).getUsername());
     }
 }

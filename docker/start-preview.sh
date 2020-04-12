@@ -7,7 +7,7 @@ docker run \
 --spring.datasource.druid.password=root \
 --zh-admin.file.log.folder=/data/app/zh-admin/log \
 " \
--p 8081:8081 \
+-p 8080:8080 \
 -v /tmp:/data/app \
 --name zh-admin \
 -d zhaozhenghao1993/zh-admin-preview:1.0.1

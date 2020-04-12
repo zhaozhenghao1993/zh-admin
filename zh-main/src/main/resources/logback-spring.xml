@@ -1,5 +1,5 @@
 <configuration>
-    <springProperty scope="context" name="LOG_HOME" source="zh-admin.file.log.folder"/>
+    <springProperty scope="context" name="LOG_HOME" source="zh-admin.log.directory" defaultValue="log" />
     <!-- %m输出的信息,%p日志级别,%t线程名,%d日期,%c类的全名,%i索引【从数字0开始递增】,,, -->
     <!-- appender是configuration的子节点，是负责写日志的组件。 -->
     <!-- ConsoleAppender：把日志输出到控制台 -->

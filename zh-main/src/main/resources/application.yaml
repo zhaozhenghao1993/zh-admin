@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
   tomcat:
     uri-encoding: UTF-8
     max-threads: 1000
@@ -7,23 +7,19 @@ server:
 
 zh-admin:
   auth:
-    routes: # 有效路由,不能重复且不能存在交集, 例：/uploads/-/system/user/avatar 不能与 /uploads 共存
-      - /api
-      - /uploads/-/system/user/avatar
-      - /druid
-  jwt:
-    token-header: ZH-TOKEN
-    expire: 14400
-    private-key-path: jwt/pkcs8_rsa_private_key.pem
-    public-key-path: jwt/rsa_public_key.pem
+    api:
+      matches: # 匹配路由,不能重复且不能存在交集, 例：/uploads/-/system/user/avatar 不能与 /uploads 共存
+        - /api
+        - /uploads/-/system/user/avatar
+        - /druid
   file:
-    log:
-      # folder: /data/app/zh-admin/log
-      folder: log
     uploads:
       folder: /data/app/zh-admin/uploads/ # 文件上传目录,末尾必有/ 或 \\
       # folder: D:/data/app/zh-admin/uploads/ # 文件上传目录,末尾必有/ 或 \\
       path: /uploads/ # 文件上传静态资源对外暴露的访问路径,末尾必有/
+  log:
+    # directory: /data/app/zh-admin/log
+    directory: log
 
 logging:
   config: classpath:logback-spring.xml

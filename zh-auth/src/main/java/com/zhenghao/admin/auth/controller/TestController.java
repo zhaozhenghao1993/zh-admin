@@ -3,6 +3,7 @@ package com.zhenghao.admin.auth.controller;
 import com.zhenghao.admin.auth.entity.SysUserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.commons.util.InetUtils;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,12 +17,16 @@ public class TestController {
     private final InetUtils inetUtils;
 
     @Autowired
+    private Environment environment;
+
+    @Autowired
     public TestController(InetUtils inetUtils) {
         this.inetUtils = inetUtils;
     }
 
     @GetMapping("/heart")
     public String heart() {
+        System.out.println(environment.getProperty("LOG_HOME"));
         return "success";
     }
 
