@@ -1,6 +1,6 @@
 package com.zhenghao.admin.common.jwt;
 
-import com.zhenghao.admin.common.constant.SystemConstant;
+import com.zhenghao.admin.common.constant.SystemConstants;
 import com.zhenghao.admin.common.util.StringCommonUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -38,8 +38,8 @@ public class JWTHelper {
     public static String generateToken(JWTInfo jwtInfo, PrivateKey privateKey, int expire) {
         return Jwts.builder()
                 .setSubject(jwtInfo.getUsername())
-                .claim(SystemConstant.JWT_KEY_USER_ID, jwtInfo.getUserId())
-                .claim(SystemConstant.JWT_KEY_NAME, jwtInfo.getName())
+                .claim(SystemConstants.JWT_KEY_USER_ID, jwtInfo.getUserId())
+                .claim(SystemConstants.JWT_KEY_NAME, jwtInfo.getName())
                 .setExpiration(DateTime.now().plusSeconds(expire).toDate())
                 .signWith(SignatureAlgorithm.RS256, privateKey)
                 .compact();
@@ -67,9 +67,9 @@ public class JWTHelper {
         Jws<Claims> claimsJws = parserToken(token, publicKey);
         Claims body = claimsJws.getBody();
         return new JWTInfo(
-                StringCommonUtils.getObjectValue(body.get(SystemConstant.JWT_KEY_USER_ID)),
+                StringCommonUtils.getObjectValue(body.get(SystemConstants.JWT_KEY_USER_ID)),
                 body.getSubject(),
-                StringCommonUtils.getObjectValue(body.get(SystemConstant.JWT_KEY_NAME)
+                StringCommonUtils.getObjectValue(body.get(SystemConstants.JWT_KEY_NAME)
                 ));
     }
 }

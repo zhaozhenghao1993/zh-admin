@@ -23,8 +23,8 @@ import java.security.spec.InvalidKeySpecException;
  * KeyConfig.java
  */
 
-@Configuration
-@EnableConfigurationProperties(JWTProperties.class)
+/*@Configuration
+@EnableConfigurationProperties(JWTProperties.class)*/
 public class JWTConfig {
 
     private final JWTProperties jwtProperties;

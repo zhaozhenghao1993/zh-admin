@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhenghao.admin.server.dao.SysDictMapper">
+
+	<select id="listForPage" resultType="com.zhenghao.admin.server.entity.SysDictEntity" flushCache="true">
+		SELECT
+			`id`,
+			`name`,
+			`code`,
+			`description`,
+			`creator_id`,
+			`create_time`,
+			`modifier_id`,
+			`modified_time`
+		FROM
+			sys_dict
+		<where>
+			<if test="name != null and name.trim() != ''">
+				AND `name` LIKE concat('%',#{name},'%')
+			</if>
+			<if test="name != null and name.trim() != ''">
+				AND code LIKE concat('%',#{code},'%')
+			</if>
+		</where>
+		<choose>
+			<when test="sortOrder != null and sortOrder == 'ascend'">
+				ORDER BY create_time
+			</when>
+			<when test="sortOrder != null and sortOrder == 'descend'">
+				ORDER BY create_time DESC
+			</when>
+			<otherwise>
+				ORDER BY id DESC
+			</otherwise>
+		</choose>
+	</select>
+
+
+    <select id="getObjectById" resultType="com.zhenghao.admin.server.entity.SysDictEntity">
+		SELECT
+			`id`,
+			`name`,
+			`code`,
+			`description`,
+			`creator_id`,
+			`create_time`,
+			`modifier_id`,
+			`modified_time`
+		FROM
+			sys_dict
+		WHERE
+			id = #{id}
+	</select>
+
+	<select id="getSysDictByCode" resultType="com.zhenghao.admin.server.entity.SysDictEntity">
+		SELECT
+			`id`,
+			`name`,
+			`code`,
+			`description`,
+			`creator_id`,
+			`create_time`,
+			`modifier_id`,
+			`modified_time`
+		FROM
+			sys_dict
+		WHERE
+			`code` = #{code}
+	</select>
+	
+	<insert id="save">
+		INSERT INTO sys_dict (
+			`name`,
+			`code`,
+			`description`,
+			`creator_id`,
+			`create_time`
+		)
+		VALUES (
+			#{name},
+			#{code},
+			#{description},
+			#{creatorId},
+			NOW()
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sys_dict
+	 	<set>
+			<if test="name != null">`name` = #{name},</if>
+			<if test="code != null">`code` = #{code},</if>
+			<if test="description != null">`description` = #{description},</if>
+			<if test="modifierId != null">`modifier_id` = #{modifierId},</if>
+			`modified_time` = NOW()
+		</set>
+		WHERE
+			id = #{id}
+	</update>
+
+    <delete id="remove">
+        DELETE
+        FROM
+			sys_dict
+        WHERE
+			id = #{value}
+    </delete>
+	
+	<delete id="batchRemove">
+		DELETE
+		FROM
+			sys_dict
+		WHERE
+			id IN
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+	
+</mapper>

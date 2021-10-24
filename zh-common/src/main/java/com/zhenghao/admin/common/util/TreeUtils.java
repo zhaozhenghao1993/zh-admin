@@ -1,9 +1,7 @@
 package com.zhenghao.admin.common.util;
 
-import com.zhenghao.admin.common.constant.SystemConstant;
+import com.zhenghao.admin.common.constant.SystemConstants;
 import com.zhenghao.admin.common.entity.TreeNode;
-
-import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -62,7 +60,7 @@ public class TreeUtils {
      * @param treeNode tree 节点
      * @return true 则发生循环依赖; false 未发生循环依赖
      */
-    public static boolean isTreeCircularReference(TreeNode parentTreeNode, @NotNull TreeNode treeNode) {
+    public static boolean isTreeCircularReference(TreeNode parentTreeNode, TreeNode treeNode) {
         if (parentTreeNode == null) {
             return false;
         }
@@ -71,7 +69,7 @@ public class TreeUtils {
                 || parentTreeNode.getParentId() == null) {
             return false;
         }
-        return Arrays.stream(parentTreeNode.getAncestors().split(SystemConstant.TREE_ANCESTORS_SPLIT))
+        return Arrays.stream(parentTreeNode.getAncestors().split(SystemConstants.TREE_ANCESTORS_SPLIT))
                 .anyMatch(ancestorsId -> ancestorsId.equals(treeNode.getId() + ""))
                 || treeNode.getParentId().equals(treeNode.getId());
     }
@@ -83,12 +81,12 @@ public class TreeUtils {
      * @param treeNode 被构建节点
      * @return 祖级列表
      */
-    public static String buildAncestors(TreeNode parentTreeNode, @NotNull TreeNode treeNode) {
+    public static String buildAncestors(TreeNode parentTreeNode, TreeNode treeNode) {
         String ancestors;
         if (parentTreeNode == null) {
             ancestors = treeNode.getParentId() + "";
         } else {
-            ancestors = parentTreeNode.getAncestors() + SystemConstant.TREE_ANCESTORS_SPLIT + parentTreeNode.getId();
+            ancestors = parentTreeNode.getAncestors() + SystemConstants.TREE_ANCESTORS_SPLIT + parentTreeNode.getId();
         }
         return ancestors;
     }

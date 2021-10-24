@@ -67,70 +67,78 @@ CREATE TABLE `sys_menu` (
 -- ----------------------------
 INSERT INTO `sys_menu` VALUES ('1', '0', '系统管理', null, null, 'sys', '0', '0', null, '1', '2019-06-01 18:34:08', null, null);
 INSERT INTO `sys_menu` VALUES ('2', '1', '用户管理', null, null, 'sys:user', '1', '0', null, '1', '2019-06-01 18:35:30', null, null);
-INSERT INTO `sys_menu` VALUES ('3', '2', '列表', '/sys/user', 'GET', 'sys:user:view', '3', '0', '系统用户列表', '1', '2019-06-01 20:14:04', null, null);
-INSERT INTO `sys_menu` VALUES ('4', '2', '展示', '/sys/user/{id}', 'GET', 'sys:user:info', '3', '1', '系统用户展示', '1', '2019-06-01 20:14:06', null, null);
-INSERT INTO `sys_menu` VALUES ('5', '2', '详情', '/sys/user/{id}/detail', 'GET', 'sys:user:detail', '3', '2', '系统用户详情', '1', '2019-06-01 20:14:08', null, null);
-INSERT INTO `sys_menu` VALUES ('6', '2', '新增', '/sys/user', 'POST', 'sys:user:save', '2', '3', '系统用户新增', '1', '2019-06-01 20:14:10', null, null);
-INSERT INTO `sys_menu` VALUES ('7', '2', '修改', '/sys/user/{id}', 'PUT', 'sys:user:edit', '2', '4', '系统用户修改', '1', '2019-06-01 20:14:12', null, null);
-INSERT INTO `sys_menu` VALUES ('8', '2', '删除', '/sys/user/{id}', 'DELETE', 'sys:user:remove', '2', '5', '系统用户删除', '1', '2019-06-01 20:14:16', null, null);
-INSERT INTO `sys_menu` VALUES ('9', '2', '批量删除', '/sys/user', 'DELETE', 'sys:user:batch', '2', '6', '系统用户批量删除', '1', '2019-06-01 20:14:23', null, null);
-INSERT INTO `sys_menu` VALUES ('10', '2', '批量启用', '/sys/user/enable', 'PUT', 'sys:user:enable', '2', '7', '系统用户启用账号', '1', '2019-06-01 20:14:25', null, null);
-INSERT INTO `sys_menu` VALUES ('11', '2', '批量锁定', '/sys/user/disable', 'PUT', 'sys:user:disable', '2', '8', '系统用户锁定账号', '1', '2019-06-01 20:14:28', null, null);
-INSERT INTO `sys_menu` VALUES ('12', '2', '重置密码', '/sys/user/{id}/reset', 'PUT', 'sys:user:reset', '2', '9', '系统用户重置密码', '1', '2019-06-01 20:14:30', null, null);
+INSERT INTO `sys_menu` VALUES ('3', '2', '列表', '/api/admin/sys/user', 'GET', 'sys:user:view', '3', '0', '系统用户列表', '1', '2019-06-01 20:14:04', null, null);
+INSERT INTO `sys_menu` VALUES ('4', '2', '展示', '/api/admin/sys/user/{id}', 'GET', 'sys:user:info', '3', '1', '系统用户展示', '1', '2019-06-01 20:14:06', null, null);
+INSERT INTO `sys_menu` VALUES ('5', '2', '详情', '/api/admin/sys/user/{id}/detail', 'GET', 'sys:user:detail', '3', '2', '系统用户详情', '1', '2019-06-01 20:14:08', null, null);
+INSERT INTO `sys_menu` VALUES ('6', '2', '新增', '/api/admin/sys/user', 'POST', 'sys:user:save', '2', '3', '系统用户新增', '1', '2019-06-01 20:14:10', null, null);
+INSERT INTO `sys_menu` VALUES ('7', '2', '修改', '/api/admin/sys/user/{id}', 'PUT', 'sys:user:edit', '2', '4', '系统用户修改', '1', '2019-06-01 20:14:12', null, null);
+INSERT INTO `sys_menu` VALUES ('8', '2', '删除', '/api/admin/sys/user/{id}', 'DELETE', 'sys:user:remove', '2', '5', '系统用户删除', '1', '2019-06-01 20:14:16', null, null);
+INSERT INTO `sys_menu` VALUES ('9', '2', '批量删除', '/api/admin/sys/user', 'DELETE', 'sys:user:batch', '2', '6', '系统用户批量删除', '1', '2019-06-01 20:14:23', null, null);
+INSERT INTO `sys_menu` VALUES ('10', '2', '批量启用', '/api/admin/sys/user/enable', 'PUT', 'sys:user:enable', '2', '7', '系统用户启用账号', '1', '2019-06-01 20:14:25', null, null);
+INSERT INTO `sys_menu` VALUES ('11', '2', '批量锁定', '/api/admin/sys/user/disable', 'PUT', 'sys:user:disable', '2', '8', '系统用户锁定账号', '1', '2019-06-01 20:14:28', null, null);
+INSERT INTO `sys_menu` VALUES ('12', '2', '重置密码', '/api/admin/sys/user/{id}/reset', 'PUT', 'sys:user:reset', '2', '9', '系统用户重置密码', '1', '2019-06-01 20:14:30', null, null);
 INSERT INTO `sys_menu` VALUES ('13', '1', '角色管理', null, null, 'sys:role', '1', '1', null, '1', '2019-06-01 20:14:33', null, null);
-INSERT INTO `sys_menu` VALUES ('14', '13', '列表', '/sys/role', 'GET', 'sys:role:view', '3', '0', '系统角色列表', '1', '2019-06-01 20:14:35', null, null);
-INSERT INTO `sys_menu` VALUES ('15', '13', '展示', '/sys/role/{id}', 'GET', 'sys:role:info', '3', '1', '系统角色详情', '1', '2019-06-01 20:14:37', null, null);
-INSERT INTO `sys_menu` VALUES ('16', '13', '角色选择', '/sys/role/select', 'GET', 'sys:role:select', '3', '2', '系统角色选择列表', '1', '2019-06-01 20:14:40', null, null);
-INSERT INTO `sys_menu` VALUES ('17', '13', '新增', '/sys/role', 'POST', 'sys:role:save', '2', '3', '系统角色新增', '1', '2019-06-01 20:14:42', null, null);
-INSERT INTO `sys_menu` VALUES ('18', '13', '修改', '/sys/role/{id}', 'PUT', 'sys:role:edit', '2', '4', '系统角色修改', '1', '2019-06-01 20:14:44', null, null);
-INSERT INTO `sys_menu` VALUES ('19', '13', '删除', '/sys/role/{id}', 'DELETE', 'sys:role:remove', '2', '5', '系统角色删除', '1', '2019-06-01 20:14:47', null, null);
-INSERT INTO `sys_menu` VALUES ('20', '13', '批量删除', '/sys/role', 'DELETE', 'sys:role:batch', '2', '6', '系统角色批量删除', '1', '2019-06-01 20:14:49', null, null);
-INSERT INTO `sys_menu` VALUES ('21', '13', '分配权限', '/sys/role/{id}/authorize', 'PUT', 'sys:role:authorize', '2', '7', '系统角色授权', '1', '2019-06-01 20:14:53', null, null);
+INSERT INTO `sys_menu` VALUES ('14', '13', '列表', '/api/admin/sys/role', 'GET', 'sys:role:view', '3', '0', '系统角色列表', '1', '2019-06-01 20:14:35', null, null);
+INSERT INTO `sys_menu` VALUES ('15', '13', '展示', '/api/admin/sys/role/{id}', 'GET', 'sys:role:info', '3', '1', '系统角色详情', '1', '2019-06-01 20:14:37', null, null);
+INSERT INTO `sys_menu` VALUES ('16', '13', '角色选择', '/api/admin/sys/role/select', 'GET', 'sys:role:select', '3', '2', '系统角色选择列表', '1', '2019-06-01 20:14:40', null, null);
+INSERT INTO `sys_menu` VALUES ('17', '13', '新增', '/api/admin/sys/role', 'POST', 'sys:role:save', '2', '3', '系统角色新增', '1', '2019-06-01 20:14:42', null, null);
+INSERT INTO `sys_menu` VALUES ('18', '13', '修改', '/api/admin/sys/role/{id}', 'PUT', 'sys:role:edit', '2', '4', '系统角色修改', '1', '2019-06-01 20:14:44', null, null);
+INSERT INTO `sys_menu` VALUES ('19', '13', '删除', '/api/admin/sys/role/{id}', 'DELETE', 'sys:role:remove', '2', '5', '系统角色删除', '1', '2019-06-01 20:14:47', null, null);
+INSERT INTO `sys_menu` VALUES ('20', '13', '批量删除', '/api/admin/sys/role', 'DELETE', 'sys:role:batch', '2', '6', '系统角色批量删除', '1', '2019-06-01 20:14:49', null, null);
+INSERT INTO `sys_menu` VALUES ('21', '13', '分配权限', '/api/admin/sys/role/{id}/authorize', 'PUT', 'sys:role:authorize', '2', '7', '系统角色授权', '1', '2019-06-01 20:14:53', null, null);
 INSERT INTO `sys_menu` VALUES ('22', '1', '权限管理', null, null, 'sys:menu', '1', '2', null, '1', '2019-06-01 20:14:56', null, null);
-INSERT INTO `sys_menu` VALUES ('23', '22', '列表', '/sys/menu', 'GET', 'sys:menu:view', '3', '0', '系统菜单列表', '1', '2019-06-01 20:14:58', null, null);
-INSERT INTO `sys_menu` VALUES ('24', '22', '展示', '/sys/menu/{id}', 'GET', 'sys:menu:info', '3', '1', '系统菜单详情', '1', '2019-06-01 20:15:01', null, null);
-INSERT INTO `sys_menu` VALUES ('25', '22', '菜单树列表', '/sys/menu/tree', 'GET', 'sys:menu:tree', '3', '2', '系统菜单树列表', '1', '2019-06-01 20:15:05', null, null);
-INSERT INTO `sys_menu` VALUES ('26', '22', '新增', '/sys/menu', 'POST', 'sys:menu:save', '2', '3', '系统菜单新增', '1', '2019-06-01 20:15:07', null, null);
-INSERT INTO `sys_menu` VALUES ('27', '22', '修改', '/sys/menu/{id}', 'PUT', 'sys:menu:edit', '2', '4', '系统菜单修改', '1', '2019-06-01 20:15:10', null, null);
-INSERT INTO `sys_menu` VALUES ('28', '22', '删除', '/sys/menu/{id}', 'DELETE', 'sys:menu:remove', '2', '5', '系统菜单删除', '1', '2019-06-01 20:15:13', null, null);
+INSERT INTO `sys_menu` VALUES ('23', '22', '列表', '/api/admin/sys/menu', 'GET', 'sys:menu:view', '3', '0', '系统菜单列表', '1', '2019-06-01 20:14:58', null, null);
+INSERT INTO `sys_menu` VALUES ('24', '22', '展示', '/api/admin/sys/menu/{id}', 'GET', 'sys:menu:info', '3', '1', '系统菜单详情', '1', '2019-06-01 20:15:01', null, null);
+INSERT INTO `sys_menu` VALUES ('25', '22', '菜单树列表', '/api/sys/menu/tree', 'GET', 'sys:menu:tree', '3', '2', '系统菜单树列表', '1', '2019-06-01 20:15:05', null, null);
+INSERT INTO `sys_menu` VALUES ('26', '22', '新增', '/api/admin/sys/menu', 'POST', 'sys:menu:save', '2', '3', '系统菜单新增', '1', '2019-06-01 20:15:07', null, null);
+INSERT INTO `sys_menu` VALUES ('27', '22', '修改', '/api/admin/sys/menu/{id}', 'PUT', 'sys:menu:edit', '2', '4', '系统菜单修改', '1', '2019-06-01 20:15:10', null, null);
+INSERT INTO `sys_menu` VALUES ('28', '22', '删除', '/api/admin/sys/menu/{id}', 'DELETE', 'sys:menu:remove', '2', '5', '系统菜单删除', '1', '2019-06-01 20:15:13', null, null);
 INSERT INTO `sys_menu` VALUES ('29', '1', '组织管理', null, null, 'sys:org', '1', '3', null, '1', '2019-06-01 20:15:15', null, null);
-INSERT INTO `sys_menu` VALUES ('30', '29', '列表', '/sys/org', 'GET', 'sys:org:view', '3', '0', '系统组织列表', '1', '2019-06-01 20:15:17', null, null);
-INSERT INTO `sys_menu` VALUES ('31', '29', '展示', '/sys/org/{id}', 'GET', 'sys:org:info', '3', '1', '系统组织详情', '1', '2019-06-01 20:15:19', null, null);
-INSERT INTO `sys_menu` VALUES ('32', '29', '组织树列表', '/sys/org/tree', 'GET', 'sys:org:tree', '3', '2', '系统组织树列表', '1', '2019-06-01 20:15:22', null, null);
-INSERT INTO `sys_menu` VALUES ('33', '29', '新增', '/sys/org', 'POST', 'sys:org:save', '2', '3', '系统组织新增', '1', '2019-06-01 20:15:24', null, null);
-INSERT INTO `sys_menu` VALUES ('34', '29', '修改', '/sys/org/{id}', 'PUT', 'sys:org:edit', '2', '4', '系统组织修改', '1', '2019-06-01 20:15:26', null, null);
-INSERT INTO `sys_menu` VALUES ('35', '29', '删除', '/sys/org/{id}', 'DELETE', 'sys:org:remove', '2', '5', '系统组织删除', '1', '2019-06-01 20:15:28', null, null);
+INSERT INTO `sys_menu` VALUES ('30', '29', '列表', '/api/admin/sys/org', 'GET', 'sys:org:view', '3', '0', '系统组织列表', '1', '2019-06-01 20:15:17', null, null);
+INSERT INTO `sys_menu` VALUES ('31', '29', '展示', '/api/admin/sys/org/{id}', 'GET', 'sys:org:info', '3', '1', '系统组织详情', '1', '2019-06-01 20:15:19', null, null);
+INSERT INTO `sys_menu` VALUES ('32', '29', '组织树列表', '/api/admin/sys/org/tree', 'GET', 'sys:org:tree', '3', '2', '系统组织树列表', '1', '2019-06-01 20:15:22', null, null);
+INSERT INTO `sys_menu` VALUES ('33', '29', '新增', '/api/admin/sys/org', 'POST', 'sys:org:save', '2', '3', '系统组织新增', '1', '2019-06-01 20:15:24', null, null);
+INSERT INTO `sys_menu` VALUES ('34', '29', '修改', '/api/admin/sys/org/{id}', 'PUT', 'sys:org:edit', '2', '4', '系统组织修改', '1', '2019-06-01 20:15:26', null, null);
+INSERT INTO `sys_menu` VALUES ('35', '29', '删除', '/api/admin/sys/org/{id}', 'DELETE', 'sys:org:remove', '2', '5', '系统组织删除', '1', '2019-06-01 20:15:28', null, null);
 INSERT INTO `sys_menu` VALUES ('36', '1', '岗位管理', null, null, 'sys:post', '1', '4', null, '1', '2019-06-01 20:15:32', null, null);
-INSERT INTO `sys_menu` VALUES ('37', '36', '列表', '/sys/post', 'GET', 'sys:post:view', '3', '0', '系统岗位列表', '1', '2019-06-01 20:15:35', null, null);
-INSERT INTO `sys_menu` VALUES ('38', '36', '展示', '/sys/post/{id}', 'GET', 'sys:post:info', '3', '1', '系统岗位展示', '1', '2019-06-01 20:15:37', null, null);
-INSERT INTO `sys_menu` VALUES ('39', '36', '岗位选择', '/sys/post/select', 'GET', 'sys:post:select', '3', '2', '系统岗位选择列表', '1', '2019-06-01 20:15:39', null, null);
-INSERT INTO `sys_menu` VALUES ('40', '36', '新增', '/sys/post', 'POST', 'sys:post:save', '2', '3', '系统岗位新增', '1', '2019-06-01 20:15:42', null, null);
-INSERT INTO `sys_menu` VALUES ('41', '36', '修改', '/sys/post/{id}', 'PUT', 'sys:post:edit', '2', '4', '系统岗位修改', '1', '2019-06-01 20:15:45', null, null);
-INSERT INTO `sys_menu` VALUES ('42', '36', '删除', '/sys/post/{id}', 'DELETE', 'sys:post:remove', '2', '5', '系统岗位删除', '1', '2019-06-01 20:15:47', null, null);
-INSERT INTO `sys_menu` VALUES ('43', '36', '批量删除', '/sys/post', 'DELETE', 'sys:post:batch', '2', '6', '系统岗位批量删除', '1', '2019-06-01 20:15:50', null, null);
-INSERT INTO `sys_menu` VALUES ('44', '0', '系统监控', null, null, 'monitor', '0', '1', null, '1', '2019-06-01 20:15:53', null, null);
-INSERT INTO `sys_menu` VALUES ('45', '44', '日志管理', null, null, 'monitor:log', '1', '0', null, '1', '2019-06-01 20:15:55', null, null);
-INSERT INTO `sys_menu` VALUES ('46', '45', '列表', '/monitor/log', 'GET', 'monitor:log:view', '3', '0', '系统日志列表', '1', '2019-06-01 20:15:57', null, null);
-INSERT INTO `sys_menu` VALUES ('47', '45', '批量删除', '/monitor/log', 'DELETE', 'monitor:log:batch', '2', '1', '系统日志批量删除', '1', '2019-06-01 20:16:00', null, null);
-INSERT INTO `sys_menu` VALUES ('48', '45', '清空', '/monitor/log/{type}/clear', 'DELETE', 'monitor:log:clear', '2', '2', '系统日志清空日志', '1', '2019-06-01 20:16:02', null, null);
-INSERT INTO `sys_menu` VALUES ('49', '44', '服务器监控', null, null, 'monitor:server', '1', '1', null, '1', '2019-06-01 20:16:05', null, null);
-INSERT INTO `sys_menu` VALUES ('50', '49', '基础信息', '/monitor/server/base', 'GET', 'monitor:server:base', '3', '0', '服务器监控基础数据', '1', '2019-06-01 20:16:08', null, null);
-INSERT INTO `sys_menu` VALUES ('51', '49', '实时信息', '/monitor/server/instant', 'GET', 'monitor:server:instant', '3', '1', '服务器监控实时数据', '1', '2019-06-01 20:16:10', null, null);
-INSERT INTO `sys_menu` VALUES ('52', '44', '性能监控', '', '', 'monitor:performance', '1', '2', null, '1', '2019-07-21 15:58:53', null, null);
-INSERT INTO `sys_menu` VALUES ('53', '52', '系统信息', '', '', 'monitor:performance:system', '1', '0', null, '1', '2019-07-21 15:59:28', null, null);
-INSERT INTO `sys_menu` VALUES ('54', '52', 'JVM信息', '', '', 'monitor:performance:jvm', '1', '1', null, '1', '2019-07-21 16:00:06', null, null);
-INSERT INTO `sys_menu` VALUES ('55', '52', 'Tomcat信息', '', '', 'monitor:performance:tomcat', '1', '2', null, '1', '2019-07-21 16:00:23', '1', '2019-07-21 16:00:29');
-INSERT INTO `sys_menu` VALUES ('56', '53', '系统信息资源', '/monitor/performance/system/*', 'GET', 'monitor:performance:system:resource', '3', '0', null, '1', '2019-07-21 16:02:49', '1', '2019-07-21 19:04:39');
-INSERT INTO `sys_menu` VALUES ('57', '54', 'JVM信息资源', '/monitor/performance/jvm/*', 'GET', 'monitor:performance:jvm:resource', '3', '0', null, '1', '2019-07-21 16:03:37', '1', '2019-07-21 19:04:47');
-INSERT INTO `sys_menu` VALUES ('58', '55', 'Tomcat信息资源', '/monitor/performance/tomcat/*', 'GET', 'monitor:performance:tomcat:resource', '3', '0', null, '1', '2019-07-21 16:04:07', '1', '2019-07-21 19:04:53');
-INSERT INTO `sys_menu` VALUES ('59', '44', '数据库监控', null, null, 'monitor:druid', '1', '2', 'druid数据库监控', '1', '2019-06-01 20:16:13', null, null);
-INSERT INTO `sys_menu` VALUES ('60', '59', 'druid静态资源', '/druid/*', 'GET', 'monitor:druid:static', '3', '0', 'druid静态资源', '1', '2019-06-01 20:16:15', null, null);
-INSERT INTO `sys_menu` VALUES ('61', '59', 'druid动态数据', '/druid/*', 'POST', 'monitor:druid:data', '3', '1', 'druid动态数据', '1', '2019-06-01 20:16:17', null, null);
-INSERT INTO `sys_menu` VALUES ('62', '0', '开发工具', null, null, 'tool', '0', '2', null, '1', '2019-06-01 20:16:19', null, null);
-INSERT INTO `sys_menu` VALUES ('63', '62', 'IconSelector', null, null, 'tool:icon', '1', '0', null, '1', '2019-06-01 20:16:21', null, null);
-INSERT INTO `sys_menu` VALUES ('64', '62', '代码生成器', null, null, 'tool:generator', '1', '1', null, '1', '2019-06-01 20:16:23', null, null);
-INSERT INTO `sys_menu` VALUES ('65', '64', '列表', '/tool/generator', 'GET', 'tool:generator:view', '3', '0', '代码生成器列表，展示所有数据库表信息', '1', '2019-06-01 20:16:25', null, null);
-INSERT INTO `sys_menu` VALUES ('66', '64', '生成代码', '/tool/generator/code', 'GET', 'tool:generator:code', '2', '1', '生成代码', '1', '2019-06-01 20:16:28', null, null);
+INSERT INTO `sys_menu` VALUES ('37', '36', '列表', '/api/admin/sys/post', 'GET', 'sys:post:view', '3', '0', '系统岗位列表', '1', '2019-06-01 20:15:35', null, null);
+INSERT INTO `sys_menu` VALUES ('38', '36', '展示', '/api/admin/sys/post/{id}', 'GET', 'sys:post:info', '3', '1', '系统岗位展示', '1', '2019-06-01 20:15:37', null, null);
+INSERT INTO `sys_menu` VALUES ('39', '36', '岗位选择', '/api/admin/sys/post/select', 'GET', 'sys:post:select', '3', '2', '系统岗位选择列表', '1', '2019-06-01 20:15:39', null, null);
+INSERT INTO `sys_menu` VALUES ('40', '36', '新增', '/api/admin/sys/post', 'POST', 'sys:post:save', '2', '3', '系统岗位新增', '1', '2019-06-01 20:15:42', null, null);
+INSERT INTO `sys_menu` VALUES ('41', '36', '修改', '/api/admin/sys/post/{id}', 'PUT', 'sys:post:edit', '2', '4', '系统岗位修改', '1', '2019-06-01 20:15:45', null, null);
+INSERT INTO `sys_menu` VALUES ('42', '36', '删除', '/api/admin/sys/post/{id}', 'DELETE', 'sys:post:remove', '2', '5', '系统岗位删除', '1', '2019-06-01 20:15:47', null, null);
+INSERT INTO `sys_menu` VALUES ('43', '36', '批量删除', '/api/admin/sys/post', 'DELETE', 'sys:post:batch', '2', '6', '系统岗位批量删除', '1', '2019-06-01 20:15:50', null, null);
+INSERT INTO `sys_menu` VALUES ('44', '1', '数据字典', null, null, 'sys:dict', '1', '4', null, '1', '2021-10-23 20:15:32', null, null);
+INSERT INTO `sys_menu` VALUES ('45', '44', '列表', '/api/admin/sys/dict', 'GET', 'sys:dict:view', '3', '0', '数据字典列表', '1', '2021-10-23 20:15:32', null, null);
+INSERT INTO `sys_menu` VALUES ('46', '44', '展示', '/api/admin/sys/dict/{id}', 'GET', 'sys:dict:info', '3', '1', '数据字典展示', '1', '2021-10-23 20:15:32', null, null);
+INSERT INTO `sys_menu` VALUES ('48', '44', '新增', '/api/admin/sys/dict', 'POST', 'sys:dict:save', '2', '3', '数据字典新增', '1', '2021-10-23 20:15:32', null, null);
+INSERT INTO `sys_menu` VALUES ('49', '44', '修改', '/api/admin/sys/dict/{id}', 'PUT', 'sys:dict:edit', '2', '4', '数据字典修改', '1', '2021-10-23 20:15:32', null, null);
+INSERT INTO `sys_menu` VALUES ('50', '44', '删除', '/api/admin/sys/dict/{id}', 'DELETE', 'sys:dict:remove', '2', '5', '数据字典删除', '1', '2021-10-23 20:15:32', null, null);
+INSERT INTO `sys_menu` VALUES ('51', '44', '字典项列表', '/api/admin/sys/dict/{dictCode}/item', 'GET', 'sys:dict:item:view', '3', '0', '数据字典项列表', '1', '2021-10-23 20:15:32', null, null);
+INSERT INTO `sys_menu` VALUES ('52', '44', '字典项展示', '/api/admin/sys/dict/{dictCode}/item/{id}', 'GET', 'sys:dict:item:info', '3', '1', '数据字典项展示', '1', '2021-10-23 20:15:32', null, null);
+INSERT INTO `sys_menu` VALUES ('53', '44', '字典项新增', '/api/admin/sys/dict/{dictCode}/item', 'POST', 'sys:dict:item:save', '2', '3', '数据字典项新增', '1', '2021-10-23 20:15:32', null, null);
+INSERT INTO `sys_menu` VALUES ('54', '44', '字典项修改', '/api/admin/sys/dict/{dictCode}/item/{id}', 'PUT', 'sys:dict:item:edit', '2', '4', '数据字典项修改', '1', '2021-10-23 20:15:32', null, null);
+INSERT INTO `sys_menu` VALUES ('55', '44', '字典项删除', '/api/admin/sys/dict/{dictCode}/item/{id}', 'DELETE', 'sys:dict:item:remove', '2', '5', '数据字典项删除', '1', '2021-10-23 20:15:32', null, null);
+INSERT INTO `sys_menu` VALUES ('56', '0', '系统监控', null, null, 'monitor', '0', '1', null, '1', '2019-06-01 20:15:53', null, null);
+INSERT INTO `sys_menu` VALUES ('57', '56', '日志管理', null, null, 'monitor:log', '1', '0', null, '1', '2019-06-01 20:15:55', null, null);
+INSERT INTO `sys_menu` VALUES ('58', '57', '列表', '/api/admin/monitor/log', 'GET', 'monitor:log:view', '3', '0', '系统日志列表', '1', '2019-06-01 20:15:57', null, null);
+INSERT INTO `sys_menu` VALUES ('59', '57', '批量删除', '/api/admin/monitor/log', 'DELETE', 'monitor:log:batch', '2', '1', '系统日志批量删除', '1', '2019-06-01 20:16:00', null, null);
+INSERT INTO `sys_menu` VALUES ('60', '57', '清空', '/api/admin/monitor/log/{type}/clear', 'DELETE', 'monitor:log:clear', '2', '2', '系统日志清空日志', '1', '2019-06-01 20:16:02', null, null);
+INSERT INTO `sys_menu` VALUES ('61', '56', '服务器监控', null, null, 'monitor:server', '1', '1', null, '1', '2019-06-01 20:16:05', null, null);
+INSERT INTO `sys_menu` VALUES ('62', '61', '基础信息', '/api/admin/monitor/server/base', 'GET', 'monitor:server:base', '3', '0', '服务器监控基础数据', '1', '2019-06-01 20:16:08', null, null);
+INSERT INTO `sys_menu` VALUES ('63', '61', '实时信息', '/api/admin/monitor/server/instant', 'GET', 'monitor:server:instant', '3', '1', '服务器监控实时数据', '1', '2019-06-01 20:16:10', null, null);
+INSERT INTO `sys_menu` VALUES ('64', '56', '性能监控', '', '', 'monitor:performance', '1', '2', null, '1', '2019-07-21 15:58:53', null, null);
+INSERT INTO `sys_menu` VALUES ('65', '64', '系统信息', '', '', 'monitor:performance:system', '1', '0', null, '1', '2019-07-21 15:59:28', null, null);
+INSERT INTO `sys_menu` VALUES ('66', '64', 'JVM信息', '', '', 'monitor:performance:jvm', '1', '1', null, '1', '2019-07-21 16:00:06', null, null);
+INSERT INTO `sys_menu` VALUES ('67', '64', 'Tomcat信息', '', '', 'monitor:performance:tomcat', '1', '2', null, '1', '2019-07-21 16:00:23', '1', '2019-07-21 16:00:29');
+INSERT INTO `sys_menu` VALUES ('68', '65', '系统信息资源', '/api/admin/monitor/performance/system/*', 'GET', 'monitor:performance:system:resource', '3', '0', null, '1', '2019-07-21 16:02:49', '1', '2019-07-21 19:04:39');
+INSERT INTO `sys_menu` VALUES ('69', '66', 'JVM信息资源', '/api/admin/monitor/performance/jvm/*', 'GET', 'monitor:performance:jvm:resource', '3', '0', null, '1', '2019-07-21 16:03:37', '1', '2019-07-21 19:04:47');
+INSERT INTO `sys_menu` VALUES ('70', '67', 'Tomcat信息资源', '/api/admin/monitor/performance/tomcat/*', 'GET', 'monitor:performance:tomcat:resource', '3', '0', null, '1', '2019-07-21 16:04:07', '1', '2019-07-21 19:04:53');
+INSERT INTO `sys_menu` VALUES ('71', '0', '开发工具', null, null, 'tool', '0', '2', null, '1', '2019-06-01 20:16:19', null, null);
+INSERT INTO `sys_menu` VALUES ('72', '71', 'IconSelector', null, null, 'tool:icon', '1', '0', null, '1', '2019-06-01 20:16:21', null, null);
+INSERT INTO `sys_menu` VALUES ('73', '71', '代码生成器', null, null, 'tool:generator', '1', '1', null, '1', '2019-06-01 20:16:23', null, null);
+INSERT INTO `sys_menu` VALUES ('74', '73', '列表', '/api/admin/tool/generator', 'GET', 'tool:generator:view', '3', '0', '代码生成器列表，展示所有数据库表信息', '1', '2019-06-01 20:16:25', null, null);
+INSERT INTO `sys_menu` VALUES ('75', '73', '生成代码', '/api/admin/tool/generator/code', 'GET', 'tool:generator:code', '2', '1', '生成代码', '1', '2019-06-01 20:16:28', null, null);
 
 -- ----------------------------
 -- Table structure for sys_org
@@ -218,7 +226,6 @@ CREATE TABLE `sys_role` (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', '超级管理员', 'admin', '【系统内置】', '1', '2019-06-01 15:58:35', null, null);
-INSERT INTO `sys_role` VALUES ('2', '只读角色', 'read-only', '【系统内置】', '1', '2019-06-01 15:58:56', null, null);
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -300,48 +307,15 @@ INSERT INTO `sys_role_menu` VALUES ('63', '1', '63');
 INSERT INTO `sys_role_menu` VALUES ('64', '1', '64');
 INSERT INTO `sys_role_menu` VALUES ('65', '1', '65');
 INSERT INTO `sys_role_menu` VALUES ('66', '1', '66');
-INSERT INTO `sys_role_menu` VALUES ('67', '2', '1');
-INSERT INTO `sys_role_menu` VALUES ('68', '2', '2');
-INSERT INTO `sys_role_menu` VALUES ('69', '2', '3');
-INSERT INTO `sys_role_menu` VALUES ('70', '2', '4');
-INSERT INTO `sys_role_menu` VALUES ('71', '2', '5');
-INSERT INTO `sys_role_menu` VALUES ('72', '2', '13');
-INSERT INTO `sys_role_menu` VALUES ('73', '2', '14');
-INSERT INTO `sys_role_menu` VALUES ('74', '2', '15');
-INSERT INTO `sys_role_menu` VALUES ('75', '2', '16');
-INSERT INTO `sys_role_menu` VALUES ('76', '2', '22');
-INSERT INTO `sys_role_menu` VALUES ('77', '2', '23');
-INSERT INTO `sys_role_menu` VALUES ('78', '2', '24');
-INSERT INTO `sys_role_menu` VALUES ('79', '2', '25');
-INSERT INTO `sys_role_menu` VALUES ('80', '2', '29');
-INSERT INTO `sys_role_menu` VALUES ('81', '2', '30');
-INSERT INTO `sys_role_menu` VALUES ('82', '2', '31');
-INSERT INTO `sys_role_menu` VALUES ('83', '2', '32');
-INSERT INTO `sys_role_menu` VALUES ('84', '2', '36');
-INSERT INTO `sys_role_menu` VALUES ('85', '2', '37');
-INSERT INTO `sys_role_menu` VALUES ('86', '2', '38');
-INSERT INTO `sys_role_menu` VALUES ('87', '2', '39');
-INSERT INTO `sys_role_menu` VALUES ('88', '2', '44');
-INSERT INTO `sys_role_menu` VALUES ('89', '2', '45');
-INSERT INTO `sys_role_menu` VALUES ('90', '2', '46');
-INSERT INTO `sys_role_menu` VALUES ('91', '2', '49');
-INSERT INTO `sys_role_menu` VALUES ('92', '2', '50');
-INSERT INTO `sys_role_menu` VALUES ('93', '2', '51');
-INSERT INTO `sys_role_menu` VALUES ('94', '2', '52');
-INSERT INTO `sys_role_menu` VALUES ('95', '2', '53');
-INSERT INTO `sys_role_menu` VALUES ('96', '2', '54');
-INSERT INTO `sys_role_menu` VALUES ('97', '2', '55');
-INSERT INTO `sys_role_menu` VALUES ('98', '2', '56');
-INSERT INTO `sys_role_menu` VALUES ('99', '2', '57');
-INSERT INTO `sys_role_menu` VALUES ('100', '2', '58');
-INSERT INTO `sys_role_menu` VALUES ('101', '2', '59');
-INSERT INTO `sys_role_menu` VALUES ('102', '2', '60');
-INSERT INTO `sys_role_menu` VALUES ('103', '2', '61');
-INSERT INTO `sys_role_menu` VALUES ('104', '2', '62');
-INSERT INTO `sys_role_menu` VALUES ('105', '2', '63');
-INSERT INTO `sys_role_menu` VALUES ('106', '2', '64');
-INSERT INTO `sys_role_menu` VALUES ('107', '2', '65');
-INSERT INTO `sys_role_menu` VALUES ('108', '2', '66');
+INSERT INTO `sys_role_menu` VALUES ('67', '1', '67');
+INSERT INTO `sys_role_menu` VALUES ('68', '1', '68');
+INSERT INTO `sys_role_menu` VALUES ('69', '1', '69');
+INSERT INTO `sys_role_menu` VALUES ('70', '1', '70');
+INSERT INTO `sys_role_menu` VALUES ('71', '1', '71');
+INSERT INTO `sys_role_menu` VALUES ('72', '1', '72');
+INSERT INTO `sys_role_menu` VALUES ('73', '1', '73');
+INSERT INTO `sys_role_menu` VALUES ('74', '1', '74');
+INSERT INTO `sys_role_menu` VALUES ('75', '1', '75');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -407,3 +381,39 @@ CREATE TABLE `sys_user_role` (
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('1', '1', '1');
 INSERT INTO `sys_user_role` VALUES ('2', '2', '2');
+
+-- ----------------------------
+-- Table structure for sys_dict
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dict`;
+CREATE TABLE `sys_dict` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '字典名称',
+  `code` varchar(100) COLLATE utf8_bin NOT NULL COMMENT '字典编码',
+  `description` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `creator_id` bigint(20) DEFAULT NULL COMMENT '创建用户id',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modifier_id` bigint(20) DEFAULT NULL COMMENT '最后修改人id',
+  `modified_time` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='数据字典';
+
+-- ----------------------------
+-- Table structure for sys_dict_item
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dict_item`;
+CREATE TABLE `sys_dict_item` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `dict_code` varchar(100) COLLATE utf8_bin NOT NULL COMMENT '字典code',
+  `name` varchar(100) COLLATE utf8_bin NOT NULL COMMENT '字典元素名称',
+  `value` varchar(100) COLLATE utf8_bin NOT NULL COMMENT '字典元素值',
+  `description` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '描述',
+  `status` tinyint(5) DEFAULT NULL COMMENT '字典元素状态，0：有效，1：无效',
+  `order` int(10) DEFAULT NULL COMMENT '排序',
+  `creator_id` bigint(20) DEFAULT NULL COMMENT '创建用户id',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modifier_id` bigint(20) DEFAULT NULL COMMENT '最后修改人id',
+  `modified_time` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_dict_code` (`dict_code`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='数据字典项目';
