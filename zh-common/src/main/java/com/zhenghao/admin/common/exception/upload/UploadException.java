@@ -1,6 +1,6 @@
 package com.zhenghao.admin.common.exception.upload;
 
-import com.zhenghao.admin.common.constant.HttpStatusConstant;
+import com.zhenghao.admin.common.constant.HttpStatusConstants;
 import com.zhenghao.admin.common.exception.BaseException;
 
 /**
@@ -17,7 +17,7 @@ import com.zhenghao.admin.common.exception.BaseException;
 public class UploadException extends BaseException {
 
     public UploadException(String message) {
-        super(HttpStatusConstant.EXCEPTION_OTHER_CODE, message);
+        super(HttpStatusConstants.EXCEPTION_OTHER_CODE, message);
     }
 
     public UploadException(int code, String message) {

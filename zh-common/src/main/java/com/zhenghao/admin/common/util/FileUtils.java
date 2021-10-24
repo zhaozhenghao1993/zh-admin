@@ -1,6 +1,6 @@
 package com.zhenghao.admin.common.util;
 
-import com.zhenghao.admin.common.constant.SystemConstant;
+import com.zhenghao.admin.common.enums.FileTypeEnum;
 
 /**
  * 🙃
@@ -85,7 +85,7 @@ public class FileUtils {
      * @param fileName
      * @return 图片：1     文档：2     视频：3    种子：4    音乐：5   其他：6
      */
-    public static SystemConstant.FileType fileType(String fileName) {
+    public static FileTypeEnum fileType(String fileName) {
 
         if (fileName == null) {
             return null;
@@ -97,7 +97,7 @@ public class FileUtils {
                     "cdr", "pcd", "dxf", "ufo", "eps", "ai", "raw", "wmf"};
             for (String img : imgs) {
                 if (img.equals(fileType)) {
-                    return SystemConstant.FileType.IMAGE;
+                    return FileTypeEnum.IMAGE;
                 }
             }
 
@@ -105,7 +105,7 @@ public class FileUtils {
             String[] documents = {"txt", "doc", "docx", "xls", "htm", "html", "jsp", "rtf", "wpd", "pdf", "ppt"};
             for (String document : documents) {
                 if (document.equals(fileType)) {
-                    return SystemConstant.FileType.DOCUMENT;
+                    return FileTypeEnum.DOCUMENT;
                 }
             }
 
@@ -113,7 +113,7 @@ public class FileUtils {
             String[] videos = {"mp4", "avi", "mov", "wmv", "asf", "navi", "3gp", "mkv", "f4v", "rmvb", "webm"};
             for (String video : videos) {
                 if (video.equals(fileType)) {
-                    return SystemConstant.FileType.VIDEO;
+                    return FileTypeEnum.VIDEO;
                 }
             }
 
@@ -122,7 +122,7 @@ public class FileUtils {
                     "m4a", "vqf"};
             for (String music : musics) {
                 if (music.equals(fileType)) {
-                    return SystemConstant.FileType.MUSIC;
+                    return FileTypeEnum.MUSIC;
                 }
             }
 
@@ -130,10 +130,10 @@ public class FileUtils {
             String[] seeds = {"torrent"};
             for (String seed : seeds) {
                 if (seed.equals(fileType)) {
-                    return SystemConstant.FileType.SEED;
+                    return FileTypeEnum.SEED;
                 }
             }
         }
-        return SystemConstant.FileType.OTHER;
+        return FileTypeEnum.OTHER;
     }
 }

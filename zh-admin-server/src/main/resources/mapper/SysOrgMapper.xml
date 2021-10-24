@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhenghao.admin.server.dao.SysOrgMapper">
+
+	<select id="list" resultType="com.zhenghao.admin.server.entity.SysOrgEntity" flushCache="true">
+		SELECT
+			o.id,
+			o.parent_id,
+			o.ancestors,
+			o.org_name,
+			o.order_num,
+			o.create_time
+		FROM
+			sys_org o
+		ORDER BY
+			o.order_num ASC
+	</select>
+
+	<select id="listTree" resultType="com.zhenghao.admin.common.vo.TreeVO" flushCache="true">
+		SELECT
+			o.id,
+			o.parent_id,
+			o.id AS `key`,
+			o.id AS `value`,
+			o.org_name AS title
+		FROM
+			sys_org o
+		ORDER BY
+			o.order_num ASC
+	</select>
+
+	<select id="countChildById" resultType="java.lang.Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			sys_org
+		WHERE
+			parent_id = #{value}
+	</select>
+
+	<select id="listByIds" resultType="com.zhenghao.admin.server.entity.SysOrgEntity">
+		SELECT
+			id,
+			org_name
+		FROM
+			sys_org
+		WHERE
+			id IN (${value})
+		ORDER BY
+			FIELD(id, ${value})
+	</select>
+
+	<insert id="save">
+		INSERT INTO sys_org (
+			parent_id,
+			ancestors,
+			org_name,
+			order_num,
+			creator_id,
+			create_time
+		)
+		VALUES (
+			#{parentId},
+			#{ancestors},
+			#{orgName},
+			#{orderNum},
+			#{creatorId},
+			NOW()
+		)
+	</insert>
+
+	<select id="getObjectById" resultType="com.zhenghao.admin.server.entity.SysOrgEntity">
+		SELECT
+			id,
+			parent_id,
+			ancestors,
+			org_name,
+			order_num,
+			create_time
+		FROM
+			sys_org
+		WHERE
+			id = #{value}
+	</select>
+	
+	<update id="update">
+		UPDATE sys_org
+		<set> 
+			<if test="parentId != null">parent_id = #{parentId}, </if>
+			<if test="ancestors != null">ancestors = #{ancestors}, </if>
+			<if test="orgName != null">org_name = #{orgName}, </if>
+			<if test="orderNum != null">order_num = #{orderNum}, </if>
+			<if test="modifierId != null">modifier_id = #{modifierId},</if>
+			modified_time = NOW()
+		</set>
+		where id = #{id}
+	</update>
+
+	<update id="updateChildAncestorsById">
+		UPDATE sys_org
+		<set>
+			ancestors = replace (ancestors, #{oldAncestors}, #{newAncestors})
+		</set>
+		WHERE FIND_IN_SET (#{id}, ancestors)
+	</update>
+
+	<select id="listChildAncestorsById" resultType="com.zhenghao.admin.server.entity.SysOrgEntity">
+		SELECT
+			id,
+			ancestors
+		FROM
+			sys_org
+		WHERE
+			FIND_IN_SET (#{id}, ancestors)
+	</select>
+
+	<delete id="remove">
+		DELETE
+		FROM
+			sys_org
+		WHERE
+			id = #{value}
+	</delete>
+
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+	
+</mapper>

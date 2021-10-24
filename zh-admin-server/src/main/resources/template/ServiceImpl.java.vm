@@ -1,0 +1,78 @@
+package ${package}.${module}.service.impl;
+
+import com.github.pagehelper.PageHelper;
+import ${package}.${module}.dao.${className}Mapper;
+import com.zhenghao.admin.common.entity.Page;
+import com.zhenghao.admin.common.entity.Query;
+import com.zhenghao.admin.common.entity.Result;
+import com.zhenghao.admin.common.util.CommonUtils;
+import ${package}.${module}.entity.${className}Entity;
+import ${package}.${module}.service.${className}Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Map;
+
+/**
+ * ${comments}
+ *
+ * @author:${author}
+ * @Email :${email}
+ * @date :${datetime}
+ * ${className}ServiceImpl.java
+ */
+@Service
+public class ${className}ServiceImpl implements ${className}Service {
+
+    private final ${className}Mapper ${objName}Mapper;
+
+    @Autowired
+    public ${className}ServiceImpl(${className}Mapper ${objName}Mapper) {
+        this.${objName}Mapper = ${objName}Mapper;
+    }
+	
+	@Override
+	public Result<Page<${className}Entity>> list${className}(Map<String, Object> params) {
+		Query query = new Query(params);
+		Page<${className}Entity> page = new Page<>(query);
+        PageHelper.startPage(page.getPageNum(), page.getPageSize());
+        page.setData(${objName}Mapper.listForPage(query));
+		return CommonUtils.msg(page);
+	}
+
+    @Override
+    public Result<${className}Entity> get${className}ById(Long ${pk.fieldName}) {
+		${className}Entity ${objName} = ${objName}Mapper.getObjectById(${pk.fieldName});
+        return CommonUtils.msg(${objName});
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+	@Override
+	public Result save${className}(${className}Entity ${objName}) {
+		int count = ${objName}Mapper.save(${objName});
+		return CommonUtils.msg(count);
+	}
+
+    @Transactional(rollbackFor = Exception.class)
+	@Override
+	public Result update${className}(${className}Entity ${objName}) {
+		int count = ${objName}Mapper.update(${objName});
+		return CommonUtils.msg(count);
+	}
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Result remove${className}(Long ${pk.fieldName}) {
+        int count = ${objName}Mapper.remove(${pk.fieldName});
+        return CommonUtils.msg(count);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+	@Override
+	public Result batchRemove(Long[] ids) {
+		int count = ${objName}Mapper.batchRemove(ids);
+		return CommonUtils.msg(ids, count);
+	}
+	
+}

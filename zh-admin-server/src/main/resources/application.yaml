@@ -1,0 +1,38 @@
+logging:
+  config: classpath:logback-spring.xml
+
+spring:
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss #日期格式化
+    time-zone: GMT+8
+    serialization:
+      indent_output: true #格式化输出
+      fail_on_empty_beans: false #忽略无法转换的对象
+    defaultPropertyInclusion: NON_NULL #设置空如何序列化
+    deserialization:
+      fail_on_unknown_properties: false #允许对象忽略json中不存在的属性
+    parser:
+      allow_unquoted_control_chars: true #允许出现特殊字符和转义符
+      allow_single_quotes: true #允许出现单引号
+
+##################mybatis####################
+mybatis:
+  configuration:
+    mapUnderscoreToCamelCase: true
+  mapper-locations: classpath*:mapper/*.xml
+
+##################pagehelper分页插件####################
+pagehelper:
+  supportMethodsArguments: true
+  reasonable: true
+  helperDialect: mysql
+  params: count=countSql
+
+##################springboot 监控####################
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics,httptrace
