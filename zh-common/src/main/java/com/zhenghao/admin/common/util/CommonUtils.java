@@ -1,6 +1,6 @@
 package com.zhenghao.admin.common.util;
 
-import com.zhenghao.admin.common.constant.MsgConstant;
+import com.zhenghao.admin.common.constant.MsgConstants;
 import com.zhenghao.admin.common.entity.Result;
 
 /**
@@ -38,9 +38,9 @@ public class CommonUtils {
      */
     public static Result msg(int count) {
         if (isIntThanZero(count)) {
-            return Result.ofSuccessMsg(MsgConstant.MSG_OPERATION_SUCCESS);
+            return Result.ofSuccessMsg(MsgConstants.MSG_OPERATION_SUCCESS);
         }
-        return Result.ofFail(MsgConstant.MSG_OPERATION_FAILED);
+        return Result.ofFail(MsgConstants.MSG_OPERATION_FAILED);
     }
 
 
@@ -52,7 +52,7 @@ public class CommonUtils {
      */
     public static <R> Result<R> msg(R data) {
         if (isNullOrEmpty(data)) {
-            return Result.ofFail(MsgConstant.MSG_INIT_FORM);
+            return Result.ofFail(MsgConstants.MSG_INIT_FORM);
         }
         return Result.ofSuccess(data);
     }
@@ -76,12 +76,12 @@ public class CommonUtils {
      */
     public static Result msg(Object[] total, int count) {
         if (total.length == count) {
-            return Result.ofSuccessMsg(MsgConstant.MSG_OPERATION_SUCCESS);
+            return Result.ofSuccessMsg(MsgConstants.MSG_OPERATION_SUCCESS);
         } else {
             if (isIntThanZero(count)) {
-                return Result.ofFail(MsgConstant.removeFailed(total.length, count));
+                return Result.ofFail(MsgConstants.removeFailed(total.length, count));
             } else {
-                return Result.ofFail(MsgConstant.MSG_OPERATION_FAILED);
+                return Result.ofFail(MsgConstants.MSG_OPERATION_FAILED);
             }
         }
     }

@@ -1,7 +1,8 @@
 package com.zhenghao.admin.common.util;
 
+import com.zhenghao.admin.common.constant.SystemConstants;
 import com.zhenghao.admin.common.entity.TreeNode;
-
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,5 +48,46 @@ public class TreeUtils {
             childList.forEach(child -> parentTree.addChild(getTree(trees, child)));
         }
         return parentTree;
+    }
+
+    /**
+     * 检查构建的 Tree 是否存在循环依赖
+     * 如果新选择的上级的 ancestors 属性发现其中含有
+     * 被编辑 Tree 的 id，或者选择了他自己本身
+     * 则认为存在循环嵌套发生
+     *
+     * @param parentTreeNode 新选择的 tree 父节点
+     * @param treeNode tree 节点
+     * @return true 则发生循环依赖; false 未发生循环依赖
+     */
+    public static boolean isTreeCircularReference(TreeNode parentTreeNode, TreeNode treeNode) {
+        if (parentTreeNode == null) {
+            return false;
+        }
+        if (parentTreeNode.getAncestors() == null
+                || parentTreeNode.getId() == null
+                || parentTreeNode.getParentId() == null) {
+            return false;
+        }
+        return Arrays.stream(parentTreeNode.getAncestors().split(SystemConstants.TREE_ANCESTORS_SPLIT))
+                .anyMatch(ancestorsId -> ancestorsId.equals(treeNode.getId() + ""))
+                || treeNode.getParentId().equals(treeNode.getId());
+    }
+
+    /**
+     * 构建祖级列表
+     *
+     * @param parentTreeNode 父节点
+     * @param treeNode 被构建节点
+     * @return 祖级列表
+     */
+    public static String buildAncestors(TreeNode parentTreeNode, TreeNode treeNode) {
+        String ancestors;
+        if (parentTreeNode == null) {
+            ancestors = treeNode.getParentId() + "";
+        } else {
+            ancestors = parentTreeNode.getAncestors() + SystemConstants.TREE_ANCESTORS_SPLIT + parentTreeNode.getId();
+        }
+        return ancestors;
     }
 }

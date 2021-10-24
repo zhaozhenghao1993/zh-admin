@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhenghao.admin.server.dao.SysDictItemMapper">
+
+	<select id="listForPage" resultType="com.zhenghao.admin.server.entity.SysDictItemEntity" flushCache="true">
+		SELECT
+			`id`,
+			`dict_code`,
+			`name`,
+			`value`,
+			`description`,
+			`status`,
+			`order`,
+			`creator_id`,
+			`create_time`,
+			`modifier_id`,
+			`modified_time`
+		FROM
+			sys_dict_item
+		<where>
+			`dict_code` = #{dictCode}
+			<if test="name != null and name.trim() != ''">
+				AND `name` LIKE concat('%',#{name},'%')
+			</if>
+			<if test="status != null and status.trim() != ''">
+				AND status = #{status}
+			</if>
+		</where>
+			ORDER BY `order`, `id` DESC
+	</select>
+
+
+    <select id="getObjectById" resultType="com.zhenghao.admin.server.entity.SysDictItemEntity">
+		SELECT
+			`id`,
+			`dict_code`,
+			`name`,
+			`value`,
+			`description`,
+			`status`,
+			`order`,
+			`creator_id`,
+			`create_time`,
+			`modifier_id`,
+			`modified_time`
+		FROM
+			sys_dict_item
+		WHERE
+			id = #{id}
+	</select>
+	
+	<insert id="save">
+		INSERT INTO sys_dict_item (
+			`dict_code`,
+			`name`,
+			`value`,
+			`description`,
+			`status`,
+			`order`,
+			`creator_id`,
+			`create_time`
+		)
+		VALUES (
+			#{dictCode},
+			#{name},
+			#{value},
+			#{description},
+			#{status},
+			#{order},
+			#{creatorId},
+			NOW()
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sys_dict_item
+	 	<set>
+			<if test="dictCode != null">`dict_code` = #{dictCode},</if>
+			<if test="name != null">`name` = #{name},</if>
+			<if test="value != null">`value` = #{value},</if>
+			<if test="description != null">`description` = #{description},</if>
+			<if test="status != null">`status` = #{status},</if>
+			<if test="order != null">`order` = #{order},</if>
+			<if test="modifierId != null">`modifier_id` = #{modifierId},</if>
+			`modified_time` = NOW()
+		</set>
+		WHERE
+			id = #{id}
+	</update>
+
+    <delete id="remove">
+        DELETE
+        FROM
+			sys_dict_item
+        WHERE
+			id = #{value}
+    </delete>
+
+	<update id="updateDictCode">
+		UPDATE
+			sys_dict_item
+		SET
+			`dict_code` = #{newDictCode}
+		WHERE
+			`dict_code` = #{oldDictCode}
+	</update>
+
+	<select id="existDictItemByDictCode" resultType="integer">
+		SELECT 1
+		FROM
+			sys_dict_item
+		WHERE
+			`dict_code` = #{dictCode}
+		LIMIT 1
+	</select>
+
+	<select id="listSysDictItems" resultType="com.zhenghao.admin.api.entity.SysDictItem">
+		SELECT
+		`name`,
+		`value`
+		FROM
+		sys_dict_item
+		<where>
+			`dict_code` = #{dictCode} AND status = #{status}
+		</where>
+		ORDER BY `order`, `id` DESC
+	</select>
+	
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+	
+</mapper>
