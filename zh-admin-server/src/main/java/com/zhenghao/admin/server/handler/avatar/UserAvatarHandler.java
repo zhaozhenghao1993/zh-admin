@@ -1,14 +1,15 @@
 package com.zhenghao.admin.server.handler.avatar;
 
-import com.zhenghao.admin.common.constant.SystemConstants;
 import com.zhenghao.admin.common.constant.UploadConstants;
 import com.zhenghao.admin.common.enums.FileTypeEnum;
 import com.zhenghao.admin.common.exception.upload.UploadException;
 import com.zhenghao.admin.common.exception.upload.UploadSizeException;
 import com.zhenghao.admin.common.exception.upload.UploadTypeException;
 import com.zhenghao.admin.common.util.FileUtils;
-import com.zhenghao.admin.server.config.UploadConfig;
-import com.zhenghao.admin.server.util.UploadUtils;
+import com.zhenghao.admin.common.config.UploadConfig;
+import com.zhenghao.admin.common.util.UploadUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +29,8 @@ import java.io.IOException;
 
 @Component
 public class UserAvatarHandler {
+
+    private final static Logger logger = LoggerFactory.getLogger(UserAvatarHandler.class);
 
     private final UploadConfig uploadConfig;
 
@@ -55,13 +58,13 @@ public class UserAvatarHandler {
             throw new UploadSizeException("Upload file too large!");
         }
         String fileName = UploadConstants.USER_AVATAR_FILE_NAME.concat(file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf('.')));
-        String folderPath = uploadConfig.getFolder().concat(UploadConstants.USER_AVATAR_FOLDER).concat(userId.toString());
-        String filePath = uploadConfig.getPath().concat(UploadConstants.USER_AVATAR_FOLDER).concat(userId.toString()).concat(UploadConstants.PATH_SEPARATOR).concat(fileName);
+        String directoryPath = uploadConfig.getUploadFileDirectory(UploadConstants.USER_AVATAR_DIRECTORY + userId.toString());
         try {
-            UploadUtils.uploadFile(file, folderPath, fileName);
+            UploadUtils.uploadFile(file, directoryPath, fileName);
         } catch (IOException e) {
+            logger.error("upload file Error", e);
             throw new UploadException("Upload file Error!");
         }
-        return filePath;
+        return uploadConfig.getUploadFilePath(UploadConstants.USER_AVATAR_DIRECTORY + userId.toString() + UploadConstants.PATH_SEPARATOR + fileName);
     }
 }
