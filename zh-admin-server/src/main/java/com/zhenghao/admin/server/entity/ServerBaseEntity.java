@@ -2,7 +2,7 @@ package com.zhenghao.admin.server.entity;
 
 import com.zhenghao.admin.common.util.DataHandleUtils;
 import com.zhenghao.admin.common.util.FileUtils;
-import com.zhenghao.admin.server.config.UploadConfig;
+import com.zhenghao.admin.common.config.UploadConfig;
 import com.zhenghao.admin.server.entity.server.App;
 import com.zhenghao.admin.server.entity.server.Jvm;
 import com.zhenghao.admin.server.entity.server.Sys;
@@ -129,7 +129,7 @@ public class ServerBaseEntity {
      */
     private void setAppInfo(Properties props) {
         app.setAppDir(props.getProperty("user.dir"));
-        app.setUploadDir(uploadConfig.getFolder());
+        app.setUploadDir(uploadConfig.getDirectory());
         app.setLogDir(logDirectory);
     }
 
