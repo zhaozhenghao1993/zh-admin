@@ -1,4 +1,4 @@
-package com.zhenghao.admin.server.util;
+package com.zhenghao.admin.common.util;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,29 +25,29 @@ public class UploadUtils {
      * 上传文件
      *
      * @param file
-     * @param folderPath 上传文件的路径
+     * @param directoryPath 上传文件的路径
      * @return
      * @throws IOException
      */
-    public static String uploadFile(MultipartFile file, String folderPath) throws IOException {
-        return uploadFile(file, folderPath, file.getOriginalFilename());
+    public static String uploadFile(MultipartFile file, String directoryPath) throws IOException {
+        return uploadFile(file, directoryPath, file.getOriginalFilename());
     }
 
     /**
      * 上传文件
      *
      * @param file
-     * @param folderPath 上传文件的路径
+     * @param directoryPath 上传文件的路径
      * @param fileName   上传文件名
      * @return
      * @throws IOException
      */
-    public static String uploadFile(MultipartFile file, String folderPath, String fileName) throws IOException {
-        File fileFolder = new File(folderPath);
-        if (!fileFolder.exists() && !fileFolder.isDirectory()) {
-            fileFolder.mkdirs();
+    public static String uploadFile(MultipartFile file, String directoryPath, String fileName) throws IOException {
+        File fileDirectory = new File(directoryPath);
+        if (!fileDirectory.exists() && !fileDirectory.isDirectory()) {
+            fileDirectory.mkdirs();
         }
-        String uploadFilePath = folderPath + File.separator + fileName;
+        String uploadFilePath = directoryPath + File.separator + fileName;
         File uploadFile = new File(uploadFilePath);
         file.transferTo(uploadFile);
         return uploadFilePath;

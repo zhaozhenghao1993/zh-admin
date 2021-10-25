@@ -43,7 +43,7 @@ public class AuthConfig {
         authFilterChainMetaList.add(new ChainMeta("/api/admin/monitor/log/visit", "GET"));
         authFilterChainMetaList.add(new ChainMeta("/api/admin/monitor/log/visit/week", "GET"));
         // 头像地址
-        authFilterChainMetaList.add(new ChainMeta("/uploads/-/system/user/avatar/{id}/**", "GET"));
+        authFilterChainMetaList.add(new ChainMeta("/uploads/system/user/avatar/{id}/**", "GET"));
         authChainMetaSource.setAuthFilterChainMetaList(authFilterChainMetaList);
         return authChainMetaSource;
     }
